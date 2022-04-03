@@ -1,1 +1,1 @@
-echo "wat"$1
+echo "vast_ai/$1

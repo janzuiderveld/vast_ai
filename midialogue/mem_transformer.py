@@ -14,8 +14,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 sys.path.append("/content/LakhNES/model/utils")
-from proj_adaptive_softmax import ProjectedAdaptiveLogSoftmax
-from log_uniform_sampler import LogUniformSampler, sample_logits
+from model.utils.proj_adaptive_softmax import ProjectedAdaptiveLogSoftmax
+from model.utils.log_uniform_sampler import LogUniformSampler, sample_logits
 
 class PositionalEmbedding(nn.Module):
     def __init__(self, demb):

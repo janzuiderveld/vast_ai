@@ -14,8 +14,8 @@ code_model_dir = './model'
 code_utils_dir = os.path.join(code_model_dir, 'utils')
 sys.path.extend([code_model_dir, code_utils_dir])
 
-MODEL_FP = 'model/pretrained/LakhNES/model.pt'
-VOCAB_FP = 'model/pretrained/LakhNES/vocab.txt'
+MODEL_FP = '/root/LakhNES/model/pretrained/LakhNES/model.pt'
+VOCAB_FP = '/root/LakhNES/model/pretrained/LakhNES/vocab.txt'
 USE_CUDA = True
 
 device = torch.device("cuda" if USE_CUDA else "cpu")

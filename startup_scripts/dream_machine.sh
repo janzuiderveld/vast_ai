@@ -14,6 +14,7 @@ python3 -m pip install -r Sketch-Simulator/requirements.txt
 
 cd Sketch-Simulator 
 python3 train_folder_server.py 2>&1 | ../_sketch_sim.log &
+python3 train_folder_server.py 2>&1 | ../_sketch_sim.log &
 #args to set 
 # save_root
 # input_dir

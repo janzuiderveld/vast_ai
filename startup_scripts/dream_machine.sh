@@ -11,9 +11,8 @@ python3 Python-TCP-Image-Socket/server_receive_socket.py 2>&1 | tee _server_rece
 python3 Python-TCP-Image-Socket/server_send_socket.py 2>&1 | tee _server_send.log &
 
 git clone https://github.com/janzuiderveld/Sketch-Simulator.git
-bash Sketch-Simulator/setup.sh | tee sketch_setup.log
-
 cd Sketch-Simulator 
+bash Sketch-Simulator/setup.sh | tee ../sketch_setup.log
 python3 train_folder_server.py 2>&1 | tee ../_sketch_sim.log &
 #args to set 
 # save_root

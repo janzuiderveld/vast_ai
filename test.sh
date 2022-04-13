@@ -1,1 +1,1 @@
-echo "vast_ai/$1
+echo "vast_ai/" 2>&1 test.txt

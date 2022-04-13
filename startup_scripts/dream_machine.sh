@@ -1,20 +1,20 @@
 apt-get install git wget curl tar -y
 git clone https://github.com/janzuiderveld/vast_ai.git
 
-python3 -m pip install -r dream_machine/Python-TCP-Image-Socket/requirements.txt
+python3 -m pip install -r vast_ai/dream_machine/Python-TCP-Image-Socket/requirements.txt
 apt-get update
 apt-get install ffmpeg libsm6 libxext6  -y
 
-cd dream_machine
-python3 Python-TCP-Image-Socket/server_receive_socket.py.py 2>&1 | _server_receive.log &
-python3 Python-TCP-Image-Socket/server_send_socket.py.py 2>&1 | _server_send.log &
+cd vast_ai/dream_machine
+
+python3 Python-TCP-Image-Socket/server_receive_socket.py 2>&1 | tee _server_receive.log &
+python3 Python-TCP-Image-Socket/server_send_socket.py 2>&1 | tee _server_send.log &
 
 git clone https://github.com/janzuiderveld/Sketch-Simulator.git
 python3 -m pip install -r Sketch-Simulator/requirements.txt 
 
 cd Sketch-Simulator 
-python3 train_folder_server.py 2>&1 | ../_sketch_sim.log &
-python3 train_folder_server.py 2>&1 | ../_sketch_sim.log &
+python3 train_folder_server.py 2>&1 | tee ../_sketch_sim.log &
 #args to set 
 # save_root
 # input_dir

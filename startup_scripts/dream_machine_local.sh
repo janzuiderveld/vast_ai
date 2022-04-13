@@ -7,5 +7,5 @@ python3 -m pip install -r dream_machine/Python-TCP-Image-Socket/requirements.txt
 # apt-get install ffmpeg libsm6 libxext6  -y
 
 cd dream_machine
-python3 Python-TCP-Image-Socket/client_receive_socket.py.py 2>&1 | _client_receive.log &
-python3 Python-TCP-Image-Socket/client_send_socket.py.py 2>&1 | _client_send.log &
+python3 Python-TCP-Image-Socket/client_receive_socket.py 2>&1 | tee _client_receive.log &
+python3 Python-TCP-Image-Socket/client_send_socket.py 2>&1 | tee _client_send.log 

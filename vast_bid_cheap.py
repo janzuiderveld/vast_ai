@@ -7,7 +7,7 @@ parser.add_argument('project_name', type=str, default='', help='project name')
 args = parser.parse_args()
 
 # run vast shell command "./vast search offers" to get prices 
-vast_cmd = './vast search offers -b --raw -o "dph, dlperf"'
+vast_cmd = './vast search offers -b --raw -o "dlperf-, dph"'
 vast_output = subprocess.check_output(vast_cmd, shell=True)
 
 # print(vast_output)

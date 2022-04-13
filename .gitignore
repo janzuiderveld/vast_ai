@@ -5,3 +5,4 @@ videos
 *env/
 test*
 thrash/
+_*.log

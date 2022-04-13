@@ -9,7 +9,7 @@ cd vast_ai/dream_machine
 
 git clone https://github.com/janzuiderveld/Sketch-Simulator.git
 cd Sketch-Simulator 
-bash setup.sh | tee ../sketch_setup.log
+bash setup.sh | tee ../_sketch_setup.log
 python3 train_folder_server.py 2>&1 | tee ../_sketch_sim.log &
 
 cd ..

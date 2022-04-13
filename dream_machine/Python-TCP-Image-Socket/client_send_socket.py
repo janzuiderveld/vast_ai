@@ -14,6 +14,7 @@ class ClientSocket:
         self.TCP_SERVER_PORT = port
         self.ftp_filepath = ftp_filepath
         self.connectCount = 0
+        self.filepath = utils.wait_new_file(self.ftp_filepath)
         self.connectServer()
 
     def connectServer(self):
@@ -35,9 +36,8 @@ class ClientSocket:
     def sendImages(self):
         cnt = 0
         while True:
-            filepath = utils.wait_new_file(self.ftp_filepath)
             try:
-                frame = cv2.imread(filepath)
+                frame = cv2.imread(self.filepath)
                 # frame = cv2.imread("/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/test.png")
                 resize_frame = cv2.resize(frame, dsize=(256, 256), interpolation=cv2.INTER_AREA)
 
@@ -61,6 +61,8 @@ class ClientSocket:
                 time.sleep(1)
                 self.connectServer()
                 self.sendImages()
+
+            self.filepath = utils.wait_new_file(self.ftp_filepath)
 
 def main(ftp_filepath):
     TCP_IP = 'localhost' 

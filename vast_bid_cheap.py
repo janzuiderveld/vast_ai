@@ -18,7 +18,7 @@ for i in range(10):
 
 top_id = top_sellers[0]["id"]
 min_bid = top_sellers[0]["min_bid"]
-vast_book_cmd = f"./vast create instance {top_id} --price {min_bid} --image pytorch/pytorch --disk 5 --onstart startup_scripts/{args.project_name}.sh"
+vast_book_cmd = f"./vast create instance {top_id} --price {min_bid} --image pytorch/pytorch --disk 15 --onstart startup_scripts/{args.project_name}.sh"
 
 print(min_bid)
 vast_output = subprocess.check_output(vast_book_cmd, shell=True)

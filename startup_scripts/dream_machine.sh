@@ -7,16 +7,18 @@ apt-get install ffmpeg libsm6 libxext6  -y
 
 cd vast_ai/dream_machine
 
+git clone https://github.com/janzuiderveld/Sketch-Simulator.git
+cd Sketch-Simulator 
+bash setup.sh | tee ../sketch_setup.log
+python3 train_folder_server.py 2>&1 | tee ../_sketch_sim.log &
+
+cd ..
 python3 Python-TCP-Image-Socket/server_receive_socket.py 2>&1 | tee _server_receive.log &
 python3 Python-TCP-Image-Socket/server_send_socket.py 2>&1 | tee _server_send.log &
 
-git clone https://github.com/janzuiderveld/Sketch-Simulator.git
-cd Sketch-Simulator 
-bash Sketch-Simulator/setup.sh | tee ../sketch_setup.log
-python3 train_folder_server.py 2>&1 | tee ../_sketch_sim.log &
 #args to set 
 # save_root
-# input_dir
+# input_dirs
 # output_dir
 # padding
 # embedding_avg

@@ -154,3 +154,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# if port is in use:
+# lsof -ti:8081 | xargs kill -9 

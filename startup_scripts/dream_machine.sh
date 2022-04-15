@@ -10,7 +10,8 @@ cd vast_ai/dream_machine
 git clone https://github.com/janzuiderveld/Sketch-Simulator.git
 cd Sketch-Simulator 
 bash setup.sh | tee ../_sketch_setup.log
-python3 train_folder_server.py 2>&1 | tee ../_sketch_sim.log &
+python3 -m pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html | tee ../_sketch_torch_update.log
+python3 train_folder_server.py 2>&1 | tee ../_sketch_sim_server.log &
 
 cd ..
 python3 Python-TCP-Image-Socket/server_receive_socket.py 2>&1 | tee _server_receive.log &

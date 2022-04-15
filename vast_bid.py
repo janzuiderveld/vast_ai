@@ -6,6 +6,7 @@ parser = argparse.ArgumentParser(description='Run a command on a remote host.')
 parser.add_argument('bidding_tactic', type=str, default='cheap', choices=['cheap', 'best1', 'auto1'], help='bidding tactic')
 # parser.add_argument('min_bid', type=str, default='1')
 parser.add_argument('project_name', type=str, default='', help='project name')
+parser.add_argument('--dummy', type=int, default=0, help='')
 args = parser.parse_args()
 
 # run vast shell command "./vast search offers" to get prices 
@@ -27,7 +28,7 @@ for i in range(10):
 top_id = top_sellers[0]["id"]
 
 # If instance is allowed to be interrupted
-if args.bidding_tactic == 'cheap' or args.bidding_tactic == 'best1':
+if args.bidding_tactic == 'cheap' or args.bidding_tactic == 'auto1':
     bid = top_sellers[0]["min_bid"]
 else:
     bid = top_sellers[0]["dph_base"]

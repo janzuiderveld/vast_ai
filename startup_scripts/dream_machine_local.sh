@@ -7,7 +7,7 @@ python3 -m pip install -r dream_machine/Python-TCP-Image-Socket/requirements.txt
 # apt-get install ffmpeg libsm6 libxext6  -y
 
 # apt install inotify-tools -y
-python3 -m pip install pyinotify
+# python3 -m pip install pyinotify
 
 cd dream_machine
 # python3 Python-TCP-Image-Socket/client_receive_socket.py 2>&1 | tee _client_receive.log &

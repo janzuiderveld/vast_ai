@@ -72,7 +72,7 @@ def main(ftp_filepath):
 if __name__ == "__main__":
     # argparser
     parser = argparse.ArgumentParser(description='TCP client')
-    parser.add_argument('--ftp_filepath', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine', help='ftp filepath')
+    parser.add_argument('--ftp_filepath', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs', help='ftp filepath')
 
     args = parser.parse_args()
     main(args.ftp_filepath)

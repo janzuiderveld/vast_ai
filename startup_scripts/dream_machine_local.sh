@@ -14,7 +14,7 @@ cd dream_machine
 python3 Python-TCP-Image-Socket/client_send_socket.py 2>&1 | tee _client_send.log &
 
 ./vast ssh-url > ssh_details.log 
-while stat --printf="%s" ssh_details.log < 
+while 
 do
     ./vast ssh-url > ssh_details.log
 done

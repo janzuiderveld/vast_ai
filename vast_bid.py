@@ -39,7 +39,5 @@ if args.bidding_tactic == 'cheap':
 else:
     vast_book_cmd = f"./vast create instance {top_id} --image pytorch/pytorch --disk 30 --onstart startup_scripts/{args.project_name}.sh"
 
-vast_book_cmd = f"./vast create instance {top_id} --price {bid} --image pytorch/pytorch --disk 30 --onstart startup_scripts/{args.project_name}.sh"
-
 vast_output = subprocess.check_output(vast_book_cmd, shell=True)
 print(vast_output)

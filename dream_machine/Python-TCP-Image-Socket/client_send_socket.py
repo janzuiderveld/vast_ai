@@ -76,5 +76,5 @@ if __name__ == "__main__":
     parser.add_argument('--ftp_filepath', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs', help='ftp filepath')
 
     args = parser.parse_args()
-    os.makedirs(args.ftp_filepath), exist_ok=True)
+    os.makedirs(args.ftp_filepath, exist_ok=True)
     main(args.ftp_filepath)

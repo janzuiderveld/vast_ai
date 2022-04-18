@@ -27,7 +27,8 @@ def main(args):
                 old_len = len(lines)
                 print(lines[-1])
                 latest_file = lines[-1] 
-                out = os.popen(f"scp -P {port} {ssh_address}:{latest_file} out_imgs/").read()
+                if " " in latest_file: continue
+                out = os.popen(f"scp -P {port} '{ssh_address}:{latest_file}' out_imgs/").read()
                 print(out)
         time.sleep(1)
 

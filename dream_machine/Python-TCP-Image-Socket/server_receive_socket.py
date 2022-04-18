@@ -59,7 +59,8 @@ class ServerSocket:
                 data = numpy.frombuffer(base64.b64decode(stringData), numpy.uint8)
                 decimg = cv2.imdecode(data, 1)
                 # cv2.imshow("image", decimg)
-                cv2.imwrite('./' + str(self.TCP_PORT) + '_images' + str(self.folder_num) + '/img' + cnt_str + '.jpg', decimg)
+                # cv2.imwrite('./' + str(self.TCP_PORT) + '_images' + str(self.folder_num) + '/img' + cnt_str + '.jpg', decimg)
+                cv2.imwrite('./' + str(self.TCP_PORT) + '_images0' + '/img' + cnt_str + '.jpg', decimg)
 
                 self.socketClose()
                 self.socketOpen()

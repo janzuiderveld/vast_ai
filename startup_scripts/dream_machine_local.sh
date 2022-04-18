@@ -2,6 +2,7 @@ python3 -m venv dream_machine/dream_machine_env
 source dream_machine/dream_machine_env/bin/activate
 
 python3 -m pip install -r dream_machine/Python-TCP-Image-Socket/requirements.txt
+python3 -m pip install requests
 
 # apt-get update
 # apt-get install ffmpeg libsm6 libxext6  -y

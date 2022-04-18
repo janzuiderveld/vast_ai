@@ -4,9 +4,14 @@ import argparse
 import time
 def main(args):
     while True:
-        out = os.popen("../vast ssh-url").read().split(":")
-        ssh_address = out[1][2:]
-        port = out[2].split("\n")[0]
+        try:
+            out = os.popen("../vast ssh-url").read().split(":")
+            if not out[0]: continue
+            print(out)
+            ssh_address = out[1][2:]
+            port = out[2].split("\n")[0]
+        except:
+            continue
 
         if port != "None" or ssh_address !="None": break
 
@@ -14,7 +19,7 @@ def main(args):
 
     while True:
         old_len = 0
-        out = os.popen(f"scp -P {port} {ssh_address}:{args.filepath} files.log").read()
+        out = os.popen(f"scp -o StrictHostKeyChecking=no -P {port} {ssh_address}:{args.filepath} files.log").read()
         print(out)
         with open("files.log", "r") as f:
             lines = f.read().splitlines()

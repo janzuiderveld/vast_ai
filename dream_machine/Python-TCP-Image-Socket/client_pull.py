@@ -17,19 +17,22 @@ def main(args):
 
     print(ssh_address, port)
 
+    old_len = 0
     while True:
-        old_len = 0
         out = os.popen(f"scp -o StrictHostKeyChecking=no -P {port} {ssh_address}:{args.filepath} files.log").read()
         print(out)
-        with open("files.log", "r") as f:
-            lines = f.read().splitlines()
-            if len(lines) > old_len:
-                old_len = len(lines)
-                print(lines[-1])
-                latest_file = lines[-1] 
-                if " " in latest_file: continue
-                out = os.popen(f"scp -P {port} '{ssh_address}:{latest_file}' out_imgs/").read()
-                print(out)
+        try:
+            with open("files.log", "r") as f:
+                lines = f.read().splitlines()
+                if len(lines) > old_len:
+                    old_len = len(lines)
+                    print(lines[-1])
+                    latest_file = lines[-1] 
+                    if " " in latest_file: continue
+                    out = os.popen(f"scp -P {port} '{ssh_address}:{latest_file}' out_imgs/").read()
+                    print(out)
+        except:
+            pass
         time.sleep(1)
 
 if __name__ == "__main__":

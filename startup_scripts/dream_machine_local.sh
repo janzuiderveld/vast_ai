@@ -11,10 +11,11 @@ python3 -m pip install -r dream_machine/Python-TCP-Image-Socket/requirements.txt
 
 cd dream_machine
 # python3 Python-TCP-Image-Socket/client_receive_socket.py 2>&1 | tee _client_receive.log &
+
+# looks for files to appear in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs, sends them over tcp
 python3 Python-TCP-Image-Socket/client_send_socket.py 2>&1 | tee _client_send.log &
 
-./vast ssh-url > ssh_details.log 
-while 
-do
-    ./vast ssh-url > ssh_details.log
-done
+# looks for files to be added to /workspace/vast_ai/dream_machine/Sketch-Simulator/out.log 
+# (when inotify script is running and detecting files in Sketch-Simulator/out/to_send) 
+# files are copied to out_imgs.
+python3 Python-TCP-Image-Socket/client_pull.py 2>&1 | tee _client_pull.log 

@@ -32,7 +32,8 @@ if __name__ == "__main__":
     # parser.add_argument('ssh_address', type=str, default='', help='')
     # parser.add_argument('port', type=str, default='', help='')
     parser.add_argument('--filepath', type=str, default='/workspace/vast_ai/dream_machine/Sketch-Simulator/out.log', help='ftp filepath')
-
+    
+    os.makedirs("out_imgs", exist_ok=True)
     args = parser.parse_args()
     main(args)
 

@@ -15,7 +15,7 @@ python3 train_folder_server.py 2>&1 | tee ../_sketch_sim_server.log &
 
 cd ..
 python3 Python-TCP-Image-Socket/server_receive_socket.py 2>&1 | tee _server_receive.log &
-python3 Python-TCP-Image-Socket/server_send_socket.py 2>&1 | tee _server_send.log &
+# python3 Python-TCP-Image-Socket/server_send_socket.py 2>&1 | tee _server_send.log &
 
 #args to set 
 # save_root

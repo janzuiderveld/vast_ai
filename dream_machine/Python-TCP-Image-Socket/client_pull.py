@@ -24,4 +24,4 @@ if __name__ == "__main__":
     main(args)
 
 
-scp -P 31054 root@ssh4.vast.ai:/workspace/vast_ai/dream_machine/Sketch-Simulator/out.log files.log
+# scp -P 31054 root@ssh4.vast.ai:/workspace/vast_ai/dream_machine/Sketch-Simulator/out.log files.log

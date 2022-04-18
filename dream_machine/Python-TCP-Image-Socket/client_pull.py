@@ -1,13 +1,13 @@
 import glob
 import os
 import argparse 
-
+import time
 def main(args):
-    out = os.popen("./vast ssh-url").read().split(":")
+    out = os.popen("../vast ssh-url").read().split(":")
     ssh_address = out[1][2:]
-    port = out[2]
+    port = out[2].split("\n")[0]
 
-    print(ssh_address)
+    print(ssh_address, port)
 
     while True:
         old_len = 0
@@ -18,6 +18,10 @@ def main(args):
             if len(lines) > old_len:
                 old_len = len(lines)
                 print(lines[-1])
+                latest_file = lines[-1] 
+                out = os.popen(f"scp -P {port} {ssh_address}:{latest_file} out_imgs/").read()
+                print(out)
+        time.sleep(1)
 
 if __name__ == "__main__":
     # argparser
@@ -30,4 +34,4 @@ if __name__ == "__main__":
     main(args)
 
 
-# scp -P 31054 root@ssh4.vast.ai:/workspace/vast_ai/dream_machine/Sketch-Simulator/out.log files.log
+# scp -P 31840 root@ssh5.vast.ai:/workspace/vast_ai/dream_machine/Sketch-Simulator/out.log files.log

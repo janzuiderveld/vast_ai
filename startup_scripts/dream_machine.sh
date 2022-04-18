@@ -22,8 +22,7 @@ python3 Python-TCP-Image-Socket/server_receive_socket.py 2>&1 | tee _server_rece
 
 
 # starts inotify script looking for files to appear in Sketch-Simulator/out/to_send, writes filepaths to /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/out.log
-bash Python-TCP-Image-Socket/inotify.sh 
-
+bash Python-TCP-Image-Socket/inotify.sh | tee _inotify.log &
 
 
 # python3 Python-TCP-Image-Socket/server_send_socket.py 2>&1 | tee _server_send.log &

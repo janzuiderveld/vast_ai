@@ -3,9 +3,12 @@ import os
 import argparse 
 import time
 def main(args):
-    out = os.popen("../vast ssh-url").read().split(":")
-    ssh_address = out[1][2:]
-    port = out[2].split("\n")[0]
+    while True:
+        out = os.popen("../vast ssh-url").read().split(":")
+        ssh_address = out[1][2:]
+        port = out[2].split("\n")[0]
+
+        if port != "None" or ssh_address !="None": break
 
     print(ssh_address, port)
 

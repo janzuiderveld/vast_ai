@@ -6,3 +6,5 @@ videos
 test*
 thrash/
 _*.log
+dream_machine/in_imgs/
+dream_machine/files.log

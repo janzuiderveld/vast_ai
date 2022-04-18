@@ -3,7 +3,7 @@ git clone https://github.com/janzuiderveld/vast_ai.git
 
 python3 -m pip install -r vast_ai/dream_machine/Python-TCP-Image-Socket/requirements.txt
 apt-get update
-apt-get install ffmpeg libsm6 libxext6  -y
+apt-get install ffmpeg libsm6 libxext6 inotify-tools -y  -y
 
 cd vast_ai/dream_machine
 

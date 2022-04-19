@@ -34,7 +34,7 @@ def main(args):
                     print(out)
         except:
             pass
-        time.sleep(1)
+        # time.sleep(1)
 
 if __name__ == "__main__":
     # argparser

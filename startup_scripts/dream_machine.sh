@@ -21,6 +21,7 @@ bash Python-TCP-Image-Socket/inotify.sh | tee _inotify.log &
 
 cd Sketch-Simulator 
 bash setup.sh | tee ../_sketch_setup.log
+# python3 -m pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html | tee ../_sketch_torch_update.log
 python3 train_folder_server.py 2>&1 | tee ../_sketch_sim_server.log &
 
 echo "YES" >> READY.log

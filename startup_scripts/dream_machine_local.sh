@@ -13,7 +13,15 @@ python3 -m pip install requests
 cd dream_machine
 # python3 Python-TCP-Image-Socket/client_receive_socket.py 2>&1 | tee _client_receive.log &
 
-sleep 60
+
+sleep 180
+
+# until [ -f /tmp/examplefile.txt ]
+# do
+#      sleep 5
+# done
+# echo "SERVER READY"
+
 
 echo 1
 

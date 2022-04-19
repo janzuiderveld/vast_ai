@@ -24,6 +24,7 @@ def main(args):
         try:
             with open("files.log", "r") as f:
                 lines = f.read().splitlines()
+                print(lines)
                 if len(lines) > old_len:
                     old_len = len(lines)
                     print(lines[-1])

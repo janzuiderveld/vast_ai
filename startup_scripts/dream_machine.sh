@@ -17,7 +17,7 @@ git clone https://github.com/janzuiderveld/Sketch-Simulator.git
 
 # starts inotify script looking for files to appear in Sketch-Simulator/out/to_send, writes filepaths to /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/out.log
 mkdir -p /workspace/vast_ai/dream_machine/Sketch-Simulator/out/to_send
-bash Python-TCP-Image-Socket/inotify.sh | tee _inotify.log &
+bash Python-TCP-Image-Socket/inotify.sh 2>&1 | tee _inotify.log &
 
 cd Sketch-Simulator 
 bash setup.sh | tee ../_sketch_setup.log

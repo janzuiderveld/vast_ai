@@ -76,8 +76,8 @@ class ServerSocket:
 
                 print('responded image')
 
-                self.socketClose()
-                self.socketOpen()
+                # self.socketClose()
+                # self.socketOpen()
                 
         except Exception as e:
             print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)

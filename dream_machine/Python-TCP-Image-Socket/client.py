@@ -111,3 +111,7 @@ if __name__ == "__main__":
     os.makedirs(args.input_fp, exist_ok=True)
     os.makedirs(args.output_fp, exist_ok=True)
     main(args)
+
+
+# write a txt file
+# with open('/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/out_imgs/output_' + cnt_str + '.txt', 'w') as f:

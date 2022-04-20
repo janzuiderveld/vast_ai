@@ -92,7 +92,7 @@ class ServerSocket:
                 self.conn.send(stringData)
                 self.conn.send(stime.encode('utf-8').ljust(64))
 
-                print(u'responded image)
+                print('responded image')
                 # with open(save_path, 'rb') as f:
                 #     while True:
                 #         data = f.read(1024)

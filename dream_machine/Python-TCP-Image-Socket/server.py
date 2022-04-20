@@ -145,8 +145,8 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='TCP client')
-    parser.add_argument('--input_fp', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/incoming_imgs', help='ftp filepath')
-    parser.add_argument('--output_fp', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/Sketch-Simulator/out/to_send', help='ftp filepath')
+    parser.add_argument('--input_fp', type=str, default='/workspace/vast_ai/dream_machine/incoming_imgs', help='ftp filepath')
+    parser.add_argument('--output_fp', type=str, default='/workspace/vast_ai/dream_machine/Sketch-Simulator/out/to_send', help='ftp filepath')
 
     args = parser.parse_args()
     os.makedirs(args.input_fp, exist_ok=True)

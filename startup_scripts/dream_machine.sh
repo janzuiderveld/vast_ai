@@ -14,14 +14,15 @@ python3 Python-TCP-Image-Socket/server.py 2>&1 | tee _server_receive.log &
 
 # Real-ESRGAN
 
-# git clone https://github.com/xinntao/Real-ESRGAN.git
-# cd Real-ESRGAN
-# python3 -m pip install basicsr facexlib gfpgan
-# python3 -m pip install -r  requirements.txt
-# python3 setup.py develop
-# wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth -P experiments/pretrained_models
+git clone https://github.com/xinntao/Real-ESRGAN.git
+cd /workspace/vast_ai/dream_machine/Real-ESRGAN
+python3 -m pip install basicsr facexlib gfpgan
+python3 -m pip install -r  requirements.txt
+python3 setup.py develop
+wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth -P /workspace/vast_ai/dream_machine/Real-ESRGAN/experiments/pretrained_models
 
 
+cd /workspace/vast_ai/dream_machine
 rm -r /workspace/vast_ai/dream_machine/Sketch-Simulator
 git clone https://github.com/janzuiderveld/Sketch-Simulator.git
 

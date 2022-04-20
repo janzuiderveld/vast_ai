@@ -76,7 +76,7 @@ class ClientSocket:
                 self.connectServer()
                 self.sendImages()
 
-            self.filepath = utils.wait_new_file(self.input_fp)
+            # self.filepath = utils.wait_new_file(self.input_fp)
 
     def recvall(self, count):
         buf = b''

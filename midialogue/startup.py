@@ -4,6 +4,8 @@ import sys
 import torch
 import torch.nn.functional as F
 import numpy as np
+import glob
+import argparse
 
 sys.path.extend("/content/LakhNES/model")
 sys.path.extend("/content/LakhNES")
@@ -13,6 +15,7 @@ import model.mem_transformer
 from collections import defaultdict
 import tempfile
 import pretty_midi
+
 
 code_model_dir = './model'
 code_utils_dir = os.path.join(code_model_dir, 'utils')
@@ -46,9 +49,6 @@ wait_amts = set([int(s[3:]) for s in idx2sym if s[:2] == 'WT'])
 print(len(idx2sym))
 
 TX1_PATH = 'data/nesmdb_tx1/test/*.tx1.txt'
-
-import glob as glob
-import os
 
 def get_tokens_tx1_paths(tx1):
     TX1_FPS = sorted(glob.glob(tx1))
@@ -258,27 +258,47 @@ def TX1_continuation(tx1, temp, topk, fn):
 
   return answer
 
-def midi_to_tx1(p1=None, no=None):
+
+def load_midi_fp(fp):
   pretty_midi.pretty_midi.MAX_TICK = 1e16
+  with open(fp, "rb") as fh:
+      fp = fh.read()
 
-  if "/" in p1:
-    with open(p1, "rb") as fh:
-      p1 = fh.read()
+  # Load MIDI file
+  with tempfile.NamedTemporaryFile('wb') as mf:
+    mf.write(fp)
+    mf.seek(0)
+    midi = pretty_midi.PrettyMIDI(mf.name)
+    midi.instruments[0].name = "p1"
+    midi.instruments[1].name = "p2"
+    midi.instruments[2].name = "tr"
+    midi.instruments[3].name = "no"
+    print(midi.instruments)
+    return midi
 
-  # if "/" in no:
-  #   with open(no, "rb") as fh:
-  #     no = fh.read()
+def midi_to_tx1(fp):
+  # pretty_midi.pretty_midi.MAX_TICK = 1e16
 
-    # Load MIDI file
-    with tempfile.NamedTemporaryFile('wb') as mf:
-      mf.write(p1)
-      mf.seek(0)
-      midi = pretty_midi.PrettyMIDI(mf.name)
-      midi.instruments[0].name = "p1"
-      print(midi.instruments)
+  # if "/" in p1:
+  #   with open(p1, "rb") as fh:
+  #     p1 = fh.read()
 
-  if no:
-    midi.instruments.append(no)
+  # # if "/" in no:
+  # #   with open(no, "rb") as fh:
+  # #     no = fh.read()
+
+  #   # Load MIDI file
+  #   with tempfile.NamedTemporaryFile('wb') as mf:
+  #     mf.write(p1)
+  #     mf.seek(0)
+  #     midi = pretty_midi.PrettyMIDI(mf.name)
+  #     midi.instruments[0].name = "p1"
+  #     print(midi.instruments)
+
+  # if no:
+  #   midi.instruments.append(no)
+
+  midi = load_midi_fp(fp)
 
   ins_names = ['p1', 'p2', 'tr', 'no']
   instruments = sorted(midi.instruments, key=lambda x: ins_names.index(x.name))
@@ -336,6 +356,98 @@ def midi_to_tx1(p1=None, no=None):
   tx1 = '\n'.join(tx1)
   return tx1
 
-def midi_continuation(p1=None, no=None, fn="test", temp=0.96, topk=64):  
-  tx1 = midi_to_tx1(p1=p1, no=no)
-  TX1_continuation(tx1, temp, topk, fn)
+
+def tx1_to_midi(tx1):
+  tx1 = tx1.strip().splitlines()
+  nsamps = sum([int(x.split('_')[1]) for x in tx1 if x[:2] == 'WT'])
+
+  # Create MIDI instruments
+  p1_prog = pretty_midi.instrument_name_to_program('Lead 1 (square)')
+  p2_prog = pretty_midi.instrument_name_to_program('Lead 2 (sawtooth)')
+  tr_prog = pretty_midi.instrument_name_to_program('Synth Bass 1')
+  no_prog = pretty_midi.instrument_name_to_program('Breath Noise')
+  p1 = pretty_midi.Instrument(program=p1_prog, name='p1', is_drum=False)
+  p2 = pretty_midi.Instrument(program=p2_prog, name='p2', is_drum=False)
+  tr = pretty_midi.Instrument(program=tr_prog, name='tr', is_drum=False)
+  no = pretty_midi.Instrument(program=no_prog, name='no', is_drum=True)
+
+  name_to_ins = {'P1': p1, 'P2': p2, 'TR': tr, 'NO': no}
+  name_to_pitch = {'P1': None, 'P2': None, 'TR': None, 'NO': None}
+  name_to_start = {'P1': None, 'P2': None, 'TR': None, 'NO': None}
+  name_to_max_velocity = {'P1': 15, 'P2': 15, 'TR': 1, 'NO': 15}
+
+  samp = 0
+  for event in tx1:
+    if event[:2] == 'WT':
+      samp += int(event[3:])
+    else:
+      tokens = event.split('_')
+      name = tokens[0]
+      ins = name_to_ins[tokens[0]]
+
+      old_pitch = name_to_pitch[name]
+      if tokens[1] == 'NOTEON':
+        if old_pitch is not None:
+          ins.notes.append(pretty_midi.Note(
+              velocity=name_to_max_velocity[name],
+              pitch=old_pitch,
+              start=name_to_start[name] / 44100.,
+              end=samp / 44100.))
+        name_to_pitch[name] = int(tokens[2])
+        name_to_start[name] = samp
+      else:
+        if old_pitch is not None:
+          ins.notes.append(pretty_midi.Note(
+              velocity=name_to_max_velocity[name],
+              pitch=name_to_pitch[name],
+              start=name_to_start[name] / 44100.,
+              end=samp / 44100.))
+
+        name_to_pitch[name] = None
+        name_to_start[name] = None
+
+  # Deactivating this for generated files
+  #for name, pitch in name_to_pitch.items():
+  #  assert pitch is None
+
+  # Create MIDI and add instruments
+  midi = pretty_midi.PrettyMIDI(initial_tempo=120, resolution=22050)
+  midi.instruments.extend([p1, p2, tr, no])
+
+  # Create indicator for end of song
+  eos = pretty_midi.TimeSignature(1, 1, nsamps / 44100.)
+  midi.time_signature_changes.append(eos)
+
+  with tempfile.NamedTemporaryFile('rb') as mf:
+    midi.write(mf.name)
+    midi = mf.read()
+
+  return midi
+
+def midi_continuation(fp, fn="test", temp=0.96, topk=64):  
+  tx1 = midi_to_tx1(fp)
+  tx1_answer = TX1_continuation(tx1, temp, topk, fn)
+  midi = tx1_to_midi(tx1_answer)
+
+def wait_for_new_midi(midi_folder):
+    init_midis = glob.glob(f"{midi_folder}/*.mid")
+    while True:
+        current_midis = glob.glob(f"{midi_folder}/*.mid")
+        if len(current_midis) > len(init_midis):
+            new_midi = list(set(current_midis).symmetric_difference(set(init_midis)))[0]
+            return new_midi
+
+
+while True:
+    midi_path = wait_for_new_midi(midi_folder)
+
+    # midi_path = glob.glob(f"{midi_folder}/*.mid")[-1]
+    # plt.figure(figsize=(8, 4))
+
+    # pm = pretty_midi.PrettyMIDI(midi_path)
+    # plot_piano_roll(pm, 0, 126)
+    
+    # midi_continuation(p1 = midi_path)
+    midi_continuation(midi_path)
+
+    break

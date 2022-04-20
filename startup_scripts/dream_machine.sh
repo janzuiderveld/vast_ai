@@ -17,6 +17,7 @@ python3 -m pip install -r Python-TCP-Image-Socket/requirements.txt
 # python3 -m pip install basicsr facexlib gfpgan
 # python3 -m pip install -r  requirements.txt
 # python3 setup.py develop
+# wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth -P experiments/pretrained_models
 
 
 # waits for files send through tcp and saves them in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/8080_images0
@@ -24,7 +25,6 @@ python3 Python-TCP-Image-Socket/server.py 2>&1 | tee _server_receive.log &
 
 rm -r /workspace/vast_ai/dream_machine/Sketch-Simulator
 git clone https://github.com/janzuiderveld/Sketch-Simulator.git
-wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth -P experiments/pretrained_models
 
 cd Sketch-Simulator 
 bash setup.sh | tee ../_sketch_setup.log

@@ -21,8 +21,8 @@ code_model_dir = './model'
 code_utils_dir = os.path.join(code_model_dir, 'utils')
 sys.path.extend([code_model_dir, code_utils_dir])
 
-MODEL_FP = '/root/LakhNES/model/pretrained/LakhNES/model.pt'
-VOCAB_FP = '/root/LakhNES/model/pretrained/LakhNES/vocab.txt'
+MODEL_FP = '/workspace/vast_ai/midialogue/LakhNES/model/pretrained/LakhNES/model.pt'
+VOCAB_FP = '/workspace/vast_ai/midialogue/LakhNES/model/pretrained/LakhNES/vocab.txt'
 USE_CUDA = True
 
 device = torch.device("cuda" if USE_CUDA else "cpu")
@@ -48,7 +48,7 @@ sym2idx = {s:i for i, s in enumerate(idx2sym)}
 wait_amts = set([int(s[3:]) for s in idx2sym if s[:2] == 'WT'])
 print(len(idx2sym))
 
-TX1_PATH = 'data/nesmdb_tx1/test/*.tx1.txt'
+TX1_PATH = '/workspace/vast_ai/midialogue/LakhNES/data/nesmdb_tx1/test/*.tx1.txt'
 
 def get_tokens_tx1_paths(tx1):
     TX1_FPS = sorted(glob.glob(tx1))
@@ -357,7 +357,7 @@ def midi_to_tx1(fp):
   return tx1
 
 
-def tx1_to_midi(tx1):
+def tx1_to_midi(tx1, save_folder):
   tx1 = tx1.strip().splitlines()
   nsamps = sum([int(x.split('_')[1]) for x in tx1 if x[:2] == 'WT'])
 
@@ -422,7 +422,7 @@ def tx1_to_midi(tx1):
     midi.write(mf.name)
     midi = mf.read()
 
-  with open('/tmp/midi.mid', 'wb') as f:
+  with open(f'{save_folder}/midi.mid', 'wb') as f:
     f.write(midi)
 
   return midi
@@ -443,7 +443,7 @@ def wait_for_new_midi(midi_folder):
 
 def main(args):
   while True:
-      midi_path = wait_for_new_midi(args.midi_folder)
+      midi_path = wait_for_new_midi(args.midi_in_folder)
 
       # midi_path = glob.glob(f"{midi_folder}/*.mid")[-1]
       # plt.figure(figsize=(8, 4))
@@ -452,15 +452,21 @@ def main(args):
       # plot_piano_roll(pm, 0, 126)
       
       # midi_continuation(p1 = midi_path)
-      midi_continuation(midi_path)
+
+      midi_continuation(midi_path, args.midi_out_folder)
 
       break
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()
-  parser.add_argument('--midi_folder', type=str, default='/tmp/midi')
+  parser.add_argument('--midi_in_folder', type=str, default='/workspace/vast_ai/midialogue/midi_in')
+  parser.add_argument('--midi_out_folder', type=str, default='/workspace/vast_ai/midialogue/midi_out')
   parser.add_argument('--temp', type=float, default=0.96)
   parser.add_argument('--topk', type=int, default=64)
   parser.add_argument('--fn', type=str, default='test')
   args = parser.parse_args()
+
+  os.makedirs(args.midi_out_folder, exist_ok=True)
+  os.makedirs(args.midi_in_folder, exist_ok=True)
+
   main(args)

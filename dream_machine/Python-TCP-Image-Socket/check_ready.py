@@ -1,6 +1,6 @@
 import os
 import subprocess
-
+import time
 while True:
     try:
         out = os.popen("../vast ssh-url").read().split(":")
@@ -15,8 +15,6 @@ while True:
 
 print(ssh_address, port)
 
-old_len = 0
-
 subprocess.Popen(['ssh', f"-o StrictHostKeyChecking=no", f"-p {port}", f"{ssh_address}", "-L 8080:localhost:8080", "-N"])
 
 while True:
@@ -25,3 +23,4 @@ while True:
         continue
     else:
         break
+    time.sleep(1)

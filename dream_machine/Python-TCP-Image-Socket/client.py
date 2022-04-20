@@ -28,6 +28,25 @@ class ClientSocket:
             self.sendImages()
         except Exception as e:
             print(e)
+    
+            import subprocess
+
+            while True:
+                try:
+                    out = os.popen("../vast ssh-url").read().split(":")
+                    if not out[0]: continue
+                    print(out)
+                    ssh_address = out[1][2:]
+                    port = out[2].split("\n")[0]
+                except:
+                    continue
+
+                if port != "None" or ssh_address !="None": break
+
+            print(ssh_address, port)
+
+            subprocess.Popen(['ssh', f"-o StrictHostKeyChecking=no", f"-p {port}", f"{ssh_address}", "-L 8080:localhost:8080", "-N"])
+
             self.connectCount += 1
             if self.connectCount == 10:
                 print(u'Connect fail %d times. exit program'%(self.connectCount))

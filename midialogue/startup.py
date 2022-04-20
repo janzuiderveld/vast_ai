@@ -422,10 +422,19 @@ def tx1_to_midi(tx1, save_folder):
     midi.write(mf.name)
     midi = mf.read()
 
-  with open(f'{save_folder}/midi.mid', 'wb') as f:
+  filepath = get_incremental_fn(save_folder)
+  with open(filepath, 'wb') as f:
     f.write(midi)
 
   return midi
+
+def get_incremental_fn(folder, fn="midi.mid"):
+  i = 0
+  new_fp = f"{folder}/{str(i)}_{fn}"
+  while path.exists(new_fp) :
+      i += 1
+      new_fp = f"{folder}/{str(i)}_{fn}"
+  return new_fp
 
 def midi_continuation(fp, output_folder, fn="test", temp=0.96, topk=64):  
   tx1 = midi_to_tx1(fp)

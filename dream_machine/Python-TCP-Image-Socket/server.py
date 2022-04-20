@@ -10,7 +10,7 @@ import threading
 from datetime import datetime
 import utils
 import argparse
-
+import shutil
 
 class ServerSocket:
     def __init__(self, ip, port, args):
@@ -18,6 +18,7 @@ class ServerSocket:
         self.TCP_PORT = port
         self.input_fp = args.input_fp
         self.output_fp = args.output_fp
+        self.esrgan = args.esrgan
         self.socketOpen()
         self.receiveThread = threading.Thread(target=self.receiveImages)
         self.receiveThread.start()
@@ -66,11 +67,16 @@ class ServerSocket:
                 cv2.imwrite(save_path, decimg)
                 
                 resp_file = utils.wait_new_file(self.output_fp)
+                
+                if self.esrgan:
+                    tmp_folder = "/workspace/vast_ai/dream_machine/temp_upscale"
+                    os.makedirs(tmp_folder, exist_ok=True)
+                    os.system(f"python3 ../Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -i {resp_file} -o tmp_folder --outscale 4 --half")
+                    out_fp = glob.glob(tmp_folder + "/*")[0]
+                else:
+                    out_fp = resp_file
 
-                os.system(f"python3 ../Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -i {resp_file} -o --outscale 4 --half")
-
-
-                frame = cv2.imread(resp_file)
+                frame = cv2.imread(out_fp)
                 resize_frame = cv2.resize(frame, dsize=(1024, 1024), interpolation=cv2.INTER_AREA)
                 encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
                 result, imgencode = cv2.imencode('.jpg', resize_frame, encode_param)
@@ -82,6 +88,9 @@ class ServerSocket:
                 self.conn.sendall(length.encode('utf-8').ljust(64))
                 self.conn.send(stringData)
 
+                if self.esrgan:
+                    shutil.rmtree(tmp_folder)
+                    
                 print('responded image')
 
                 cnt += 1
@@ -151,6 +160,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='TCP client')
     parser.add_argument('--input_fp', type=str, default='/workspace/vast_ai/dream_machine/incoming_imgs', help='ftp filepath')
     parser.add_argument('--output_fp', type=str, default='/workspace/vast_ai/dream_machine/Sketch-Simulator/out/to_send', help='ftp filepath')
+    parser.add_argument('--esrgan', type=int, default=0, help='ftp filepath')
 
     args = parser.parse_args()
     os.makedirs(args.input_fp, exist_ok=True)

@@ -1,4 +1,5 @@
 python3 vast_bid.py auto1 dream_machine
 # python3 vast_bid.py auto1 dream_machine
-bash startup_scripts/dream_machine_local.sh 
 
+sleep 300
+bash startup_scripts/dream_machine_local.sh 

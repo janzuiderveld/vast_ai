@@ -65,9 +65,10 @@ class ServerSocket:
                 save_path = self.input_fp + '/input_' + cnt_str + '.jpg'
                 cv2.imwrite(save_path, decimg)
                 
-                utils.wait_new_file(self.output_fp)
-
-                resize_frame = cv2.resize(decimg, dsize=(1024, 1024), interpolation=cv2.INTER_AREA)
+                resp_file = utils.wait_new_file(self.output_fp)
+                
+                frame = cv2.imread(resp_file)
+                resize_frame = cv2.resize(frame, dsize=(1024, 1024), interpolation=cv2.INTER_AREA)
                 encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
                 result, imgencode = cv2.imencode('.jpg', resize_frame, encode_param)
                 

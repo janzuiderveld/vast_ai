@@ -16,7 +16,7 @@ class ClientSocket:
         self.input_fp = args.input_fp
         self.output_fp = args.output_fp
         self.connectCount = 0
-        self.filepath = utils.wait_new_file(self.input_fp)
+        # self.filepath = utils.wait_new_file(self.input_fp)
         self.connectServer()
 
     def connectServer(self):
@@ -48,8 +48,8 @@ class ClientSocket:
                 else:
                     cnt_str = str(cnt)
 
-                frame = cv2.imread(self.filepath)
-                # frame = cv2.imread("/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/test.png")
+                # frame = cv2.imread(self.filepath)
+                frame = cv2.imread("/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/test.png")
                 resize_frame = cv2.resize(frame, dsize=(256, 256), interpolation=cv2.INTER_AREA)
 
                 now = time.localtime()

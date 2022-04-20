@@ -56,9 +56,6 @@ class ClientSocket:
                 print(u'send images %d'%(cnt))
                 cnt+=1
 
-
-                time.sleep(15)
-
                 # response = self.sock.recv(64)
                 length = self.recvall(64)
                 length1 = length.decode('utf-8')

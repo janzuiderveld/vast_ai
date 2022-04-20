@@ -53,7 +53,7 @@ class ServerSocket:
                 length1 = length.decode('utf-8')
                 stringData = self.recvall(self.conn, int(length1))
                 stime = self.recvall(self.conn, 64)
-                
+
                 print('send time: ' + stime.decode('utf-8'))
                 now = time.localtime()
                 print('receive time: ' + datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f'))
@@ -92,7 +92,7 @@ class ServerSocket:
                 self.conn.send(stringData)
                 self.conn.send(stime.encode('utf-8').ljust(64))
 
-                 print(u'responded image)
+                print(u'responded image)
                 # with open(save_path, 'rb') as f:
                 #     while True:
                 #         data = f.read(1024)

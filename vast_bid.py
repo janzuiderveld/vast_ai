@@ -14,7 +14,7 @@ args = parser.parse_args()
 # run vast shell command "./vast search offers" to get prices 
 if args.bidding_tactic == 'cheap':
     # vast_cmd = './vast search offers -b --raw -o "dph"'
-    vast_cmd = './vast search offers -d --raw -o "dph"'
+    vast_cmd = './vast search offers -b --raw -o "dph"'
 elif args.bidding_tactic == 'best1':
     vast_cmd = './vast search offers -d "num_gpus == 1 gpu_ram > 20" --raw -o "dlperf-"'   
 elif args.bidding_tactic == 'auto1':

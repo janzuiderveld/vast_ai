@@ -55,6 +55,12 @@ class ClientSocket:
                 self.sock.send(stime.encode('utf-8').ljust(64))
                 print(u'send images %d'%(cnt))
                 cnt+=1
+
+                # response = self.sock.recv(64)
+                length = self.recvall(self.sock, 64)
+                length1 = length.decode('utf-8')
+                stringData = self.recvall(self.sock, int(length1))
+
                 time.sleep(0.095)
             except Exception as e:
                 print(e)
@@ -64,6 +70,15 @@ class ClientSocket:
                 self.sendImages()
 
             self.filepath = utils.wait_new_file(self.ftp_filepath)
+
+    def recvall(self, count):
+        buf = b''
+        while count:
+            newbuf = self.sock.recv(count)
+            if not newbuf: return None
+            buf += newbuf
+            count -= len(newbuf)
+        return buf    
 
 def main(ftp_filepath):
     TCP_IP = 'localhost' 

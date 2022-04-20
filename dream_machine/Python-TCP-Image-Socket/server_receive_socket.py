@@ -53,6 +53,7 @@ class ServerSocket:
                 length1 = length.decode('utf-8')
                 stringData = self.recvall(self.conn, int(length1))
                 stime = self.recvall(self.conn, 64)
+                
                 print('send time: ' + stime.decode('utf-8'))
                 now = time.localtime()
                 print('receive time: ' + datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f'))
@@ -60,7 +61,44 @@ class ServerSocket:
                 decimg = cv2.imdecode(data, 1)
                 # cv2.imshow("image", decimg)
                 # cv2.imwrite('./' + str(self.TCP_PORT) + '_images' + str(self.folder_num) + '/img' + cnt_str + '.jpg', decimg)
-                cv2.imwrite('./' + str(self.TCP_PORT) + '_images0' + '/img' + cnt_str + '.jpg', decimg)
+                
+
+                save_path = './' + str(self.TCP_PORT) + '_images0' + '/img' + cnt_str + '.jpg'
+                cv2.imwrite(save_path, decimg)
+                
+
+                ######################
+
+                # header = ("HTTP/1.1 200 OK\r\n"
+                #         "Accept-Ranges: bytes\r\n"
+                #         f"Content-Length: {length1}\r\n"
+                #         "Keep-Alive: timeout=10, max=100\r\n"
+                #         "Connection: Keep-Alive\r\n (or Connection: close)"
+                #         "Content-Type: image/png; charset=ISO-8859-1\r\n"
+                #         # "Content-Type: image/jpeg; charset=ISO-8859-1\r\n"
+                #         "\r\n")
+                # print("length: " + length1)
+                # self.conn.send(header)
+
+                resize_frame = cv2.resize(decimg, dsize=(256, 256), interpolation=cv2.INTER_AREA)
+                encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
+                result, imgencode = cv2.imencode('.jpg', resize_frame, encode_param)
+                
+                data = numpy.array(imgencode)
+                stringData = base64.b64encode(data)
+                length = str(len(stringData))
+
+                self.conn.sendall(length.encode('utf-8').ljust(64))
+                self.conn.send(stringData)
+                self.conn.send(stime.encode('utf-8').ljust(64))
+
+                 print(u'responded image)
+                # with open(save_path, 'rb') as f:
+                #     while True:
+                #         data = f.read(1024)
+                #         if not data:
+                #             break
+                #         self.conn.send(data)
 
                 self.socketClose()
                 self.socketOpen()

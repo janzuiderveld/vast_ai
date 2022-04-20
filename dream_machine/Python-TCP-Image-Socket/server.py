@@ -67,9 +67,6 @@ class ServerSocket:
                 cv2.imwrite(save_path, decimg)
                 
                 resp_file = utils.wait_new_file(self.output_fp)
-                
-                # sleep to avoid corrupted file? (libpng error: Read Error)
-                time.sleep(1)
 
                 if self.esrgan:
                     tmp_folder = "/workspace/vast_ai/dream_machine/temp_upscale"

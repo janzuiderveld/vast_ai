@@ -7,9 +7,9 @@ import numpy as np
 import glob
 import argparse
 
-sys.path.extend("/content/LakhNES/model")
-sys.path.extend("/content/LakhNES")
-sys.path.extend("/content/LakhNES/utils")
+sys.path.extend("/workspace/vast_ai/midialogue/LakhNES/model")
+sys.path.extend("/workspace/vast_ai/midialogue/LakhNES")
+sys.path.extend("/workspace/vast_ai/midialogue/LakhNES/utils")
 import model.mem_transformer
 
 from collections import defaultdict
@@ -422,6 +422,9 @@ def tx1_to_midi(tx1):
     midi.write(mf.name)
     midi = mf.read()
 
+  with open('/tmp/midi.mid', 'wb') as f:
+    f.write(midi)
+
   return midi
 
 def midi_continuation(fp, fn="test", temp=0.96, topk=64):  
@@ -438,16 +441,26 @@ def wait_for_new_midi(midi_folder):
             return new_midi
 
 
-while True:
-    midi_path = wait_for_new_midi(midi_folder)
+def main(args):
+  while True:
+      midi_path = wait_for_new_midi(args.midi_folder)
 
-    # midi_path = glob.glob(f"{midi_folder}/*.mid")[-1]
-    # plt.figure(figsize=(8, 4))
+      # midi_path = glob.glob(f"{midi_folder}/*.mid")[-1]
+      # plt.figure(figsize=(8, 4))
 
-    # pm = pretty_midi.PrettyMIDI(midi_path)
-    # plot_piano_roll(pm, 0, 126)
-    
-    # midi_continuation(p1 = midi_path)
-    midi_continuation(midi_path)
+      # pm = pretty_midi.PrettyMIDI(midi_path)
+      # plot_piano_roll(pm, 0, 126)
+      
+      # midi_continuation(p1 = midi_path)
+      midi_continuation(midi_path)
 
-    break
+      break
+
+if __name__ == "__main__":
+  parser = argparse.ArgumentParser()
+  parser.add_argument('--midi_folder', type=str, default='/tmp/midi')
+  parser.add_argument('--temp', type=float, default=0.96)
+  parser.add_argument('--topk', type=int, default=64)
+  parser.add_argument('--fn', type=str, default='test')
+  args = parser.parse_args()
+  main(args)

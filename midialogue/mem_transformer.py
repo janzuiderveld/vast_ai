@@ -13,7 +13,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-sys.path.append("/content/LakhNES/model/utils")
+sys.path.append("/workspace/vast_ai/midialogue/LakhNES/model/utils")
 from model.utils.proj_adaptive_softmax import ProjectedAdaptiveLogSoftmax
 from model.utils.log_uniform_sampler import LogUniformSampler, sample_logits
 

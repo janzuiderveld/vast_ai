@@ -1,4 +1,8 @@
 #!/bin/bash
+apt-get install git wget curl tar -y
+
+cd /workspace
+git clone https://github.com/janzuiderveld/vast_ai.git
 cd /workspace/vast_ai/midialogue
 git clone https://github.com/chrisdonahue/LakhNES
 
@@ -14,12 +18,14 @@ cd /workspace/vast_ai/midialogue/LakhNES/model/pretrained
 tar -xf model.tar.gz && rm model.tar.gz
 cd /workspace/vast_ai/midialogue/LakhNES/data
 tar -xf /workspace/vast_ai/midialogue/LakhNES/nesmdb_tx1.tar.gz
-cd /workspace/vast_ai/midialogue
 
 cp /workspace/vast_ai/midialogue/mem_transformer.py /workspace/vast_ai/midialogue/LakhNES/model/mem_transformer.py
+cp /workspace/vast_ai/midialogue/startup.py /workspace/vast_ai/midialogue/LakhNES/startup.py
 
 touch /workspace/vast_ai/midialogue/LakhNES/model/utils/__init__.py
 touch /workspace/vast_ai/midialogue/LakhNES/model/model/__init__.pyw
 touch /workspace/vast_ai/midialogue/LakhNES/model/__init__.py
+
+cd /workspace/vast_ai/midialogue/LakhNES
 
 python3 startup.py

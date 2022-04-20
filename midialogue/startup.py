@@ -427,10 +427,10 @@ def tx1_to_midi(tx1, save_folder):
 
   return midi
 
-def midi_continuation(fp, fn="test", temp=0.96, topk=64):  
+def midi_continuation(fp, output_folder, fn="test", temp=0.96, topk=64):  
   tx1 = midi_to_tx1(fp)
   tx1_answer = TX1_continuation(tx1, temp, topk, fn)
-  midi = tx1_to_midi(tx1_answer)
+  midi = tx1_to_midi(tx1_answer, output_folder)
 
 def wait_for_new_midi(midi_folder):
     init_midis = glob.glob(f"{midi_folder}/*.mid")

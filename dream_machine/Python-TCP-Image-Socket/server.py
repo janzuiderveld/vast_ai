@@ -11,6 +11,7 @@ from datetime import datetime
 import utils
 import argparse
 import shutil
+import subprocess
 
 class ServerSocket:
     def __init__(self, ip, port, args):
@@ -71,7 +72,9 @@ class ServerSocket:
                 if self.esrgan:
                     tmp_folder = "/workspace/vast_ai/dream_machine/temp_upscale"
                     os.makedirs(tmp_folder, exist_ok=True)
-                    os.system(f"python3 ../Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -i {resp_file} -o tmp_folder --outscale 4 --half")
+                    os.chdir("/workspace/vast_ai/dream_machine/Real-ESRGAN")
+                    os.system(f"python3 Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -i {resp_file} -o {tmp_folder} --outscale 4 --half")
+                    os.chdir("/workspace/vast_ai/dream_machine")
                     out_fp = glob.glob(tmp_folder + "/*")[0]
                 else:
                     out_fp = resp_file

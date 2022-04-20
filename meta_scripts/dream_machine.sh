@@ -1,8 +1,9 @@
+#!/bin/bash
 python3 vast_bid.py auto1 dream_machine
 
-# echo "Wating 5 minutes before starting local script"
 
-# sleep 300
+echo "Wating 60 sec before starting local script"
+sleep 60
 
-
-bash startup_scripts/dream_machine_local.sh 
+# sudo chmod a+x startup_scripts/dream_machine_local.sh
+./startup_scripts/dream_machine_local.sh 

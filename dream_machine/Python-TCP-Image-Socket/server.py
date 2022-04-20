@@ -66,7 +66,10 @@ class ServerSocket:
                 cv2.imwrite(save_path, decimg)
                 
                 resp_file = utils.wait_new_file(self.output_fp)
-                
+
+                os.system(f"python3 ../Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -i {resp_file} -o --outscale 4 --half")
+
+
                 frame = cv2.imread(resp_file)
                 resize_frame = cv2.resize(frame, dsize=(1024, 1024), interpolation=cv2.INTER_AREA)
                 encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]

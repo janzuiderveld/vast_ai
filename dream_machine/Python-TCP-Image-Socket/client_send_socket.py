@@ -10,12 +10,13 @@ import argparse
 import os
 
 class ClientSocket:
-    def __init__(self, ip, port, ftp_filepath):
+    def __init__(self, ip, port, input_fp):
         self.TCP_SERVER_IP = ip
         self.TCP_SERVER_PORT = port
-        self.ftp_filepath = ftp_filepath
+        self.input_fp = args.input_fp
+        self.output_fp = args.output_fp
         self.connectCount = 0
-        # self.filepath = utils.wait_new_file(self.ftp_filepath)
+        # self.filepath = utils.wait_new_file(self.input_fp)
         self.connectServer()
 
     def connectServer(self):
@@ -54,7 +55,6 @@ class ClientSocket:
                 self.sock.send(stringData)
                 self.sock.send(stime.encode('utf-8').ljust(64))
                 print(u'send images %d'%(cnt))
-                cnt+=1
 
                 # response = self.sock.recv(64)
                 length = self.recvall(64)
@@ -65,22 +65,18 @@ class ClientSocket:
                 print('receive time: ' + datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f'))
                 data = numpy.frombuffer(base64.b64decode(stringData), numpy.uint8)
                 decimg = cv2.imdecode(data, 1)
-                # cv2.imshow("image", decimg)
-                # cv2.imwrite('./' + str(self.TCP_PORT) + '_images' + str(self.folder_num) + '/img' + cnt_str + '.jpg', decimg)
-                
-                save_path = './WOOHOEE2.jpg'
-                cv2.imwrite(save_path, decimg)
 
+                cv2.imwrite(self.output_fp + "output_" + str(cnt) + ".jpg" , decimg)
+                cnt+=1
 
-                time.sleep(0.095)
             except Exception as e:
-                print(e)
+                print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
                 self.sock.close()
                 time.sleep(1)
                 self.connectServer()
                 self.sendImages()
 
-            self.filepath = utils.wait_new_file(self.ftp_filepath)
+            self.filepath = utils.wait_new_file(self.input_fp)
 
     def recvall(self, count):
         buf = b''
@@ -91,16 +87,18 @@ class ClientSocket:
             count -= len(newbuf)
         return buf    
 
-def main(ftp_filepath):
+def main(args):
     TCP_IP = 'localhost' 
     TCP_PORT = 8080 
-    client = ClientSocket(TCP_IP, TCP_PORT, ftp_filepath)
+    client = ClientSocket(TCP_IP, TCP_PORT, args)
 
 if __name__ == "__main__":
     # argparser
     parser = argparse.ArgumentParser(description='TCP client')
-    parser.add_argument('--ftp_filepath', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs', help='ftp filepath')
+    parser.add_argument('--input_fp', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs', help='ftp filepath')
+    parser.add_argument('--output_fp', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/out_imgs', help='ftp filepath')
 
     args = parser.parse_args()
-    os.makedirs(args.ftp_filepath, exist_ok=True)
-    main(args.ftp_filepath)
+    os.makedirs(args.input_fp, exist_ok=True)
+    os.makedirs(args.output_fp, exist_ok=True)
+    main(args)

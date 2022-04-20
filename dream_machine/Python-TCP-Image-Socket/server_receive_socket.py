@@ -59,31 +59,10 @@ class ServerSocket:
                 print('receive time: ' + datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f'))
                 data = numpy.frombuffer(base64.b64decode(stringData), numpy.uint8)
                 decimg = cv2.imdecode(data, 1)
-                # cv2.imshow("image", decimg)
-                # cv2.imwrite('./' + str(self.TCP_PORT) + '_images' + str(self.folder_num) + '/img' + cnt_str + '.jpg', decimg)
-                
 
                 save_path = './' + str(self.TCP_PORT) + '_images0' + '/img' + cnt_str + '.jpg'
                 cv2.imwrite(save_path, decimg)
                 
-
-                ######################
-
-                # header = ("HTTP/1.1 200 OK\r\n"
-                #         "Accept-Ranges: bytes\r\n"
-                #         f"Content-Length: {length1}\r\n"
-                #         "Keep-Alive: timeout=10, max=100\r\n"
-                #         "Connection: Keep-Alive\r\n (or Connection: close)"
-                #         "Content-Type: image/png; charset=ISO-8859-1\r\n"
-                #         # "Content-Type: image/jpeg; charset=ISO-8859-1\r\n"
-                #         "\r\n")
-                # print("length: " + length1)
-                # self.conn.send(header)
-
-
-                time.sleep(15)
-
-
                 resize_frame = cv2.resize(decimg, dsize=(1024, 1024), interpolation=cv2.INTER_AREA)
                 encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
                 result, imgencode = cv2.imencode('.jpg', resize_frame, encode_param)
@@ -94,22 +73,14 @@ class ServerSocket:
 
                 self.conn.sendall(length.encode('utf-8').ljust(64))
                 self.conn.send(stringData)
-                # self.conn.send(stime.encode('utf-8').ljust(64))
 
                 print('responded image')
-                # with open(save_path, 'rb') as f:
-                #     while True:
-                #         data = f.read(1024)
-                #         if not data:
-                #             break
-                #         self.conn.send(data)
 
                 self.socketClose()
                 self.socketOpen()
                 
         except Exception as e:
             print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
-            # self.convertImage(str(self.folder_num), cnt, startTime)
             self.socketClose()
 
             self.socketOpen()
@@ -125,24 +96,6 @@ class ServerSocket:
         except OSError as e:
             if e.errno != errno.EEXIST:
                 print("Failed to create " + folder_name +  " directory")
-                raise
-
-        folder_name = str(self.TCP_PORT) + "_images1"
-        try:
-            if not os.path.exists(folder_name):
-                os.makedirs(os.path.join(folder_name))
-        except OSError as e:
-            if e.errno != errno.EEXIST:
-                print("Failed to create " + folder_name + " directory")
-                raise
-
-        folder_name = "videos"
-        try:
-            if not os.path.exists(folder_name):
-                os.makedirs(os.path.join(folder_name))
-        except OSError as e:
-            if e.errno != errno.EEXIST:
-                print("Failed to create " + folder_name + " directory")
                 raise
         
     def recvall(self, sock, count):

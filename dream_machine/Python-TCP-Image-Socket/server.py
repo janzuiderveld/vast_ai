@@ -97,6 +97,7 @@ class ServerSocket:
                 print('responded image')
 
                 cnt += 1
+
                 # self.socketClose()
                 # self.socketOpen()
                 
@@ -163,7 +164,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='TCP client')
     parser.add_argument('--input_fp', type=str, default='/workspace/vast_ai/dream_machine/incoming_imgs', help='ftp filepath')
     parser.add_argument('--output_fp', type=str, default='/workspace/vast_ai/dream_machine/Sketch-Simulator/out/to_send', help='ftp filepath')
-    parser.add_argument('--esrgan', type=int, default=0, help='ftp filepath')
+    parser.add_argument('--esrgan', type=int, default=1, help='ftp filepath')
 
     args = parser.parse_args()
     os.makedirs(args.input_fp, exist_ok=True)

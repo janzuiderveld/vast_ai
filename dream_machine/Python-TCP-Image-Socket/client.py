@@ -63,7 +63,7 @@ class ClientSocket:
                 self.sock.sendall(length.encode('utf-8').ljust(64))
                 self.sock.send(stringData)
                 self.sock.send(stime.encode('utf-8').ljust(64))
-                print(u'send images %d'%(cnt_str))
+                print(u'send images %d'%(cnt))
 
                 # response = self.sock.recv(64)
                 length = self.recvall(64)

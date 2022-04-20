@@ -5,7 +5,7 @@ import argparse
 #TODO set 3090 mode.
 
 parser = argparse.ArgumentParser(description='Run a command on a remote host.')
-parser.add_argument('bidding_tactic', type=str, default='cheap', choices=['cheap', 'best1', 'auto1'], help='bidding tactic')
+parser.add_argument('bidding_tactic', type=str, default='cheap', choices=['cheap', 'cheap8', 'best1', 'auto1'], help='bidding tactic')
 # parser.add_argument('min_bid', type=str, default='1')
 parser.add_argument('project_name', type=str, default='', help='project name')
 parser.add_argument('--dummy', type=int, default=0, help='')
@@ -13,8 +13,9 @@ args = parser.parse_args()
 
 # run vast shell command "./vast search offers" to get prices 
 if args.bidding_tactic == 'cheap':
-    # vast_cmd = './vast search offers -b --raw -o "dph"'
     vast_cmd = './vast search offers -b --raw -o "dph"'
+if args.bidding_tactic == 'cheap8':
+    vast_cmd = './vast search offers -b "num_gpus == 8" --raw -o "dph"' 
 elif args.bidding_tactic == 'best1':
     vast_cmd = './vast search offers -d "num_gpus == 1 gpu_ram > 20" --raw -o "dlperf-"'   
 elif args.bidding_tactic == 'auto1':
@@ -35,7 +36,7 @@ for i in range(10):
 top_id = top_sellers[0]["id"]
 
 # If instance is allowed to be interrupted
-if args.bidding_tactic == 'cheap':
+if args.bidding_tactic == 'cheap' or "cheap8":
     bid = top_sellers[0]["min_bid"]
     vast_book_cmd = f"./vast create instance {top_id} --price {bid} --image pytorch/pytorch --disk 30 --onstart startup_scripts/{args.project_name}.sh"
 else:

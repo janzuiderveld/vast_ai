@@ -1,5 +1,6 @@
 import glob
 import time
+import os
 
 # wait for new files to appear in the FTP folder
 def wait_new_file(folder):

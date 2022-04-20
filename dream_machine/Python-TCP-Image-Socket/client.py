@@ -16,7 +16,6 @@ class ClientSocket:
         self.input_fp = args.input_fp
         self.output_fp = args.output_fp
         self.connectCount = 0
-        self.filepath = utils.wait_new_file(self.input_fp)
         self.connectServer()
 
     def connectServer(self):
@@ -66,12 +65,13 @@ class ClientSocket:
                     cnt_str = '0' + str(cnt)
                 else:
                     cnt_str = str(cnt)
+                self.filepath = utils.wait_new_file(self.input_fp)
 
                 frame = cv2.imread(self.filepath)
                 # frame = cv2.imread("/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/test.png")
                 resize_frame = cv2.resize(frame, dsize=(256, 256), interpolation=cv2.INTER_AREA)
 
-                now = time.localtime()
+                start = time.time()
                 stime = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')
                     
                 encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
@@ -89,13 +89,14 @@ class ClientSocket:
                 length1 = length.decode('utf-8')
                 stringData = self.recvall(int(length1))
 
-                now = time.localtime()
-                print('receive time: ' + datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f'))
                 data = numpy.frombuffer(base64.b64decode(stringData), numpy.uint8)
                 decimg = cv2.imdecode(data, 1)
 
                 cv2.imwrite(self.output_fp + "/output_" + cnt_str + ".jpg" , decimg)
+                end = time.time()
                 cnt+=1
+
+                print("server took %f seconds"%(end-start))
 
             except Exception as e:
                 print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
@@ -103,8 +104,6 @@ class ClientSocket:
                 time.sleep(1)
                 self.connectServer()
                 self.sendImages()
-
-            self.filepath = utils.wait_new_file(self.input_fp)
 
     def recvall(self, count):
         buf = b''

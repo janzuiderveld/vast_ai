@@ -80,6 +80,10 @@ class ServerSocket:
                 # print("length: " + length1)
                 # self.conn.send(header)
 
+
+                time.sleep(15)
+
+
                 resize_frame = cv2.resize(decimg, dsize=(256, 256), interpolation=cv2.INTER_AREA)
                 encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
                 result, imgencode = cv2.imencode('.jpg', resize_frame, encode_param)

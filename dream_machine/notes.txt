@@ -1,0 +1,4 @@
+RTX 3090:
+full run (@4/20)
+40, 36 seconds
+

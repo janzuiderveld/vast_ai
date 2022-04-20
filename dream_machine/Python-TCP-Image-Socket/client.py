@@ -44,7 +44,7 @@ class ClientSocket:
 
             print(ssh_address, port)
 
-            subprocess.Popen(['ssh', f"-o StrictHostKeyChecking=no", f"-p {port}", f"{ssh_address}", "-L 8080:localhost:8080", "-N"])
+            pipe_proc = subprocess.Popen(['ssh', f"-o StrictHostKeyChecking=no", f"-p {port}", f"{ssh_address}", "-L 8080:localhost:8080", "-N"], shell=True)
 
             self.connectCount += 1
             if self.connectCount == 10:

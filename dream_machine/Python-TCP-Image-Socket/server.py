@@ -70,12 +70,14 @@ class ServerSocket:
                 resp_file = utils.wait_new_file(self.output_fp)
 
                 if self.esrgan:
+                    # start_esr = time.time()
                     tmp_folder = "/workspace/vast_ai/dream_machine/temp_upscale"
                     os.makedirs(tmp_folder, exist_ok=True)
                     os.chdir("/workspace/vast_ai/dream_machine/Real-ESRGAN")
                     os.system(f"python3 inference_realesrgan.py -n RealESRGAN_x4plus -i {resp_file} -o {tmp_folder} --outscale 4 --half")
                     os.chdir("/workspace/vast_ai/dream_machine")
                     out_fp = glob.glob(tmp_folder + "/*")[0]
+                    # end_esr = time.time()
                 else:
                     out_fp = resp_file
 

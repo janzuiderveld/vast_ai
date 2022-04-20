@@ -8,13 +8,15 @@ import sys
 import time
 import threading
 from datetime import datetime
+import utils
+
 
 class ServerSocket:
-    def __init__(self, ip, port):
+    def __init__(self, ip, port, args):
         self.TCP_IP = ip
         self.TCP_PORT = port
-        self.createImageDir()
-        self.folder_num = 0
+        self.input_fp = args.input_fp
+        self.output_fp = args.output_fp
         self.socketOpen()
         self.receiveThread = threading.Thread(target=self.receiveImages)
         self.receiveThread.start()
@@ -47,7 +49,6 @@ class ServerSocket:
                 else:
                     cnt_str = str(cnt)
                 if cnt == 0: startTime = time.localtime()
-                cnt += 1
 
                 length = self.recvall(self.conn, 64)
                 length1 = length.decode('utf-8')
@@ -60,9 +61,11 @@ class ServerSocket:
                 data = numpy.frombuffer(base64.b64decode(stringData), numpy.uint8)
                 decimg = cv2.imdecode(data, 1)
 
-                save_path = './' + str(self.TCP_PORT) + '_images0' + '/img' + cnt_str + '.jpg'
+                save_path = self.input_fp + '/input_' + cnt_str + '.jpg'
                 cv2.imwrite(save_path, decimg)
                 
+                utils.wait_new_file(self.output_fp)
+
                 resize_frame = cv2.resize(decimg, dsize=(1024, 1024), interpolation=cv2.INTER_AREA)
                 encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
                 result, imgencode = cv2.imencode('.jpg', resize_frame, encode_param)
@@ -76,6 +79,7 @@ class ServerSocket:
 
                 print('responded image')
 
+                cnt += 1
                 # self.socketClose()
                 # self.socketOpen()
                 
@@ -87,17 +91,7 @@ class ServerSocket:
             self.receiveThread = threading.Thread(target=self.receiveImages)
             self.receiveThread.start()
 
-    def createImageDir(self):
 
-        folder_name = str(self.TCP_PORT) + "_images0"
-        try:
-            if not os.path.exists(folder_name):
-                os.makedirs(os.path.join(folder_name))
-        except OSError as e:
-            if e.errno != errno.EEXIST:
-                print("Failed to create " + folder_name +  " directory")
-                raise
-        
     def recvall(self, sock, count):
         buf = b''
         while count:
@@ -145,8 +139,15 @@ class ServerSocket:
         file_time = (str(now.tm_hour) + '_' + str(now.tm_min) + '_' + str(now.tm_sec))
         return file_time
 
-def main():
-    server = ServerSocket('localhost', 8080)
+def main(args):
+    server = ServerSocket('localhost', 8080, args)
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description='TCP client')
+    parser.add_argument('--input_fp', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/incoming_imgs', help='ftp filepath')
+    parser.add_argument('--output_fp', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/Sketch-Simulator/out/to_send', help='ftp filepath')
+
+    args = parser.parse_args()
+    os.makedirs(args.input_fp, exist_ok=True)
+    os.makedirs(args.output_fp, exist_ok=True)
+    main(args)

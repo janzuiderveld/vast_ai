@@ -39,6 +39,15 @@ class ClientSocket:
         cnt = 0
         while True:
             try:
+                if (cnt < 10):
+                    cnt_str = '000' + str(cnt)
+                elif (cnt < 100):
+                    cnt_str = '00' + str(cnt)
+                elif (cnt < 1000):
+                    cnt_str = '0' + str(cnt)
+                else:
+                    cnt_str = str(cnt)
+
                 frame = cv2.imread(self.filepath)
                 # frame = cv2.imread("/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/test.png")
                 resize_frame = cv2.resize(frame, dsize=(256, 256), interpolation=cv2.INTER_AREA)
@@ -54,7 +63,7 @@ class ClientSocket:
                 self.sock.sendall(length.encode('utf-8').ljust(64))
                 self.sock.send(stringData)
                 self.sock.send(stime.encode('utf-8').ljust(64))
-                print(u'send images %d'%(cnt))
+                print(u'send images %d'%(cnt_str))
 
                 # response = self.sock.recv(64)
                 length = self.recvall(64)
@@ -66,7 +75,7 @@ class ClientSocket:
                 data = numpy.frombuffer(base64.b64decode(stringData), numpy.uint8)
                 decimg = cv2.imdecode(data, 1)
 
-                cv2.imwrite(self.output_fp + "/output_" + str(cnt) + ".jpg" , decimg)
+                cv2.imwrite(self.output_fp + "/output_" + cnt_str + ".jpg" , decimg)
                 cnt+=1
 
             except Exception as e:

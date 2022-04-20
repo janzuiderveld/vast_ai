@@ -15,7 +15,7 @@ class ClientSocket:
         self.TCP_SERVER_PORT = port
         self.ftp_filepath = ftp_filepath
         self.connectCount = 0
-        self.filepath = utils.wait_new_file(self.ftp_filepath)
+        # self.filepath = utils.wait_new_file(self.ftp_filepath)
         self.connectServer()
 
     def connectServer(self):
@@ -38,8 +38,8 @@ class ClientSocket:
         cnt = 0
         while True:
             try:
-                frame = cv2.imread(self.filepath)
-                # frame = cv2.imread("/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/test.png")
+                # frame = cv2.imread(self.filepath)
+                frame = cv2.imread("/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/test.png")
                 resize_frame = cv2.resize(frame, dsize=(256, 256), interpolation=cv2.INTER_AREA)
 
                 now = time.localtime()
@@ -56,10 +56,24 @@ class ClientSocket:
                 print(u'send images %d'%(cnt))
                 cnt+=1
 
+
+                time.sleep(15)
+
                 # response = self.sock.recv(64)
-                length = self.recvall(self.sock, 64)
+                length = self.recvall(64)
                 length1 = length.decode('utf-8')
-                stringData = self.recvall(self.sock, int(length1))
+                stringData = self.recvall(int(length1))
+
+                now = time.localtime()
+                print('receive time: ' + datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f'))
+                data = numpy.frombuffer(base64.b64decode(stringData), numpy.uint8)
+                decimg = cv2.imdecode(data, 1)
+                # cv2.imshow("image", decimg)
+                # cv2.imwrite('./' + str(self.TCP_PORT) + '_images' + str(self.folder_num) + '/img' + cnt_str + '.jpg', decimg)
+                
+                save_path = './WOOHOEE2.jpg'
+                cv2.imwrite(save_path, decimg)
+
 
                 time.sleep(0.095)
             except Exception as e:

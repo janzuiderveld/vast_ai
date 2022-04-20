@@ -10,6 +10,10 @@ sys.path.extend("/content/LakhNES")
 sys.path.extend("/content/LakhNES/utils")
 import model.mem_transformer
 
+from collections import defaultdict
+import tempfile
+import pretty_midi
+
 code_model_dir = './model'
 code_utils_dir = os.path.join(code_model_dir, 'utils')
 sys.path.extend([code_model_dir, code_utils_dir])
@@ -104,9 +108,9 @@ def get_tokens_tx1_var(tx1):
 # get_tokens_tx1_var(tx1)
 # sym2idx
 
-import numpy as np
-import torch
-import torch.nn.functional as F
+# import numpy as np
+# import torch
+# import torch.nn.functional as F
 
 def load_vocab(vocab_fp):
   idx2sym = ['<S>']
@@ -253,10 +257,6 @@ def TX1_continuation(tx1, temp, topk, fn):
   print('Gen PPL: {}'.format(np.exp(nll / len(tokens[1:-1]))))
 
   return answer
-
-from collections import defaultdict
-import tempfile
-import pretty_midi
 
 def midi_to_tx1(p1=None, no=None):
   pretty_midi.pretty_midi.MAX_TICK = 1e16

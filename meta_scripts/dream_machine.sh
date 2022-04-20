@@ -1,5 +1,6 @@
 #!/bin/bash
 python3 vast_bid.py auto1 dream_machine
+# python3 vast_bid.py cheap dream_machine
 
 
 echo "Wating 60 sec before starting local script"

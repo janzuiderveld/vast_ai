@@ -9,11 +9,11 @@ cd /workspace/vast_ai/dream_machine
 
 python3 -m pip install -r Python-TCP-Image-Socket/requirements.txt
 
-# waits for files send through tcp and saves them in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/8080_images0
-python3 Python-TCP-Image-Socket/server.py 2>&1 | tee _server_receive.log &
-
 rm -r /workspace/vast_ai/dream_machine/Sketch-Simulator
 git clone https://github.com/janzuiderveld/Sketch-Simulator.git
+
+# waits for files send through tcp and saves them in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/8080_images0
+python3 Python-TCP-Image-Socket/server.py 2>&1 | tee _server_receive.log &
 
 cd Sketch-Simulator 
 bash setup.sh | tee ../_sketch_setup.log

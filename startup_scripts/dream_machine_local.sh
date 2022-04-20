@@ -25,6 +25,11 @@ cd dream_machine
 # (when inotify script is running and detecting files in Sketch-Simulator/out/to_send) 
 # files are copied to out_imgs.
 
+echo "waiting for server to be ready..."
+
+python3 Python-TCP-Image-Socket/check_ready.py
+
+echo "Server ready"
 
 # looks for files to appear in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs, sends them over tcp
 # python3 Python-TCP-Image-Socket/client.py 2>&1 | tee _client_send.log &

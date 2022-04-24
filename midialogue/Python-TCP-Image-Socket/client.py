@@ -7,6 +7,7 @@ from datetime import datetime
 import utils
 import argparse
 import os
+import subprocess
 
 class ClientSocket:
     def __init__(self, ip, port, input_fp):
@@ -15,7 +16,38 @@ class ClientSocket:
         self.input_fp = args.input_fp
         self.output_fp = args.output_fp
         self.connectCount = 0
+        self.establish_ssh()
         self.connectServer()
+
+    def establish_ssh(self):
+        while True:
+            try:
+                out = os.popen("../vast ssh-url").read().split(":")
+                if not out[0]: continue
+                print(out)
+                ssh_address = out[1][2:]
+                port = out[2].split("\n")[0]
+            except:
+                continue
+
+            if port != "None" or ssh_address !="None": break
+
+        print(ssh_address, port)
+
+        # terminate pipe_proc if it exists
+        if 'self.pipe_proc' in locals():
+            self.pipe_proc.terminate()
+
+        self.pipe_proc = subprocess.Popen(['ssh', f"-o StrictHostKeyChecking=no", f"-p {port}", f"{ssh_address}", "-L 8080:localhost:8080", "-N"])
+
+        self.connectCount += 1
+        if self.connectCount == 10:
+            print(u'Connect fail %d times. exit program'%(self.connectCount))
+            sys.exit()
+        print(u'%d times try to connect with server'%(self.connectCount))
+        
+
+        time.sleep(5)
 
     def connectServer(self):
         try:
@@ -26,30 +58,32 @@ class ClientSocket:
             self.sendImages()
         except Exception as e:
             print(e)
-    
-            import subprocess
+            self.establish_ssh()
 
-            while True:
-                try:
-                    out = os.popen("../vast ssh-url").read().split(":")
-                    if not out[0]: continue
-                    print(out)
-                    ssh_address = out[1][2:]
-                    port = out[2].split("\n")[0]
-                except:
-                    continue
 
-                if port != "None" or ssh_address !="None": break
+            # while True:
+            #     try:
+            #         out = os.popen("../vast ssh-url").read().split(":")
+            #         if not out[0]: continue
+            #         print(out)
+            #         ssh_address = out[1][2:]
+            #         port = out[2].split("\n")[0]
+            #     except:
+            #         continue
 
-            print(ssh_address, port)
+            #     if port != "None" or ssh_address !="None": break
 
-            pipe_proc = subprocess.Popen(['ssh', f"-o StrictHostKeyChecking=no", f"-p {port}", f"{ssh_address}", "-L 8080:localhost:8080", "-N"])
+            # print(ssh_address, port)
 
-            self.connectCount += 1
-            if self.connectCount == 10:
-                print(u'Connect fail %d times. exit program'%(self.connectCount))
-                sys.exit()
-            print(u'%d times try to connect with server'%(self.connectCount))
+            # pipe_proc = subprocess.Popen(['ssh', f"-o StrictHostKeyChecking=no", f"-p {port}", f"{ssh_address}", "-L 8080:localhost:8080", "-N"])
+
+            # self.connectCount += 1
+            # if self.connectCount == 10:
+            #     print(u'Connect fail %d times. exit program'%(self.connectCount))
+            #     sys.exit()
+            # print(u'%d times try to connect with server'%(self.connectCount))
+            
+            # time.sleep(5)
             self.connectServer()
 
 

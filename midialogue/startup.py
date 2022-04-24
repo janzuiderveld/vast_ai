@@ -512,9 +512,11 @@ def main(args):
       # plot_piano_roll(pm, 0, 126)
       
       # midi_continuation(p1 = midi_path)
-
-      midi_continuation(midi_path, args.midi_out_folder)
-
+      try:
+          midi_continuation(midi_path, args.midi_out_folder)
+      except:
+          print("Failed to load midi")
+          
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()

@@ -16,6 +16,13 @@ from collections import defaultdict
 import tempfile
 import pretty_midi
 
+# NOTES
+# -answer_add_silence', type=int, default=3*44100) # this is added as wait time to end of input after last midi signal. Might influence output?
+
+# P1 RANGE: 33 TM 108
+# P2 RANGE: 33 TM 108
+# TR RANGE: 21 TM 108
+# NO RANGE: 1 TM 16
 
 code_model_dir = './model'
 code_utils_dir = os.path.join(code_model_dir, 'utils')
@@ -94,6 +101,7 @@ def get_tokens_tx1_var(tx1):
         if s in sym2idx:
             tx1_ids.append(sym2idx[s])
         else:
+            print(sym2idx)
             print(s)
             assert s[:2] == 'WT'
             wait_amt = int(s.split('_')[1])
@@ -256,7 +264,11 @@ def TX1_continuation(tx1, temp, topk, fn):
       answer.append(gen)
   print('Gen PPL: {}'.format(np.exp(nll / len(tokens[1:-1]))))
 
-  return answer
+  answer_str = '\n'.join(map(lambda x: idx2sym[x], answer))
+  # for i in answer:
+  #     idx2sym
+
+  return answer_str
 
 
 def load_midi_fp(fp):
@@ -268,11 +280,19 @@ def load_midi_fp(fp):
   with tempfile.NamedTemporaryFile('wb') as mf:
     mf.write(fp)
     mf.seek(0)
+    print(mf.name)
     midi = pretty_midi.PrettyMIDI(mf.name)
+    print(midi.instruments)
+    if len(midi.instruments) > 4:
+        del midi.instruments[4:]
+    if len(midi.instruments) < 4:
+        for i in range(4 - len(midi.instruments)):
+            midi.instruments.append(pretty_midi.Instrument(program=0))
     midi.instruments[0].name = "p1"
     midi.instruments[1].name = "p2"
     midi.instruments[2].name = "tr"
     midi.instruments[3].name = "no"
+
     print(midi.instruments)
     return midi
 
@@ -310,6 +330,23 @@ def midi_to_tx1(fp):
     last_end = -1
     last_pitch = -1
     for note in ins.notes:
+      pitch = note.pitch
+      # filter out notes according to range:
+      # P1 RANGE: 33 - 108
+      # P2 RANGE: 33 - 108
+      # TR RANGE: 21 - 108
+      # NO RANGE: 1 - 16
+
+      filtered = False
+      if (instag == 'P1' and pitch < 33) or (instag == 'P2' and pitch < 33) or (instag == 'TR' and pitch < 21) or (instag == 'NO' and pitch < 1):
+        filtered = True
+        continue
+      if (instag == 'P1' and pitch > 108) or (instag == 'P2' and pitch > 108) or (instag == 'TR' and pitch > 108) or (instag == 'NO' and pitch > 16):
+        filtered = True
+        continue
+      if filtered: print('warning: filtered out notes out of range')
+      
+
       start = (note.start * 44100) + 1e-6
       end = (note.end * 44100) + 1e-6
       print(instag, note.start, note.end)
@@ -326,7 +363,6 @@ def midi_to_tx1(fp):
       assert start > last_start
       assert start >= last_end
 
-      pitch = note.pitch
 
       if last_end >= 0 and last_end != start:
         samp_to_events[last_end].append('{}_NOTEOFF'.format(instag))
@@ -349,9 +385,9 @@ def midi_to_tx1(fp):
     tx1.extend(events)
     last_samp = samp
 
-  nsamps = int((midi.time_signature_changes[-1].time * 44100) + 1e-6)
-  if nsamps > last_samp:
-    tx1.append('WT_{}'.format(nsamps - last_samp))
+  # nsamps = int((midi.time_signature_changes[-1].time * 44100) + 1e-6)
+  # if nsamps > last_samp:
+  tx1.append('WT_{}'.format(args.answer_add_silence))
 
   tx1 = '\n'.join(tx1)
   return tx1
@@ -431,10 +467,12 @@ def tx1_to_midi(tx1, save_folder):
 def get_incremental_fn(folder, fn="midi.mid"):
   i = 0
   new_fp = f"{folder}/{str(i)}_{fn}"
-  while path.exists(new_fp) :
+  while os.path.exists(new_fp) :
       i += 1
       new_fp = f"{folder}/{str(i)}_{fn}"
   return new_fp
+
+
 
 def midi_continuation(fp, output_folder, fn="test", temp=0.96, topk=64):  
   tx1 = midi_to_tx1(fp)
@@ -443,14 +481,27 @@ def midi_continuation(fp, output_folder, fn="test", temp=0.96, topk=64):
 
 def wait_for_new_midi(midi_folder):
     init_midis = glob.glob(f"{midi_folder}/*.mid")
+    print(f"Waiting for new *mid in {midi_folder}")
     while True:
         current_midis = glob.glob(f"{midi_folder}/*.mid")
+        # if 1:
+            # new_midi = current_midis[0]
         if len(current_midis) > len(init_midis):
             new_midi = list(set(current_midis).symmetric_difference(set(init_midis)))[0]
+            print(f"New midi found: {new_midi}")
+            while True:
+                try:
+                    load_midi_fp(new_midi)
+                    break
+                except:
+                    print(f"Failed to load {new_midi}")
+                
+
             return new_midi
 
 
 def main(args):
+  os.system("echo READY > /workspace/vast_ai/midialogue/READY.log")
   while True:
       midi_path = wait_for_new_midi(args.midi_in_folder)
 
@@ -464,12 +515,12 @@ def main(args):
 
       midi_continuation(midi_path, args.midi_out_folder)
 
-      break
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()
   parser.add_argument('--midi_in_folder', type=str, default='/workspace/vast_ai/midialogue/midi_in')
   parser.add_argument('--midi_out_folder', type=str, default='/workspace/vast_ai/midialogue/midi_out')
+  parser.add_argument('--answer_add_silence', type=int, default=44100//5) # this is added as wait time to end of input after last midi signal. Might influence output significantly?
   parser.add_argument('--temp', type=float, default=0.96)
   parser.add_argument('--topk', type=int, default=64)
   parser.add_argument('--fn', type=str, default='test')

@@ -9,3 +9,6 @@ _*.log
 dream_machine/in_imgs/
 dream_machine/out_imgs/
 dream_machine/*.log
+*.mid
+midialogue/midi_in
+midialogue/midi_out

@@ -65,8 +65,8 @@ class ClientSocket:
                     cnt_str = '0' + str(cnt)
                 else:
                     cnt_str = str(cnt)
-                # self.filepath = utils.wait_new_file(self.input_fp)
-                self.filepath = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_in/1_midi.mid"
+                self.filepath = utils.wait_new_file(self.input_fp)
+                # self.filepath = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_in/1_midi.mid"
 
                 # frame = cv2.imread(self.filepath)
                 # frame = cv2.imread("/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/test.png")

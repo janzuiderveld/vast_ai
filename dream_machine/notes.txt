@@ -1,3 +1,5 @@
+64 cutn, 10 iterations
+
 RTX 3090:
 full run (@4/20)
 40, 36 seconds
@@ -5,3 +7,13 @@ full run (@4/20)
 A100
 full run (@4/20)
 106.617012, 105
+
+8x RTX A6000
+ONLY Synthesis, no server test
+Dataparrallel on clip visual encoder
+30 sec
+(400x400, 13 sec)
+
+
+
+580 x 410 nice verhouding voor a4?

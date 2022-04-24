@@ -5,7 +5,7 @@ import argparse
 #TODO set 3090 mode.
 
 parser = argparse.ArgumentParser(description='Run a command on a remote host.')
-parser.add_argument('bidding_tactic', type=str, default='cheap', choices=['cheap', 'cheap8', 'best1', 'auto1'], help='bidding tactic')
+parser.add_argument('bidding_tactic', type=str, default='cheap', choices=['cheap', 'cheap8', 'cheap4', 'best1', 'auto1'], help='bidding tactic')
 # parser.add_argument('min_bid', type=str, default='1')
 parser.add_argument('project_name', type=str, default='', help='project name')
 parser.add_argument('--dummy', type=int, default=0, help='')
@@ -14,6 +14,8 @@ args = parser.parse_args()
 # run vast shell command "./vast search offers" to get prices 
 if args.bidding_tactic == 'cheap':
     vast_cmd = './vast search offers -b --raw -o "dph"'
+if args.bidding_tactic == 'cheap4':
+    vast_cmd = './vast search offers -b "num_gpus == 4" --raw -o "dph"' 
 if args.bidding_tactic == 'cheap8':
     vast_cmd = './vast search offers -b "num_gpus == 8" --raw -o "dph"' 
 elif args.bidding_tactic == 'best1':

@@ -8,7 +8,7 @@ python3 -m pip install -r Python-TCP-Image-Socket/requirements.txt
 
 # waits for files send through tcp and saves them in /Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_in
 # python3 Python-TCP-Image-Socket/server.py 2>&1 | tee _server_receive.log &
-python3 Python-TCP-Image-Socket/server.py --dummy 1 2>&1 | tee _server_receive.log &
+python3 Python-TCP-Image-Socket/server.py 2>&1 | tee _server_receive.log &
 
 cd /workspace/vast_ai/midialogue
 git clone https://github.com/chrisdonahue/LakhNES

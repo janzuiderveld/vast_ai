@@ -53,6 +53,17 @@ echo "Server ready"
 
 # looks for files to appear in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs, sends them over tcp
 # python3 Python-TCP-Image-Socket/client.py 2>&1 | tee _client_send.log &
-python3 ./Python-TCP-Image-Socket/client.py 
+# python3 ./Python-TCP-Image-Socket/client.py
+
+
+python3 midi_autoplay.py &
+
+python3 ./Python-TCP-Image-Socket/client.py &
+
+
+cd /Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi-utilities/bin
+prefix=$"/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_in/"
+# ./brainstorm  --in <port> [ --prefix <filename prefix> ] [ --timeout <seconds> ] [ --confirmation <command line> ]
+./brainstorm  --in 0 --prefix $prefix --timeout 2 --confirmation 'echo "saved a midi"'
 
 

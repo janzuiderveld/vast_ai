@@ -17,12 +17,13 @@ def wait_new_file(folder):
         filecount = len(files_new)
         if filecount > len(files_old):
             break
+        time.sleep(0.01)
 
     # get new file by unique intersection
     new_file = str(list(set(files_new) - set(files_old))[0])
     print("New file found: " + str(new_file))
     while True:
         if os.path.isfile(str(new_file)): break
-        time.sleep(0.001)
+        time.sleep(0.01)
     return new_file
 

@@ -43,7 +43,7 @@ def wait_for_new_midi(midi_folder):
         # if 1:
         #     new_midi = init_midis[0]
 
-        
+
             # try:
             #     load_midi_fp(new_midi)
                 
@@ -60,6 +60,7 @@ def main(args):
         try:
             # wait for new midi
             new_fp = wait_for_new_midi(args.midi_in_folder)
+            print(new_fp)
             if new_fp:
                 os.system(f"./playsmf --out {args.midi_out_port} {new_fp}")
         except Exception as e:

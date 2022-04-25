@@ -15,6 +15,7 @@ class ClientSocket:
         self.TCP_SERVER_PORT = port
         self.input_fp = args.input_fp
         self.output_fp = args.output_fp
+        self.dummy = args.dummy
         self.connectCount = 0
         self.connectServer()
 
@@ -67,7 +68,7 @@ class ClientSocket:
                     cnt_str = str(cnt)
                 self.filepath = utils.wait_new_file(self.input_fp)
 
-                if dummy:
+                if self.dummy:
                     time.sleep(2)
                     frame = cv2.imread("/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/test.png")
                 else:

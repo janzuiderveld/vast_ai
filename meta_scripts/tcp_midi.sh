@@ -1,2 +1,2 @@
-python3 vast_bid.py cheap tcp_dream
-bash startup_scripts/tcp_dream_local.sh
+python3 vast_bid.py cheap tcp_midi
+bash startup_scripts/tcp_midi_local.sh

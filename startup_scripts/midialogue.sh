@@ -36,5 +36,5 @@ touch /workspace/vast_ai/midialogue/LakhNES/model/__init__.py
 
 cd /workspace/vast_ai/midialogue/LakhNES
 
-python3 startup.py 2>&1 | tee ../_midialogue_server.log &
+python3 startup.py 2>&1 | tee ../_midialogue_server.log
 

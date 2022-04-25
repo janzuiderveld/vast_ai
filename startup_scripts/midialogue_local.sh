@@ -69,6 +69,6 @@ prefix=$"/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_in/"
 
 ./lsmidiins
 
-./brainstorm  --in 1 --prefix $prefix --timeout 2 --confirmation 'echo "saved a midi"'
+./brainstorm  --in 0 --prefix $prefix --timeout 2 --confirmation 'echo "saved a midi"'
 
 

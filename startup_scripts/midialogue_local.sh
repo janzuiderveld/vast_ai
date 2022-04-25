@@ -2,7 +2,7 @@
 python3 -m venv dream_machine/dream_machine_env
 source dream_machine/dream_machine_env/bin/activate
 
-python3 -m pip install -r dream_machine/Python-TCP-Image-Socket/requirements.txt
+python3 -m pip install -r midialogue/Python-TCP-Image-Socket/requirements.txt
 python3 -m pip install requests
 
 # apt-get update
@@ -32,13 +32,21 @@ rm -rf midi_in midi_out
 
 
 
-
 echo "waiting for server to be ready..."
-
+kill -9 $(lsof -t -i:8080)
 python3 ./Python-TCP-Image-Socket/check_ready.py
-# ssh -p 12190 root@ssh5.vast.ai -L 8080:localhost:8080 -N &
-cmd=`cat ssh_pipe.cmd`
-$cmd &
+sleep 2
+kill -9 $(lsof -t -i:8080)
+sleep 2
+
+echo $(lsof -i:8080)
+
+cmd=`cat ssh_pipe.cmd` 
+$cmd > test_ssh.thrash &
+
+sleep 3
+
+echo $(lsof -i:8080)
 
 echo "Server ready"
 

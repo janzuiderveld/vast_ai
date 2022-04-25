@@ -68,7 +68,7 @@ class ServerSocket:
                 now = time.localtime()
                 print('receive time: ' + datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f'))
 
-                if dummy:
+                if self.dummy:
                     print('dummy mode')
                     resp_file = save_path
                 else:

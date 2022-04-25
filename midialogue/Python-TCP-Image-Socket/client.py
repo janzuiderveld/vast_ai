@@ -102,7 +102,7 @@ class ClientSocket:
 
                 if self.dummy:
                     time.sleep(2)
-                    self.filepath = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_in/1_midi.mid"
+                    self.filepath = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/Python-TCP-Image-Socket/client.py"
                 else:
                     self.filepath = utils.wait_new_file(self.input_fp)
 

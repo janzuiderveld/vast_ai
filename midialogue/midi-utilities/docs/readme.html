@@ -1,0 +1,262 @@
+<html>
+<head>
+
+<title>Div's MIDI Utilities</title>
+
+<style type="text/css"><!--
+body { margin: 5ex; font-family: arial, helvetica, sans-serif; font-size: smaller }
+a { color: #FF6600 }
+--></style>
+
+</head>
+<body>
+
+<h1>Div's MIDI Utilities</h1>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Here is a collection of MIDI utilities I wrote for myself, which you may find useful as well.  They are designed to be platform neutral, and work on current versions of Windows, Linux, and MacOS.  Regardless of platform, the utilities follow the Unix design philosophy; most run from the command line instead of providing a GUI, and each is small and dedicated to a specific task.  Some work in realtime, while others act upon saved MIDI files.</p>
+
+<p>You can find the latest version of these utilities on my <a href="http://www.sreal.com/~div/midi-utilities/">website</a> or <a href="https://github.com/dgslomin/divs-midi-utilities/">Github</a>.</p>
+
+<h2 id="news">News</h2>
+
+<p>2021-09-08 - Added <em>Tactrola</em>.  Switched to <a href="https://www.qt.io/">Qt widgets</a> for the GUI utilities.</p>
+
+<p>2021-04-05 - <em>tempo-map</em> now supports clicks that don't correspond to quarter notes.</p>
+
+<p>2021-01-28 - Major update!  All of the realtime utilities have been rewritten to use <a href="https://github.com/thestk/rtmidi">RtMidi</a> and where necessary <a href="https://www.wxwidgets.org/">wxWidgets</a>, thus allowing the whole suite to work on MacOS.  Some of the older, less-useful utilities have been retired to the "extras" directory; please contact me if you'd like me to revive support for any of them.  Also added several new utilities plus lots of new features, fixes, and cleanups.</p>
+
+<h2 id="realtime-midi-utilities">Realtime MIDI utilities</h2>
+
+<h3>lsmidiins and lsmidiouts</h3>
+
+<p>These utilities display a numbered list of the MIDI input and output ports on your system.  The realtime utilities can refer to ports by either number or name.</p>
+
+<p>Usage: lsmidiins</p>
+
+<p>Usage: lsmidiouts</p>
+
+<h3>playsmf and recordsmf</h3>
+
+<p>A simple MIDI file player and recorder.</p>
+
+<p>Usage: playsmf --out &lt;port&gt; [ --from &lt;time&gt; ] [ --to &lt;time&gt; ] [ ( --solo-track &lt;n&gt; ) ... | ( --mute-track &lt;n&gt; ) ... ] [ --extra-time &lt;seconds&gt; ] &lt;filename.mid&gt;</p>
+
+<p>Usage: recordsmf --in &lt;port&gt; [ --save-every &lt;msecs&gt; ] &lt;filename.mid&gt;</p>
+
+<h3>dispmidi</h3>
+
+<p><em>dispmidi</em> pretty-prints incoming MIDI messages, which can be useful for debugging complex MIDI setups.</p>
+
+<p>Usage: dispmidi --in &lt;port&gt;</p>
+
+<h3>sendmidi</h3>
+
+<p><em>sendmidi</em> sends a single specified MIDI message.  It can be used for scripting or as a simple knob box.</p>
+
+<p>Usage: sendmidi --out &lt;port&gt; ( --note-off &lt;channel&gt; &lt;note&gt; &lt;velocity&gt; | --note-on &lt;channel> &lt;note&gt; &lt;velocity&gt; | --key-pressure &lt;channel&gt; &lt;note&gt; &lt;amount&gt; | --control-change &lt;channel&gt; &lt;number&gt; &lt;value&gt; | --program-change &lt;channel&gt; &lt;number&gt; | --channel-pressure &lt;channel&gt; &lt;amount&gt; | --pitch-wheel &lt;channel&gt; &lt;amount&gt; | --panic )</p>
+
+<h3>routemidi</h3>
+
+<p><em>routemidi</em> lets you define multiple busses, each of which reads from multiple input ports, merges the streams together, and copies the result to multiple output ports.  You can route channels freely between busses.  On Linux and MacOS it also lets you establish virtual ports for other applications to connect to later.</p>
+
+<p>Usage: routemidi [ --bus | --in &lt;port&gt; | --out &lt;port&gt; | --virtual-in &lt;port&gt; | --virtual-out &lt;port&gt; | --channel &lt;input bus number&gt; &lt;input channel number&gt; &lt;output bus number&gt; &lt;output channel number&gt; ] ...</p>
+
+<h3>alsamidicable</h3>
+
+<p><em>alsamidicable</em> works on Linux only, and has a different way of referring to ports than the other utilities.  It's similar to the system utility <em>aconnect</em> but will wait for ports with the specified names to be created before connecting to them.  This allows it to be used in startup scripts which would otherwise have timing issues.</p>
+
+<p>Usage: alsamidicable --list-ports</p>
+
+<p>Usage: alsamidicable --list-connections</p>
+
+<p>Usage: alsamidicable --connect --from &lt;client&gt; &lt;port&gt; --to &lt;client&gt; &lt;port&gt; [ --timeout &lt;seconds&gt; ]</p>
+
+<p>Usage: alsamidicable --disconnect --from &lt;client&gt; &lt;port&gt; --to &lt;client&gt; &lt;port&gt;</p>
+
+<h3>brainstorm</h3>
+
+<p><em>Brainstorm</em> functions as a dictation machine for MIDI.  It listens for incoming MIDI events and saves them to a new MIDI file every time you pause in your playing for a few seconds.  The filenames are generated automatically based on the current time, so it requires no interaction.  I find it useful for recording brainstorming sessions, hence the name, and use it more than all the other utilities put together.</p>
+
+<p>Usage: brainstorm --in &lt;port&gt; [ --prefix &lt;filename prefix&gt; ] [ --timeout &lt;seconds&gt; ] [ --confirmation &lt;command line&gt; ]</p>
+
+<p>The confirmation option allows you to specify a command to execute whenever a file is saved, so that you know your music is safe.  I use it to play a short audio file, in keeping with brainstorm's "interfaceless" design, but you can get fairly elaborate if you want.  The filename will be substituted for each <code>%s</code> in the command.</p>
+
+<h3>tactrola</h3>
+
+<div style="text-align: center"><img src="tactrola.png" alt="" style="width: 800px" /></div>
+
+<p><em>Tactrola</em> (as in "tactile controller") lets you use your computer's touchscreen as a MIDI Polyphonic Expression (MPE) controller.  It has a piano-style keyboard layout, but can be configured to let you glide your fingers smoothly between notes, with automatic aim assistance that makes sure you start and end each note in tune.  The range of the keyboards can be adjusted via drag and pinch.  Performance-oriented assignable sliders provide realtime control of up to sixteen additional aspects of the sound such as volume swell, vibrato, and filter cutoff.  Note that it really does require a touchscreen, not a mouse, and a desktop operating system, not iOS or Android.</p>
+
+<h3>qwertymidi and delta</h3>
+
+<p><em>qwertymidi</em> lets you use your computer keyboard as if it were a synthesizer keyboard.  It supports custom mapping of the keyboard layout by means of a config file.  Sample maps are provided for conventional and von Janko pianos, Hayden, English, Anglo, Maccann, and Crane concertinas, different chromatic and diatonic button accordions, and more.  For portability reasons this has to be a GUI application, but it still takes all its options from the command line.</p>
+
+<p><em>delta</em> is a fun to play, monophonic variation on <em>qwertymidi</em> which maps keys on the computer keyboard to relative intervals instead of absolute pitches.  It was inspired by the unusual <a href="http://www.samchillian.com/">Samchillian</a> MIDI controller I read about online.  It also supports custom keyboard mappings.</p>
+
+<p>Usage: qwertymidi [ --out &lt;port&gt; ] [ --channel &lt;n&gt; ] [ --program &lt;n&gt; ] [ --velocity &lt;n&gt; ] [ --transpose &lt;n&gt; ] [ --map &lt;filename.xml&gt; ]</p>
+
+<p>Usage: delta [ --out &lt;port&gt; ] [ --channel &lt;n&gt; ] [ --program &lt;n&gt; ] [ --velocity &lt;n&gt; ] [ --map &lt;filename.xml&gt; ]</p>
+
+<h3>onmidi</h3>
+
+<p><em>onmidi</em> runs programs or scripts in response to MIDI input.  It's particularly useful for turning pages in on-screen sheet music.</p>
+
+<p>Usage: onmidi --in &lt;port&gt; [ --out &lt;port&gt; ] [ --hold-length &lt;msecs&gt; ] [ --note-command &lt;note&gt; &lt;command&gt; | --controller-command &lt;controller number&gt; &lt;command&gt; | --controller-hold-command &lt;controller number&gt; &lt;command&gt; | --pitch-wheel-up-command &lt;command&gt; | --pitch-wheel-down-command &lt;command&gt; ] ...</p>
+
+<h3>noteflurry</h3>
+
+<p><em>noteflurry</em> outputs a configurable sequence of notes for each note you play, transposed and velocity-scaled to match.  Trigger means that the sequence should start each time you play a note, like an echo.  Gate means that the notes you play are pulsed according to the notes going by in the sequence.  Using them together produces a complicated rhythmic texture.  Overall, <em>noteflurry</em> can sound like a multi-tap delay, an arpeggiator, or an analogue-style sequencer, including the distinctive pulsing effects in the Who's "Won't Get Fooled Again" and "Baba O'Riley," Pink Floyd's "On the Run," and many songs by U2.  In addition, it can simply transpose or add parallel intervals if you use trigger mode with notes on beat zero.</p>
+
+<p>Usage: noteflurry --in &lt;port&gt; --out &lt;port&gt; [ --trigger ] [ --gate ] [ --note &lt;beat&gt; &lt;duration beats&gt; &lt;note interval&gt; &lt;velocity&gt; ] ... [ --loop &lt;beats&gt; ] [ --tempo &lt;bpm, default 100&gt; ]</p>
+
+<h3>pedalsim</h3>
+
+<p><em>pedalsim</em> simulates the pedals of a piano when you want to use a controller's physical pedals to drive a synthesis engine that doesn't understand what those pedals mean.  This is very common for sostenuto, bass sustain, and the soft pedal, but even regular sustain isn't natively supported by more simplistic soft synths.  It also tries to simulate an organ-style volume pedal, but this feature is more limited in its usefulness; because it works by adjusting incoming note velocities, it only affects new notes coming in, leaving the sustained ones alone.</p>
+
+<p>Usage: pedalsim --in &lt;port&gt; --out &lt;port&gt; [ --sustain ] [ --sostenuto ] [ --bass-sustain ] [ --soft ] [ --volume ] [ --independent-sostenuto ] [ --highest-bass-note &lt;default B3&gt; ] [ --max-soft-velocity &lt;default 95&gt; ] [ --sustain-controller &lt;default 64&gt; ] [ --sostenuto-controller &lt;default 66&gt; ] [ --bass-sustain-controller &lt;default 69&gt; ] [ --soft-controller &lt;default 67&gt; ] [ --volume-controller &lt;default 12&gt; ]</p>
+
+<h3>jumpoctave</h3>
+
+<p><em>jumpoctave</em> lets you use the pitch bend wheel as an octave jump control.  Useful for small synths that lack proper transpose buttons.</p>
+
+<p>Usage: jumpoctave --in &lt;port&gt; --out &lt;port&gt;</p>
+
+<h3>notemap</h3>
+
+<p><em>notemap</em> lets you remap the layout of notes on your MIDI keyboard.  Explore the guitar concept of alternate tunings on the piano, set up an ergonomic drum kit for your fingers, etc.</p>
+
+<p>Usage: notemap --in &lt;port&gt; --out &lt;port&gt; [ --transpose &lt;n&gt; ] [ --map &lt;filename.xml&gt; ]</p>
+
+<h3>netmidic and netmidid</h3>
+
+<p>These utilities speak NetMIDI, a trivial network protocol I created which sends standard MIDI messages over a TCP/IP connection as fast as possible.  They can be used to connect up the MIDI systems on two different machines over a network connection, even if they are running different operating systems.  The client forwards messages from the local MIDI system to a NetMIDI server.  The server forwards messages sent by the client to the local MIDI system.</p>
+
+<p>Usage: netmidic --in &lt;midi port&gt; --server &lt;hostname&gt; &lt;network port&gt;</p>
+
+<p>Usage: netmidid --port &lt;network port&gt; --out &lt;midi port&gt;</p>
+
+<h2 id="midi-file-utilities">MIDI file utilities</h2>
+
+<h3>midifile and normalizesmf</h3>
+
+<p><em>midifile</em> is a powerful and practical C language library that allows you to read and write Standard MIDI Files (SMF), and provides a data structure for MIDI sequences.  Essentially, it is the core of a MIDI sequencer without the user interface and the realtime recording and playback functionality.  It has no dependencies, so it should be easy to include in your own projects.</p>
+
+<p><em>normalizesmf</em> is a utility which provides a minimal demonstration of the <em>midifile</em> library.  It reads in a MIDI file, then writes it out again.  If your sequencer complains that a file is invalid, this normalizer might make it more palatable.</p>
+
+<p>Usage: normalizesmf &lt;filename&gt;</p>
+
+<h3>convert-time</h3>
+
+<p><em>convert-time</em> displays a timestamp in a given MIDI file in all the different formats supported by the other utilities.</p>
+
+<p>Usage: convert-time &lt;filename&gt; &lt;time&gt;</p>
+
+<h3>tempo-map</h3>
+
+<p><em>tempo-map</em> is a utility for "metercasting", a unique algorithm for adjusting the timing of a MIDI sequence.  Unlike conventional quantization, metercasting does not replace the human characteristics of your playing with a mechanistic feel.  First, you record your performance without a metronome, as with <em>brainstorm</em>.  Next, ignoring any beat markers your sequencer might display, you add a click track consisting of one note per beat, synchronized with your performance.  <em>tempo-map</em> then processes the file, adjusting the timestamps of existing events and inserting new tempo events so that performance sounds the same when played back, but the notes will line up with beats when displayed in the sequencer.  You can then selectively delete the inserted tempo events, resulting in a steady but still completely nuanced recording.</p>
+
+<p>Usage: tempo-map ( --click-track &lt;n&gt; | --constant-tempo &lt;beats per minute&gt; ) [ --click-to-beat-ratio &lt;clicks&gt; &lt;beats&gt; ] [ --note-click-to-beat-ratio &lt;note&gt; &lt;clicks&gt; &lt;beats&gt; ] ... [ --out &lt;filename.mid&gt; ] &lt;filename.mid&gt;</p>
+
+<p>MIDI defines the "beats per minute" of tempo in terms of quarter note beats, regardless of time signature.  In meters like 6/8, musicians will often think in dotted quarter note beats, and would prefer to lay down a click track with one click per dotted quarter note; the click to beat ratio provides the necessary conversion.  For meters which distinguish between "long beats" and "short beats" (like a 2-2-3 rhythm in 7/8 time), use different notes for the the long clicks than the short clicks and set a different ratio for each.</p>
+
+<h3>click-track</h3>
+
+<p>Adds a click track that corresponds to the sequence's notion of beats.  Note that running <em>tempo-map</em> directly on this program's output will have no effect, but it can be useful as a starting point if you manually edit the clicks before running <em>tempo-map</em>.</p>
+
+<p>Usage: click-track --click-to-beat-ratio &lt;clicks&gt; &lt;beats&gt; [ --channel &lt;default 0&gt; ] [ --note &lt;default 64&gt; ] [ --velocity &lt;default 64&gt; ] [ --out &lt;filename.mid&gt; ] &lt;filename.mid&gt;</p>
+
+<h3>align-clicks</h3>
+
+<p>Between the time when you record a click track and when you use it as input to <em>tempo-map</em>, you usually have to go through and manually align the click events with nearby notes that you played on the real tracks.  <em>align-clicks</em> is a heuristic attempt to do that alignment automatically.</p>
+
+<p>Usage: align-clicks --click-track &lt;n&gt; [ --out &lt;filename.mid&gt; ] &lt;filename.mid&gt;</p>
+
+<h3>quantize</h3>
+
+<p>A naive quantizer, by user request; I prefer metercasting, myself.  Rounds event timing to the nearest (specified division of a) quarter note.  Preserves note durations rather than lining up note off events with the grid; this avoids having a very clipped sound, but can potentially move the note off to the wrong side of a sustain pedal change.</p>
+
+<p>Usage: quantize --beat-division &lt;division&gt; [ --out &lt;filename.mid&gt; ] &lt;filename.mid&gt;</p>
+
+<h3>smooth-tempo</h3>
+
+<p>When metercasting, you often end up with a MIDI file that has lots of jittery little tempo changes.  <em>smooth-tempo</em> smoothes them out using a three sample average.</p>
+
+<p>Usage: smooth-tempo [ --out &lt;filename.mid&gt; ] &lt;filename.mid&gt;</p>
+
+<h3>average-tempo, scale-tempo, offset-tempo, average-velocity, scale-velocity, and offset-velocity</h3>
+
+<p>These utilities can be used together for patching up multiple takes of a song to match one another.  The ability to analyze a specified section of a song is particularly useful if the tempo varies frequently, as is the case when the song has been through <em>tempo-map</em>.</p>
+
+<p>Usage: average-tempo [ --from &lt;time&gt; ] [ --to &lt;time&gt; ] &lt;filename.mid&gt;</p>
+
+<p>Usage: scale-tempo [ --from &lt;time&gt; ] [ --to &lt;time&gt; ] --amount &lt;n&gt; [ --out &lt;filename.mid&gt; ] &lt;filename.mid&gt;</p>
+
+<p>Usage: offset-tempo [ --from &lt;time&gt; ] [ --to &lt;time&gt; ] --amount &lt;n&gt; [ --out &lt;filename.mid&gt; ] &lt;filename.mid&gt;</p>
+
+<p>Usage: average-velocity [ --from &lt;time&gt; ] [ --to &lt;time&gt; ] [ --track &lt;n&gt; ] &lt;filename.mid&gt;</p>
+
+<p>Usage: scale-velocity [ --from &lt;time&gt; ] [ --to &lt;time&gt; ] [ --track &lt;n&gt; ] --amount &lt;n&gt; [ --out &lt;filename.mid&gt; ] &lt;filename.mid&gt;</p>
+
+<p>Usage: offset-velocity [ --from &lt;time&gt; ] [ --to &lt;time&gt; ] [ --track &lt;n&gt; ] --amount &lt;n&gt; [ --out &lt;filename.mid&gt; ] &lt;filename.mid&gt;</p>
+
+<h3>smf-length</h3>
+
+<p><em>smf-length</em> shows how long the file is.</p>
+
+<p>Usage: smf-length &lt;filename.mid&gt;</p>
+
+<h3>cut-time</h3>
+
+<p><em>cut-time</em> removes a section of the file.</p>
+
+<p>Usage: cut-time [ --from &lt;time&gt; ] [ --to &lt;time&gt; ] [ --out &lt;filename.mid&gt; ] &lt;filename.mid&gt;</p>
+
+<h3>mish</h3>
+
+<p>A compiler for a text-based music notation language which I invented, called "Mish" (<u>MI</u>DI <u>sh</u>orthand).  It converts Mish files into standard MIDI files.</p>
+
+<p>Usage: mish --in &lt;input.mish&gt; --out &lt;output.mid&gt;</p>
+
+<h3>smftoxml and xmltosmf</h3>
+
+<p>These utilities convert a MIDI file into an ad hoc XML equivalent and back.  This can be useful for seeing exactly what is in the file.  Using the two utilities together, you can modify MIDI files with a text editor.</p>
+
+<p>Usage: smftoxml &lt;filename.xml&gt;</p>
+
+<p>Usage: xmltosmf &lt;filename.xml&gt; &lt;filename.mid&gt;</p>
+
+<h2 id="extras">Extras</h2>
+
+<p>Also provided is the source code to several obsolete or incomplete programs in the "extras" directory.  They're included in the package primarily so that I don't lose track of them, but there's useful code to borrow in there, and I may return to working on some of them if there's enough demand.  These include <em>alsamidi2net</em>, <em>alsamidi2pipe</em>, <em>beatbox</em>, <em>fakesustain</em>, <em>imp</em>, <em>intervals</em>, <em>joycc</em>, <em>joypedal</em>, <em>mciplaysmf</em>, <em>metercaster</em>, <em>midimon</em>, <em>midithru</em>, <em>multiecho</em>, <em>net2alsamidi</em>, <em>net2pipe</em>, <em>onmessage</em>, <em>onpedal</em>, <em>padpedal</em>, <em>pedalnote</em>, <em>pipe2alsamidi</em>, <em>pipe2net</em>, <em>Piano Protagonist</em>, <em>pulsar</em>, <em>rw</em>, <em>smftosqlite</em>, <em>sqlitetosmf</em>, <em>transpose</em>, <em>velocityfader</em>, <em>velocity-map</em>, <em>verbosify</em>, <em>xmidiqwerty</em>, older platform-specific versions of the main utilities, and several attempts to build a full linear or step-based sequencer, the latest of which is called <em>Seqer</em>.  This last is something of a quixotic quest for me which has been going on for many years, and most of my standalone utilities are actually spin-offs from that project.</p>
+
+<h2 id="helpful-hints">Helpful hints</h2>
+
+<p>These programs are designed to be run from the command line or from scripts.  If you just double-click on their icons you won't be able to provide the required command line arguments, and may not even have a chance to read the help message before the command prompt window disappears.</p>
+
+<p>Most of the realtime utilities are designed to connect to existing MIDI ports.  That's fine if you want them to talk directly to hardware, but isn't sufficient if you want to use the output of one utility as the input of another.  Different platforms have different solutions to this problem.  On Linux or MacOS you can use <em>routemidi</em> to create virtual ports.  This isn't possible on Windows, but there you can use a MIDI loopback driver such as the free <a href="http://www.tobias-erichsen.de/">LoopMIDI</a>.  On Linux you can also use <em>alsamidicable</em> to reconfigure MIDI connections between programs which are already running.</p>
+
+<p>If you don't have a hardware synthesizer or virtual instrument software, you'll probably want a simple fallback software synthesizer to turn MIDI messages into actual sound.  Windows comes with the Microsoft GS Wavetable Synth.  On Linux you can use <a href="http://timidity.sourceforge.net/">Timidity</a> or <a href="https://www.fluidsynth.org/">Fluidsynth</a>.  On MacOS you can use the free <a href="https://github.com/matlimatli/simplesynth">SimpleSynth</a>.  For a more powerful software synthesizer which is compatible with Tactrola's MPE output, try <a href="https://surge-synthesizer.github.io/">Surge</a>.</p>
+
+<h2 id="license">License</h2>
+
+<p>These utilities are free and open source, provided under terms of the <a href="https://opensource.org/licenses/BSD-3-Clause">BSD license</a>.  Specifically:</p>
+
+<p>&copy; Copyright 1998-2021 David G. Slomin, all rights reserved.</p>
+
+<p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
+
+<ul>
+<li>Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.</li>
+<li>Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.</li>
+<li>Neither the name of David G. Slomin, Div, Sreal, nor the names of any other contributors to this software may be used to endorse or promote products derived from this software without specific prior written permission.</li>
+</ul>
+
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+<p>dgslomin (at) alumni (dot) princeton (dot) edu<br>
+last modified 2021-09-08</p>
+
+</body>
+</html>

@@ -67,8 +67,11 @@ class ClientSocket:
                     cnt_str = str(cnt)
                 self.filepath = utils.wait_new_file(self.input_fp)
 
-                frame = cv2.imread(self.filepath)
-                # frame = cv2.imread("/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/test.png")
+                if dummy:
+                    time.sleep(2)
+                    frame = cv2.imread("/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/test.png")
+                else:
+                    frame = cv2.imread(self.filepath)
                 resize_frame = cv2.resize(frame, dsize=(256, 256), interpolation=cv2.INTER_AREA)
 
                 start = time.time()
@@ -124,6 +127,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='TCP client')
     parser.add_argument('--input_fp', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs', help='ftp filepath')
     parser.add_argument('--output_fp', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/out_imgs', help='ftp filepath')
+    parser.add_argument('--dummy', type=int, default=0, help='ftp filepath')
 
     args = parser.parse_args()
     os.makedirs(args.input_fp, exist_ok=True)

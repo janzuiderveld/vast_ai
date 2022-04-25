@@ -431,8 +431,8 @@ def tx1_to_midi(tx1, save_folder):
     if event[:2] == 'WT':
       samp += int(event[3:])
     else:
-      if tokens[0] == '<S>': continue
       tokens = event.split('_')
+      if tokens[0] == '<S>': continue
       name = tokens[0]
       ins = name_to_ins[tokens[0]]
 

@@ -505,8 +505,11 @@ def wait_for_new_midi(midi_folder):
 
 def main(args):
   os.system("echo READY > /workspace/vast_ai/midialogue/READY.log")
+  print("runnign main")
   while True:
+      print("waiting for new midi")
       midi_path = wait_for_new_midi(args.midi_in_folder)
+      print(f"new midi found: {midi_path}")
       if midi_path:
         try:
             midi_continuation(midi_path, args.midi_out_folder)

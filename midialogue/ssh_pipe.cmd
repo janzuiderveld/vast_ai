@@ -1,0 +1,1 @@
+ssh -p 12265 root@ssh4.vast.ai -L 8080:localhost:8080 -N

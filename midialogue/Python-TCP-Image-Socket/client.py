@@ -35,10 +35,10 @@ class ClientSocket:
         print(ssh_address, port)
 
         # terminate pipe_proc if it exists
-        if 'self.pipe_proc' in locals():
-            self.pipe_proc.terminate()
+        # if 'self.pipe_proc' in locals():
+        #     self.pipe_proc.terminate()
 
-        self.pipe_proc = subprocess.Popen(['ssh', f"-o StrictHostKeyChecking=no", f"-p {port}", f"{ssh_address}", "-L 8080:localhost:8080", "-N"])
+        # self.pipe_proc = subprocess.Popen(['ssh', f"-o StrictHostKeyChecking=no", f"-p {port}", f"{ssh_address}", "-L 8080:localhost:8080", "-N"])
 
         self.connectCount += 1
         if self.connectCount == 10:
@@ -99,8 +99,8 @@ class ClientSocket:
                     cnt_str = '0' + str(cnt)
                 else:
                     cnt_str = str(cnt)
-                self.filepath = utils.wait_new_file(self.input_fp)
-                # self.filepath = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_in/1_midi.mid"
+                # self.filepath = utils.wait_new_file(self.input_fp)
+                self.filepath = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_in/1_midi.mid"
 
                 # frame = cv2.imread(self.filepath)
                 # frame = cv2.imread("/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/test.png")

@@ -11,12 +11,8 @@ python3 -m pip install requests
 # apt install inotify-tools -y
 # python3 -m pip install pyinotify
 
-cd midialogue
-# remove midi_in and midi_out folders
-rm -rf midi_in midi_out
-
+cd dream_machine
 # python3 Python-TCP-Image-Socket/client_receive_socket.py 2>&1 | tee _client_receive.log &
-
 
 
 # until [ -f /tmp/examplefile.txt ]
@@ -30,18 +26,11 @@ rm -rf midi_in midi_out
 # (when inotify script is running and detecting files in Sketch-Simulator/out/to_send) 
 # files are copied to out_imgs.
 
-
-
-
 echo "waiting for server to be ready..."
 
 python3 ./Python-TCP-Image-Socket/check_ready.py
-# ssh -p 12190 root@ssh5.vast.ai -L 8080:localhost:8080 -N &
-cmd=`cat ssh_pipe.cmd`
-$cmd &
 
 echo "Server ready"
-
 
 # looks for files to appear in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs, sends them over tcp
 # python3 Python-TCP-Image-Socket/client.py 2>&1 | tee _client_send.log &

@@ -8,6 +8,7 @@ import utils
 import argparse
 import os
 import subprocess
+import pretty_midi
 
 class ClientSocket:
     def __init__(self, ip, port, input_fp):
@@ -104,7 +105,19 @@ class ClientSocket:
                     time.sleep(2)
                     self.filepath = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/Python-TCP-Image-Socket/client.py"
                 else:
-                    self.filepath = utils.wait_new_file(self.input_fp)
+                    while True:
+                        self.filepath = utils.wait_new_file(self.input_fp)
+
+                        try:
+                            midi_data = pretty_midi.PrettyMIDI(self.filepath)
+                            # count notes
+                            note_count = midi_data.get_piano_roll().sum(axis=0)
+                            if note_count: break
+                        except:
+                            print(u'%s is not a valid midi file'%(self.filepath))
+                            continue
+                        time.sleep(0.1)
+
 
                 # frame = cv2.imread(self.filepath)
                 # frame = cv2.imread("/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/test.png")

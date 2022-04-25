@@ -128,7 +128,13 @@ class ClientSocket:
 
                 # response = self.sock.recv(64)
                 length = self.recvall(64)
-                length1 = length.decode('utf-8')
+                while True:
+                    try:
+                        length1 = length.decode('utf-8')
+                        break
+                    except:
+                        print(u'length decode error')
+                        continue
                 stringData = self.recvall(int(length1))
 
                 data = numpy.frombuffer(base64.b64decode(stringData), numpy.uint8)

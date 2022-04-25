@@ -476,21 +476,24 @@ def get_incremental_fn(folder, fn="midi.mid"):
 
 
 
-def midi_continuation(fp, output_folder, fn="test", temp=0.96, topk=64):  
+def midi_continuation(fp, output_folder, fn="test", temp=0.96, topk=64): 
+  print("transcribing midi file to txq: ", fp)
   tx1 = midi_to_tx1(fp)
+  print("Generating continuation for {}".format(fp))") 
   tx1_answer = TX1_continuation(tx1, temp, topk, fn)
+  print("transcribing tx1 to midi: ")
   midi = tx1_to_midi(tx1_answer, output_folder)
 
 def wait_for_new_midi(midi_folder):
     init_midis = glob.glob(f"{midi_folder}/*.mid")
-    print(f"Waiting for new *mid in {midi_folder}")
+    print(f"startup : Waiting for new *mid in {midi_folder}")
     while True:
         current_midis = glob.glob(f"{midi_folder}/*.mid")
         # if 1:
             # new_midi = current_midis[0]
         if len(current_midis) > len(init_midis):
             new_midi = list(set(current_midis).symmetric_difference(set(init_midis)))[0]
-            print(f"New midi found: {new_midi}")
+            print(f"startup : New midi found: {new_midi}")
 
             try:
                 load_midi_fp(new_midi)
@@ -499,7 +502,7 @@ def wait_for_new_midi(midi_folder):
                 error = ('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
                 filepath = get_incremental_fn(args.midi_out_folder)
                 os.system(f"echo {error} > {filepath}")
-                print(f"Failed to load {new_midi}")
+                print(f"startup : Failed to load {new_midi}")
                 return 0
                 
             return new_midi
@@ -507,11 +510,11 @@ def wait_for_new_midi(midi_folder):
 
 def main(args):
   os.system("echo READY > /workspace/vast_ai/midialogue/READY.log")
-  print("runnign main")
+  print("startup: runnign main")
   while True:
-      print("waiting for new midi")
+      print("startup: waiting for new midi")
       midi_path = wait_for_new_midi(args.midi_in_folder)
-      print(f"new midi found: {midi_path}")
+      print(f"startup : new midi found: {midi_path}")
       if midi_path:
         try:
             midi_continuation(midi_path, args.midi_out_folder)
@@ -519,7 +522,7 @@ def main(args):
             error = ('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
             filepath = get_incremental_fn(args.midi_out_folder)
             os.system(f"echo {error} > {filepath}")
-            print(f"Failed to load {new_midi}")
+            print(f"startup : Failed to load {new_midi}")
       
 
 if __name__ == "__main__":

@@ -485,7 +485,7 @@ def midi_continuation(fp, output_folder, fn="test", temp=0.96, topk=64):
   midi = tx1_to_midi(tx1_answer, output_folder)
 
 def wait_for_new_midi(midi_folder):
-    init_midis = glob.glob(f"{midi_folder}/*.mid")
+    init_midis = glob.glob(f"{midi_folder}/*.mid") 
     print(f"startup : Waiting for new *mid in {midi_folder}")
     while True:
         current_midis = glob.glob(f"{midi_folder}/*.mid")

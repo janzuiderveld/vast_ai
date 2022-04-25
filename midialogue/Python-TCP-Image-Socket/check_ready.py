@@ -13,9 +13,9 @@ while True:
 
     if port != "None" or ssh_address !="None": break
 
-print(ssh_address, port)
+# print(ssh_address, port)
 
-subprocess.Popen(['ssh', f"-o StrictHostKeyChecking=no", f"-p {port}", f"{ssh_address}", "-L 8080:localhost:8080", "-N"])
+# subprocess.Popen(['ssh', f"-o StrictHostKeyChecking=no", f"-p {port}", f"{ssh_address}", "-L 8080:localhost:8080", "-N"])
 
 while True:
     out = os.system(f"scp -o StrictHostKeyChecking=no -P {port} {ssh_address}:/workspace/vast_ai/midialogue/READY.log READY.log")
@@ -24,3 +24,6 @@ while True:
     else:
         break
     time.sleep(1)
+
+with open("ssh_pipe.cmd", "w") as f:
+    f.write(f"ssh -p {port} {ssh_address} -L 8080:localhost:8080 -N")

@@ -67,19 +67,23 @@ class ServerSocket:
                 save_path = self.input_fp + '/input_' + cnt_str + '.jpg'
                 cv2.imwrite(save_path, decimg)
                 
-                resp_file = utils.wait_new_file(self.output_fp)
+                if not dummy:   
+                    resp_file = utils.wait_new_file(self.output_fp)
 
-                if self.esrgan:
-                    # start_esr = time.time()
-                    tmp_folder = "/workspace/vast_ai/dream_machine/temp_upscale"
-                    os.makedirs(tmp_folder, exist_ok=True)
-                    os.chdir("/workspace/vast_ai/dream_machine/Real-ESRGAN")
-                    os.system(f"python3 inference_realesrgan.py -n RealESRGAN_x4plus -i {resp_file} -o {tmp_folder} --outscale 4 --half")
-                    os.chdir("/workspace/vast_ai/dream_machine")
-                    out_fp = glob.glob(tmp_folder + "/*")[0]
-                    # end_esr = time.time()
+                    if self.esrgan:
+                        # start_esr = time.time()
+                        tmp_folder = "/workspace/vast_ai/dream_machine/temp_upscale"
+                        os.makedirs(tmp_folder, exist_ok=True)
+                        os.chdir("/workspace/vast_ai/dream_machine/Real-ESRGAN")
+                        os.system(f"python3 inference_realesrgan.py -n RealESRGAN_x4plus -i {resp_file} -o {tmp_folder} --outscale 4 --half")
+                        os.chdir("/workspace/vast_ai/dream_machine")
+                        out_fp = glob.glob(tmp_folder + "/*")[0]
+                        # end_esr = time.time()
+                    else:
+                        out_fp = resp_file
                 else:
-                    out_fp = resp_file
+                    time.sleep(2)
+                    out_fp = save_path
 
                 frame = cv2.imread(out_fp)
                 resize_frame = cv2.resize(frame, dsize=(1024, 1024), interpolation=cv2.INTER_AREA)
@@ -167,6 +171,7 @@ if __name__ == "__main__":
     parser.add_argument('--input_fp', type=str, default='/workspace/vast_ai/dream_machine/incoming_imgs', help='ftp filepath')
     parser.add_argument('--output_fp', type=str, default='/workspace/vast_ai/dream_machine/Sketch-Simulator/out/to_send', help='ftp filepath')
     parser.add_argument('--esrgan', type=int, default=1, help='ftp filepath')
+    parser.add_argument('--dummy', type=int, default=0, help='ftp filepath')
 
     args = parser.parse_args()
     os.makedirs(args.input_fp, exist_ok=True)

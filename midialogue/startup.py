@@ -504,14 +504,6 @@ def main(args):
   os.system("echo READY > /workspace/vast_ai/midialogue/READY.log")
   while True:
       midi_path = wait_for_new_midi(args.midi_in_folder)
-
-      # midi_path = glob.glob(f"{midi_folder}/*.mid")[-1]
-      # plt.figure(figsize=(8, 4))
-
-      # pm = pretty_midi.PrettyMIDI(midi_path)
-      # plot_piano_roll(pm, 0, 126)
-      
-      # midi_continuation(p1 = midi_path)
       try:
           midi_continuation(midi_path, args.midi_out_folder)
       except:

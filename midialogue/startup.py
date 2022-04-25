@@ -489,14 +489,17 @@ def wait_for_new_midi(midi_folder):
         if len(current_midis) > len(init_midis):
             new_midi = list(set(current_midis).symmetric_difference(set(init_midis)))[0]
             print(f"New midi found: {new_midi}")
-            while True:
-                try:
-                    load_midi_fp(new_midi)
-                    break
-                except:
-                    print(f"Failed to load {new_midi}")
-                
 
+            try:
+                load_midi_fp(new_midi)
+                
+            except Exception as e:
+                error = ('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+                filepath = get_incremental_fn(args.midi_out_folder)
+                os.system(f"echo {error} > {filepath}")
+                print(f"Failed to load {new_midi}")
+                return 0
+                
             return new_midi
 
 
@@ -504,11 +507,15 @@ def main(args):
   os.system("echo READY > /workspace/vast_ai/midialogue/READY.log")
   while True:
       midi_path = wait_for_new_midi(args.midi_in_folder)
-      try:
-          midi_continuation(midi_path, args.midi_out_folder)
-      except:
-          print("Failed to load midi")
-          
+      if midi_path:
+        try:
+            midi_continuation(midi_path, args.midi_out_folder)
+        except Exception as e:
+            error = ('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+            filepath = get_incremental_fn(args.midi_out_folder)
+            os.system(f"echo {error} > {filepath}")
+            print(f"Failed to load {new_midi}")
+      
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()

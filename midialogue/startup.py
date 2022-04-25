@@ -281,7 +281,12 @@ def load_midi_fp(fp):
     mf.write(fp)
     mf.seek(0)
     print(mf.name)
-    midi = pretty_midi.PrettyMIDI(mf.name)
+    while True:
+        try:
+            midi = pretty_midi.PrettyMIDI(mf.name)
+            break
+        except:
+            continue
     print(midi.instruments)
     if len(midi.instruments) > 4:
         del midi.instruments[4:]

@@ -45,6 +45,6 @@ echo "Server ready"
 
 # looks for files to appear in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs, sends them over tcp
 # python3 Python-TCP-Image-Socket/client.py 2>&1 | tee _client_send.log &
-python3 ./Python-TCP-Image-Socket/client.py --dummy 1 2>&1 | tee _client_send.log &
+python3 ./Python-TCP-Image-Socket/client.py --dummy 1
 
 

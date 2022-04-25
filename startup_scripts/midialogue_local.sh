@@ -65,6 +65,9 @@ python3 ./Python-TCP-Image-Socket/client.py &
 cd /Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi-utilities/bin
 prefix=$"/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_in/"
 # ./brainstorm  --in <port> [ --prefix <filename prefix> ] [ --timeout <seconds> ] [ --confirmation <command line> ]
-./brainstorm  --in 0 --prefix $prefix --timeout 2 --confirmation 'echo "saved a midi"'
+
+./lsmidiins
+
+./brainstorm  --in 1 --prefix $prefix --timeout 2 --confirmation 'echo "saved a midi"'
 
 

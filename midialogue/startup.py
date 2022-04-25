@@ -479,7 +479,7 @@ def get_incremental_fn(folder, fn="midi.mid"):
 def midi_continuation(fp, output_folder, fn="test", temp=0.96, topk=64): 
   print("transcribing midi file to txq: ", fp)
   tx1 = midi_to_tx1(fp)
-  print("Generating continuation for {}".format(fp))"
+  print("Generating continuation for {}".format(fp))
   tx1_answer = TX1_continuation(tx1, temp, topk, fn)
   print("transcribing tx1 to midi: ")
   midi = tx1_to_midi(tx1_answer, output_folder)

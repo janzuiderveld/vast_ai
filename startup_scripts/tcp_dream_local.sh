@@ -27,13 +27,13 @@ cd dream_machine
 # files are copied to out_imgs.
 
 echo "waiting for server to be ready..."
-
+kill -9 $(lsof -t -i:8080)
 python3 ./Python-TCP-Image-Socket/check_ready.py
-
+kill -9 $(lsof -t -i:8080)
 echo "Server ready"
 
 # looks for files to appear in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs, sends them over tcp
 # python3 Python-TCP-Image-Socket/client.py 2>&1 | tee _client_send.log &
-python3 ./Python-TCP-Image-Socket/client.py 
+python3 ./Python-TCP-Image-Socket/client.py --dummy 1 2>&1 | tee _client_send.log &
 
 

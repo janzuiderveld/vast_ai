@@ -11,7 +11,8 @@ import subprocess
 import pretty_midi
 import tempfile
 
-#TODO FILTER CORRUPT MIDI FILES
+#TODO FILTER CORRUPT MIDI FILES: normalizesmf <filename>
+#TODO bij minder input kanalen nogg steeds mappen naar goede kanaal > zet ghost notes bij begin openames
 
 class ClientSocket:
     def __init__(self, ip, port, input_fp):

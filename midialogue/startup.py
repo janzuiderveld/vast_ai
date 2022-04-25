@@ -239,7 +239,7 @@ def TX1_continuation(tx1, temp, topk, fn):
 
   print("startup: len tokens: {}".format(len(tokens)))
   if len(tokens) < 4:
-      answer_str = '\n'.join(['<S>', 'WT_8820', '<S>'])
+      answer_str = '\n'.join(['<S>', 'P1_NOTEON_33' 'WT_8820', 'P1_NOTEOFF', '<S>'])
       return answer_str
 
   sampler = TxlSimpleSampler(model, device, mem_len=512)

@@ -17,7 +17,7 @@ class ClientSocket:
         self.output_fp = args.output_fp
         self.dummy = args.dummy
         self.connectCount = 0
-        self.establish_ssh()
+        # self.establish_ssh()
         self.connectServer()
 
     def establish_ssh(self):
@@ -46,9 +46,8 @@ class ClientSocket:
             print(u'Connect fail %d times. exit program'%(self.connectCount))
             sys.exit()
         print(u'%d times try to connect with server'%(self.connectCount))
-        
-
-        time.sleep(5)
+    
+        # time.sleep(5)
 
     def connectServer(self):
         try:
@@ -59,7 +58,7 @@ class ClientSocket:
             self.sendImages()
         except Exception as e:
             print(e)
-            self.establish_ssh()
+            # self.establish_ssh()
 
 
             # while True:
@@ -84,7 +83,7 @@ class ClientSocket:
             #     sys.exit()
             # print(u'%d times try to connect with server'%(self.connectCount))
             
-            # time.sleep(5)
+            time.sleep(5)
             self.connectServer()
 
 

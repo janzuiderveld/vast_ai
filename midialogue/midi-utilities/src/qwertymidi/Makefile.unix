@@ -1,0 +1,23 @@
+
+default:
+	test -d target || mkdir target
+	cd target && qmake ..
+	cd target && make
+ifeq ("$(shell uname -s)", "Darwin")
+	rm -rf ../../bin/qwertymidi.app ../../bin/qwertymidi
+	cp -r target/qwertymidi.app ../../bin
+	cp ../midiutil/open-mac-app ../../bin/qwertymidi
+else
+	cp target/qwertymidi ../../bin
+endif
+
+clean:
+	rm -rf target
+
+reallyclean: clean
+ifeq ("$(shell uname -s)", "Darwin")
+	rm -rf ../../bin/qwertymidi.app  ../../bin/qwertymidi
+else
+	rm -f ../../bin/qwertymidi
+endif
+

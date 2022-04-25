@@ -4,6 +4,7 @@ source dream_machine/dream_machine_env/bin/activate
 
 python3 -m pip install -r midialogue/Python-TCP-Image-Socket/requirements.txt
 python3 -m pip install requests
+python3 -m pip install pretty_midi
 
 # apt-get update
 # apt-get install ffmpeg libsm6 libxext6  -y

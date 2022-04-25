@@ -3,6 +3,8 @@ import sys
 import numpy as np
 import glob
 import argparse
+import pretty_midi
+import tempfile
 
 def load_midi_fp(fp):
   pretty_midi.pretty_midi.MAX_TICK = 1e16
@@ -33,18 +35,21 @@ def wait_for_new_midi(midi_folder):
     init_midis = glob.glob(f"{midi_folder}/*.mid")
     print(f"Waiting for new *mid in {midi_folder}")
     while True:
-        # current_midis = glob.glob(f"{midi_folder}/*.mid")
-        # if len(current_midis) > len(init_midis):
-        #     new_midi = list(set(current_midis).symmetric_difference(set(init_midis)))[0]
-        #     print(f"New midi found: {new_midi}")
+        current_midis = glob.glob(f"{midi_folder}/*.mid")
+        if len(current_midis) > len(init_midis):
+            new_midi = list(set(current_midis).symmetric_difference(set(init_midis)))[0]
+            print(f"New midi found: {new_midi}")
 
-        if 1:
-            new_midi = init_midis[0]
+        # if 1:
+        #     new_midi = init_midis[0]
+
+        
             # try:
             #     load_midi_fp(new_midi)
                 
             # except Exception as e:
             #     error = ('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+            #     print(error)
             #     print(f"Failed to load {new_midi}")
             #     return 0
                 
@@ -55,7 +60,8 @@ def main(args):
         try:
             # wait for new midi
             new_fp = wait_for_new_midi(args.midi_in_folder)
-            os.system(f"./playsmf --out {args.midi_out_port} {new_fp}")
+            if new_fp:
+                os.system(f"./playsmf --out {args.midi_out_port} {new_fp}")
         except Exception as e:
             print(('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e))
             break

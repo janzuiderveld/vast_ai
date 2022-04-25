@@ -7,6 +7,8 @@ import numpy as np
 import glob
 import argparse
 
+#TODO FILTER CORRUPT MIDI FILES
+
 sys.path.extend("/workspace/vast_ai/midialogue/LakhNES/model")
 sys.path.extend("/workspace/vast_ai/midialogue/LakhNES")
 sys.path.extend("/workspace/vast_ai/midialogue/LakhNES/utils")
@@ -53,7 +55,7 @@ with open(VOCAB_FP, 'r') as f:
     idx2sym.append(line.strip().split(',')[-1])
 sym2idx = {s:i for i, s in enumerate(idx2sym)}
 wait_amts = set([int(s[3:]) for s in idx2sym if s[:2] == 'WT'])
-print(len(idx2sym))
+print(len(idx2sym)) 
 
 TX1_PATH = '/workspace/vast_ai/midialogue/LakhNES/data/nesmdb_tx1/test/*.tx1.txt'
 
@@ -234,6 +236,11 @@ class TxlSimpleSampler:
 
 def TX1_continuation(tx1, temp, topk, fn):
   tokens = get_tokens_tx1_var(tx1)
+
+  print("startup: len tokens: {}".format(len(tokens)))
+  if len(tokens) < 4:
+      answer_str = '\n'.join(['<S>', 'WT_8820', '<S>'])
+      return answer_str
 
   sampler = TxlSimpleSampler(model, device, mem_len=512)
 

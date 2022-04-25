@@ -76,7 +76,7 @@ class ServerSocket:
 
                 with open(resp_file, "rb") as fp:
                     data = fp.read()
-
+ 
                 stringData = base64.b64encode(data)
                 length = str(len(stringData))
 

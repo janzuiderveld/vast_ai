@@ -1,4 +1,5 @@
 #!/bin/bash
+lsof -ti:8080 | xargs kill -9
 python3 -m venv dream_machine/dream_machine_env
 source dream_machine/dream_machine_env/bin/activate
 

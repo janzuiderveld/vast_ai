@@ -18,6 +18,7 @@ class ServerSocket:
         self.TCP_PORT = port
         self.input_fp = args.input_fp
         self.output_fp = args.output_fp
+        self.dummy = args.dummy
         self.socketOpen()
         self.receiveThread = threading.Thread(target=self.receiveFiles)
         self.receiveThread.start()
@@ -67,10 +68,11 @@ class ServerSocket:
                 now = time.localtime()
                 print('receive time: ' + datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f'))
 
-                
-                resp_file = utils.wait_new_file(self.output_fp)
-
-                out_fp = resp_file
+                if dummy:
+                    print('dummy mode')
+                    resp_file = save_path
+                else:
+                    resp_file = utils.wait_new_file(self.output_fp)
 
                 with open(resp_file, "rb") as fp:
                     data = fp.read()
@@ -152,6 +154,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='TCP client')
     parser.add_argument('--input_fp', type=str, default='/workspace/vast_ai/midialogue/midi_in', help='ftp filepath')
     parser.add_argument('--output_fp', type=str, default='/workspace/vast_ai/midialogue/midi_out', help='ftp filepath')
+    parser.add_argument('--dummy', type=int, default=0, help='ftp filepath')
 
     args = parser.parse_args()
     os.makedirs(args.input_fp, exist_ok=True)

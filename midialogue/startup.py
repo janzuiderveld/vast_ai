@@ -360,8 +360,10 @@ def midi_to_tx1(fp):
       start = int(start)
       end = int(end)
 
-      assert start > last_start
-      assert start >= last_end
+      if not start > last_start:
+          continue
+      if not start >= last_end:
+          continue
 
 
       if last_end >= 0 and last_end != start:

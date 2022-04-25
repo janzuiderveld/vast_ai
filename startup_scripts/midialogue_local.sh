@@ -57,7 +57,7 @@ echo "Server ready"
 # python3 ./Python-TCP-Image-Socket/client.py
 
 
-python3 midi_autoplay.py &
+python3 midi_autoplay.py --midi_out_port 2 &
 
 python3 ./Python-TCP-Image-Socket/client.py &
 

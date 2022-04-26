@@ -229,9 +229,9 @@ if __name__ == "__main__":
     # argparser
     parser = argparse.ArgumentParser(description='TCP client')
     # parser.add_argument('--input_fp', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_in', help='ftp filepath')
-    parser.add_argument('--input_fp', type=str, default='../midi_in', help='ftp filepath')
+    parser.add_argument('--input_fp', type=str, default='midi_in', help='ftp filepath')
     # parser.add_argument('--output_fp', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_out', help='ftp filepath')
-    parser.add_argument('--output_fp', type=str, default='../midi_out', help='ftp filepath')
+    parser.add_argument('--output_fp', type=str, default='midi_out', help='ftp filepath')
     parser.add_argument('--dummy', type=int, default=0, help='ftp filepath')
 
     args = parser.parse_args()

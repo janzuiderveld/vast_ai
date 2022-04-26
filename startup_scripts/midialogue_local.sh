@@ -39,14 +39,14 @@ $ROOT_DIR/midialogue/midi-utilities/bin/routemidi --bus --in $in_port --virtual-
 
 # cd /workspace/vast_ai/midialogue/LakhNES/
 
-python3 -m venv dream_machine/dream_machine_env
-source dream_machine/dream_machine_env/bin/activate
+python3 -m venv $ROOT_DIR/midialogue/midialogue_env
+source $ROOT_DIR/midialogue/midialogue_env/bin/activate
 
-python3 -m pip install -r midialogue/Python-TCP-Image-Socket/requirements.txt
+python3 -m pip install -r $ROOT_DIR/midialogue/Python-TCP-Image-Socket/requirements.txt
 python3 -m pip install requests
 python3 -m pip install pretty_midi
 
-cd midialogue
+cd $ROOT_DIR/midialogue
 # remove midi_in and midi_out folders
 rm -rf midi_in midi_out
 
@@ -70,20 +70,13 @@ echo $(lsof -i:8080)
 echo "Server ready"
 
 
-# looks for files to appear in $ROOT_DIR/dream_machine/in_imgs, sends them over tcp
-# python3 Python-TCP-Image-Socket/client.py 2>&1 | tee _client_send.log &
-# python3 ./Python-TCP-Image-Socket/client.py
-
-
 python3 midi_autoplay.py --midi_out_port $out_port &
 
 python3 Python-TCP-Image-Socket/client.py &
 
-
 cd $ROOT_DIR/midialogue/midi-utilities/bin
 prefix=$"$ROOT_DIR/midialogue/midi_in/"
 # ./brainstorm  --in <port> [ --prefix <filename prefix> ] [ --timeout <seconds> ] [ --confirmation <command line> ]
-
 
 echo "model listens on virtual port $model_port"
 # saves files which will be sent to model

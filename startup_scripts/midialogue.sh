@@ -2,6 +2,8 @@ cd /workspace
 apt-get install git wget curl tar -y
 git clone https://github.com/janzuiderveld/vast_ai.git
 
+/usr/sbin/sshd -p $DIRECT_PORT_START
+
 cd /workspace/vast_ai/midialogue
 
 python3 -m pip install -r Python-TCP-Image-Socket/requirements.txt

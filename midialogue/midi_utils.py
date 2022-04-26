@@ -28,16 +28,21 @@ def load_midi(fp):
     # else:
     #     return 0
 
-in_file = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_in/20220425235234.mid"
-out_file = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_edit/20220425235234.mid"
+in_file = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi-utilities/bin/brainstorm-20220426133859.mid"
+# out_file = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_edit/20220425235234.mid"
 # in_file = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_in/20220426000304.mid"
 # out_file = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_edit/20220426000304.mid"
 
 
 # os.system(f"bash test_midi_edit.sh {in_file} {out_file}")
 
+import time
 # load_midi(out_file)
+start = time.time()
 load_midi(in_file)
+end = time.time()
+print(end - start)
+
 
 
 

@@ -77,7 +77,6 @@ if __name__ == "__main__":
   args = parser.parse_args()
 
   os.makedirs(args.midi_in_folder, exist_ok=True)
-  
 #   os.chdir("/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi-utilities/bin")
 
   main(args)

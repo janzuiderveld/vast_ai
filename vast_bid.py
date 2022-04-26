@@ -13,17 +13,17 @@ args = parser.parse_args()
 
 # run vast shell command "./vast search offers" to get prices 
 if args.bidding_tactic == 'cheap':
-    vast_cmd = './vast search offers -b --raw -o "dph"'
+    vast_cmd = './vast search offers -b "direct_port_count>0" --raw -o "dph"'
 if args.bidding_tactic == 'cheap4':
-    vast_cmd = './vast search offers -b "num_gpus == 4" --raw -o "dph"' 
+    vast_cmd = './vast search offers -b "direct_port_count>0 num_gpus == 4" --raw -o "dph"' 
 if args.bidding_tactic == 'cheap8':
-    vast_cmd = './vast search offers -b "num_gpus == 8" --raw -o "dph"' 
+    vast_cmd = './vast search offers -b "direct_port_count>0 num_gpus == 8" --raw -o "dph"' 
 elif args.bidding_tactic == 'auto1_bid':
-    vast_cmd = './vast search offers -b "num_gpus == 1 gpu_ram > 20" --raw'   
+    vast_cmd = './vast search offers -b "direct_port_count>0 num_gpus == 1 gpu_ram > 20" --raw'   
 elif args.bidding_tactic == 'auto1':
-    vast_cmd = './vast search offers -d "num_gpus == 1 gpu_ram > 20" --raw'   
+    vast_cmd = './vast search offers -d "direct_port_count>0 num_gpus == 1 gpu_ram > 20" --raw'   
 elif args.bidding_tactic == 'best1':
-    vast_cmd = './vast search offers -d "num_gpus == 1 gpu_ram > 20" --raw -o "dlperf-"'   
+    vast_cmd = './vast search offers -d "direct_port_count>0 num_gpus == 1 gpu_ram > 20" --raw -o "dlperf-"'   
 
 vast_output = subprocess.check_output(vast_cmd, shell=True)
 

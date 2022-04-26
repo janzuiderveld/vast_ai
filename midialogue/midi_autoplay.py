@@ -62,19 +62,22 @@ def main(args):
             new_fp = wait_for_new_midi(args.midi_in_folder)
             print(new_fp)
             if new_fp:
+                os.chdir("midi-utilities/bin")
                 os.system(f"./playsmf --out {args.midi_out_port} {new_fp}")
+                os.chdir("../..")
         except Exception as e:
             print(('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e))
             break
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()
-  parser.add_argument('--midi_in_folder', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_out')
+  parser.add_argument('--midi_in_folder', type=str, default='midi_out')
+#   parser.add_argument('--midi_in_folder', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_out')
   parser.add_argument('--midi_out_port', type=int, default=0)
   args = parser.parse_args()
 
   os.makedirs(args.midi_in_folder, exist_ok=True)
   
-  os.chdir("/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi-utilities/bin")
+#   os.chdir("/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi-utilities/bin")
 
   main(args)

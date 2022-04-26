@@ -1089,7 +1089,7 @@ MidiFile_t MidiFile_new(int file_format, MidiFileDivisionType_t division_type, i
 	MidiFile_t midi_file = (MidiFile_t)(malloc(sizeof(struct MidiFile)));
 	midi_file->file_format = file_format;
 	midi_file->division_type = division_type;
-	midi_file->resolution = resolution;
+	midi_file->resolution = 960;
 
 	switch (division_type)
 	{

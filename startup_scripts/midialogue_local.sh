@@ -5,6 +5,8 @@ lsof -ti:8080 | xargs kill -9
 read -p 'Which midi input port do you want to listen to?: ' in_port
 echo "using midi input port $in_port"
 
+echo "/n/n"
+
 /Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi-utilities/bin/lsmidiouts
 read -p 'Which midi output port do you want to send to?: ' out_port
 echo "using midi output port $out_port"
@@ -12,7 +14,7 @@ echo "using midi output port $out_port"
 model_port=10
 timeout=2
 
-# /Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi-utilities/bin/routemidi --bus --in 0 --virtual-out 10 0 &
+
 /Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi-utilities/bin/routemidi --bus --in $in_port --out $out_port &
 /Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi-utilities/bin/routemidi --bus --in $in_port --virtual-out $model_port &
 

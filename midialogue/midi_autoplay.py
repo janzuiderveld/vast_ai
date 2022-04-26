@@ -63,7 +63,7 @@ def main(args):
             print(new_fp)
             if new_fp:
                 os.chdir("midi-utilities/bin")
-                os.system(f"./playsmf --out {args.midi_out_port} {new_fp}")
+                os.system(f"./playsmf --out {args.midi_out_port} ../../{new_fp}")
                 os.chdir("../..")
         except Exception as e:
             print(('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e))

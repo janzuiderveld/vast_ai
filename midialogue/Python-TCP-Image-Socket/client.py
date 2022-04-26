@@ -139,26 +139,26 @@ class ClientSocket:
                     time.sleep(2)
                     self.filepath = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/Python-TCP-Image-Socket/client.py"
                 else:
-                    while True:
-                        self.filepath = utils.wait_new_file(self.input_fp)
+                    self.filepath = utils.wait_new_file(self.input_fp)
 
-                        try:
-                            print("trying to load midi file")
-                            # Load MIDI file
-                            with open(self.filepath, "rb") as fh:
-                                data = fh.read()
-                            with tempfile.NamedTemporaryFile('wb') as mf:
-                                mf.write(data)
-                                mf.seek(0)
-                                midi_data = pretty_midi.PrettyMIDI(mf.name)
-                                # count notes
-                                note_count = midi_data.get_piano_roll().sum(axis=0)
-                                if note_count: break
-                        except Exception as e:
-                            print(f"error on line {sys.exc_info()[-1].tb_lineno}: {e}")
-                            print(u'%s is not a valid midi file'%(self.filepath))
-                            break
-                        time.sleep(0.1)
+                    # while True:
+                    #     try:
+                    #         print("trying to load midi file")
+                    #         # Load MIDI file
+                    #         with open(self.filepath, "rb") as fh:
+                    #             data = fh.read()
+                    #         with tempfile.NamedTemporaryFile('wb') as mf:
+                    #             mf.write(data)
+                    #             mf.seek(0)
+                    #             midi_data = pretty_midi.PrettyMIDI(mf.name)
+                    #             # count notes
+                    #             note_count = midi_data.get_piano_roll().sum(axis=0)
+                    #             if note_count: break
+                    #     except Exception as e:
+                    #         print(f"error on line {sys.exc_info()[-1].tb_lineno}: {e}")
+                    #         print(u'%s is not a valid midi file'%(self.filepath))
+                    #         break
+                    #     time.sleep(0.1)
 
                 # frame = cv2.imread(self.filepath)
                 # frame = cv2.imread("/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/test.png")

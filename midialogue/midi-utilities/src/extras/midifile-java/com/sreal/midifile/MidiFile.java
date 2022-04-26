@@ -24,11 +24,11 @@ public class MidiFile
 	{
 		this.file_format = file_format;
 		this.division_type = division_type;
-		this.resolution = 960;
+		this.resolution = resolution;
 
 		if (this.division_type == com.sreal.midifile.MidiFile.DIVISION_TYPE_PPQ)
 		{
-			this.number_of_ticks_per_beat = 960;
+			this.number_of_ticks_per_beat = resolution;
 			this.number_of_frames_per_second = 30.0;
 		}
 		else if (this.division_type == com.sreal.midifile.MidiFile.DIVISION_TYPE_SMPTE24)

@@ -39,4 +39,5 @@ while True:
 
 with open("ssh_pipe.cmd", "w") as f:
     # f.write(f"ssh -p {open_port} root@{public_ip} -L 8080:localhost:8080 -tt")
-    f.write(f"ssh -p {port} root@{ssh_address} -L 8080:localhost:8080 -tt")
+    # f.write(f"ssh -p {port} {ssh_address} -L 8080:localhost:8080 -N")
+    f.write(f"ssh -p {port} {ssh_address} -L 8080:localhost:8080 -tt")

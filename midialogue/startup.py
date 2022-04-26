@@ -452,8 +452,8 @@ def tx1_to_midi(tx1, save_folder):
         if old_pitch is not None:
 
           if tokens[0] == 'NO' and not args.lasers:
-            pitch = round(scale_number(pitch, 0, 127, 1, 16))
-            
+            pitch = round(scale_number(old_pitch, 0, 127, 1, 16))
+
           ins.notes.append(pretty_midi.Note(
               velocity=name_to_max_velocity[name],
               pitch=old_pitch,
@@ -463,13 +463,13 @@ def tx1_to_midi(tx1, save_folder):
         name_to_start[name] = samp
       else:
         if old_pitch is not None:
-
+          pitch = name_to_pitch[name]
           if tokens[0] == 'NO' and not args.lasers:
             pitch = round(scale_number(pitch, 0, 127, 1, 16))
 
           ins.notes.append(pretty_midi.Note(
               velocity=name_to_max_velocity[name],
-              pitch=name_to_pitch[name],
+              pitch=pitch,
               start=name_to_start[name] / 44100.,
               end=samp / 44100.))
 

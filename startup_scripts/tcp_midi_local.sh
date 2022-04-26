@@ -12,19 +12,6 @@ python3 -m pip install requests
 # python3 -m pip install pyinotify
 
 cd midialogue
-# python3 Python-TCP-Image-Socket/client_receive_socket.py 2>&1 | tee _client_receive.log &
-
-
-# until [ -f /tmp/examplefile.txt ]
-# do
-#      sleep 5
-# done
-# echo "SERVER READY"
-
-
-# looks for files to be added to /workspace/vast_ai/dream_machine/Sketch-Simulator/out.log 
-# (when inotify script is running and detecting files in Sketch-Simulator/out/to_send) 
-# files are copied to out_imgs.
 
 echo "waiting for server to be ready..."
 kill -9 $(lsof -t -i:8080)

@@ -11,10 +11,17 @@ import subprocess
 import pretty_midi
 import tempfile
 
-#TODO FILTER CORRUPT MIDI FILES: normalizesmf <filename>
-#TODO bij minder input kanalen nogg steeds mappen naar goede kanaal > zet ghost notes bij begin openames
+#TODO FILTER CORRUPT MIDI FILES: 
+# not working:  normalizesmf <filename> 
+# TEMPO-MAP: would make max tick smaller thus readable by pretty midi? 
+#TODO bij minder input kanalen nogg steeds mappen naar goede kanaal > zet ghost notes bij begin openames >  sendmidi
+# TEMPO-MAP: would make max tick smaller thus readable by pretty midi to add notes? 
+# ONMIDI? 
 
-#TODO
+#TODO 2 kanalen gewshcaald voor synth en model > NOTEMAP
+# ROUTEMIDI? 
+# Usage: sendmidi --out <port> ( --note-off <channel> <note> <velocity> | --note-on <channel> <note> <velocity> | --key-pressure <channel> <note> <amount> | --control-change <channel> <number> <value> | --program-change <channel> <number> | --channel-pressure <channel> <amount> | --pitch-wheel <channel> <amount> | --panic )
+# notemap --in <port> --out <port> [ --transpose <n> ] [ --map <filename.xml> ]
 
 # TODO ERROR:
 # Generating continuation for /workspace/vast_ai/midialogue/midi_in/midi_0022.mid │·················································································································
@@ -30,6 +37,12 @@ import tempfile
 #   File "startup.py", line 447, in tx1_to_midi                                   │·················································································································
 #     name_to_pitch[name] = int(tokens[2])                                        │·················································································································
 # ValueError: invalid literal for int() with base 10: '33WT'   
+
+# TODO sometime..
+# NETMIDIC AND NETMIDID
+# These utilities speak NetMIDI, a trivial network protocol I created which sends standard MIDI messages over a TCP/IP connection as fast as possible. They can be used to connect up the MIDI systems on two different machines over a network connection, even if they are running different operating systems. The client forwards messages from the local MIDI system to a NetMIDI server. The server forwards messages sent by the client to the local MIDI system.
+
+
 
 
 class ClientSocket:

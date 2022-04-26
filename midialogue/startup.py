@@ -435,7 +435,7 @@ def tx1_to_midi(tx1, save_folder):
   name_to_ins = {'P1': p1, 'P2': p2, 'TR': tr, 'NO': no}
   name_to_pitch = {'P1': None, 'P2': None, 'TR': None, 'NO': None}
   name_to_start = {'P1': None, 'P2': None, 'TR': None, 'NO': None}
-  name_to_max_velocity = {'P1': 15, 'P2': 15, 'TR': 1, 'NO': 15}
+  name_to_max_velocity = {'P1': 100, 'P2': 100, 'TR': 100, 'NO': 100}
 
   samp = 0
   for event in tx1:
@@ -450,6 +450,10 @@ def tx1_to_midi(tx1, save_folder):
       old_pitch = name_to_pitch[name]
       if tokens[1] == 'NOTEON':
         if old_pitch is not None:
+
+          if tokens[0] == 'NO' and not args.lasers:
+            pitch = round(scale_number(pitch, 0, 127, 1, 16))
+            
           ins.notes.append(pretty_midi.Note(
               velocity=name_to_max_velocity[name],
               pitch=old_pitch,
@@ -459,6 +463,10 @@ def tx1_to_midi(tx1, save_folder):
         name_to_start[name] = samp
       else:
         if old_pitch is not None:
+
+          if tokens[0] == 'NO' and not args.lasers:
+            pitch = round(scale_number(pitch, 0, 127, 1, 16))
+
           ins.notes.append(pretty_midi.Note(
               velocity=name_to_max_velocity[name],
               pitch=name_to_pitch[name],

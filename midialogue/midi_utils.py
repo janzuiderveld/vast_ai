@@ -28,7 +28,7 @@ def load_midi(fp):
     # else:
     #     return 0
 
-in_file = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi-utilities/bin/brainstorm-20220426133859.mid"
+in_file = "/workspace/vast_ai/midialogue/midi_in/20220426144438.mid"
 # out_file = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_edit/20220425235234.mid"
 # in_file = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_in/20220426000304.mid"
 # out_file = "/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_edit/20220426000304.mid"

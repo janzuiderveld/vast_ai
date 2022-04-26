@@ -221,6 +221,8 @@ class ClientSocket:
         return buf    
 
 def main(args):
+    # TCP_IP = "18.235.86.254"
+    # TCP_PORT = 17513 
     TCP_IP = 'localhost' 
     TCP_PORT = 8080 
     client = ClientSocket(TCP_IP, TCP_PORT, args)

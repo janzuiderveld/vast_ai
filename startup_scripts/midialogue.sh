@@ -7,7 +7,7 @@ cd /workspace/vast_ai/midialogue
 python3 -m pip install -r Python-TCP-Image-Socket/requirements.txt
 python3 -m pip install pretty_midi
 
-# waits for files send through tcp and saves them in /Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_in
+# waits for files send through tcp and saves them in vast_ai/midialogue/midi_in
 # python3 Python-TCP-Image-Socket/server.py 2>&1 | tee _server_receive.log &
 python3 Python-TCP-Image-Socket/server.py  2>&1 | tee _server_receive.log &
 
@@ -36,5 +36,4 @@ touch /workspace/vast_ai/midialogue/LakhNES/model/__init__.py
 
 cd /workspace/vast_ai/midialogue/LakhNES
 
-# python3 startup.py 2>&1 | tee ../_midialogue_server.log
-
+python3 startup.py 2>&1 | tee ../_midialogue_server.log

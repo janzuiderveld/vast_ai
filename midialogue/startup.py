@@ -277,7 +277,6 @@ def TX1_continuation(tx1, temp, topk, fn):
 
   return answer_str
 
-
 def load_midi_fp(fp):
   pretty_midi.pretty_midi.MAX_TICK = 1e16
   with open(fp, "rb") as fh:
@@ -288,25 +287,33 @@ def load_midi_fp(fp):
     mf.write(fp)
     mf.seek(0)
     print(mf.name)
-    while True:
-        try:
-            midi = pretty_midi.PrettyMIDI(mf.name)
-            break
-        except:
-            continue
-    print(midi.instruments)
-    if len(midi.instruments) > 4:
-        del midi.instruments[4:]
-    if len(midi.instruments) < 4:
-        for i in range(4 - len(midi.instruments)):
-            midi.instruments.append(pretty_midi.Instrument(program=0))
+    
+    print("startup: loading midi")
+    midi = pretty_midi.PrettyMIDI(mf.name)
+
+    assert len(midi.instruments) == 4
+
+    # print(midi.instruments)
+    # if len(midi.instruments) > 4:
+    #     del midi.instruments[4:]
+    # if len(midi.instruments) < 4:
+    #     for i in range(4 - len(midi.instruments)):
+    #         midi.instruments.append(pretty_midi.Instrument(program=0))
+
     midi.instruments[0].name = "p1"
     midi.instruments[1].name = "p2"
     midi.instruments[2].name = "tr"
     midi.instruments[3].name = "no"
 
     print(midi.instruments)
+
     return midi
+
+def scale_number(unscaled, to_min, to_max, from_min, from_max):
+    return (to_max-to_min)*(unscaled-from_min)/(from_max-from_min)+to_min
+
+def scale_list(l, to_min, to_max):
+    return [scale_number(i, to_min, to_max, min(l), max(l)) for i in l]
 
 def midi_to_tx1(fp):
   # pretty_midi.pretty_midi.MAX_TICK = 1e16
@@ -349,6 +356,10 @@ def midi_to_tx1(fp):
       # TR RANGE: 21 - 108
       # NO RANGE: 1 - 16
 
+      # scale notes between 0 and 127 to 0-16 if not lasers
+      if instag == 'NO' and not args.lasers:
+          pitch = round(scale_number(pitch, 1, 16, 0, 127))
+      
       filtered = False
       if (instag == 'P1' and pitch < 33) or (instag == 'P2' and pitch < 33) or (instag == 'TR' and pitch < 21) or (instag == 'NO' and pitch < 1):
         filtered = True
@@ -508,15 +519,15 @@ def wait_for_new_midi(midi_folder):
             new_midi = list(set(current_midis).symmetric_difference(set(init_midis)))[0]
             print(f"startup : New midi found: {new_midi}")
 
-            try:
-                load_midi_fp(new_midi)
+            # try:
+            #     load_midi_fp(new_midi)
                 
-            except Exception as e:
-                error = ('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
-                filepath = get_incremental_fn(args.midi_out_folder)
-                os.system(f"echo {error} > {filepath}")
-                print(f"startup : Failed to load {new_midi}")
-                return 0
+            # except Exception as e:
+            #     error = ('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+            #     filepath = get_incremental_fn(args.midi_out_folder)
+            #     os.system(f"echo {error} > {filepath}")
+            #     print(f"startup : Failed to load {new_midi}")
+            #     return 0
                 
             return new_midi
 
@@ -545,7 +556,7 @@ if __name__ == "__main__":
   parser.add_argument('--answer_add_silence', type=int, default=44100//5) # this is added as wait time to end of input after last midi signal. Might influence output significantly?
   parser.add_argument('--temp', type=float, default=0.96)
   parser.add_argument('--topk', type=int, default=64)
-  parser.add_argument('--fn', type=str, default='test')
+  parser.add_argument('--lasers', type=int, default=0)
   args = parser.parse_args()
 
   os.makedirs(args.midi_out_folder, exist_ok=True)

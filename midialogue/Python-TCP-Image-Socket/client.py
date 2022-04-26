@@ -11,12 +11,11 @@ import subprocess
 import pretty_midi
 import tempfile
 
-#TODO FILTER CORRUPT MIDI FILES: 
-# not working:  normalizesmf <filename> 
-# TEMPO-MAP: would make max tick smaller thus readable by pretty midi? 
+#TODO FILTER CORRUPT MIDI FILES: MAYBE FIXED 
+# normalizesmf <filename>  ?
+
 #TODO bij minder input kanalen nogg steeds mappen naar goede kanaal > zet ghost notes bij begin openames >  sendmidi
-# TEMPO-MAP: would make max tick smaller thus readable by pretty midi to add notes? 
-# ONMIDI? 
+# Check
 
 #TODO 2 kanalen gewshcaald voor synth en model > NOTEMAP
 # ROUTEMIDI? 

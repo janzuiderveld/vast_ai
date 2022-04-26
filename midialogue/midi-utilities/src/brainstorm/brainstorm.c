@@ -34,6 +34,19 @@ static void create_midi_file_for_first_event(void)
 	MidiFileTrack_createTempoEvent(track, 0, 100.0);
 	track = MidiFile_createTrack(midi_file); /* main track */
 	start_time_msecs = MidiUtil_getCurrentTimeMsecs();
+
+	// fill up 4 channels for the first event 
+	MidiFileTrack_createNoteOnEvent(track, 0, 0, 62, 100);
+	MidiFileTrack_createNoteOffEvent(track, 1, 0, 62, 0);
+
+	MidiFileTrack_createNoteOnEvent(track, 0, 1, 62, 100);
+	MidiFileTrack_createNoteOffEvent(track, 1, 1, 62, 0);
+
+	MidiFileTrack_createNoteOnEvent(track, 0, 2, 62, 100);
+	MidiFileTrack_createNoteOffEvent(track, 1, 2, 62, 0);
+
+	MidiFileTrack_createNoteOnEvent(track, 0, 3, 1, 100);
+	MidiFileTrack_createNoteOffEvent(track, 1, 3, 1, 0);
 }
 
 static void handle_alarm(int cancelled, void *user_data)

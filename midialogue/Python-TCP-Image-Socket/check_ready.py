@@ -29,8 +29,8 @@ while True:
 # subprocess.Popen(['ssh', f"-o StrictHostKeyChecking=no", f"-p {port}", f"{ssh_address}", "-L 8080:localhost:8080", "-N"])
 
 while True:
-    # out = os.system(f"scp -o StrictHostKeyChecking=no -P {port} {ssh_address}:/workspace/vast_ai/midialogue/READY.log READY.log")
-    out = os.system(f"scp -o StrictHostKeyChecking=no -P {open_port} root@{public_ip}:/workspace/vast_ai/midialogue/READY.log READY.log")
+    out = os.system(f"scp -o StrictHostKeyChecking=no -P {port} {ssh_address}:/workspace/vast_ai/midialogue/READY.log READY.log")
+    # out = os.system(f"scp -o StrictHostKeyChecking=no -P {open_port} root@{public_ip}:/workspace/vast_ai/midialogue/READY.log READY.log")
     if out != 0:
         continue
     else:
@@ -38,4 +38,5 @@ while True:
     time.sleep(1)
 
 with open("ssh_pipe.cmd", "w") as f:
-    f.write(f"ssh -p {open_port} root@{public_ip} -L 8080:localhost:8080 -tt")
+    # f.write(f"ssh -p {open_port} root@{public_ip} -L 8080:localhost:8080 -tt")
+    f.write(f"ssh -p {port} root@{ssh_address} -L 8080:localhost:8080 -tt")

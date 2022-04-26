@@ -219,6 +219,7 @@ DIST          = /Users/janzuiderveld/miniconda3/mkspecs/features/spec_pre.prf \
 		/Users/janzuiderveld/miniconda3/mkspecs/features/qt_config.prf \
 		/Users/janzuiderveld/miniconda3/mkspecs/macx-clang/qmake.conf \
 		/Users/janzuiderveld/miniconda3/mkspecs/features/spec_post.prf \
+		../.qmake.stash \
 		/Users/janzuiderveld/miniconda3/mkspecs/features/exclusive_builds.prf \
 		/Users/janzuiderveld/miniconda3/mkspecs/features/mac/sdk.prf \
 		/Users/janzuiderveld/miniconda3/mkspecs/features/toolchain.prf \
@@ -424,6 +425,7 @@ Makefile: ../tactrola.pro /Users/janzuiderveld/miniconda3/mkspecs/macx-clang/qma
 		/Users/janzuiderveld/miniconda3/mkspecs/features/qt_config.prf \
 		/Users/janzuiderveld/miniconda3/mkspecs/macx-clang/qmake.conf \
 		/Users/janzuiderveld/miniconda3/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/Users/janzuiderveld/miniconda3/mkspecs/features/exclusive_builds.prf \
 		/Users/janzuiderveld/miniconda3/mkspecs/features/mac/sdk.prf \
 		/Users/janzuiderveld/miniconda3/mkspecs/features/toolchain.prf \
@@ -612,6 +614,7 @@ Makefile: ../tactrola.pro /Users/janzuiderveld/miniconda3/mkspecs/macx-clang/qma
 /Users/janzuiderveld/miniconda3/mkspecs/features/qt_config.prf:
 /Users/janzuiderveld/miniconda3/mkspecs/macx-clang/qmake.conf:
 /Users/janzuiderveld/miniconda3/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /Users/janzuiderveld/miniconda3/mkspecs/features/exclusive_builds.prf:
 /Users/janzuiderveld/miniconda3/mkspecs/features/mac/sdk.prf:
 /Users/janzuiderveld/miniconda3/mkspecs/features/toolchain.prf:
@@ -682,6 +685,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r tactrola.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 

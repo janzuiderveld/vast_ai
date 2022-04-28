@@ -62,7 +62,7 @@ python3 -m venv $ROOT_DIR/midialogue/midialogue_env
 source $ROOT_DIR/midialogue/midialogue_env/bin/activate
 
 python3 -m pip install -r $ROOT_DIR/midialogue/Python-TCP-Image-Socket/requirements.txt
-python3 -m pip install requests
+python3 -m pip install wheel 
 python3 -m pip install pretty_midi
 
 cd $ROOT_DIR/midialogue

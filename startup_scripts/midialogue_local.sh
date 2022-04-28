@@ -1,4 +1,12 @@
 #!/bin/bash
+function finish {
+  pkill -P $$
+  echo "killed $$"
+  exit
+}
+trap finish EXIT
+trap finish SIGINT
+
 lsof -ti:8080 | xargs kill -9
 
 ROOT_DIR=$PWD
@@ -23,7 +31,8 @@ $ROOT_DIR/midialogue/midi-utilities/bin/lsmidiins
 read -p 'Which midi input port do you want to listen to?: ' in_port
 echo "using midi input port $in_port"
 
-echo "/n/n"
+echo ""
+echo ""
 
 $ROOT_DIR/midialogue/midi-utilities/bin/lsmidiouts
 read -p 'Which midi output port do you want to send to?: ' out_port
@@ -109,4 +118,3 @@ prefix=$"$ROOT_DIR/midialogue/midi_in/"
 echo "model listens on virtual port $model_port"
 # saves files which will be sent to model
 ./brainstorm  --in $model_port --prefix $prefix --timeout $timeout --confirmation 'echo "saved a midi file"'
-

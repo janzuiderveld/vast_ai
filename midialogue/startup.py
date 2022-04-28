@@ -7,6 +7,8 @@ import numpy as np
 import glob
 import argparse
 
+sys.stdout = open("../_midialogue_server.log", "w")
+
 #TODO FILTER CORRUPT MIDI FILES
 
 sys.path.extend("/workspace/vast_ai/midialogue/LakhNES/model")
@@ -542,7 +544,7 @@ def wait_for_new_midi(midi_folder):
 
 def main(args):
   os.system("echo READY > /workspace/vast_ai/midialogue/READY.log")
-  print("startup: runnign main")
+  print("startup: running main")
   while True:
       print("startup: waiting for new midi")
       midi_path = wait_for_new_midi(args.midi_in_folder)

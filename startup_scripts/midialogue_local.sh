@@ -29,9 +29,20 @@ $ROOT_DIR/midialogue/midi-utilities/bin/lsmidiouts
 read -p 'Which midi output port do you want to send to?: ' out_port
 echo "using midi output port $out_port"
 
-model_port=10
-timeout=2
+case "$(uname -s)" in
 
+   Darwin)
+     echo 'Mac OS X'
+     model_port=10
+     ;;
+
+   Linux)
+     echo 'Linux'
+     model_port=3
+     ;;
+esac
+
+timeout=2
 
 $ROOT_DIR/midialogue/midi-utilities/bin/routemidi --bus --in $in_port --out $out_port &
 $ROOT_DIR/midialogue/midi-utilities/bin/routemidi --bus --in $in_port --virtual-out $model_port &
@@ -86,7 +97,6 @@ sleep 3
 echo $(lsof -i:8080)
 
 echo "Server ready"
-
 
 python3 midi_autoplay.py --midi_out_port $out_port &
 

@@ -16,10 +16,7 @@ stdbuf -o0 python3 Python-TCP-Image-Socket/server.py 2>&1 | tee _server_receive.
 cd /workspace/vast_ai/midialogue
 git clone https://github.com/chrisdonahue/LakhNES
 
-python3 - << EOF
-import os
-os.makedirs("/workspace/vast_ai/midialogue/LakhNES/model/pretrained/LakhNES", exist_ok=True)
-EOF
+mkdir -p /workspace/vast_ai/midialogue/LakhNES/model/pretrained/LakhNES
 
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1ND27trP3pTAl6eAk5QiYE9JjLOivqGsd' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1ND27trP3pTAl6eAk5QiYE9JjLOivqGsd" -O /workspace/vast_ai/midialogue/LakhNES/model/pretrained/model.tar.gz && rm -rf /tmp/cookies.txt
 wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1WO6guGagqaw22LH32_NEBeavtbaWy_ar' -O /workspace/vast_ai/midialogue/LakhNES/data/nesmdb_tx1.tar.gz

@@ -192,7 +192,7 @@ class ClientSocket:
                 stringData = self.recvall(int(length1))
 
                 data = numpy.frombuffer(base64.b64decode(stringData), numpy.uint8)
-                save_path = f"{self.output_fp}/midi_{cnt_str}.mid"
+                save_path = "{}/midi_{}.mid".format(self.output_fp, cnt_str)
                 with open(save_path, "wb") as fp:
                     fp.write(data)
                 

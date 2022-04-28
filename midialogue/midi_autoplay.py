@@ -32,13 +32,13 @@ def load_midi_fp(fp):
     return midi
 
 def wait_for_new_midi(midi_folder):
-    init_midis = glob.glob(f"{midi_folder}/*.mid")
-    print(f"Waiting for new *mid in {midi_folder}")
+    init_midis = glob.glob("{}/*.mid".format(midi_folder))
+    print("Waiting for new *mid in {}".format(midi_folder))
     while True:
-        current_midis = glob.glob(f"{midi_folder}/*.mid")
+        current_midis = glob.glob("{}/*.mid".format(midi_folder))
         if len(current_midis) > len(init_midis):
             new_midi = list(set(current_midis).symmetric_difference(set(init_midis)))[0]
-            print(f"New midi found: {new_midi}")
+            print("New midi found: {}".format(new_midi))
 
         # if 1:
         #     new_midi = init_midis[0]
@@ -63,7 +63,7 @@ def main(args):
             print(new_fp)
             if new_fp:
                 os.chdir("midi-utilities/bin")
-                os.system(f"./playsmf --out {args.midi_out_port} ../../{new_fp}")
+                os.system("./playsmf --out {} ../../{}".format(args.midi_out_port, new_fp))
                 os.chdir("../..")
         except Exception as e:
             print(('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e))

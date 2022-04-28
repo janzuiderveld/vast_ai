@@ -1,17 +1,21 @@
 #!/bin/bash
-apt-get -y install lsof
 lsof -ti:8080 | xargs kill -9
-
-# 561, 
-
 
 ROOT_DIR=$PWD
 
 cd $ROOT_DIR/midialogue
-unzip midi-utilities-20210908.zip
-mv brainstorm.c $ROOT_DIR/midi-utilities/src/brainstorm/brainstorm.c
-cd $ROOT_DIR/midialogue/midi-utilities/src
-make
+
+echo "ROOT_DIR: $ROOT_DIR"
+
+if [ ! -d "$ROOT_DIR/midialogue/midi-utilities" ]; then
+  # Take action if $DIR exists. #
+    unzip -n midi-utilities-20210908.zip
+    cp brainstorm.c $ROOT_DIR/midi-utilities/src/brainstorm/brainstorm.c
+    cp Makefile.unix $ROOT_DIR/midi-utilities/src/Makefile.unix
+    cd $ROOT_DIR/midialogue/midi-utilities/src/
+    make -f Makefile.unix
+fi
+
 
 # cd $ROOT_DIR/midialogue
 

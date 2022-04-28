@@ -1,4 +1,4 @@
-print("Running with Lakhnes script)
+print("Running with Lakhnes script")
 from collections import defaultdict
 import os
 import sys

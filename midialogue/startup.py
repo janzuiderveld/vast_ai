@@ -550,8 +550,8 @@ def wait_for_new_midi(midi_folder):
 
 
 def main(args):
-  sys.stdout = save_stdout
-  sys.stderr = save_stderr
+  sys.stdout = __stdout__
+  sys.stderr = __stderr__
   os.system("echo READY > /workspace/vast_ai/midialogue/READY.log")
   print("startup: running main")
   while True:

@@ -3,6 +3,14 @@ lsof -ti:8080 | xargs kill -9
 
 ROOT_DIR=$PWD
 
+# cd $ROOT_DIR/midialogue
+# unzip midi-utilities-20210908.zip
+# cd brainstorm.c $ROOT_DIR/midi-utilities/
+# cd $ROOT_DIR/midi-utilities/src
+# make
+
+# cd $ROOT_DIR/midialogue
+
 $ROOT_DIR/midialogue/midi-utilities/bin/lsmidiins
 read -p 'Which midi input port do you want to listen to?: ' in_port
 echo "using midi input port $in_port"

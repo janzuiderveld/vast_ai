@@ -10,8 +10,8 @@ echo "ROOT_DIR: $ROOT_DIR"
 if [ ! -d "$ROOT_DIR/midialogue/midi-utilities" ]; then
   # Take action if $DIR exists. #
     unzip -n midi-utilities-20210908.zip
-    cp brainstorm.c $ROOT_DIR/midi-utilities/src/brainstorm/brainstorm.c
-    cp Makefile.unix $ROOT_DIR/midi-utilities/src/Makefile.unix
+    cp brainstorm.c $ROOT_DIR/midialogue/midi-utilities/src/brainstorm/brainstorm.c
+    cp Makefile.unix $ROOT_DIR/midialogue/midi-utilities/src/Makefile.unix
     cd $ROOT_DIR/midialogue/midi-utilities/src/
     make -f Makefile.unix
 fi

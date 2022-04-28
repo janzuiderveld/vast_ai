@@ -1,1 +1,1 @@
-ssh -p 37710 root@ssh4.vast.ai -L 8080:localhost:8080 -tt
+ssh -p 10374 root@ssh5.vast.ai -L 8080:localhost:8080 -tt

@@ -34,9 +34,8 @@ touch /workspace/vast_ai/midialogue/LakhNES/model/utils/__init__.py
 touch /workspace/vast_ai/midialogue/LakhNES/model/model/__init__.pyw
 touch /workspace/vast_ai/midialogue/LakhNES/model/__init__.py
 
-cd /workspace/vast_ai/midialogue/LakhNES
 
-echo "starting LakhNES server"
+cd /workspace/vast_ai/midialogue/
+bash -m start_LakhNES.sh 
 
-python3 startup.py | tee -a "$(tty)"
 # stdbuf -o0 python3 startup.py 2>&1 | tee ../_midialogue_server.log

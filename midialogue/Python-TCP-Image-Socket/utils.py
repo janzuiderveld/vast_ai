@@ -8,12 +8,12 @@ def wait_new_file(folder):
     Wait for new files to appear in the folder.
     """
     # wait for new files to appear in the FTP folder
-    files_old = glob.glob(f"{folder}/*")
+    files_old = glob.glob("{}/*".format(folder))
     files_new = []
     # filecount = len(files_old)
     print("Waiting for new files to appear in the FTP folder...")
     while True:
-        files_new = glob.glob(f"{folder}/*")
+        files_new = glob.glob("{}/*".format(folder))
         filecount = len(files_new)
         if filecount > len(files_old):
             break

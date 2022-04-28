@@ -3,11 +3,11 @@ lsof -ti:8080 | xargs kill -9
 
 ROOT_DIR=$PWD
 
-# cd $ROOT_DIR/midialogue
-# unzip midi-utilities-20210908.zip
-# cd brainstorm.c $ROOT_DIR/midi-utilities/
-# cd $ROOT_DIR/midi-utilities/src
-# make
+cd $ROOT_DIR/midialogue
+unzip midi-utilities-20210908.zip
+mv brainstorm.c $ROOT_DIR/midi-utilities/src/brainstorm/brainstorm.c
+cd $ROOT_DIR/midialogue/midi-utilities/src
+make
 
 # cd $ROOT_DIR/midialogue
 

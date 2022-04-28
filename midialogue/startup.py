@@ -1,3 +1,4 @@
+print("Running with Lakhnes script)
 from collections import defaultdict
 import os
 import sys
@@ -7,7 +8,6 @@ import numpy as np
 import glob
 import argparse
 
-print("Running with Lakhnes script)
 
 # sys.stdout = open("../_midialogue_server.log", "w")
 

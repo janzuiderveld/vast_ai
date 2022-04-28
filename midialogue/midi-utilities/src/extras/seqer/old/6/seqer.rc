@@ -1,6 +1,0 @@
-
-aaaaaaaa ICON "seqer.ico"
-seqer ICON "seqer.ico"
-
-#include "wx/msw/wx.rc"
-

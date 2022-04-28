@@ -12,5 +12,5 @@ dream_machine/*.log
 *.mid
 midialogue/midi_in
 midialogue/midi_out
-midialogue/midi-utilities/
+midialogue/midi-utilities
 archive

@@ -1,4 +1,5 @@
 #!/bin/bash
+wget https://raw.githubusercontent.com/vast-ai/vast-python/master/vast.py -O vast; chmod +x vast;
 python3 vast_bid.py auto1 dream_machine
 # python3 vast_bid.py a100 dream_machine
 # python3 vast_bid.py best1 dream_machine

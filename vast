@@ -558,7 +558,7 @@ def copy(args: argparse.Namespace): # FIXME: This is a dummy function for now.
     @param dst: Target to copy object to.
     """
 
-    url = apiurl(args, f"/commands/rsync/")
+    url = apiurl(args, "/commands/rsync/")
     (src_id, src_path) = parse_vast_url(args.src)
     (dst_id, dst_path) = parse_vast_url(args.dst)
 
@@ -572,7 +572,7 @@ def copy(args: argparse.Namespace): # FIXME: This is a dummy function for now.
     }
     r = requests.put(url, json=req_json)
     r.raise_for_status()
-    print(f"Result of copy:{r.json()}")
+    print("Result of copy:{}".format(r.json()))
 
 
     #
@@ -786,7 +786,7 @@ def _ssh_url(args, protocol):
         return 1
     else:
         instance, = rows
-    print(f'{protocol}root@{instance["ssh_host"]}:{instance["ssh_port"]}')
+    print('{}root@{}:{}'.format(protocol, instance["ssh_host"], instance["ssh_port"]))
 
 
 @parser.command(
@@ -863,7 +863,7 @@ def show__user(args):
     :rtype:
     """
     req_url = apiurl(args, "/users/current", {"owner": "me"});
-    print(f"URL: {req_url}")
+    print("URL: {}".format(req_url))
     print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHh\n")
     r = requests.get(req_url);
     r.raise_for_status()
@@ -947,11 +947,11 @@ def filter_invoice_items(args: argparse.Namespace, rows: typing.List) -> typing.
 
     if args.end_date:
         if args.start_date:
-            header_text = f'Invoice items after {start_date_txt} and before {end_date_txt}.'
+            header_text = 'Invoice items after {} and before {}.'.format(start_date_txt, end_date_txt)
         else:
-            header_text = f'Invoice items before {end_date_txt}.'
+            header_text = 'Invoice items before {}.'.format(end_date_txt)
     elif args.start_date:
-        header_text = f'Invoice items after {start_date_txt}.'
+        header_text = 'Invoice items after {}.'.format(start_date_txt)
     else:
         header_text = " "
 
@@ -1243,7 +1243,7 @@ def set__defjob(args):
     :rtype:
     """
     req_url = apiurl(args, "/machines/create_bids/");
-    print(f"URL:{req_url}")
+    print("URL:{}".format(req_url))
     r = requests.put(req_url, json=
     {'machine': args.id, 'price_gpu': args.price_gpu, 'price_inetu': args.price_inetu, 'price_inetd': args.price_inetd,
      'image': args.image, 'args': args.args});
@@ -1350,7 +1350,7 @@ def change__bid(args: argparse.Namespace):
     :rtype int:
     """
     url = apiurl(args, "/instances/bid_price/{id}/".format(id=args.id))
-    print(f"URL: {url}")
+    print("URL: {}".format(url))
     r = requests.put(url, json={
         "client_id": "me",
         "price": args.price,

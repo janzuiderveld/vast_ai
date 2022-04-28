@@ -54,8 +54,8 @@ $ROOT_DIR/midialogue/midi-utilities/bin/routemidi --bus --in $in_port --virtual-
 # ============================================================
 
 
-# python3 -m venv $ROOT_DIR/midialogue/midialogue_env
-# source $ROOT_DIR/midialogue/midialogue_env/bin/activate
+python3 -m venv $ROOT_DIR/midialogue/midialogue_env
+source $ROOT_DIR/midialogue/midialogue_env/bin/activate
 
 python3 -m pip install -r $ROOT_DIR/midialogue/Python-TCP-Image-Socket/requirements.txt
 python3 -m pip install requests

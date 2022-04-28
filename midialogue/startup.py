@@ -1,7 +1,10 @@
+import sys
+save_stdout = sys.stdout
+save_stderr = sys.stderr
+
 print("Running Lakhnes script")
 from collections import defaultdict
 import os
-import sys
 import torch
 import torch.nn.functional as F
 import numpy as np
@@ -547,6 +550,8 @@ def wait_for_new_midi(midi_folder):
 
 
 def main(args):
+  sys.stdout = save_stdout
+  sys.stderr = save_stderr
   os.system("echo READY > /workspace/vast_ai/midialogue/READY.log")
   print("startup: running main")
   while True:

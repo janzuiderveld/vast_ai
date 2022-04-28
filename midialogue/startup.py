@@ -7,7 +7,7 @@ import numpy as np
 import glob
 import argparse
 
-sys.stdout = open("../_midialogue_server.log", "w")
+# sys.stdout = open("../_midialogue_server.log", "w")
 
 #TODO FILTER CORRUPT MIDI FILES
 

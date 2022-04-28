@@ -42,9 +42,11 @@ top_id = top_sellers[0]["id"]
 # If instance is allowed to be interrupted
 if args.bidding_tactic == 'cheap' or args.bidding_tactic == "cheap8" or args.bidding_tactic == "cheap4" or args.bidding_tactic == "auto1_bid": 
     bid = top_sellers[0]["min_bid"]
-    vast_book_cmd = f"./vast create instance {top_id} --price {bid} --image pytorch/pytorch --disk 30 --onstart startup_scripts/{args.project_name}.sh"
+    # vast_book_cmd = f"./vast create instance {top_id} --price {bid} --image pytorch/pytorch --disk 30 --onstart startup_scripts/{args.project_name}.sh"
+    vast_book_cmd = "./vast create instance " + top_id + " --price " + str(bid) + " --image pytorch/pytorch --disk 30 --onstart startup_scripts/" + args.project_name + ".sh"
 else:
-    vast_book_cmd = f"./vast create instance {top_id} --image pytorch/pytorch --disk 30 --onstart startup_scripts/{args.project_name}.sh"
+    # vast_book_cmd = f"./vast create instance {top_id} --image pytorch/pytorch --disk 30 --onstart startup_scripts/{args.project_name}.sh"
+    vast_book_cmd = "./vast create instance " + top_id + " --image pytorch/pytorch --disk 30 --onstart startup_scripts/" + args.project_name + ".sh"
 
 vast_output = subprocess.check_output(vast_book_cmd, shell=True)
 print(vast_output)

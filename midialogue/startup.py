@@ -295,6 +295,8 @@ def load_midi_fp(fp):
 
     assert len(midi.instruments) == 4
 
+    print("startup: loading midi done")
+
     # print(midi.instruments)
     # if len(midi.instruments) > 4:
     #     del midi.instruments[4:]

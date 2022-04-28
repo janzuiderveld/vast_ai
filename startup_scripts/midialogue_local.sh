@@ -32,6 +32,7 @@ timeout=2
 $ROOT_DIR/midialogue/midi-utilities/bin/routemidi --bus --in $in_port --out $out_port &
 $ROOT_DIR/midialogue/midi-utilities/bin/routemidi --bus --in $in_port --virtual-out $model_port &
 
+# ============================================================
 # Split channel 4 for different mappings?
 # out_scaling_port=11
 # model_scaling_port=12
@@ -50,9 +51,11 @@ $ROOT_DIR/midialogue/midi-utilities/bin/routemidi --bus --in $in_port --virtual-
 # notemap --in $model_scaling_port --out $model_port --map $ROOT_DIR/midialogue/note_mappings/x_to_model.xml.xml
 
 # cd /workspace/vast_ai/midialogue/LakhNES/
+# ============================================================
 
-python3 -m venv $ROOT_DIR/midialogue/midialogue_env
-source $ROOT_DIR/midialogue/midialogue_env/bin/activate
+
+# python3 -m venv $ROOT_DIR/midialogue/midialogue_env
+# source $ROOT_DIR/midialogue/midialogue_env/bin/activate
 
 python3 -m pip install -r $ROOT_DIR/midialogue/Python-TCP-Image-Socket/requirements.txt
 python3 -m pip install requests

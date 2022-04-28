@@ -1,18 +1,15 @@
 import sys
 save_stdout = sys.stdout
 save_stderr = sys.stderr
+import warnings
+warnings.filterwarnings("ignore")
 
 print("Running Lakhnes script")
-from collections import defaultdict
+# from collections import defaultdict
 import os
-import torch
-import torch.nn.functional as F
-import numpy as np
+
 import glob
 import argparse
-
-
-# sys.stdout = open("../_midialogue_server.log", "w")
 
 #TODO FILTER CORRUPT MIDI FILES
 
@@ -40,6 +37,12 @@ sys.path.extend([code_model_dir, code_utils_dir])
 MODEL_FP = '/workspace/vast_ai/midialogue/LakhNES/model/pretrained/LakhNES/model.pt'
 VOCAB_FP = '/workspace/vast_ai/midialogue/LakhNES/model/pretrained/LakhNES/vocab.txt'
 USE_CUDA = True
+
+import torch
+import torch.nn.functional as F
+import numpy as np
+
+sys.stdout = sys.__stdout__
 
 device = torch.device("cuda" if USE_CUDA else "cpu")
 

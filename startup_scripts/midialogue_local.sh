@@ -1,5 +1,9 @@
 #!/bin/bash
+apt-get -y install lsof
 lsof -ti:8080 | xargs kill -9
+
+# 561, 
+
 
 ROOT_DIR=$PWD
 

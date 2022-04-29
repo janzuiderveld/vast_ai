@@ -10,6 +10,7 @@ import os
 import subprocess
 import pretty_midi
 import tempfile
+import cv2
 
 #TODO FILTER CORRUPT MIDI FILES: MAYBE FIXED 
 # normalizesmf <filename>  ?
@@ -170,9 +171,23 @@ class ClientSocket:
                 # encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
                 # result, imgencode = cv2.imencode('.jpg', resize_frame, encode_param)
                 # data = numpy.array(imgencode)
-                with open(self.filepath, "rb") as fp:
-                    data = fp.read()
+                # with open(self.filepath, "rb") as fp:
+                #     data = fp.read()
 
+                # stringData = base64.b64encode(data)
+                # length = str(len(stringData))
+                # self.sock.sendall(length.encode('utf-8').ljust(64))
+                # self.sock.send(stringData)
+                # self.sock.send(stime.encode('utf-8').ljust(64))
+                # print(u'send images %d'%(cnt))
+                # print(u'send images %d'%(cnt))
+
+                frame = cv2.imread(self.filepath)
+                resize_frame = cv2.resize(frame, dsize=(256, 256), interpolation=cv2.INTER_AREA)
+
+                encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
+                result, imgencode = cv2.imencode('.jpg', resize_frame, encode_param)
+                data = numpy.array(imgencode)
                 stringData = base64.b64encode(data)
                 length = str(len(stringData))
                 self.sock.sendall(length.encode('utf-8').ljust(64))
@@ -180,7 +195,9 @@ class ClientSocket:
                 self.sock.send(stime.encode('utf-8').ljust(64))
                 print(u'send images %d'%(cnt))
 
+
                 # response = self.sock.recv(64)
+                print("waiting for length")
                 length = self.recvall(64)
                 while True:
                     try:
@@ -189,12 +206,20 @@ class ClientSocket:
                     except:
                         print(u'length decode error')
                         continue
+
+                print("WAITING FOR STR DATA")
+                
                 stringData = self.recvall(int(length1))
 
+                # data = numpy.frombuffer(base64.b64decode(stringData), numpy.uint8)
+                # save_path = "{}/midi_{}.mid".format(self.output_fp, cnt_str)
+                # with open(save_path, "wb") as fp:
+                #     fp.write(data)
+
                 data = numpy.frombuffer(base64.b64decode(stringData), numpy.uint8)
-                save_path = "{}/midi_{}.mid".format(self.output_fp, cnt_str)
-                with open(save_path, "wb") as fp:
-                    fp.write(data)
+                decimg = cv2.imdecode(data, 1)
+
+                cv2.imwrite(self.output_fp + "/output_" + cnt_str + ".jpg" , decimg)
                 
                 # decimg = cv2.imdecode(data, 1)
 

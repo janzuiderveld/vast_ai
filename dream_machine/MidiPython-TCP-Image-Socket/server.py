@@ -23,6 +23,7 @@ class ServerSocket:
         self.socketOpen()
         # self.receiveThread = threading.Thread(target=self.receiveFiles)
         # self.receiveThread.start()
+        print("starting receive loop")
         self.receiveFiles()
 
     def socketClose(self):

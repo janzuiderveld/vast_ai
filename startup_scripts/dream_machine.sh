@@ -13,7 +13,7 @@ cd /workspace/vast_ai/dream_machine
 python3 -m pip install -r Python-TCP-Image-Socket/requirements.txt
 
 # waits for files send through tcp and saves them in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/8080_images0
-python3 MidiPython-TCP-Image-Socket/server.py 2>&1 | tee _server_receive.log &
+python3 MidiPython-TCP-Image-Socket/server.py | tee _server_receive.log &
 
 # Real-ESRGAN
 
@@ -40,7 +40,7 @@ cd /workspace/vast_ai/dream_machine
 
 echo "starting dream machine"
 chmod +rwx start_sketch_sim_server.sh
-bash -i -x start_sketch_sim_server.sh 2>&1 | tee _start_sketch_sim_server.log
+bash -i -x start_sketch_sim_server.sh | tee _start_sketch_sim_server.log
 
 # python3 train_folder_server.py 2>&1 | tee ../_sketch_sim_server.log &
 

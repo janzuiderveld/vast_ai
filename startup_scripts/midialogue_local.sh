@@ -32,7 +32,6 @@ fi
 echo "waiting for server to start up (3 minutes)"
 sleep 180
 
-
 echo ""
 echo "Midi Utilities: midi ins" 
 

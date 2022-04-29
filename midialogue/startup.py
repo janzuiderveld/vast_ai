@@ -575,7 +575,7 @@ if __name__ == "__main__":
   parser = argparse.ArgumentParser()
   parser.add_argument('--midi_in_folder', type=str, default='/workspace/vast_ai/midialogue/midi_in')
   parser.add_argument('--midi_out_folder', type=str, default='/workspace/vast_ai/midialogue/midi_out')
-  parser.add_argument('--answer_add_silence', type=int, default=44100//5) # this is added as wait time to end of input after last midi signal. Might influence output significantly?
+  parser.add_argument('--answer_add_silence', type=int, default=0) # this is added as wait time to end of input after last midi signal. Might influence output significantly?
   parser.add_argument('--temp', type=float, default=0.96)
   parser.add_argument('--topk', type=int, default=64)
   parser.add_argument('--lasers', type=int, default=0)

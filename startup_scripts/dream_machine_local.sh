@@ -20,8 +20,8 @@ cd $ROOT_DIR/dream_machine
 
 echo "ROOT_DIR: $ROOT_DIR"
 
-python3 -m venv dream_machine/dream_machine_env
-source dream_machine/dream_machine_env/bin/activate
+python3 -m venv $ROOT_DIR/dream_machine/dream_machine_env
+source $ROOT_DIR/dream_machine/dream_machine_env/bin/activate
 
 python3 -m pip install -r dream_machine/Python-TCP-Image-Socket/requirements.txt
 python3 -m pip install requests
@@ -32,7 +32,7 @@ python3 -m pip install requests
 # apt install inotify-tools -y
 # python3 -m pip install pyinotify
 
-cd dream_machine
+cd $ROOT_DIR/dream_machine
 # python3 Python-TCP-Image-Socket/client_receive_socket.py 2>&1 | tee _client_receive.log &
 
 

@@ -25,7 +25,7 @@ python3 -m pip install -r  requirements.txt
 python3 setup.py develop
 wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth -P /workspace/vast_ai/dream_machine/Real-ESRGAN/experiments/pretrained_models
 
-echo "setting up LakhNES"
+echo "setting up dream_machine"
 echo "downloading git"
 cd /workspace/vast_ai/dream_machine
 rm -r /workspace/vast_ai/dream_machine/Sketch-Simulator
@@ -38,9 +38,9 @@ bash setup.sh | tee ../_sketch_setup.log
 
 cd /workspace/vast_ai/dream_machine
 
-echo "starting LakhNES"
+echo "starting dream machine"
 chmod +rwx start_sketch_sim_server.sh
-bash -i start_sketch_sim_server.sh
+bash -i -x start_sketch_sim_server.sh 2>&1 | tee _start_sketch_sim_server.log
 
 # python3 train_folder_server.py 2>&1 | tee ../_sketch_sim_server.log &
 

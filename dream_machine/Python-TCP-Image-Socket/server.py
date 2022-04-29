@@ -15,6 +15,7 @@ import subprocess
 
 class ServerSocket:
     def __init__(self, ip, port, args):
+        print("server: init")
         self.TCP_IP = ip
         self.TCP_PORT = port
         self.input_fp = args.input_fp
@@ -68,6 +69,7 @@ class ServerSocket:
                 cv2.imwrite(save_path, decimg)
                 
                 if not dummy:   
+                    print("server: wait for output")
                     resp_file = utils.wait_new_file(self.output_fp)
 
                     if self.esrgan:
@@ -85,16 +87,23 @@ class ServerSocket:
                     time.sleep(2)
                     out_fp = save_path
 
+                print("server: reading output to cv2")
                 frame = cv2.imread(out_fp)
+                print("server: resizing_output")
                 resize_frame = cv2.resize(frame, dsize=(1024, 1024), interpolation=cv2.INTER_AREA)
+                print("server: encoding output")
                 encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
+                print("server: encoding output..")
+
                 result, imgencode = cv2.imencode('.jpg', resize_frame, encode_param)
                 
                 data = numpy.array(imgencode)
                 stringData = base64.b64encode(data)
                 length = str(len(stringData))
 
+                print("server: sending output length")
                 self.conn.sendall(length.encode('utf-8').ljust(64))
+                print("server: sending output")
                 self.conn.send(stringData)
 
                 if self.esrgan:

@@ -29,6 +29,10 @@ if [ ! -d "$ROOT_DIR/midialogue/midi-utilities" ]; then
     make -f Makefile.unix
 fi
 
+echo "waiting for server to start up (3 minutes)"
+sleep 180
+
+
 echo ""
 echo "Midi Utilities: midi ins" 
 

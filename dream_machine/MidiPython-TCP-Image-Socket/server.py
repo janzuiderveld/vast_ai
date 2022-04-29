@@ -11,6 +11,7 @@ import utils
 import argparse
 import shutil
 import subprocess
+import cv2
 
 class ServerSocket:
     def __init__(self, ip, port, args):
@@ -20,8 +21,9 @@ class ServerSocket:
         self.output_fp = args.output_fp
         self.dummy = args.dummy
         self.socketOpen()
-        self.receiveThread = threading.Thread(target=self.receiveFiles)
-        self.receiveThread.start()
+        # self.receiveThread = threading.Thread(target=self.receiveFiles)
+        # self.receiveThread.start()
+        self.receiveFiles()
 
     def socketClose(self):
         self.sock.close()
@@ -64,9 +66,20 @@ class ServerSocket:
 
                 stime = self.recvall(self.conn, 64)
 
+                # print('send time: ' + stime.decode('utf-8'))
+                # now = time.localtime()
+                # print('receive time: ' + datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f'))
+
+
                 print('send time: ' + stime.decode('utf-8'))
                 now = time.localtime()
                 print('receive time: ' + datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f'))
+                data = numpy.frombuffer(base64.b64decode(stringData), numpy.uint8)
+                decimg = cv2.imdecode(data, 1)
+
+                save_path = self.input_fp + '/input_' + cnt_str + '.jpg'
+                cv2.imwrite(save_path, decimg)
+
 
                 if self.dummy:
                     print('dummy mode')
@@ -83,15 +96,35 @@ class ServerSocket:
                         resp_file = glob.glob(tmp_folder + "/*")[0]
                         # end_esr = time.time()
 
-                with open(resp_file, "rb") as fp:
-                    data = fp.read()
+                # with open(resp_file, "rb") as fp:
+                #     data = fp.read()
  
+                print("server: reading output to cv2")
+                frame = cv2.imread(resp_file)
+                print("server: resizing_output")
+                resize_frame = cv2.resize(frame, dsize=(1024, 1024), interpolation=cv2.INTER_AREA)
+                print("server: encoding output")
+                encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
+                print("server: encoding output..")
+                result, imgencode = cv2.imencode('.jpg', resize_frame, encode_param)
+                
+                print("server: encoding output to numpy")
+                data = numpy.array(imgencode)
+                print("server: encoding output b64")
                 stringData = base64.b64encode(data)
+                print("server: getting string lentgh")
                 length = str(len(stringData))
 
-
+                # stringData = base64.b64encode(data)
+                # length = str(len(stringData))
+                
+                print("server: sending output length")
                 self.conn.sendall(length.encode('utf-8').ljust(64))
+                print("server: sending output")
                 self.conn.send(stringData)
+
+                # self.conn.sendall(length.encode('utf-8').ljust(64))
+                # self.conn.send(stringData)
 
                 if self.esrgan:
                     shutil.rmtree(tmp_folder)

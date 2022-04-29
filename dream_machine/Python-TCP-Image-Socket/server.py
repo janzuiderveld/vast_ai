@@ -119,7 +119,7 @@ class ServerSocket:
         except Exception as e:
             print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
             self.socketClose()
-
+            time.sleep(1)
             self.socketOpen()
             self.receiveThread = threading.Thread(target=self.receiveImages)
             self.receiveThread.start()

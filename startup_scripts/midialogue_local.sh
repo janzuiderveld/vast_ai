@@ -2,11 +2,16 @@
 function finish {
   pkill -P $$
   echo "killed $$"
+  cd $ROOT_DIR
+  ID=$(./vast show instances --raw | python3 -c "import sys, json; print(json.load(sys.stdin)[0]['id'])")
+  echo "destroying instance $ID"
+  ./vast destroy instance $ID
   exit
 }
 trap finish EXIT
 trap finish SIGINT
 
+# make sure there are no more tunnels on port 8080 the machine
 lsof -ti:8080 | xargs kill -9
 
 ROOT_DIR=$PWD
@@ -24,19 +29,22 @@ if [ ! -d "$ROOT_DIR/midialogue/midi-utilities" ]; then
     make -f Makefile.unix
 fi
 
-
-# cd $ROOT_DIR/midialogue
+echo ""
+echo "Midi Utilities: midi ins" 
 
 $ROOT_DIR/midialogue/midi-utilities/bin/lsmidiins
+echo ""
 read -p 'Which midi input port do you want to listen to?: ' in_port
 echo "using midi input port $in_port"
 
 echo ""
-echo ""
+echo "Midi Utilities: midi outs"
 
 $ROOT_DIR/midialogue/midi-utilities/bin/lsmidiouts
+echo ""
 read -p 'Which midi output port do you want to send to?: ' out_port
 echo "using midi output port $out_port"
+echo ""
 
 case "$(uname -s)" in
 

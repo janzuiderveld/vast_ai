@@ -26,10 +26,16 @@ cd /workspace/vast_ai/dream_machine
 rm -r /workspace/vast_ai/dream_machine/Sketch-Simulator
 git clone https://github.com/janzuiderveld/Sketch-Simulator.git
 
-cd Sketch-Simulator 
+cd /workspace/vast_ai/dream_machine/Sketch-Simulator 
 bash setup.sh | tee ../_sketch_setup.log
 # python3 -m pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html | tee ../_sketch_torch_update.log
-python3 train_folder_server.py 2>&1 | tee ../_sketch_sim_server.log &
+
+cd /workspace/vast_ai/dream_machine
+
+chmod +rwx start_sketch_sim_server.sh
+bash -i start_sketch_sim_server.sh
+
+# python3 train_folder_server.py 2>&1 | tee ../_sketch_sim_server.log &
 
 
 # python3 Python-TCP-Image-Socket/server_send_socket.py 2>&1 | tee _server_send.log &

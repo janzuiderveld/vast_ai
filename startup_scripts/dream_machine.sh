@@ -7,10 +7,10 @@ apt-get install ffmpeg libsm6 libxext6 -y
 
 cd /workspace/vast_ai/dream_machine
 
-python3 -m pip install -r MidiPython-TCP-Image-Socket/requirements.txt
+python3 -m pip install -r Python-TCP-Image-Socket/requirements.txt
 
 # waits for files send through tcp and saves them in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/8080_images0
-python3 MidiPython-TCP-Image-Socket/server.py 2>&1 | tee _server_receive.log &
+python3 Python-TCP-Image-Socket/server.py 2>&1 | tee _server_receive.log &
 
 # Real-ESRGAN
 

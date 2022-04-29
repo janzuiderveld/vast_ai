@@ -1,4 +1,16 @@
 #!/bin/bash
+function finish {
+  pkill -P $$
+  echo "killed $$"
+  cd $ROOT_DIR
+  ID=$(./vast show instances --raw | python3 -c "import sys, json; print(json.load(sys.stdin)[0]['id'])")
+  echo "destroying instance $ID"
+  ./vast destroy instance $ID
+  exit
+}
+trap finish EXIT
+trap finish SIGINT
+
 python3 -m venv dream_machine/dream_machine_env
 source dream_machine/dream_machine_env/bin/activate
 
@@ -27,8 +39,20 @@ cd dream_machine
 # files are copied to out_imgs.
 
 echo "waiting for server to be ready..."
-
+kill -9 $(lsof -t -i:8080)
 python3 ./MidiPython-TCP-Image-Socket/check_ready.py
+sleep 2
+kill -9 $(lsof -t -i:8080)
+sleep 2
+
+echo $(lsof -i:8080)
+
+cmd=`cat ssh_pipe.cmd` 
+$cmd > test_ssh.thrash &
+
+sleep 3
+
+echo $(lsof -i:8080)
 
 echo "Server ready"
 

@@ -11,6 +11,15 @@ function finish {
 trap finish EXIT
 trap finish SIGINT
 
+# make sure there are no more tunnels on port 8080 the machine
+lsof -ti:8080 | xargs kill -9
+
+ROOT_DIR=$PWD
+
+cd $ROOT_DIR/dream_machine
+
+echo "ROOT_DIR: $ROOT_DIR"
+
 python3 -m venv dream_machine/dream_machine_env
 source dream_machine/dream_machine_env/bin/activate
 
@@ -58,6 +67,6 @@ echo "Server ready"
 
 # looks for files to appear in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs, sends them over tcp
 # python3 Python-TCP-Image-Socket/client.py 2>&1 | tee _client_send.log &
-python3 ./MidiPython-TCP-Image-Socket/client.py 
+python3 ./Python-TCP-Image-Socket/client.py 
 
 

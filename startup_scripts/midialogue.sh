@@ -37,6 +37,6 @@ touch /workspace/vast_ai/midialogue/LakhNES/model/__init__.py
 sleep 2
 
 cd /workspace/vast_ai/midialogue/
-bash -i start_LakhNES.sh
+bash -p -i start_LakhNES.sh
 
 # stdbuf -o0 python3 startup.py 2>&1 | tee ../_midialogue_server.log

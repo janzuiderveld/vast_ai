@@ -59,7 +59,7 @@ case "$(uname -s)" in
      ;;
 esac
 
-timeout=2
+timeout=1
 
 $ROOT_DIR/midialogue/midi-utilities/bin/routemidi --bus --in $in_port --out $out_port &
 $ROOT_DIR/midialogue/midi-utilities/bin/routemidi --bus --in $in_port --virtual-out $model_port &

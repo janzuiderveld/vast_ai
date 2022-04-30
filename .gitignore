@@ -9,9 +9,11 @@ _*.log
 dream_machine/in_imgs/
 dream_machine/out_imgs/
 dream_machine/*.log
+dream_machine/incoming_imgs/
 *.mid
 midialogue/midi_in
 midialogue/midi_out
 midialogue/midi-utilities
 archive
 READY.log
+ssh_pipe.cmd

@@ -10,8 +10,6 @@ trap finish SIGINT
 # make sure there are no more tunnels on port 8080 the machine
 lsof -ti:8080 | xargs kill -9
 
-source ~/.bashrc
-
 cd /workspace
 apt-get install git wget curl tar -y
 git clone https://github.com/janzuiderveld/vast_ai.git

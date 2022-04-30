@@ -24,7 +24,7 @@ export ROOT_DIR
 python3 -u -m pip install -r Python-TCP-Image-Socket/requirements.txt
 
 # waits for files send through tcp and saves them in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/8080_images0
-python3 -u MidiPython-TCP-Image-Socket/server.py | tee _server_receive.log
+python3 -u MidiPython-TCP-Image-Socket/server.py | tee _server_receive.log &
 
 # Real-ESRGAN
 echo "setting up Real-ESRGAN"
@@ -53,7 +53,7 @@ echo "starting dream machine"
 # bash -i -x start_sketch_sim_server.sh |& _start_sketch_sim_server.log
 
 cd /workspace/vast_ai/dream_machine/Sketch-Simulator
-python3 -u train_folder_server.py | tee ../_sketch_sim_server.log &
+python3 -u train_folder_server.py | tee ../_sketch_sim_server.log
 
 
 # python3 -u Python-TCP-Image-Socket/server_send_socket.py 2>&1 | tee _server_send.log &

@@ -56,6 +56,8 @@ class ClientSocket:
                 else:
                     self.filepath = utils.wait_new_file(self.input_fp)
 
+                time.sleep(5)
+
                 # wait until file is properly saved
                 while True:
                     try:

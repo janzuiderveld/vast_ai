@@ -21,7 +21,7 @@ cd $ROOT_DIR/dream_machine
 python3 -u -m venv $ROOT_DIR/dream_machine/dream_machine_env
 source $ROOT_DIR/dream_machine/dream_machine_env/bin/activate
 
-python3 -u -m pip install -r dream_machine/Python-TCP-Image-Socket/requirements.txt
+python3 -u -m pip install -r $ROOT_DIR/dream_machine/Python-TCP-Image-Socket/requirements.txt
 python3 -u -m pip install requests
 
 # apt-get update

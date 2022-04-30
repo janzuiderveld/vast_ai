@@ -10,6 +10,7 @@ import subprocess
 import tempfile
 # import numpy
 # import cv2 
+from PIL import Image
 
 
 class ClientSocket:
@@ -54,6 +55,15 @@ class ClientSocket:
                     self.filepath = self.dummy
                 else:
                     self.filepath = utils.wait_new_file(self.input_fp)
+
+                # wait until file is properly saved
+                while True:
+                    try:
+                        img = Image.open(self.filepath)
+                        break
+                    except Exception as e:
+                        print("Windows sender: failed to open incoming file, trying again")
+                        print(e)
 
                 start = time.time()
                 stime = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')

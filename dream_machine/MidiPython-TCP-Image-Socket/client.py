@@ -150,7 +150,7 @@ class ClientSocket:
                             img.save(self.filepath)
                             break
                         except Exception as e:
-                            print(s"server comm: failed to convert .TIF file to .jpg file, trying again")
+                            print("server comm: failed to convert .TIF file to .jpg file, trying again")
                             print(e)
 
 

@@ -46,8 +46,6 @@ cd /workspace/vast_ai/dream_machine/Sketch-Simulator
 bash setup.sh | tee ../_sketch_setup.log
 # python3 -u -m pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html | tee ../_sketch_torch_update.log
 
-cd /workspace/vast_ai/dream_machine
-
 echo "starting dream machine"
 # chmod +rwx start_sketch_sim_server.sh
 # bash -i -x start_sketch_sim_server.sh |& _start_sketch_sim_server.log

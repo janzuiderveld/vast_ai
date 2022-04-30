@@ -10,6 +10,7 @@ import os
 import subprocess
 import tempfile
 import cv2
+from PIL import Image
 
 #TODO FILTER CORRUPT MIDI FILES: MAYBE FIXED 
 # normalizesmf <filename>  ?
@@ -88,7 +89,7 @@ class ClientSocket:
         try:
             self.sock = socket.socket()
             self.sock.connect((self.TCP_SERVER_IP, self.TCP_SERVER_PORT))
-            print(u'Client socket is connected with Server socket [ TCP_SERVER_IP: ' + self.TCP_SERVER_IP + ', TCP_SERVER_PORT: ' + str(self.TCP_SERVER_PORT) + ' ]')
+            print(u'server comm: Client socket is connected with Server socket [ TCP_SERVER_IP: ' + self.TCP_SERVER_IP + ', TCP_SERVER_PORT: ' + str(self.TCP_SERVER_PORT) + ' ]')
             self.connectCount = 0
             self.sendImages()
         except Exception as e:
@@ -139,48 +140,16 @@ class ClientSocket:
                     time.sleep(2)
                     self.filepath = "/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/test.png"
                 else:
-                    self.filepath = utils.wait_new_file(self.input_fp)
+                    tif_file = utils.wait_new_file(self.input_fp)
 
-                    # while True:
-                    #     try:
-                    #         print("trying to load midi file")
-                    #         # Load MIDI file
-                    #         with open(self.filepath, "rb") as fh:
-                    #             data = fh.read()
-                    #         with tempfile.NamedTemporaryFile('wb') as mf:
-                    #             mf.write(data)
-                    #             mf.seek(0)
-                    #             midi_data = pretty_midi.PrettyMIDI(mf.name)
-                    #             # count notes
-                    #             note_count = midi_data.get_piano_roll().sum(axis=0)
-                    #             if note_count: break
-                    #     except Exception as e:
-                    #         print(f"error on line {sys.exc_info()[-1].tb_lineno}: {e}")
-                    #         print(u'%s is not a valid midi file'%(self.filepath))
-                    #         break
-                    #     time.sleep(0.1)
-
-                # frame = cv2.imread(self.filepath)
-                # frame = cv2.imread("/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/test.png")
-                # resize_frame = cv2.resize(frame, dsize=(256, 256), interpolation=cv2.INTER_AREA)
+                    # convert .TIF file to .jpg
+                    img = Image.open(tif_file)
+                    self.filepath = tif_file.replace('.TIF', '.jpg')
+                    img.save(self.filepath)
 
                 start = time.time()
                 stime = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')
-                    
-                # encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
-                # result, imgencode = cv2.imencode('.jpg', resize_frame, encode_param)
-                # data = numpy.array(imgencode)
-                # with open(self.filepath, "rb") as fp:
-                #     data = fp.read()
-
-                # stringData = base64.b64encode(data)
-                # length = str(len(stringData))
-                # self.sock.sendall(length.encode('utf-8').ljust(64))
-                # self.sock.send(stringData)
-                # self.sock.send(stime.encode('utf-8').ljust(64))
-                # print(u'send images %d'%(cnt))
-                # print(u'send images %d'%(cnt))
-
+        
                 frame = cv2.imread(self.filepath)
                 resize_frame = cv2.resize(frame, dsize=(256, 256), interpolation=cv2.INTER_AREA)
 
@@ -192,44 +161,34 @@ class ClientSocket:
                 self.sock.sendall(length.encode('utf-8').ljust(64))
                 self.sock.send(stringData)
                 self.sock.send(stime.encode('utf-8').ljust(64))
-                print(u'send images %d'%(cnt))
+                print(u'server comm: send images %d'%(cnt))
 
-
-                # response = self.sock.recv(64)
-                print("waiting for length")
+                print("server comm: waiting for length")
                 length = self.recvall(64)
                 while True:
                     try:
                         length1 = length.decode('utf-8')
                         break
                     except:
-                        print(u'length decode error')
+                        print(u'server comm: length decode error')
                         continue
 
-                print("WAITING FOR STR DATA")
+                print("server comm: WAITING FOR STR DATA")
                 
                 stringData = self.recvall(int(length1))
-
-                # data = numpy.frombuffer(base64.b64decode(stringData), numpy.uint8)
-                # save_path = "{}/midi_{}.mid".format(self.output_fp, cnt_str)
-                # with open(save_path, "wb") as fp:
-                #     fp.write(data)
 
                 data = numpy.frombuffer(base64.b64decode(stringData), numpy.uint8)
                 decimg = cv2.imdecode(data, 1)
 
                 cv2.imwrite(self.output_fp + "/output_" + cnt_str + ".jpg" , decimg)
                 
-                # decimg = cv2.imdecode(data, 1)
-
-                # cv2.imwrite(self.output_fp + "/output_" + cnt_str + ".jpg" , decimg)
                 end = time.time()
                 cnt+=1
 
-                print("server took %f seconds"%(end-start))
+                print("server comm: server took %f seconds"%(end-start))
 
             except Exception as e:
-                print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+                print('server comm: Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
                 self.sock.close()
                 time.sleep(1)
                 self.connectServer()
@@ -259,7 +218,7 @@ if __name__ == "__main__":
 
     # parser.add_argument('--output_fp', type=str, default='out_imgs', help='ftp filepath')
     parser.add_argument('--output_fp', type=str, default='/home/pi/vast_ai/dream_machine/out_imgs', help='ftp filepath')
-    
+
     parser.add_argument('--dummy', type=int, default=0, help='ftp filepath')
 
     args = parser.parse_args()

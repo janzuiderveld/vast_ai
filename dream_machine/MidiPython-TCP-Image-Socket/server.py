@@ -82,7 +82,6 @@ class ServerSocket:
                 save_path = self.input_fp + '/input_' + cnt_str + '.jpg'
                 cv2.imwrite(save_path, decimg)
 
-
                 if self.dummy:
                     print('dummy mode')
                     resp_file = save_path

@@ -1,6 +1,4 @@
 #!/bin/sh
-source ~/.bashrc
-
 function finish {
   pkill -P $$
   echo "killed $$"
@@ -9,25 +7,28 @@ function finish {
 trap finish EXIT
 trap finish SIGINT
 
+# make sure there are no more tunnels on port 8080 the machine
+lsof -ti:8080 | xargs kill -9
+
+source ~/.bashrc
 
 cd /workspace
 apt-get install git wget curl tar -y
 git clone https://github.com/janzuiderveld/vast_ai.git
+cd /workspace/vast_ai/dream_machine
 
 apt-get update
 apt-get install ffmpeg libsm6 libxext6 -y
 
-cd /workspace/vast_ai/dream_machine
 ROOT_DIR=$PWD
 export ROOT_DIR
 
 python3 -u -m pip install -r Python-TCP-Image-Socket/requirements.txt
 
 # waits for files send through tcp and saves them in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/8080_images0
-stdbuf -o0 python3 -u MidiPython-TCP-Image-Socket/server.py |& _server_receive.log &
+python3 -u MidiPython-TCP-Image-Socket/server.py | tee _server_receive.log
 
 # Real-ESRGAN
-
 echo "setting up Real-ESRGAN"
 git clone https://github.com/xinntao/Real-ESRGAN.git
 cd /workspace/vast_ai/dream_machine/Real-ESRGAN
@@ -50,10 +51,11 @@ bash setup.sh | tee ../_sketch_setup.log
 cd /workspace/vast_ai/dream_machine
 
 echo "starting dream machine"
-chmod +rwx start_sketch_sim_server.sh
-bash -i -x start_sketch_sim_server.sh |& _start_sketch_sim_server.log
+# chmod +rwx start_sketch_sim_server.sh
+# bash -i -x start_sketch_sim_server.sh |& _start_sketch_sim_server.log
 
-# python3 -u train_folder_server.py |& ../_sketch_sim_server.log &
+cd /workspace/vast_ai/dream_machine/Sketch-Simulator
+python3 -u train_folder_server.py | tee ../_sketch_sim_server.log &
 
 
 # python3 -u Python-TCP-Image-Socket/server_send_socket.py 2>&1 | tee _server_send.log &

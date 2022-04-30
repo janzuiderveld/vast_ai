@@ -20,10 +20,10 @@ cd /workspace/vast_ai/dream_machine
 apt-get update
 apt-get install ffmpeg libsm6 libxext6 -y
 
-python3 -m pip install -r Python-TCP-Image-Socket/requirements.txt
-
 ROOT_DIR=$PWD
 export ROOT_DIR
+
+python3 -m pip install -r Python-TCP-Image-Socket/requirements.txt
 
 echo "READY" > "$ROOT_DIR/READY.log"
 

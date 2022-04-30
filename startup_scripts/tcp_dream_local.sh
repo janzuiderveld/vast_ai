@@ -1,5 +1,4 @@
 #!/bin/bash
-#!/bin/bash
 function finish {
   pkill -P $$
   echo "killed $$"

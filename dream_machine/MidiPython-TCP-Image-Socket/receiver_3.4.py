@@ -140,9 +140,9 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='TCP client')
-    parser.add_argument('--input_fp', type=str, default='test_input', help='ftp filepath')
-    parser.add_argument('--TCP_SERVER_IP', type=str, default='localhost', help='TCP server ip')
-    parser.add_argument('--TCP_SERVER_PORT', type=int, default=8080, help='TCP server port')
+    parser.add_argument('--input_fp', type=str, default='received_images', help='ftp filepath')
+    parser.add_argument('--TCP_SERVER_IP', type=str, default='192.168.2.2', help='TCP server ip')
+    parser.add_argument('--TCP_SERVER_PORT', type=int, default=8081, help='TCP server port')
 
     args = parser.parse_args()
 

@@ -10,7 +10,7 @@ import subprocess
 import tempfile
 # import numpy
 # import cv2 
-
+from PIL import Image
 
 class ClientSocket:
     def __init__(self, ip, port, input_fp):
@@ -57,14 +57,11 @@ class ClientSocket:
                 start = time.time()
                 stime = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')
                     
-                # frame = cv2.imread(self.filepath)
-                # resize_frame = cv2.resize(frame, dsize=(256, 256), interpolation=cv2.INTER_AREA)
-                # encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
-                # result, imgencode = cv2.imencode('.jpg', resize_frame, encode_param)
-                # data = numpy.array(imgencode)
-                # stringData = base64.b64encode(data)
-                
-                with open(self.filepath, "rb") as imageFile:
+                # convert .TIF file to .jpg
+                img = Image.open(self.filepath)
+                img.save(self.filepath.replace('.TIF', '.jpg'))
+
+                with open(self.filepath.replace('.TIF', '.jpg'), "rb") as imageFile:
                     stringData = base64.b64encode(imageFile.read())
 
                 length = str(len(stringData))

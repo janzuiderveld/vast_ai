@@ -10,7 +10,7 @@ import subprocess
 import tempfile
 # import numpy
 # import cv2 
-from PIL import Image
+
 
 class ClientSocket:
     def __init__(self, ip, port, input_fp):
@@ -56,12 +56,8 @@ class ClientSocket:
 
                 start = time.time()
                 stime = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')
-                    
-                # convert .TIF file to .jpg
-                img = Image.open(self.filepath)
-                img.save(self.filepath.replace('.TIF', '.jpg'))
-
-                with open(self.filepath.replace('.TIF', '.jpg'), "rb") as imageFile:
+                
+                with open(self.filepath, "rb") as imageFile:
                     stringData = base64.b64encode(imageFile.read())
 
                 length = str(len(stringData))
@@ -93,7 +89,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='TCP client')
-    parser.add_argument('--input_fp', type=str, default='/home/pi/FTP/test', help='ftp filepath')
+    parser.add_argument('--input_fp', type=str, default='/home/pi/vast_ai/dream_machine/out_imgs', help='ftp filepath')
     parser.add_argument('--TCP_SERVER_IP', type=str, default='192.168.2.2', help='TCP server ip')
     parser.add_argument('--TCP_SERVER_PORT', type=int, default=8081, help='TCP server port')
     parser.add_argument('--dummy', type=str, default="", help='')
@@ -103,3 +99,9 @@ if __name__ == "__main__":
     os.makedirs(args.input_fp, exist_ok=True)
     main(args)
 
+
+# parser.add_argument('--input_fp', type=str, default='/home/pi/FTP/test', help='ftp filepath')
+
+# # convert .TIF file to .jpg
+# img = Image.open(self.filepath)
+# img.save(self.filepath.replace('.TIF', '.jpg'))

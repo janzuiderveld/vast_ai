@@ -24,6 +24,7 @@ class ClientSocket:
 
     def connectServer(self):
         try:
+            print("Windows_sender: trying to connect")
             self.sock = socket.socket()
             self.sock.connect((self.TCP_SERVER_IP, self.TCP_SERVER_PORT))
             print(u'Windows_sender: Client socket is connected with Server socket [ TCP_SERVER_IP: ' + self.TCP_SERVER_IP + ', TCP_SERVER_PORT: ' + str(self.TCP_SERVER_PORT) + ' ]')
@@ -97,6 +98,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     os.makedirs(args.input_fp, exist_ok=True)
+    print("Windows_sender: starting main")
     main(args)
 
 

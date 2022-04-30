@@ -22,7 +22,8 @@ python3 -u -m venv $ROOT_DIR/dream_machine/dream_machine_env
 source $ROOT_DIR/dream_machine/dream_machine_env/bin/activate
 
 python3 -u -m pip install -r $ROOT_DIR/dream_machine/Python-TCP-Image-Socket/requirements.txt
-python3 -u -m pip install requests
+python3 -u -m pip install requests 
+python3 -u -m pip install pillow 
 
 # apt-get update
 # apt-get install ffmpeg libsm6 libxext6  -y
@@ -45,6 +46,8 @@ python3 -u -m pip install requests
 # (when inotify script is running and detecting files in Sketch-Simulator/out/to_send) 
 # files are copied to out_imgs.
 
+python3 -u ./MidiPython-TCP-Image-Socket/sender_3.4.py &
+
 echo "waiting for server to be ready..."
 kill -9 $(lsof -t -i:8080)
 python3 -u ./MidiPython-TCP-Image-Socket/check_ready.py
@@ -65,8 +68,7 @@ echo "Server ready"
 
 # looks for files to appear in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs, sends them over tcp
 # python3 -u Python-TCP-Image-Socket/client.py 2>&1 | tee _client_send.log &
-python3 -u ./MidiPython-TCP-Image-Socket/sender_3.4.py &
-python3 -u ./MidiPython-TCP-Image-Socket/client.py &
+python3 -u ./MidiPython-TCP-Image-Socket/client.py
 
 
 

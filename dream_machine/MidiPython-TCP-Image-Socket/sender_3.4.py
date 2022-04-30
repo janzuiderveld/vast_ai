@@ -56,16 +56,21 @@ class ClientSocket:
                 else:
                     self.filepath = utils.wait_new_file(self.input_fp)
 
-                time.sleep(5)
+                time.sleep(3)
 
                 # wait until file is properly saved
                 while True:
                     try:
                         img = Image.open(self.filepath)
+                        # convert .jpg file as png
+                        self.filepath = self.filepath.replace(".jpg", ".png")
+                        img.save(self.filepath)
                         break
                     except Exception as e:
                         print("Windows sender: failed to open incoming file, trying again")
                         print(e)
+                        
+                time.sleep(3)
 
                 start = time.time()
                 stime = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')

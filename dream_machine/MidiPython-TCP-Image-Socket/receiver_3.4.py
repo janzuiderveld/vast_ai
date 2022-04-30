@@ -56,7 +56,7 @@ class ServerSocket:
                 stringData = self.recvall(self.conn, int(length1))
                 data = base64.b64decode(stringData)
 
-                save_path = self.input_fp + "/image_" + cnt_str + ".jpg"
+                save_path = self.input_fp + "/image_" + cnt_str + ".png"
 
                 stime = self.recvall(self.conn, 64)
 
@@ -65,7 +65,7 @@ class ServerSocket:
                 now = time.localtime()
                 print('receive time: ' + datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f'))
 
-                save_path = self.input_fp + '/input_' + cnt_str + '.jpg'
+                save_path = self.input_fp + '/input_' + cnt_str + '.png'
                 with open(save_path, 'wb') as f:
                     f.write(data)
                 cnt += 1

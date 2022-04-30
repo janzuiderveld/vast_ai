@@ -18,8 +18,6 @@ ROOT_DIR=$PWD
 
 cd $ROOT_DIR/dream_machine
 
-echo "ROOT_DIR: $ROOT_DIR"
-
 python3 -u -m venv $ROOT_DIR/dream_machine/dream_machine_env
 source $ROOT_DIR/dream_machine/dream_machine_env/bin/activate
 

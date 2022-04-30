@@ -20,6 +20,7 @@ class ServerSocket:
         self.input_fp = args.input_fp
         self.output_fp = args.output_fp
         self.dummy = args.dummy
+        self.esrgan = args.esrgan
         self.socketOpen()
         # self.receiveThread = threading.Thread(target=self.receiveFiles)
         # self.receiveThread.start()
@@ -127,7 +128,7 @@ class ServerSocket:
                 # self.conn.sendall(length.encode('utf-8').ljust(64))
                 # self.conn.send(stringData)
 
-                if self.esrgan:
+                if self.esrgan and not self.dummy:
                     shutil.rmtree(tmp_folder)
                     
                 print('responded file')
@@ -198,12 +199,17 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='TCP client')
-    parser.add_argument('--input_fp', type=str, default='/workspace/vast_ai/dream_machine/incoming_imgs', help='ftp filepath')
-    parser.add_argument('--output_fp', type=str, default='/workspace/vast_ai/dream_machine/Sketch-Simulator/out/to_send', help='ftp filepath')
+    parser.add_argument('--input_fp', type=str, default='incoming_imgs', help='ftp filepath')
+    parser.add_argument('--output_fp', type=str, default='Sketch-Simulator/out/to_send', help='ftp filepath')
     parser.add_argument('--esrgan', type=int, default=1, help='ftp filepath')
     parser.add_argument('--dummy', type=int, default=0, help='ftp filepath')
 
     args = parser.parse_args()
+
+    # add environment variable ROOT_DIR to the path
+    args.input_fp = os.path.join(os.environ['ROOT_DIR'], args.input_fp)
+    args.output_fp = os.path.join(os.environ['ROOT_DIR'], args.output_fp)
+
     os.makedirs(args.input_fp, exist_ok=True)
     os.makedirs(args.output_fp, exist_ok=True)
     main(args)

@@ -93,7 +93,7 @@ class ServerSocket:
                         tmp_folder = "/workspace/vast_ai/dream_machine/temp_upscale"
                         os.makedirs(tmp_folder, exist_ok=True)
                         os.chdir("/workspace/vast_ai/dream_machine/Real-ESRGAN")
-                        os.system(f"python3 inference_realesrgan.py -n RealESRGAN_x4plus -i {resp_file} -o {tmp_folder} --outscale 4 --half")
+                        os.system(f"python3 inference_realesrgan.py -n RealESRGAN_x4plus -i {resp_file} -o {tmp_folder} --outscale 4")
                         os.chdir("/workspace/vast_ai/dream_machine")
                         resp_file = glob.glob(tmp_folder + "/*")[0]
                         # end_esr = time.time()
@@ -139,7 +139,7 @@ class ServerSocket:
                 # self.socketOpen()
                 
         except Exception as e:
-            print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+            print('server: Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
             self.socketClose()
 
             self.socketOpen()

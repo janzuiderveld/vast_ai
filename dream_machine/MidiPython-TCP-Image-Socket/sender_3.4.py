@@ -26,7 +26,7 @@ class ClientSocket:
         try:
             self.sock = socket.socket()
             self.sock.connect((self.TCP_SERVER_IP, self.TCP_SERVER_PORT))
-            print(u'Client socket is connected with Server socket [ TCP_SERVER_IP: ' + self.TCP_SERVER_IP + ', TCP_SERVER_PORT: ' + str(self.TCP_SERVER_PORT) + ' ]')
+            print(u'Windows_sender: Client socket is connected with Server socket [ TCP_SERVER_IP: ' + self.TCP_SERVER_IP + ', TCP_SERVER_PORT: ' + str(self.TCP_SERVER_PORT) + ' ]')
             self.connectCount = 0
             self.sendImages()
         except Exception as e:
@@ -64,10 +64,10 @@ class ClientSocket:
                 self.sock.sendall(length.encode('utf-8').ljust(64))
                 self.sock.send(stringData)
                 self.sock.send(stime.encode('utf-8').ljust(64))
-                print(u'send images %d'%(cnt))
+                print(u'Windows_sender: send images %d'%(cnt))
 
             except Exception as e:
-                print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+                print('Windows_sender: Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
                 self.sock.close()
                 time.sleep(1)
                 self.connectServer()

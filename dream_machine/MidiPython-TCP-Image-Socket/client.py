@@ -254,12 +254,12 @@ def main(args):
 if __name__ == "__main__":
     # argparser
     parser = argparse.ArgumentParser(description='TCP client')
-    # parser.add_argument('--input_fp', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_in', help='ftp filepath')
-    # parser.add_argument('--input_fp', type=str, default='midi_in', help='ftp filepath')
-    parser.add_argument('--input_fp', type=str, default='in_imgs', help='ftp filepath')
-    # parser.add_argument('--output_fp', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_out', help='ftp filepath')
-    # parser.add_argument('--output_fp', type=str, default='midi_out', help='ftp filepath')
-    parser.add_argument('--output_fp', type=str, default='out_imgs', help='ftp filepath')
+    # parser.add_argument('--input_fp', type=str, default='in_imgs', help='ftp filepath')
+    parser.add_argument('--input_fp', type=str, default='/home/pi/FTP/test', help='ftp filepath')
+
+    # parser.add_argument('--output_fp', type=str, default='out_imgs', help='ftp filepath')
+    parser.add_argument('--output_fp', type=str, default='/home/pi/vast_ai/dream_machine/out_imgs', help='ftp filepath')
+    
     parser.add_argument('--dummy', type=int, default=0, help='ftp filepath')
 
     args = parser.parse_args()
@@ -270,3 +270,9 @@ if __name__ == "__main__":
 
 # write a txt file
 # with open('/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/out_imgs/output_' + cnt_str + '.txt', 'w') as f:
+
+# parser.add_argument('--input_fp', type=str, default='/home/pi/FTP/test', help='ftp filepath')
+
+# # convert .TIF file to .jpg
+# img = Image.open(self.filepath)
+# img.save(self.filepath.replace('.TIF', '.jpg'))

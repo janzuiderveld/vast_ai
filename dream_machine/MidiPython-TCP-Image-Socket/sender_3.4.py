@@ -96,11 +96,11 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='TCP client')
-    parser.add_argument('--input_fp', type=str, default='test_send', help='ftp filepath')
-    parser.add_argument('--TCP_SERVER_IP', type=str, default='localhost', help='TCP server ip')
-    parser.add_argument('--TCP_SERVER_PORT', type=int, default=8080, help='TCP server port')
-    # parser.add_argument('--dummy', type=str, default="", help='')
-    parser.add_argument('--dummy', type=str, default="/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs/test.png", help='')
+    parser.add_argument('--input_fp', type=str, default='/home/pi/FTP/test', help='ftp filepath')
+    parser.add_argument('--TCP_SERVER_IP', type=str, default='192.168.2.2', help='TCP server ip')
+    parser.add_argument('--TCP_SERVER_PORT', type=int, default=8081, help='TCP server port')
+    parser.add_argument('--dummy', type=str, default="", help='')
+    # parser.add_argument('--dummy', type=str, default="/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs/test.png", help='')
 
     args = parser.parse_args()
     os.makedirs(args.input_fp, exist_ok=True)

@@ -8,7 +8,6 @@ import utils
 import argparse
 import os
 import subprocess
-import pretty_midi
 import tempfile
 import cv2
 

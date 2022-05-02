@@ -11,6 +11,7 @@ import subprocess
 import tempfile
 import cv2
 from PIL import Image
+import shutil
 
 #TODO FILTER CORRUPT MIDI FILES: MAYBE FIXED 
 # normalizesmf <filename>  ?
@@ -143,22 +144,40 @@ class ClientSocket:
                     tif_file = utils.wait_new_file(self.input_fp)
 
                     # convert .TIF file to .jpg
+                    # while True:
+                    #     try:
+                    #         img = Image.open(tif_file)
+                    #         self.filepath = tif_file.replace('.TIF', '.jpg')
+                    #         img.save(self.filepath)
+                    #         break
+                    #     except Exception as e:
+                    #         print("server comm: failed to convert .TIF file to .jpg file, trying again")
+                    #         print(e)
+
+
+                    # wait for file to be saved properly
                     while True:
                         try:
                             img = Image.open(tif_file)
-                            self.filepath = tif_file.replace('.TIF', '.jpg')
-                            img.save(self.filepath)
+                            del img
+                            self.filepath = tif_file
                             break
                         except Exception as e:
-                            print("server comm: failed to convert .TIF file to .jpg file, trying again")
+                            # print("server comm: failed to convert .TIF file to .jpg file, trying again")
                             print(e)
+
+                    # self.filepath = tif_file
 
 
                 start = time.time()
                 stime = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')
         
                 frame = cv2.imread(self.filepath)
-                resize_frame = cv2.resize(frame, dsize=(256, 256), interpolation=cv2.INTER_AREA)
+
+                # rotate frame 90 degrees
+                frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+
+                resize_frame = cv2.resize(frame, dsize=(565, 400), interpolation=cv2.INTER_AREA)
 
                 encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
                 result, imgencode = cv2.imencode('.jpg', resize_frame, encode_param)
@@ -229,6 +248,12 @@ if __name__ == "__main__":
     parser.add_argument('--dummy', type=int, default=0, help='ftp filepath')
 
     args = parser.parse_args()
+
+    if os.path.exists(dirpath) and os.path.isdir(dirpath):
+        shutil.rmtree(args.input_fp)
+    if os.path.exists(dirpath) and os.path.isdir(dirpath):
+        shutil.rmtree(args.output_fp)
+
     os.makedirs(args.input_fp, exist_ok=True)
     os.makedirs(args.output_fp, exist_ok=True)
     main(args)

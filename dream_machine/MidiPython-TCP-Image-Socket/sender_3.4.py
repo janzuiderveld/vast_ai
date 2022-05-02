@@ -63,8 +63,8 @@ class ClientSocket:
                     try:
                         img = Image.open(self.filepath)
                         # convert .jpg file as png
-                        self.filepath = self.filepath.replace(".jpg", ".png")
-                        img.save(self.filepath)
+                        # self.filepath = self.filepath.replace(".jpg", ".png")
+                        # img.save(self.filepath)
                         break
                     except Exception as e:
                         print("Windows sender: failed to open incoming file, trying again")

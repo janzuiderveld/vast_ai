@@ -56,7 +56,7 @@ class ServerSocket:
                 stringData = self.recvall(self.conn, int(length1))
                 data = base64.b64decode(stringData)
 
-                save_path = self.input_fp + "/image_" + cnt_str + ".png"
+                save_path = self.input_fp + "/image_" + cnt_str + ".jpg"
 
                 stime = self.recvall(self.conn, 64)
 

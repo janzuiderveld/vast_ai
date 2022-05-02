@@ -249,9 +249,9 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    if os.path.exists(dirpath) and os.path.isdir(dirpath):
+    if os.path.exists(args.input_fp) and os.path.isdir(args.input_fp):
         shutil.rmtree(args.input_fp)
-    if os.path.exists(dirpath) and os.path.isdir(dirpath):
+    if os.path.exists(args.output_fp) and os.path.isdir(args.output_fp):
         shutil.rmtree(args.output_fp)
 
     os.makedirs(args.input_fp, exist_ok=True)

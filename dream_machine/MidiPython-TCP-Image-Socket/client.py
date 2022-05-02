@@ -144,27 +144,27 @@ class ClientSocket:
                     tif_file = utils.wait_new_file(self.input_fp)
 
                     # convert .TIF file to .jpg
-                    # while True:
-                    #     try:
-                    #         img = Image.open(tif_file)
-                    #         self.filepath = tif_file.replace('.TIF', '.jpg')
-                    #         img.save(self.filepath)
-                    #         break
-                    #     except Exception as e:
-                    #         print("server comm: failed to convert .TIF file to .jpg file, trying again")
-                    #         print(e)
-
-
-                    # wait for file to be saved properly
                     while True:
                         try:
                             img = Image.open(tif_file)
-                            del img
-                            self.filepath = tif_file
+                            self.filepath = tif_file.replace('.TIF', '.jpg')
+                            img.save(self.filepath)
                             break
                         except Exception as e:
-                            # print("server comm: failed to convert .TIF file to .jpg file, trying again")
+                            print("server comm: failed to convert .TIF file to .jpg file, trying again")
                             print(e)
+
+
+                    # wait for file to be saved properly
+                    # while True:
+                    #     try:
+                    #         img = Image.open(tif_file)
+                    #         del img
+                    #         self.filepath = tif_file
+                    #         break
+                    #     except Exception as e:
+                    #         # print("server comm: failed to convert .TIF file to .jpg file, trying again")
+                    #         print(e)
 
                     # self.filepath = tif_file
 

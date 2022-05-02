@@ -61,7 +61,7 @@ class ServerSocket:
                 stringData = self.recvall(self.conn, int(length1))
                 data = numpy.frombuffer(base64.b64decode(stringData), numpy.uint8)
 
-                save_path = f"{self.input_fp}/midi_{cnt_str}.mid"
+                save_path = f"{self.input_fp}/img_{cnt_str}.jpg"
 
                 with open(save_path, 'wb') as f:
                     f.write(data)
@@ -95,6 +95,7 @@ class ServerSocket:
                         os.system(f"python3 inference_realesrgan.py -n RealESRGAN_x4plus -i {resp_file} -o {tmp_folder} --outscale 4")
                         os.chdir("/workspace/vast_ai/dream_machine")
                         resp_file = glob.glob(tmp_folder + "/*")[0]
+                        print(resp_file, "is the output file of ESRGAN")
                         # end_esr = time.time()
 
                 # with open(resp_file, "rb") as fp:
@@ -102,8 +103,8 @@ class ServerSocket:
  
                 print("server: reading output to cv2")
                 frame = cv2.imread(resp_file)
-                print("server: resizing_output")
-                resize_frame = cv2.resize(frame, dsize=(1024, 1024), interpolation=cv2.INTER_AREA)
+                # print("server: resizing_output")
+                # resize_frame = cv2.resize(frame, dsize=(1024, 1024), interpolation=cv2.INTER_AREA)
                 print("server: encoding output")
                 encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
                 print("server: encoding output..")

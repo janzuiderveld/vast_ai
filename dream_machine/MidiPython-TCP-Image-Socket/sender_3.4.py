@@ -56,7 +56,7 @@ class ClientSocket:
                 else:
                     self.filepath = utils.wait_new_file(self.input_fp)
 
-                time.sleep(3)
+                # time.sleep(3)
 
                 # wait until file is properly saved
                 while True:
@@ -70,7 +70,7 @@ class ClientSocket:
                         print("Windows sender: failed to open incoming file, trying again")
                         print(e)
                         
-                time.sleep(3)
+                # time.sleep(3)
 
                 start = time.time()
                 stime = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')

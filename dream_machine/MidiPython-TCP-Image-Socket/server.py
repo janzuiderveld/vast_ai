@@ -108,7 +108,7 @@ class ServerSocket:
                 print("server: encoding output")
                 encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
                 print("server: encoding output..")
-                result, imgencode = cv2.imencode('.jpg', resize_frame, encode_param)
+                result, imgencode = cv2.imencode('.jpg', frame, encode_param)
                 
                 print("server: encoding output to numpy")
                 data = numpy.array(imgencode)

@@ -176,7 +176,8 @@ class ClientSocket:
 
                 # rotate frame 90 degrees counter-clockwise
                 frame = cv2.rotate(frame, cv2.ROTATE_90_COUNTERCLOCKWISE)
-                frame = cv2.rotate(frame, cv2.ROTATE_180)
+                frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+                # frame = cv2.rotate(frame, cv2.ROTATE_180)
 
                 resize_frame = cv2.resize(frame, dsize=(565, 400), interpolation=cv2.INTER_AREA)
 

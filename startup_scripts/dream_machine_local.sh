@@ -69,10 +69,13 @@ echo "Server ready"
 # python3 -u Python-TCP-Image-Socket/client.py 2>&1 | tee _client_send.log &
 python3 -u ./MidiPython-TCP-Image-Socket/client.py
 
+sleep 10
+
+python3 -u ./MidiPython-TCP-Image-Socket/sender_3.4.py 
+
 sleep 5
 
 sudo python3 -u ./serial/first.py &
-python3 -u ./MidiPython-TCP-Image-Socket/sender_3.4.py
 
 
 

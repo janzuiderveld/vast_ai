@@ -175,7 +175,7 @@ class ClientSocket:
                 frame = cv2.imread(self.filepath)
 
                 # rotate frame 90 degrees counter-clockwise
-                frame = cv2.rotate(frame, cv2.ROTATE_90_COUNTERCLOCKWISE)
+                # frame = cv2.rotate(frame, cv2.ROTATE_90_COUNTERCLOCKWISE)
                 frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
                 # frame = cv2.rotate(frame, cv2.ROTATE_180)
 

@@ -47,6 +47,7 @@ python3 -u -m pip install pillow
 # files are copied to out_imgs.
 
 python3 -u ./MidiPython-TCP-Image-Socket/sender_3.4.py &
+sudo python3 -u ./serial/first.py &
 
 echo "waiting for server to be ready..."
 kill -9 $(lsof -t -i:8080)

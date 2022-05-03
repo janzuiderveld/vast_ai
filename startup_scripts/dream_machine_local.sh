@@ -46,8 +46,6 @@ python3 -u -m pip install pillow
 # (when inotify script is running and detecting files in Sketch-Simulator/out/to_send) 
 # files are copied to out_imgs.
 
-python3 -u ./MidiPython-TCP-Image-Socket/sender_3.4.py &
-sudo python3 -u ./serial/first.py &
 
 echo "waiting for server to be ready..."
 kill -9 $(lsof -t -i:8080)
@@ -70,6 +68,13 @@ echo "Server ready"
 # looks for files to appear in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs, sends them over tcp
 # python3 -u Python-TCP-Image-Socket/client.py 2>&1 | tee _client_send.log &
 python3 -u ./MidiPython-TCP-Image-Socket/client.py
+
+sleep 5
+
+sudo python3 -u ./serial/first.py &
+python3 -u ./MidiPython-TCP-Image-Socket/sender_3.4.py
+
+
 
 
 

@@ -70,7 +70,7 @@ class ClientSocket:
                         print("Windows sender: failed to open incoming file, trying again")
                         print(e)
                         
-                # time.sleep(3)
+                time.sleep(2)
 
                 start = time.time()
                 stime = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')

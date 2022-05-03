@@ -7,11 +7,10 @@ import datetime
  
 def my_callback(channel):
 
-    ser.write((bytes(str("p"), 'utf-8')))
-
     if GPIO.input(channel) == GPIO.HIGH:
         print('\n▼  at ' + str(datetime.datetime.now()))
     else:
+        ser.write((bytes(str("p"), 'utf-8')))
         print('\n ▲ at ' + str(datetime.datetime.now()))
 
 #/home/pi/vast_ai/dream_machine/out_imgs

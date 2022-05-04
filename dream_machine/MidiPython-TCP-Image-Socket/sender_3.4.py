@@ -114,6 +114,10 @@ if __name__ == "__main__":
     # parser.add_argument('--dummy', type=str, default="/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs/test.png", help='')
 
     args = parser.parse_args()
+
+    if os.path.exists(args.input_fp) and os.path.isdir(args.input_fp):
+        shutil.rmtree(args.input_fp)
+
     os.makedirs(args.input_fp, exist_ok=True)
     print("Windows_sender: starting main")
     main(args)

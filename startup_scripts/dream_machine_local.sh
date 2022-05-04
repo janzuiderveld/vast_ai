@@ -25,9 +25,9 @@ python3 -u -m pip install -r $ROOT_DIR/dream_machine/Python-TCP-Image-Socket/req
 python3 -u -m pip install requests 
 python3 -u -m pip install pillow 
 
-sleep 10
+# sleep 10
 
-python3 -u ./MidiPython-TCP-Image-Socket/sender_3.4.py 
+python3 -u ./MidiPython-TCP-Image-Socket/sender_3.4.py &
 
 sleep 5
 
@@ -77,9 +77,6 @@ echo "Server ready"
 # looks for files to appear in /Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs, sends them over tcp
 # python3 -u Python-TCP-Image-Socket/client.py 2>&1 | tee _client_send.log &
 python3 -u ./MidiPython-TCP-Image-Socket/client.py
-
-
-
 
 
 

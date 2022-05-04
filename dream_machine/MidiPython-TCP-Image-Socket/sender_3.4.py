@@ -11,6 +11,7 @@ import tempfile
 # import numpy
 # import cv2 
 from PIL import Image
+import shutil
 
 
 class ClientSocket:

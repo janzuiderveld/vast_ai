@@ -25,6 +25,15 @@ python3 -u -m pip install -r $ROOT_DIR/dream_machine/Python-TCP-Image-Socket/req
 python3 -u -m pip install requests 
 python3 -u -m pip install pillow 
 
+sleep 10
+
+python3 -u ./MidiPython-TCP-Image-Socket/sender_3.4.py 
+
+sleep 5
+
+sudo python3 -u ./serial/first.py &
+
+
 # apt-get update
 # apt-get install ffmpeg libsm6 libxext6  -y
 
@@ -69,13 +78,6 @@ echo "Server ready"
 # python3 -u Python-TCP-Image-Socket/client.py 2>&1 | tee _client_send.log &
 python3 -u ./MidiPython-TCP-Image-Socket/client.py
 
-sleep 10
-
-python3 -u ./MidiPython-TCP-Image-Socket/sender_3.4.py 
-
-sleep 5
-
-sudo python3 -u ./serial/first.py &
 
 
 

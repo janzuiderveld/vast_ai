@@ -92,37 +92,13 @@ class ClientSocket:
             self.sock.connect((self.TCP_SERVER_IP, self.TCP_SERVER_PORT))
             print(u'server comm: Client socket is connected with Server socket [ TCP_SERVER_IP: ' + self.TCP_SERVER_IP + ', TCP_SERVER_PORT: ' + str(self.TCP_SERVER_PORT) + ' ]')
             self.connectCount = 0
-            self.sendImages()
         except Exception as e:
             print(e)
             # self.establish_ssh()
-
-
-            # while True:
-            #     try:
-            #         out = os.popen("../vast ssh-url").read().split(":")
-            #         if not out[0]: continue
-            #         print(out)
-            #         ssh_address = out[1][2:]
-            #         port = out[2].split("\n")[0]
-            #     except:
-            #         continue
-
-            #     if port != "None" or ssh_address !="None": break
-
-            # print(ssh_address, port)
-
-            # pipe_proc = subprocess.Popen(['ssh', f"-o StrictHostKeyChecking=no", f"-p {port}", f"{ssh_address}", "-L 8080:localhost:8080", "-N"])
-
-            # self.connectCount += 1
-            # if self.connectCount == 10:
-            #     print(u'Connect fail %d times. exit program'%(self.connectCount))
-            #     sys.exit()
-            # print(u'%d times try to connect with server'%(self.connectCount))
-            
             time.sleep(5)
             self.connectServer()
 
+        self.sendImages()
 
     def sendImages(self):
         cnt = 0
@@ -193,13 +169,13 @@ class ClientSocket:
 
                 print("server comm: waiting for length")
                 length = self.recvall(64)
-                while True:
-                    try:
-                        length1 = length.decode('utf-8')
-                        break
-                    except:
-                        print(u'server comm: length decode error')
-                        continue
+                # while True:
+                    # try:
+                length1 = length.decode('utf-8')
+                        # break
+                    # except:
+                        # print(u'server comm: length decode error')
+                        # continue
 
                 print("server comm: WAITING FOR STR DATA")
                 
@@ -258,7 +234,12 @@ if __name__ == "__main__":
 
     os.makedirs(args.input_fp, exist_ok=True)
     os.makedirs(args.output_fp, exist_ok=True)
-    main(args)
+    while True:
+        try:
+            main(args)
+        except Exception as err:
+            print(err)
+            continue
 
 
 # write a txt file

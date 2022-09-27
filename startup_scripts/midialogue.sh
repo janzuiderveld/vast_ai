@@ -26,11 +26,9 @@ wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1WO6g
 
 cd /workspace/vast_ai/midialogue/LakhNES/model/pretrained
 
-sleep 1
-
 tar -xf model.tar.gz && rm model.tar.gz
 cd /workspace/vast_ai/midialogue/LakhNES/data
-tar -xf /workspace/vast_ai/midialogue/LakhNES/nesmdb_tx1.tar.gz
+tar -xf /workspace/vast_ai/midialogue/LakhNES/data/nesmdb_tx1.tar.gz
 
 cp /workspace/vast_ai/midialogue/mem_transformer.py /workspace/vast_ai/midialogue/LakhNES/model/mem_transformer.py
 cp /workspace/vast_ai/midialogue/startup.py /workspace/vast_ai/midialogue/LakhNES/startup.py

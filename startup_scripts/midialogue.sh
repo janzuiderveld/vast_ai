@@ -25,6 +25,9 @@ wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download
 wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1WO6guGagqaw22LH32_NEBeavtbaWy_ar' -O /workspace/vast_ai/midialogue/LakhNES/data/nesmdb_tx1.tar.gz
 
 cd /workspace/vast_ai/midialogue/LakhNES/model/pretrained
+
+sleep 1
+
 tar -xf model.tar.gz && rm model.tar.gz
 cd /workspace/vast_ai/midialogue/LakhNES/data
 tar -xf /workspace/vast_ai/midialogue/LakhNES/nesmdb_tx1.tar.gz

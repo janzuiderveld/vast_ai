@@ -12,6 +12,8 @@ cd /workspace/vast_ai/midialogue
 python3 -m pip install -r Python-TCP-Image-Socket/requirements.txt
 python3 -m pip install pretty_midi
 
+python3 -m pip install torch==1.0.1.post2 torchvision==0.2.2.post3
+
 # waits for files send through tcp and saves them in vast_ai/midialogue/midi_in
 # python3 Python-TCP-Image-Socket/server.py 2>&1 | tee _server_receive.log &
 stdbuf -o0 python3 Python-TCP-Image-Socket/server.py 2>&1 | tee _server_receive.log &

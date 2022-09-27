@@ -12,7 +12,8 @@ parser.add_argument('--dummy', type=int, default=0, help='')
 args = parser.parse_args()
 
 if args.project_name == "midialogue":
-    image = "pytorch/pytorch:1.0.1-cuda10.0-cudnn7-devel"
+    # image = "pytorch/pytorch:1.0.1-cuda10.0-cudnn7-devel"
+    image = "pytorch/pytorch:1.10.0-cuda11.3-cudnn8-runtime"
 else:
     image = "pytorch/pytorch"
 

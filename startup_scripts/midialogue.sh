@@ -34,7 +34,7 @@ cp /workspace/vast_ai/midialogue/mem_transformer.py /workspace/vast_ai/midialogu
 cp /workspace/vast_ai/midialogue/startup.py /workspace/vast_ai/midialogue/LakhNES/startup.py
 
 touch /workspace/vast_ai/midialogue/LakhNES/model/utils/__init__.py
-touch /workspace/vast_ai/midialogue/LakhNES/model/model/__init__.pyw
+touch /workspace/vast_ai/midialogue/LakhNES/model/model/__init__.py
 touch /workspace/vast_ai/midialogue/LakhNES/model/__init__.py
 
 sleep 2

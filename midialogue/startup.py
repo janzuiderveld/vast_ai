@@ -565,10 +565,14 @@ def main(args):
         try:
             midi_continuation(midi_path, args.midi_out_folder)
         except Exception as e:
-            error = ('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+            # filepath = get_incremental_fn(args.midi_out_folder)
+            # os.system(f"echo {error} > {filepath}")
+            
             filepath = get_incremental_fn(args.midi_out_folder)
-            os.system(f"echo {error} > {filepath}")
-            print(f"startup : Failed to continue new_midi")
+            os.system(f"cp {midi_path} {filepath}")
+
+            error = ('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+            print(f"startup : Failed to continue new_midi: {error}")
       
 
 if __name__ == "__main__":

@@ -568,7 +568,7 @@ def main(args):
             error = ('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
             filepath = get_incremental_fn(args.midi_out_folder)
             os.system(f"echo {error} > {filepath}")
-            print(f"startup : Failed to load {new_midi}")
+            print(f"startup : Failed to continue new_midi")
       
 
 if __name__ == "__main__":

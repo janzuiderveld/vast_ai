@@ -30,7 +30,7 @@ if [ ! -d "$ROOT_DIR/midialogue/midi-utilities" ]; then
 fi
 
 echo "waiting for server to start up (3 minutes)"
-sleep 180
+# sleep 180
 
 echo ""
 echo "Midi Utilities: midi ins" 

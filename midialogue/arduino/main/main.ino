@@ -43,12 +43,12 @@
 
 // Ordered Serial list
 HardwareSerial Serials[7] {
-  Serial1,
   Serial2,
-  Serial3,
-  Serial4,
+  Serial1,
   Serial5,
-  Serial6,
+  Serial4,
+  Serial3,
+  Serial8,
   Serial7
 };
 
@@ -90,12 +90,15 @@ void loop() {
       usbMIDI.sendNoteOn(60, 99, i);  // 60 = C4
       // delay(200);
 
+
+      Serial.println(i);
       Serial.println("note on");
 
     // if dists[i] > 100 and note is not 0, send midi note off
     } else if (dists[i] > 100 && note[i] != 0) {
       note[i] = 0;
       usbMIDI.sendNoteOff(60, 0, i);  // 60 = C4
+      Serial.println(i);
       Serial.println("note off");
 
     }

@@ -42,7 +42,7 @@
 #define TXD7 29
 
 // Ordered Serial list
-void (*Serials[7])() {
+HardwareSerial Serials[7] {
   Serial1,
   Serial2,
   Serial3,
@@ -83,7 +83,7 @@ void loop() {
   }
 }
 
-int Get_Lidar_data(HardwareSerial serialX){
+void Get_Lidar_data(HardwareSerial serialX, int dists[]){
 if (serialX.available()) //check if serial port has data input
     {
     if(rec_debug_state == 0x01)
@@ -153,7 +153,7 @@ else if(rec_debug_state ==  0x05)
             while(serialX.available()){serialX.read();} // This part is added becuase some previous packets are there in the buffer so to clear serial buffer and get fresh data.
             rec_debug_state = 0x01;
            }
-
+      
         // {
           // uart[8]=serialX.read();
           // if(uart[8] == check)

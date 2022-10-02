@@ -18,11 +18,9 @@ if args.project_name == "midialogue":
 else:
     image = "pytorch/pytorch"
 
-
-
 # run vast shell command "./vast search offers" to get prices 
 if args.bidding_tactic == 'cheap':
-    vast_cmd = './vast search offers -b --raw -o "dph"'
+    vast_cmd = './vast search offers -b "direct_port_count>0" --raw -o "dph"'
 if args.bidding_tactic == 'cheap4':
     vast_cmd = './vast search offers -b "direct_port_count>0 num_gpus == 4" --raw -o "dph"' 
 if args.bidding_tactic == 'cheap8':
@@ -34,7 +32,8 @@ elif args.bidding_tactic == 'auto1':
 elif args.bidding_tactic == 'best1':
     vast_cmd = './vast search offers -d "direct_port_count>0 num_gpus == 1 gpu_ram > 20" --raw -o "dlperf-"'   
 
-api_key = "./vast set api-key de86e0ed253c266f1af083bba635720f6b2e0beb9ecacac70006d88b9f63e4fc"
+# open api key from /home/p/keys/vast_api_key.txt
+api_key = "export VAST_API_KEY=$(cat /home/p/keys/vast_api_key.txt)"
 subprocess.check_output(api_key, shell=True)
 
 vast_output = subprocess.check_output(vast_cmd, shell=True)
@@ -59,6 +58,9 @@ if args.bidding_tactic == 'cheap' or args.bidding_tactic == "cheap8" or args.bid
 else:
     # vast_book_cmd = f"./vast create instance {top_id} --image {image} --disk 30 --onstart startup_scripts/{args.project_name}.sh"
     vast_book_cmd = f"./vast create instance " + str(top_id) + f" --image {image} --disk 30 --onstart startup_scripts/" + args.project_name + ".sh"
+
+if args.direct:
+    vast_book_cmd += " --direct"
 
 vast_output = subprocess.check_output(vast_book_cmd, shell=True)
 print(vast_output)

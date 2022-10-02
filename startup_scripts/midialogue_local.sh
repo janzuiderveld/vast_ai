@@ -160,7 +160,7 @@ ID=$(./vast show instances --raw | python3 -c "import sys, json; print(json.load
 # ./vast copy "$ID:/workspace/vast_ai/midialogue/midi_out" ":$ROOT_DIR/midialogue/midi_out" 
 
 ./vast copy $ROOT_DIR/midialogue/midi_in $ID:/workspace/vast_ai/midialogue/midi_in
-./vast copy $ID:/workspace/vast_ai/midialogue/midi_out $ROOT_DIR/midialogue/midi_out"
+./vast copy $ID:/workspace/vast_ai/midialogue/midi_out $ROOT_DIR/midialogue/midi_out
 
 
 

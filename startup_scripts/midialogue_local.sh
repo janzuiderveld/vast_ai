@@ -180,9 +180,8 @@ echo "model listens on virtual port $model_port"
 # while loop copying over midi files to and from vast 
 cd $ROOT_DIR
 while true; do
-  ./vast copy $ROOT_DIR/midialogue/midi_in $ID:/workspace/vast_ai/midialogue/midi_in
-  ./vast copy $ID:/workspace/vast_ai/midialogue/midi_out $ROOT_DIR/midialogue/midi_out
-  # sleep 0.1 second
+  ./vast copy $ROOT_DIR/midialogue/midi_in $ID:/workspace/vast_ai/midialogue
+  ./vast copy $ID:/workspace/vast_ai/midialogue/midi_out $ROOT_DIR/midialogue
   sleep 5
 done
 

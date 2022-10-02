@@ -52,16 +52,13 @@ HardwareSerial Serials[7] {
   Serial7
 };
 
+//declare list for measured distances
+int dists[7];
 
-int dist; /*----actual distance measurements of LiDAR---*/
-int strength; /*----signal strength of LiDAR----------------*/
-float temprature;
-unsigned char check;        /*----save check value------------------------*/
 int i;
-unsigned char uart[9];  /*----save data measured by LiDAR-------------*/
+unsigned char uart[7][5];  /*----save data measured by LiDAR-------------*/
 const int HEADER=0x59; /*----frame header of data package------------*/
-int rec_debug_state = 0x01;//receive state for frame
-
+int rec_debug_state[7] = {0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01}; /*----receive state for frame----------------*/
 
 void setup() {
   delay(2000);
@@ -79,79 +76,86 @@ void setup() {
 void loop() {
   // read from all 7 serial ports
   for (int i = 0; i < 7; i++) {
-    Get_Lidar_data(Serials[i]);
+    while(Serials[i].available()){
+      Get_Lidar_data(serialX, i);
+    }
+
+    // Get_Lidar_data(Serials[i], i);
   }
+
+  
+
 }
 
-void Get_Lidar_data(HardwareSerial serialX, int dists[]){
+void Get_Lidar_data(HardwareSerial serialX, int i){
 if (serialX.available()) //check if serial port has data input
     {
-    if(rec_debug_state == 0x01)
+    if(rec_debug_state[i] == 0x01)
         {  //the first byte
-          uart[0]=serialX.read();
-          if(uart[0] == 0x59)
+          uart[i][0]=serialX.read();
+          if(uart[i][0] == 0x59)
               {
-                // check = uart[0];
-                rec_debug_state = 0x02;
+                // check = uart[i][0];
+                rec_debug_state[i] = 0x02;
               }
         }
-else if(rec_debug_state == 0x02)
+else if(rec_debug_state[i] == 0x02)
      {//the second byte
-      uart[1]=serialX.read();
-      if(uart[1] == 0x59)
+      uart[i][1]=serialX.read();
+      if(uart[i][1] == 0x59)
           {
-            // check += uart[1];
-            rec_debug_state = 0x03;
+            // check += uart[i][1];
+            rec_debug_state[i] = 0x03;
           }
       else{
-            rec_debug_state = 0x01;
+            rec_debug_state[i] = 0x01;
           }
       }
 
-else if(rec_debug_state == 0x03)
+else if(rec_debug_state[i] == 0x03)
         {
-          uart[2]=serialX.read();
-          // check += uart[2];
-          rec_debug_state = 0x04;
+          uart[i][2]=serialX.read();
+          // check += uart[i][2];
+          rec_debug_state[i] = 0x04;
         }
-else if(rec_debug_state == 0x04)
+else if(rec_debug_state[i] == 0x04)
         {
-          uart[3]=serialX.read();
-          // check += uart[3];
-          rec_debug_state = 0x05;
+          uart[i][3]=serialX.read();
+          // check += uart[i][3];
+          rec_debug_state[i] = 0x05;
         }
-// else if(rec_debug_state == 0x05)
+// else if(rec_debug_state[i] == 0x05)
 //         {
-//           uart[4]=serialX.read();
-//           check += uart[4];
-//           rec_debug_state = 0x06;
+//           uart[i][4]=serialX.read();
+//           check += uart[i][4];
+//           rec_debug_state[i] = 0x06;
 //         }
-// else if(rec_debug_state == 0x06)
+// else if(rec_debug_state[i] == 0x06)
 //         {
-//           uart[5]=serialX.read();
-//           check += uart[5];
-//           rec_debug_state = 0x07;
+//           uart[i][5]=serialX.read();
+//           check += uart[i][5];
+//           rec_debug_state[i] = 0x07;
 //         }
-// else if(rec_debug_state == 0x07)
+// else if(rec_debug_state[i] == 0x07)
 //         {
-//           uart[6]=serialX.read();
-//           check += uart[6];
-//           rec_debug_state = 0x08;
+//           uart[i][6]=serialX.read();
+//           check += uart[i][6];
+//           rec_debug_state[i] = 0x08;
 //         }
-// else if(rec_debug_state == 0x08)
+// else if(rec_debug_state[i] == 0x08)
 //         {
-//           uart[7]=serialX.read();
-//           check += uart[7];
-//           rec_debug_state = 0x09;
+//           uart[i][7]=serialX.read();
+//           check += uart[i][7];
+//           rec_debug_state[i] = 0x09;
 //         }
 
-// else if(rec_debug_state == 0x09)
-else if(rec_debug_state ==  0x05)
+// else if(rec_debug_state[i] == 0x09)
+else if(rec_debug_state[i] ==  0x05)
            {
-            dist = uart[2] + uart[3]*256;//the distance
+            dist = uart[i][2] + uart[i][3]*256;//the distance
             Serial.print(dist); //output measure distance value of LiDAR
             while(serialX.available()){serialX.read();} // This part is added becuase some previous packets are there in the buffer so to clear serial buffer and get fresh data.
-            rec_debug_state = 0x01;
+            rec_debug_state[i] = 0x01;
            }
       
         // {

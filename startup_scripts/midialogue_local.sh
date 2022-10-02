@@ -69,9 +69,6 @@ tee_index=${#tee_index}
 let blo_index=$blo_index-2
 let tee_index=$tee_index-2
 
-echo $blo_index
-echo $tee_index
-
 out_port=${midi_devices:$blo_index:2}
 in_port=${midi_devices:$tee_index:2}
 
@@ -159,8 +156,8 @@ python3 midi_autoplay.py --midi_out_port $out_port &
 # python3 Python-TCP-Image-Socket/client.py &
 cd $ROOT_DIR
 ID=$(./vast show instances --raw | python3 -c "import sys, json; print(json.load(sys.stdin)[0]['id'])")
-./vast copy $"$ROOT_DIR/midialogue/midi_in" $"$ID:/workspace/vast_ai/midialogue/midi_in"
-./vast copy $"$ID:/workspace/vast_ai/midialogue/midi_out $"$ROOT_DIR/midialogue/midi_out" 
+./vast copy $":$ROOT_DIR/midialogue/midi_in" $"$ID:/workspace/vast_ai/midialogue/midi_in"
+./vast copy $"$ID:/workspace/vast_ai/midialogue/midi_out" $":$ROOT_DIR/midialogue/midi_out" 
 
 
 cd $ROOT_DIR/midialogue/midi-utilities/bin

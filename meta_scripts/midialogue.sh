@@ -1,4 +1,7 @@
 #!/bin/bash
+
+exec &> /home/p/Desktop/midi_meta.log
+
 # wget https://raw.githubusercontent.com/vast-ai/vast-python/master/vast.py -O vast; chmod +x vast;
 
 case "$(uname -s)" in
@@ -18,6 +21,8 @@ esac
 
 # yes | apt-get install python3-pip python3-venv
 
+cd /home/p/vast_ai
+
 ROOT_DIR=$PWD
 python3 -m venv $ROOT_DIR/midialogue/midialogue_env
 source $ROOT_DIR/midialogue/midialogue_env/bin/activate
@@ -29,3 +34,5 @@ python3 vast_bid.py auto1_bid midialogue
 
 # sudo chmod a+x startup_scripts/midialogue_local.sh
 ./startup_scripts/midialogue_local.sh 
+
+echo $?

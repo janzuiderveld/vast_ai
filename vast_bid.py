@@ -18,6 +18,8 @@ if args.project_name == "midialogue":
 else:
     image = "pytorch/pytorch"
 
+
+
 # run vast shell command "./vast search offers" to get prices 
 if args.bidding_tactic == 'cheap':
     vast_cmd = './vast search offers -b --raw -o "dph"'
@@ -31,6 +33,9 @@ elif args.bidding_tactic == 'auto1':
     vast_cmd = './vast search offers -d "direct_port_count>0 num_gpus == 1 gpu_ram > 20" --raw'   
 elif args.bidding_tactic == 'best1':
     vast_cmd = './vast search offers -d "direct_port_count>0 num_gpus == 1 gpu_ram > 20" --raw -o "dlperf-"'   
+
+api_key = "./vast set api-key de86e0ed253c266f1af083bba635720f6b2e0beb9ecacac70006d88b9f63e4fc"
+subprocess.check_output(api_key, shell=True)
 
 vast_output = subprocess.check_output(vast_cmd, shell=True)
 

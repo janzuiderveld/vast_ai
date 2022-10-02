@@ -83,7 +83,7 @@ void loop() {
   }
 }
 
-int Get_Lidar_data(serialX){
+int Get_Lidar_data(HardwareSerial serialX){
 if (serialX.available()) //check if serial port has data input
     {
     if(rec_debug_state == 0x01)

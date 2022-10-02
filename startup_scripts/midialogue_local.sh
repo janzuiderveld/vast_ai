@@ -153,21 +153,7 @@ echo "Server ready"
 
 python3 midi_autoplay.py --midi_out_port $out_port &
 
-# python3 Python-TCP-Image-Socket/client.py &
-cd $ROOT_DIR
-ID=$(./vast show instances --raw | python3 -c "import sys, json; print(json.load(sys.stdin)[0]['id'])")
-# ./vast copy "$ROOT_DIR/midialogue/midi_in" $"$ID:/workspace/vast_ai/midialogue/midi_in"
-# ./vast copy "$ID:/workspace/vast_ai/midialogue/midi_out" ":$ROOT_DIR/midialogue/midi_out" 
-
-
-# make midi_in and midi_out folders
-mkdir $ROOT_DIR/midialogue/midi_in
-mkdir $ROOT_DIR/midialogue/midi_out
-
-# ./vast copy $ROOT_DIR/midialogue/midi_in $ID:/workspace/vast_ai/midialogue/midi_in
-# ./vast copy $ID:/workspace/vast_ai/midialogue/midi_out $ROOT_DIR/midialogue/midi_out
-
-
+python3 Python-TCP-Image-Socket/client.py &
 
 cd $ROOT_DIR/midialogue/midi-utilities/bin
 prefix=$"$ROOT_DIR/midialogue/midi_in/"
@@ -175,14 +161,20 @@ prefix=$"$ROOT_DIR/midialogue/midi_in/"
 
 echo "model listens on virtual port $model_port"
 # saves files which will be sent to model
-./brainstorm  --in $model_port --prefix $prefix --timeout $timeout --confirmation 'echo "saved a midi file"' &
+./brainstorm  --in $model_port --prefix $prefix --timeout $timeout --confirmation 'echo "saved a midi file"' 
 
+# ./brainstorm  --in $model_port --prefix $prefix --timeout $timeout --confirmation 'echo "saved a midi file"' &
 # while loop copying over midi files to and from vast and hide output
-cd $ROOT_DIR
-while true; do
-  ./vast copy $ROOT_DIR/midialogue/midi_in $ID:/workspace/vast_ai/midialogue 2> /dev/null
-  ./vast copy $ID:/workspace/vast_ai/midialogue/midi_out $ROOT_DIR/midialogue 2> /dev/null
-  sleep 0.1
-done
+# cd $ROOT_DIR
+# ID=$(./vast show instances --raw | python3 -c "import sys, json; print(json.load(sys.stdin)[0]['id'])")
+
+# # make midi_in and midi_out folders
+# mkdir $ROOT_DIR/midialogue/midi_in
+# mkdir $ROOT_DIR/midialogue/midi_out
+# while true; do
+#   ./vast copy $ROOT_DIR/midialogue/midi_in $ID:/workspace/vast_ai/midialogue 2> /dev/null
+#   ./vast copy $ID:/workspace/vast_ai/midialogue/midi_out $ROOT_DIR/midialogue 2> /dev/null
+#   sleep 0.1
+# done
 
 

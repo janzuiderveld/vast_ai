@@ -54,11 +54,14 @@ HardwareSerial Serials[7] {
 
 //declare list for measured distances
 int dists[7];
+int dist_temp;
 
 int i;
 unsigned char uart[7][5];  /*----save data measured by LiDAR-------------*/
 const int HEADER=0x59; /*----frame header of data package------------*/
 int rec_debug_state[7] = {0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01}; /*----receive state for frame----------------*/
+
+int note[7] = {0, 0, 0, 0, 0, 0, 0};
 
 void setup() {
   delay(2000);
@@ -77,20 +80,35 @@ void loop() {
   // read from all 7 serial ports
   for (int i = 0; i < 7; i++) {
     while(Serials[i].available()){
-      Get_Lidar_data(serialX, i);
+      Get_Lidar_data(Serials[i], i);
     }
 
-    // Get_Lidar_data(Serials[i], i);
+  for (int i = 0; i < 7; i++) {
+    // if dists[i] < 100 and note is not 60, send midi note on
+    if (dists[i] < 100 && note[i] != 60) {
+      note[i] = 60;
+      usbMIDI.sendNoteOn(60, 99, i);  // 60 = C4
+      // delay(200);
+
+      Serial.println("note on");
+
+    // if dists[i] > 100 and note is not 0, send midi note off
+    } else if (dists[i] > 100 && note[i] != 0) {
+      note[i] = 0;
+      usbMIDI.sendNoteOff(60, 0, i);  // 60 = C4
+      Serial.println("note off");
+
+    }
+
   }
-
-  
-
+}
 }
 
 void Get_Lidar_data(HardwareSerial serialX, int i){
 if (serialX.available()) //check if serial port has data input
     {
     if(rec_debug_state[i] == 0x01)
+        
         {  //the first byte
           uart[i][0]=serialX.read();
           if(uart[i][0] == 0x59)
@@ -104,7 +122,6 @@ else if(rec_debug_state[i] == 0x02)
       uart[i][1]=serialX.read();
       if(uart[i][1] == 0x59)
           {
-            // check += uart[i][1];
             rec_debug_state[i] = 0x03;
           }
       else{
@@ -115,74 +132,36 @@ else if(rec_debug_state[i] == 0x02)
 else if(rec_debug_state[i] == 0x03)
         {
           uart[i][2]=serialX.read();
-          // check += uart[i][2];
           rec_debug_state[i] = 0x04;
         }
 else if(rec_debug_state[i] == 0x04)
         {
           uart[i][3]=serialX.read();
-          // check += uart[i][3];
           rec_debug_state[i] = 0x05;
         }
-// else if(rec_debug_state[i] == 0x05)
-//         {
-//           uart[i][4]=serialX.read();
-//           check += uart[i][4];
-//           rec_debug_state[i] = 0x06;
-//         }
-// else if(rec_debug_state[i] == 0x06)
-//         {
-//           uart[i][5]=serialX.read();
-//           check += uart[i][5];
-//           rec_debug_state[i] = 0x07;
-//         }
-// else if(rec_debug_state[i] == 0x07)
-//         {
-//           uart[i][6]=serialX.read();
-//           check += uart[i][6];
-//           rec_debug_state[i] = 0x08;
-//         }
-// else if(rec_debug_state[i] == 0x08)
-//         {
-//           uart[i][7]=serialX.read();
-//           check += uart[i][7];
-//           rec_debug_state[i] = 0x09;
-//         }
 
-// else if(rec_debug_state[i] == 0x09)
 else if(rec_debug_state[i] ==  0x05)
            {
-            dist = uart[i][2] + uart[i][3]*256;//the distance
-            Serial.print(dist); //output measure distance value of LiDAR
+
+            dist_temp = uart[i][2] + uart[i][3]*256;//the distance
+
+            // Serial.println(dist_temp);
+
+            // Do not update bad data
+            if (dist_temp < 0 || dist_temp > 1200) {
+              while(serialX.available()){serialX.read();} // This part is added becuase some previous packets are there in the buffer so to clear serial buffer and get fresh data.
+              rec_debug_state[i] = 0x01;
+              return;
+            }
+
+            dists[i] = dist_temp;
+
             while(serialX.available()){serialX.read();} // This part is added becuase some previous packets are there in the buffer so to clear serial buffer and get fresh data.
             rec_debug_state[i] = 0x01;
+            
+            // Serial.println(dists[i]); //output measure distance value of LiDAR
+            
            }
-      
-        // {
-          // uart[8]=serialX.read();
-          // if(uart[8] == check)
-            // {
-              
-              // dist = uart[2] + uart[3]*256;//the distance
-              // strength = uart[4] + uart[5]*256;//the strength
-              // temprature = uart[6] + uart[7] *256;//calculate chip temprature
-              // temprature = temprature/8 - 256;                              
-
-              // Serial.print(dist); //output measure distance value of LiDAR
-              // Serial.print('\n');
-              // Serial.print("strength = ");
-              // Serial.print(strength); //output signal strength value
-              // Serial.print('\n');
-              // Serial.print("\t Chip Temprature = ");
-              // Serial.print(temprature);
-              // Serial.println(" celcius degree"); //output chip temperature of Lidar                  
-
-              // while(serialX.available()){serialX.read();} // This part is added becuase some previous packets are there in the buffer so to clear serial buffer and get fresh data.
-              
-            //  }
-          // rec_debug_state = 0x01;
-
-          
+    
         }
-    }
 }

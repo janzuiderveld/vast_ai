@@ -9,7 +9,7 @@ parser.add_argument('bidding_tactic', type=str, default='cheap', choices=['cheap
 # parser.add_argument('min_bid', type=str, default='1')
 parser.add_argument('project_name', type=str, default='', help='project name')
 parser.add_argument('--dummy', type=int, default=0, help='')
-parser.add_argument('--direct', type=int, default=1, choices=[1, 0], help='direct connection, use true when doing file transfers')
+parser.add_argument('--direct', type=int, default=0, choices=[1, 0], help='direct connection, use true when doing file transfers')
 args = parser.parse_args()
 
 if args.project_name == "midialogue":

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-exec &> /home/p/Desktop/midi_meta.log
+#exec &> /home/p/Desktop/midi_meta.log
 
 # wget https://raw.githubusercontent.com/vast-ai/vast-python/master/vast.py -O vast; chmod +x vast;
 

@@ -29,8 +29,9 @@ source $ROOT_DIR/midialogue/midialogue_env/bin/activate
 
 python3 -m pip install requests
 
+python3 vast_bid.py cheap_od midialogue
 # python3 vast_bid.py cheap midialogue
-python3 vast_bid.py auto1_bid midialogue
+# python3 vast_bid.py auto1_bid midialogue
 
 # sudo chmod a+x startup_scripts/midialogue_local.sh
 ./startup_scripts/midialogue_local.sh 

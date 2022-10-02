@@ -177,12 +177,12 @@ echo "model listens on virtual port $model_port"
 # saves files which will be sent to model
 ./brainstorm  --in $model_port --prefix $prefix --timeout $timeout --confirmation 'echo "saved a midi file"' &
 
-# while loop copying over midi files to and from vast 
+# while loop copying over midi files to and from vast and hide output
 cd $ROOT_DIR
 while true; do
-  ./vast copy $ROOT_DIR/midialogue/midi_in $ID:/workspace/vast_ai/midialogue
-  ./vast copy $ID:/workspace/vast_ai/midialogue/midi_out $ROOT_DIR/midialogue
-  sleep 5
+  ./vast copy $ROOT_DIR/midialogue/midi_in $ID:/workspace/vast_ai/midialogue 2> /dev/null
+  ./vast copy $ID:/workspace/vast_ai/midialogue/midi_out $ROOT_DIR/midialogue 2> /dev/null
+  sleep 0.1
 done
 
 

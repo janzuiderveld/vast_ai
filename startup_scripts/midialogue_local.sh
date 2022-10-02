@@ -164,8 +164,8 @@ ID=$(./vast show instances --raw | python3 -c "import sys, json; print(json.load
 mkdir $ROOT_DIR/midialogue/midi_in
 mkdir $ROOT_DIR/midialogue/midi_out
 
-./vast copy $ROOT_DIR/midialogue/midi_in $ID:/workspace/vast_ai/midialogue/midi_in
-./vast copy $ID:/workspace/vast_ai/midialogue/midi_out $ROOT_DIR/midialogue/midi_out
+# ./vast copy $ROOT_DIR/midialogue/midi_in $ID:/workspace/vast_ai/midialogue/midi_in
+# ./vast copy $ID:/workspace/vast_ai/midialogue/midi_out $ROOT_DIR/midialogue/midi_out
 
 
 
@@ -175,4 +175,14 @@ prefix=$"$ROOT_DIR/midialogue/midi_in/"
 
 echo "model listens on virtual port $model_port"
 # saves files which will be sent to model
-./brainstorm  --in $model_port --prefix $prefix --timeout $timeout --confirmation 'echo "saved a midi file"'
+./brainstorm  --in $model_port --prefix $prefix --timeout $timeout --confirmation 'echo "saved a midi file"' &
+
+# while loop copying over midi files to and from vast 
+while true; do
+  ./vast copy $ROOT_DIR/midialogue/midi_in $ID:/workspace/vast_ai/midialogue/midi_in
+  ./vast copy $ID:/workspace/vast_ai/midialogue/midi_out $ROOT_DIR/midialogue/midi_out
+  # sleep 0.1 second
+  sleep 0.1
+done
+
+

@@ -1,13 +1,15 @@
-// This code is wrriten to read data from Benewake mini-S LiDAR through UART physical interface.
+// This code is writen to read data from Benewake mini-S LiDAR through UART physical interface.
 // The code is tested with Teensy 4.1. It can also be used with ESP8266 by making slight modifications
 // by Ibrahim Technical Support Engineer: ibrahim@benewake.com
 
 // This code reads serial data from 7 different Benewake mini-S LiDAR sensors
 
-// Ant 1: C3, D3, E3, G3, A3 Ant 2: C4, D4, E4, G4, A4 Ant 3: C5, D5, E5, G5, A5
-// Ant 1: 48, 50, 52, 55, 57 Ant 2:  Ant 3: 
-
-int noteLock[7] = {0,0,0,0,0,0,0};
+int DEBUG = 1;
+double deltaAverageThresholdTriggerIn = 1.0; // IMPORTANT
+double deltaAverageThresholdControlOut = 1.0; // IMPORTANT
+double triggerDist = 250.0; // IMPORTANT
+const double smoothSamples = 1.0 ;
+int ctrlStartMs = 20;
 
 int notes1[6] = {48, 50, 52, 55, 57, 59};
 int notes2[6] = {48, 50, 52, 55, 57, 59};
@@ -17,53 +19,23 @@ int notes5[6] = {48, 50, 52, 55, 57, 59};
 int notes6[6] = {48, 50, 52, 55, 57, 59};
 int notes7[6] = {48, 50, 52, 55, 57, 59};
 
-int ctrlMapPos[7] = {93, 93, 93, 93, 93, 93, 93};
-int ctrlMapNeg[7] = {94, 94, 94, 94, 94, 94, 94};
+// length of notes arrays
+// int numNotes = sizeof(notes1) -1;
+int numNotes = 5;
+
+int ctrlMapPos[7] = {94, 94, 94, 94, 94, 94, 94};
+int ctrlMapNeg[7] = {93, 93, 93, 93, 93, 93, 93};
+
 // int ctrlMapPos[7] = {0, 0, 0, 0, 0, 0, 0};
 // int ctrlMapNeg[7] = {0, 0, 0, 0, 0, 0, 0};
 int ctrlChannelMapPos[7] = {1, 2, 3, 4, 5, 6, 7};
 int ctrlChannelMapNeg[7] = {1, 2, 3, 4, 5, 6, 7};
 
-double deltaAverageThresholdTriggerIn = 2.0; // IMPORTANT
-double deltaAverageThresholdControlOut = 1.0; // IMPORTANT
-int triggerSampleThreshold = 10; // IMPORTANT
+int inputMapRange[2] = {50, 250};
 
-// list of notes
+const int num_channels = 7; // number of analog channels to iterate over
 int *notes[7] = {notes1, notes2, notes3, notes4, notes5, notes6, notes7};
-
-int DEBUG = 1;
-
-double triggerDist = 250.0;
-
-int lastDist = 0;
-
-// Serial 2 (sensor 1)
-#define RXD2 7
-#define TXD2 8
-
-// Serial 1 (sensor 2)
-#define RXD1 0
-#define TXD1 1
-
-// Serial 5 (sensor 3)
-#define RXD5 21
-#define TXD5 20
-
-// Serial 4 (sensor 4)
-#define RXD4 16
-#define TXD4 17
-
-// Serial 3 (sensor 5)
-#define RXD3 15
-#define TXD3 14
-
-// Serial 8 (sensor 6)
-#define RXD8 34
-#define TXD8 35
-
-// Serial 7 (sensor 7)
-#define RXD7 28
-#define TXD7 29
+int noteLock[7] = {0,0,0,0,0,0,0};
 
 // Ordered Serial list
 HardwareSerial Serials[7] {
@@ -76,51 +48,30 @@ HardwareSerial Serials[7] {
   Serial2
 };
 
-const int gAnalogChannelNum = 7; // number of analog channels to iterate over
+// bool first_iteration = true;
+// const int sampleRate = 1000;
+// const int analogMemSec = 3;
+// const int analogMemSamples = analogMemSec * sampleRate;
+// double analogMemory [num_channels][analogMemSamples];
+// int analogMemCounter[num_channels] = {0, 0, 0, 0, 0, 0, 0};
 
-// needed?
-bool first_sample[gAnalogChannelNum] = {true, true, true, true, true, true, true} ;
-bool first_iteration = true;
-///////////////////////////////////////
+// double triggerSampleCount[num_channels] = {0, 0, 0, 0, 0, 0, 0};
 
-double analogInMax[gAnalogChannelNum]= {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0} ;
-double analogInMin[gAnalogChannelNum]= {9999.0, 9999.0, 9999.0, 9999.0, 9999.0, 9999.0, 9999.0, } ;
-
-double runningAverage;
-
-
-float lastTrigger[gAnalogChannelNum];
-const int sampleRate = 1000;
-const int analogMemSec = 3;
-const int analogMemSamples = analogMemSec * sampleRate;
-
-double analogMemory [gAnalogChannelNum][analogMemSamples];
-int analogMemCounter[gAnalogChannelNum] = {0, 0, 0, 0, 0, 0, 0};
-
-double triggerSampleCount[gAnalogChannelNum] = {0, 0, 0, 0, 0, 0, 0};
-double thresh [gAnalogChannelNum];
-double outputScaling [gAnalogChannelNum];
-
-double thresh_error = 0.02;
-const double smoothSamples = 1.0 ;
+bool first_sample[num_channels] = {true, true, true, true, true, true, true} ;
 double scalar1 = 1.0/smoothSamples;
 double scalar2 = 1.0 - scalar1;
 
 // TODO if smoothing is not needed, make this int 
-double average[gAnalogChannelNum]= {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0} ;
-double lastAverage[gAnalogChannelNum]= {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0} ;
-double deltaAverage[gAnalogChannelNum]= {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0} ;
-double scaled[gAnalogChannelNum]= {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0} ;
+double average[num_channels]= {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0} ;
+double lastAverage[num_channels]= {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0} ;
+double deltaAverage[num_channels]= {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0} ;
 
 
-
-int counter = 0;
-
-//declare list for measured distances
+// declare list for measured distances
 int dists[7];
+int lastDists[7] = {0, 0, 0, 0, 0, 0, 0};
 int dist_temp;
 
-int i;
 unsigned char uart[7][5];  /*----save data measured by LiDAR-------------*/
 const int HEADER=0x59; /*----frame header of data package------------*/
 int rec_debug_state[7] = {0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01}; /*----receive state for frame----------------*/
@@ -130,6 +81,8 @@ int noteIndex[7] = {-1, -1, -1, -1, -1, -1, -1};
 int enterDist[7] = {999, 999, 999, 999, 999, 999, 999};
 int distDiff[7] = {0, 0, 0, 0, 0, 0, 0};
 int ctrlChange[7] = {0, 0, 0, 0, 0, 0, 0};
+int triggerTick[7] = {0, 0, 0, 0, 0, 0, 0};
+
 
 // USB MIDI receive functions
 // contributed by Jan Zuiderveld
@@ -149,8 +102,6 @@ void OnNoteOff(byte channel, byte note, byte velocity) {
 ///////////////////////// SETUP ///////////////////////////// 
 
 void setup() {
-  delay(2000);
-
   auto start = millis();
   
   if (DEBUG) {
@@ -168,164 +119,85 @@ void setup() {
     pinMode(laser_control_pins[i], OUTPUT);
     digitalWrite(laser_control_pins[i], HIGH);
   }
+
   usbMIDI.setHandleNoteOff(OnNoteOff);
   usbMIDI.setHandleNoteOn(OnNoteOn) ;
-
-  // blink lasers during setup
-  for (int i = 0; i < 7; i++) {
-    pinMode(laser_control_pins[i], OUTPUT);
-  }
-  delay(500);
-  for (int i = 0; i < 7; i++) {
-    // digitalWrite(laser_control_pins[i], LOW);
-    pinMode(laser_control_pins[i], INPUT);
-  }
-  delay(500);
-    for (int i = 0; i < 7; i++) {
-    pinMode(laser_control_pins[i], OUTPUT);
-    // digitalWrite(laser_control_pins[i], HIGH);
-  }
-  delay(500);
-  for (int i = 0; i < 7; i++) {
-    // digitalWrite(laser_control_pins[i], LOW);
-    pinMode(laser_control_pins[i], INPUT);
-  }
-  delay(500);
-    for (int i = 0; i < 7; i++) {
-    // digitalWrite(laser_control_pins[i], HIGH);
-    pinMode(laser_control_pins[i], OUTPUT);
-  }
-
- 
-  // // loop until analogMem is filled
-    // Serial.println("Filling memory");
-    // while (analogMemCounter[6] < analogMemSamples) {
-    //     for(unsigned int ch = 0; ch < gAnalogChannelNum; ch++) {
-            
-    //         // save current rec_debug_state
-    //         int rec_debug_state_last = rec_debug_state[ch];
-            
-    //         while(Serials[ch].available()){
-    //             Get_Lidar_data(Serials[ch], ch);
-    //         }
-
-    //         if (rec_debug_state[ch] == 0x01) {
-    //             if (rec_debug_state_last == 0x05) {
-    //                 // save to memory
-    //                 analogMemory[ch][analogMemCounter[ch]] = dists[ch];
-    //                 analogMemCounter[ch]++;
-
-    //                 if (dists[ch] > analogInMax[ch]) {
-    //                     // print to the console the channel, the min and max
-    //                     // std::cout << "Channel " << ch << ": " << analogInMin[ch] << " to " << analogInMax[ch] << std::endl;
-    //                     analogInMax[ch] = dists[ch];
-    //                 }
-
-    //                 if (dists[ch] < analogInMin[ch]) {
-    //                     // filter our zero readings
-    //                         // print to the console the channel, the min and max
-    //                         // std::cout << "Channel " << ch << ": " << analogInMin[ch] << " to " << analogInMax[ch] << std::endl;
-    //                     analogInMin[ch] = dists[ch];
-    //                 }
-    //             }
-    //         } 
-    //     }
-    // if (DEBUG) {
-    //   // print counters
-    //   for (int i = 0; i < 7; i++) {
-    //     Serial.print(analogMemCounter[i]);
-    //     Serial.print(" ");
-    //   }
-    //   Serial.println("");
-      
-      // Serial.println("");
-
-      // // loop over channels
-      // for(unsigned int ch = 0; ch < gAnalogChannelNum; ch++) {
-
-      //     //print AnalogInMin and AnalogInMax
-      //     Serial.print("Channel ");
-      //     Serial.print(ch);
-      //     Serial.print(": ");
-      //     Serial.print(analogInMin[ch]);
-      //     Serial.print(" to ");
-      //     Serial.println(analogInMax[ch]);
-
-      //     // print memory counter
-      //     Serial.print("Memory counter: ");
-      //     Serial.println(analogMemCounter[ch]);
-
-      //     }
-
-    //   }
-
-    // }
-
-
-  first_iteration = false;
 
   if (DEBUG) {
     // print the time that has elapsed
     auto end = millis();
     auto duration = (end - start);
     // print duration
-    Serial.print("Duration (ms): ");
+    Serial.print("Setup Duration (ms): ");
     Serial.println(duration);
   }
-}
 
+  // blink lasers to signal setup is done
+  for (int i = 0; i < 7; i++) {
+    pinMode(laser_control_pins[i], OUTPUT);
+  }
+  delay(500);
+  for (int i = 0; i < 7; i++) {
+    // digitalWrite(laser_control_pins[i], LOW);
+    pinMode(laser_control_pins[i], INPUT);
+  }
+  delay(500);
+    for (int i = 0; i < 7; i++) {
+    pinMode(laser_control_pins[i], OUTPUT);
+    // digitalWrite(laser_control_pins[i], HIGH);
+  }
+  delay(500);
+  for (int i = 0; i < 7; i++) {
+    // digitalWrite(laser_control_pins[i], LOW);
+    pinMode(laser_control_pins[i], INPUT);
+  }
+  delay(500);
+    for (int i = 0; i < 7; i++) {
+    // digitalWrite(laser_control_pins[i], HIGH);
+    pinMode(laser_control_pins[i], OUTPUT);
+  }
+
+}
 
 ////////////////////////////////// main loop //////////////////////////////////
 void loop() {
-  while (usbMIDI.read()) {
+  while (usbMIDI.read()) { // read all incoming messages
   }
 
-  // TODO If performance is an issue, move everything to this first loop over channels
-  // TODO wait for new data? maybe looping now happens with old data?
   // read data from channels 
-  for (int i = 0; i < 7; i++) {
-    while(Serials[i].available()){
-      Get_Lidar_data(Serials[i], i);
+  for (int ch = 0; ch < num_channels; ch++) {
+    while(Serials[ch].available()){
+      Get_Lidar_data(Serials[ch], ch);
     }
-  }
 
-  // iterate over channels for processing
-  // get the average according to the smoothing factor
-  for(unsigned int ch = 0; ch < gAnalogChannelNum; ch++) {
-      if (smoothSamples == 1.0) {
-          average[ch] = dists[ch];
-      } else {
-          if (first_sample[ch]) {
-              average[ch] = dists[ch];
-              first_sample[ch] = false;
-          }
-          else {
-              average[ch] = (dists[ch]*scalar1) + (average[ch]*scalar2);
-          } 
-      }
+    // if dists[ch] has not changed, continue
+    if (dists[ch] == lastDists[ch]) {
+        continue;
+    }
+  
+    if (smoothSamples == 1.0) {
+        average[ch] = dists[ch];
+    } else {
+        if (first_sample[ch]) {
+            average[ch] = dists[ch];
+            first_sample[ch] = false;
+        }
+        else {
+            average[ch] = (dists[ch]*scalar1) + (average[ch]*scalar2);
+        } 
+    }
 
     // distance to MIDI translation
-
-    // if noteLock is true, then the note will not change until the noteLock is released
-    // if noteLock is false, then the note will change to corresponding note when the distance has settled
-
     // This section sends NoteOn messages to the MIDI channel when appropriate
     if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 0) {
-        
-        // TODO add measures to check if average is stable?
-        // triggerSampleCount[ch]++;
-        // if last triggerSampleThreshold measurements < triggerDist: map to note
-        // if (triggerSampleCount[ch] > triggerSampleThreshold) {
 
-        // like this:
-        // calculate absolute distance from last measurement
-        deltaAverage[ch] = abs(average[ch] - lastAverage[ch]);
-        if (deltaAverage[ch] >= deltaAverageThresholdTriggerIn) {
+        deltaAverage[ch] = (lastAverage[ch] - average[ch]); // positive if lower, negative if higher away
+        if (deltaAverage[ch] <= deltaAverageThresholdTriggerIn) {
         
-
             // map to note
             noteLock[ch] = 1;
-            noteIndex[ch] = map(average[ch], 50, 220, 0, 5);
+            noteIndex[ch] = map(average[ch], inputMapRange[0], inputMapRange[1], 0, numNotes);
+
             // cut off index at 0 and 5
             if (noteIndex[ch] < 0) {
                 noteIndex[ch] = 0;
@@ -337,6 +209,8 @@ void loop() {
 
             usbMIDI.sendNoteOn(noteOut[ch], 127, ch+1);
             usbMIDI.send_now();
+
+            triggerTick[ch] = millis();
 
             // print noteOut
             if (DEBUG) {
@@ -350,64 +224,58 @@ void loop() {
     }
 
     // This section sends ctrlChange messages to the MIDI channel when appropriate (distance change while noteLock is on)
-
     if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 1) {
-        triggerSampleCount[ch]++;
-        // if last triggerSampleThreshold measurements < triggerDist: map to note
-        if (triggerSampleCount[ch] > triggerSampleThreshold) {
-
-          if (enterDist[ch] == 0) {
-            enterDist[ch] = average[ch];
-          }
+        if (triggerTick[ch] < (millis() + ctrlStartMs)) {
           
-          deltaAverage[ch] = abs(average[ch] - lastAverage[ch]);
-          if (deltaAverage[ch] >= deltaAverageThresholdControlOut && deltaAverage != 0) {
-
+            if (enterDist[ch] == 0) {
+                enterDist[ch] = average[ch];
+            }
+          
             // get difference between enterDist and average
             distDiff[ch] = average[ch] - enterDist[ch];
             
             // map to ctrlChange
             if (distDiff[ch] > 0) {
                 ctrlChange[ch] = map(distDiff[ch], 0, 127, 0, 127);
+
                 // cutoff 
                 if (ctrlChange[ch] > 127) {
                     ctrlChange[ch] = 127;
                 }
-                if (ctrlChange[ch] < 0) {
-                    ctrlChange[ch] = 0;
+                if (ctrlChange[ch] < 1) {
+                    ctrlChange[ch] = 1;
                 }
+
                 usbMIDI.sendControlChange(ctrlMapPos[ch], ctrlChange[ch], ctrlChannelMapPos[ch]);
             }
 
-          if (distDiff[ch] < 0) {
-              ctrlChange[ch] = map(distDiff[ch], 0, -127, 0, 127);
-              // cutoff 
-              if (ctrlChange[ch] > 127) {
-                  ctrlChange[ch] = 127;
-              }
-              if (ctrlChange[ch] < 0) {
-                  ctrlChange[ch] = 0;
-              } 
-              usbMIDI.sendControlChange(ctrlMapNeg[ch], ctrlChange[ch], ctrlChannelMapNeg[ch]);
-          }
+            if (distDiff[ch] < 0) {
+                ctrlChange[ch] = map(distDiff[ch], 0, -127, 0, 127);
+                // cutoff 
+                if (ctrlChange[ch] > 127) {
+                    ctrlChange[ch] = 127;
+                }
+                if (ctrlChange[ch] < 1) {
+                    ctrlChange[ch] = 1;
+                } 
+                usbMIDI.sendControlChange(ctrlMapNeg[ch], ctrlChange[ch], ctrlChannelMapNeg[ch]);
+            }
 
           usbMIDI.send_now();
 
+            // print ctrlChange
+            if (DEBUG) {
+                Serial.print("CtrlChange: ");
+                Serial.println(ctrlChange[ch]);
+                Serial.print("Channel: ");
+                Serial.println(ch);
+                Serial.print("Dist ");
+                Serial.println(dists[ch]);
+            }
+
         }
 
-        // print ctrlChange
-        if (DEBUG) {
-          Serial.print("CtrlChange: ");
-          Serial.println(ctrlChange[ch]);
-          Serial.print("Channel: ");
-          Serial.println(ch);
-          Serial.print("Dist ");
-          Serial.println(dists[ch]);
-       }
-      }
     }
-  
-
 
     // This section sends NoteOff messages to the MIDI channel when appropriate
     if (noteLock[ch] == 1  && (average[ch] == 0 || average[ch] > triggerDist)) {
@@ -425,11 +293,10 @@ void loop() {
         noteLock[ch] = 0;
 
         // reset triggerSampleCount
-        triggerSampleCount[ch] = 0;
         enterDist[ch] = 0;
 
         // print 
-          if (DEBUG) {
+        if (DEBUG) {
             Serial.print("Note off: ");
             Serial.println(noteOut[ch]);
             Serial.print("Channel: ");
@@ -437,24 +304,24 @@ void loop() {
             Serial.print("Distance: ");
             Serial.println(average[ch]);
 
-          }
+        }
 
     }
 
     lastAverage[ch] = average[ch];
+    lastDists[ch] = dists[ch];
 
+  } // end of loop over channels
 
+    // every 100ms, print the distances
+    if (millis() % 100 == 0 && DEBUG && noteLock == 0) {
+        for (int i = 0; i < 7; i++) {
+            Serial.print(dists[i]);
+            Serial.print(" ");
+        }
+        Serial.println();
 
-  }
-  // every 100ms, print the distances
-  if (millis() % 100 == 0 && DEBUG && noteLock == 0) {
-    for (int i = 0; i < 7; i++) {
-      Serial.print(dists[i]);
-      Serial.print(" ");
     }
-    Serial.println();
-
-  }
 
 
 }

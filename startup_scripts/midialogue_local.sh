@@ -14,9 +14,9 @@ trap finish SIGINT
 # make sure there are no more tunnels on port 8080 the machine
 lsof -ti:8080 | xargs kill -9
 
-ROOT_DIR=$PWD
+cd vast_ai
 
-cd $ROOT_DIR/midialogue
+ROOT_DIR=$PWD
 
 echo "ROOT_DIR: $ROOT_DIR"
 

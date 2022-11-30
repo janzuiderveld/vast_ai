@@ -14,7 +14,7 @@ while True:
         out = os.popen("../vast show instances --raw").read()
         out = json.loads(out)[0]
         public_ip = (out["public_ipaddr"])
-        open_port = (out["direct_port_start"])
+        open_port = (out["ports"]["22/tcp"][0]["HostPort"])
         print(ssh_address, port, public_ip, open_port)
         break
     except Exception as e:
@@ -29,8 +29,8 @@ while True:
 # subprocess.Popen(['ssh', f"-o StrictHostKeyChecking=no", f"-p {port}", f"{ssh_address}", "-L 8080:localhost:8080", "-N"])
 
 while True:
-    out = os.system("scp -o StrictHostKeyChecking=no -P {} {}:/workspace/vast_ai/dream_machine/READY.log READY.log".format(port, ssh_address))
-    # out = os.system(f"scp -o StrictHostKeyChecking=no -P {open_port} root@{public_ip}:/workspace/vast_ai/midialogue/READY.log READY.log")
+    #out = os.system("scp -o StrictHostKeyChecking=no -P {} {}:/workspace/vast_ai/dream_machine/READY.log READY.log".format(port, ssh_address))
+    out = os.system(f"scp -o StrictHostKeyChecking=no -P {open_port} root@{public_ip}:/workspace/vast_ai/midialogue/READY.log READY.log")
     if out != 0:
         continue
     else:

@@ -9,7 +9,14 @@ parser.add_argument('bidding_tactic', type=str, default='cheap', choices=['cheap
 # parser.add_argument('min_bid', type=str, default='1')
 parser.add_argument('project_name', type=str, default='', help='project name')
 parser.add_argument('--dummy', type=int, default=0, help='')
+parser.add_argument('--direct', type=int, default=1, choices=[1, 0], help='direct connection, use true when doing file transfers')
 args = parser.parse_args()
+
+if args.project_name == "midialogue":
+    # image = "pytorch/pytorch:1.0.1-cuda10.0-cudnn7-devel"
+    image = "pytorch/pytorch:1.10.0-cuda11.3-cudnn8-runtime"
+else:
+    image = "pytorch/pytorch"
 
 # run vast shell command "./vast search offers" to get prices 
 if args.bidding_tactic == 'cheap':
@@ -42,11 +49,11 @@ top_id = top_sellers[0]["id"]
 # If instance is allowed to be interrupted
 if args.bidding_tactic == 'cheap' or args.bidding_tactic == "cheap8" or args.bidding_tactic == "cheap4" or args.bidding_tactic == "auto1_bid": 
     bid = top_sellers[0]["min_bid"]
-    # vast_book_cmd = f"./vast create instance {top_id} --price {bid} --image pytorch/pytorch --disk 30 --onstart startup_scripts/{args.project_name}.sh"
-    vast_book_cmd = "./vast create instance " + str(top_id) + " --price " + str(bid) + " --image pytorch/pytorch --disk 30 --onstart startup_scripts/" + args.project_name + ".sh"
+    # vast_book_cmd = f"./vast create instance {top_id} --price {bid} --image {image} --disk 30 --onstart startup_scripts/{args.project_name}.sh"
+    vast_book_cmd = f"./vast create instance " + str(top_id) + " --price " + str(bid) + f" --image {image} --disk 30 --onstart startup_scripts/" + args.project_name + ".sh"
 else:
-    # vast_book_cmd = f"./vast create instance {top_id} --image pytorch/pytorch --disk 30 --onstart startup_scripts/{args.project_name}.sh"
-    vast_book_cmd = "./vast create instance " + str(top_id) + " --image pytorch/pytorch --disk 30 --onstart startup_scripts/" + args.project_name + ".sh"
+    # vast_book_cmd = f"./vast create instance {top_id} --image {image} --disk 30 --onstart startup_scripts/{args.project_name}.sh"
+    vast_book_cmd = f"./vast create instance " + str(top_id) + f" --image {image} --disk 30 --onstart startup_scripts/" + args.project_name + ".sh"
 
 vast_output = subprocess.check_output(vast_book_cmd, shell=True)
 print(vast_output)

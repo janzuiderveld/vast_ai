@@ -12,6 +12,8 @@ import tempfile
 import cv2
 from PIL import Image
 import shutil
+import traceback
+import json
 
 #TODO FILTER CORRUPT MIDI FILES: MAYBE FIXED 
 # normalizesmf <filename>  ?
@@ -47,15 +49,21 @@ import shutil
 
 
 class ClientSocket:
-    def __init__(self, ip, port, input_fp):
-        self.TCP_SERVER_IP = ip
-        self.TCP_SERVER_PORT = port
+    def __init__(self, input_fp):
+        out = os.popen("../vast show instances --raw").read()
+        out = json.loads(out)[0]
+        self.inst_ID = out["id"]
+
+        self.TCP_SERVER_IP = (out["public_ipaddr"])
+        self.TCP_SERVER_PORT = int(out["ports"]["22/tcp"][0]["HostPort"])
+
         self.input_fp = args.input_fp
         self.output_fp = args.output_fp
         self.dummy = args.dummy
         self.connectCount = 0
         # self.establish_ssh()
         self.connectServer()
+
 
     def establish_ssh(self):
         while True:
@@ -71,6 +79,7 @@ class ClientSocket:
                 ssh_address = (out["public_ipaddr"])
                 port = (out["machine_dir_ssh_port"])
             except:
+                traceback.print_exc()
                 continue
 
             if port != "None" or ssh_address !="None": break
@@ -99,6 +108,7 @@ class ClientSocket:
             self.connectCount = 0
         except Exception as e:
             print(e)
+            traceback.print_exc()
             # self.establish_ssh()
             time.sleep(5)
             self.connectServer()
@@ -162,6 +172,11 @@ class ClientSocket:
 
                 resize_frame = cv2.resize(frame, dsize=(565, 400), interpolation=cv2.INTER_AREA)
 
+                # if self.method='VAST':
+                #     # use vast copy to copy image to server
+                #     os.system(f"../vast copy {self.filepath} /home/ubuntu/vast_ai/dream_machine/input/{cnt_str}.jpg")
+                # else:
+
                 encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
                 result, imgencode = cv2.imencode('.jpg', resize_frame, encode_param)
                 data = numpy.array(imgencode)
@@ -198,6 +213,7 @@ class ClientSocket:
 
             except Exception as e:
                 print('server comm: Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+                traceback.print_exc()
                 self.sock.close()
                 time.sleep(1)
                 self.connectServer()
@@ -215,9 +231,9 @@ class ClientSocket:
 def main(args):
     # TCP_IP = "18.235.86.254"
     # TCP_PORT = 17513 
-    TCP_IP = 'localhost' 
-    TCP_PORT = 8080 
-    client = ClientSocket(TCP_IP, TCP_PORT, args)
+    # TCP_IP = os.environ['PUBLIC_IP']
+    # TCP_PORT = int(os.environ['OPEN_PORT'])
+    client = ClientSocket(args)
 
 if __name__ == "__main__":
     # argparser
@@ -249,6 +265,7 @@ if __name__ == "__main__":
             main(args)
         except Exception as err:
             print(err)
+            print(traceback.format_exc())
             continue
 
 

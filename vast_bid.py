@@ -17,6 +17,8 @@ if args.project_name == "midialogue":
     image = "pytorch/pytorch:1.10.0-cuda11.3-cudnn8-runtime"
 else:
     image = "pytorch/pytorch"
+    # torch==1.9.0+cu111 torchvision==0.10.0+cu111
+    # image = "pytorch/pytorch"
 
 # run vast shell command "./vast search offers" to get prices 
 if args.bidding_tactic == 'cheap':

@@ -112,9 +112,14 @@ if __name__ == "__main__":
     parser.add_argument('--TCP_SERVER_IP', type=str, default='192.168.2.2', help='TCP server ip')
     parser.add_argument('--TCP_SERVER_PORT', type=int, default=8081, help='TCP server port')
     parser.add_argument('--dummy', type=str, default="", help='')
-    # parser.add_argument('--dummy', type=str, default="/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs/test.png", help='')
+
 
     args = parser.parse_args()
+
+    import os
+    if os.environ["DEVICE"] == "Mac":
+        args.dummy = "/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/in_imgs/test.png"
+        args.input_fp = "/Users/janzuiderveld/Documents/GitHub/vast_ai/dream_machine/out_imgs"
 
     if os.path.exists(args.input_fp) and os.path.isdir(args.input_fp):
         shutil.rmtree(args.input_fp)

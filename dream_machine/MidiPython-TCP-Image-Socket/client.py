@@ -60,11 +60,16 @@ class ClientSocket:
     def establish_ssh(self):
         while True:
             try:
-                out = os.popen("../vast ssh-url").read().split(":")
-                if not out[0]: continue
-                print(out)
-                ssh_address = out[1][2:]
-                port = out[2].split("\n")[0]
+                # out = os.popen("../vast ssh-url").read().split(":")
+                # if not out[0]: continue
+                # print(out)
+                # ssh_address = out[1][2:]
+                # port = out[2].split("\n")[0]
+
+                out = os.popen("../vast show instances --raw").read()
+                out = json.loads(out)[0]
+                ssh_address = (out["public_ipaddr"])
+                port = (out["machine_dir_ssh_port"])
             except:
                 continue
 
@@ -217,11 +222,16 @@ def main(args):
 if __name__ == "__main__":
     # argparser
     parser = argparse.ArgumentParser(description='TCP client')
-    # parser.add_argument('--input_fp', type=str, default='in_imgs', help='ftp filepath')
-    parser.add_argument('--input_fp', type=str, default='/home/pi/FTP/test', help='ftp filepath')
 
-    # parser.add_argument('--output_fp', type=str, default='out_imgs', help='ftp filepath')
-    parser.add_argument('--output_fp', type=str, default='/home/pi/vast_ai/dream_machine/out_imgs', help='ftp filepath')
+    # check exported DEVICE variable
+    import os
+    if os.environ.get('DEVICE') == 'Mac':
+        parser.add_argument('--input_fp', type=str, default='in_imgs', help='ftp filepath')
+        parser.add_argument('--output_fp', type=str, default='out_imgs', help='ftp filepath')
+
+    else:
+        parser.add_argument('--input_fp', type=str, default='/home/pi/FTP/test', help='ftp filepath')
+        parser.add_argument('--output_fp', type=str, default='/home/pi/vast_ai/dream_machine/out_imgs', help='ftp filepath')
 
     parser.add_argument('--dummy', type=int, default=0, help='ftp filepath')
 

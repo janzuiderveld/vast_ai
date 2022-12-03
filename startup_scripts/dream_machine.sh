@@ -51,6 +51,7 @@ echo "starting dream machine"
 # bash -i -x start_sketch_sim_server.sh |& _start_sketch_sim_server.log
 
 cd /workspace/vast_ai/dream_machine/Sketch-Simulator
+echo "READY" > "$ROOT_DIR/READY.log"
 python3 -u train_folder_server.py | tee ../_sketch_sim_server.log
 
 

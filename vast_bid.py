@@ -20,10 +20,9 @@ else:
 
 # run vast shell command "./vast search offers" to get prices 
 if args.bidding_tactic == 'cheap':
-
-    vast_cmd = './vast search offers -b "direct_port_count>0" --raw -o "dph"'
+    vast_cmd = './vast search offers -b "direct_port_count>1" --raw -o "dph"'
 if args.bidding_tactic == 'cheap_od':
-    vast_cmd = './vast search offers -d "direct_port_count>0" --raw -o "dph"'
+    vast_cmd = './vast search offers -d "direct_port_count>1" --raw -o "dph"'
 
 if args.bidding_tactic == 'cheap4':
     vast_cmd = './vast search offers -b "direct_port_count>1 num_gpus == 4" --raw -o "dph"' 
@@ -59,13 +58,21 @@ top_id = top_sellers[0]["id"]
 if args.bidding_tactic == 'cheap' or args.bidding_tactic == "cheap8" or args.bidding_tactic == "cheap4" or args.bidding_tactic == "auto1_bid": 
     bid = top_sellers[0]["min_bid"]
     # vast_book_cmd = f"./vast create instance {top_id} --price {bid} --image {image} --disk 30 --onstart startup_scripts/{args.project_name}.sh"
-    vast_book_cmd = f"./vast create instance " + str(top_id) + " --price " + str(bid) + f" --image {image} --disk 30 --direct --onstart startup_scripts/" + args.project_name + ".sh"
+    vast_book_cmd = f"./vast create instance " + str(top_id) + " --price " + str(bid) + f" --image {image} --disk 100 --ssh --direct --onstart startup_scripts/" + args.project_name + ".sh"
 else:
     # vast_book_cmd = f"./vast create instance {top_id} --image {image} --disk 30 --onstart startup_scripts/{args.project_name}.sh"
-    vast_book_cmd = f"./vast create instance " + str(top_id) + f" --image {image} --disk 30 --direct --onstart startup_scripts/" + args.project_name + ".sh"
+    vast_book_cmd = f"./vast create instance " + str(top_id) + f" --image {image} --disk 100 --ssh --direct --onstart startup_scripts/" + args.project_name + ".sh"
 
-if args.direct:
-    vast_book_cmd += " --direct"
+# if args.direct:
+# #     vast_book_cmd += " --direct"
+#     import os, json
+#     out = os.popen("../vast show instances --raw").read()
+#     out = json.loads(out)[0]
+#     public_ip = (out["public_ipaddr"])
+#     open_port = (out["machine_dir_ssh_port"])
+#     print(public_ip, open_port)
 
 vast_output = subprocess.check_output(vast_book_cmd, shell=True)
+
 print(vast_output)
+print(top_sellers[0])

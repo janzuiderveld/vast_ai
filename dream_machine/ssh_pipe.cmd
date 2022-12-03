@@ -1,1 +1,1 @@
-ssh -p 24538 root@ssh5.vast.ai -L 8080:localhost:8080 -tt
+ssh -p 49780 76.50.42.128 -L 8080:localhost:8080 -tt

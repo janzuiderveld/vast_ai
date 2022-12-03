@@ -18,19 +18,23 @@ ROOT_DIR=$PWD
 
 cd $ROOT_DIR/dream_machine
 
+echo "activating venv"
 python3 -u -m venv $ROOT_DIR/dream_machine/dream_machine_env
 source $ROOT_DIR/dream_machine/dream_machine_env/bin/activate
 
+echo "installing requirements"
 python3 -u -m pip install -r $ROOT_DIR/dream_machine/Python-TCP-Image-Socket/requirements.txt
 python3 -u -m pip install requests 
 python3 -u -m pip install pillow 
 
 # sleep 10
 
+echo "starting server"
 python3 -u ./MidiPython-TCP-Image-Socket/sender_3.4.py &
 
 sleep 5
 
+echo "starting serial"
 sudo python3 -u ./serial/first.py &
 
 

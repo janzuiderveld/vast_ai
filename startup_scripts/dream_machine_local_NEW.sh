@@ -11,6 +11,24 @@ function finish {
 trap finish EXIT
 trap finish SIGINT
 
+case "$(uname -s)" in
+
+   Darwin)
+     echo 'Mac OS X'
+    #  curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    #  python3 get-pip.py
+    # venv?
+    export DEVICE=Mac
+
+     ;;
+
+   Linux)
+     echo 'Linux'
+     apt-get -y install python3-pip python3-venv lsof
+    export DEVICE=Linux
+     ;;
+esac
+
 ROOT_DIR=$PWD
 cd $ROOT_DIR/dream_machine
 

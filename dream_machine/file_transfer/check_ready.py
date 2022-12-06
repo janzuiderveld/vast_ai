@@ -14,6 +14,7 @@ while True:
         inst_ID = out["id"]
         break
     except Exception as e:
+        print(out)
         print("Error on line {}".format(sys.exc_info()[-1].tb_lineno))
         print("Server not ready yet")
         continue
@@ -26,12 +27,19 @@ os.environ["OPEN_PORT"] = open_port
 
 while True:
     try:
-        # out = os.system(f"scp -o StrictHostKeyChecking=no -P {open_port} root@{public_ip}:/workspace/vast_ai/dream_machine/READY.log READY.log")
-        out = os.system(f"../vast copy {inst_ID}:/workspace/vast_ai/dream_machine/READY.log READY.log")
-        if out != 0:
-            continue
+        # Rsync, is a bit slower in retrying..
+        out = subprocess.check_output([f"../vast", "copy", f"{inst_ID}:/workspace/vast_ai/dream_machine/READY.log", "READY.log"])   
+        if "0 files to consider" in out.decode("utf-8"):
+            print("server comm: file not found, trying again")
         else:
             break
+        
+
+        # out = os.system(f"scp -o StrictHostKeyChecking=no -P {open_port} root@{public_ip}:/workspace/vast_ai/dream_machine/READY.log READY.log")
+        # if out != 0:
+        #     continue
+        # else:
+        #     break
         time.sleep(1)
 
     except KeyboardInterrupt:

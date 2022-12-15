@@ -41,7 +41,7 @@ bash setup.sh | tee ../_sketch_setup.log
 # python3 -u -m pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html | tee ../_sketch_torch_update.log
 
 echo "starting dream machine"
+echo "READY" > "$ROOT_DIR/READY.log" # this happens in train_folder_server.py
 cd /workspace/vast_ai/dream_machine/Sketch-Simulator
 python3 -u train_folder_server.py | tee ../_sketch_sim_server.log
-# echo "READY" > "$ROOT_DIR/READY.log" # this happens in train_folder_server.py
 

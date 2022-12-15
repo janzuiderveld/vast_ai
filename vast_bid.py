@@ -16,7 +16,8 @@ if args.project_name == "midialogue":
     # image = "pytorch/pytorch:1.0.1-cuda10.0-cudnn7-devel"
     image = "pytorch/pytorch:1.10.0-cuda11.3-cudnn8-runtime"
 else:
-    image = "pytorch/pytorch"
+    image = "pytorch/pytorch:1.9.0-cuda11.1-cudnn8-runtime"
+    # image = "pytorch/pytorch"
     # torch==1.9.0+cu111 torchvision==0.10.0+cu111
     # image = "pytorch/pytorch"
 
@@ -24,7 +25,7 @@ else:
 if args.bidding_tactic == 'cheap':
     vast_cmd = './vast search offers -b "direct_port_count>1" --raw -o "dph"'
 if args.bidding_tactic == 'cheap_od':
-    vast_cmd = './vast search offers -d "direct_port_count>1" --raw -o "dph"'
+    vast_cmd = './vast search offers -d "direct_port_count>1 gpu_ram > 15" --raw -o "dph"'
 
 if args.bidding_tactic == 'cheap4':
     vast_cmd = './vast search offers -b "direct_port_count>1 num_gpus == 4" --raw -o "dph"' 

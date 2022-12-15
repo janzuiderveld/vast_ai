@@ -28,6 +28,6 @@ source $ROOT_DIR/dream_machine/dream_machine_env/bin/activate
 # python3 vast_bid.py best1 dream_machine
 # python3 vast_bid.py cheap4 dream_machine
 # python3 vast_bid.py cheap dream_machine
-python3 vast_bid.py cheap_od dream_machine
+python3 vast_bid.py cheap_od dream_machine_NEW
 echo "starting local script"
 ./startup_scripts/dream_machine_local_NEW.sh 

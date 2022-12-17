@@ -37,7 +37,7 @@ class ClientSocket:
         self.start()
 
     def start(self):
-        cnt = 1
+        cnt = 0
         while True:
             try:
                 if (cnt < 10):

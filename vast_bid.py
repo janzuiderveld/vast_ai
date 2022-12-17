@@ -26,6 +26,8 @@ if args.bidding_tactic == 'cheap':
     vast_cmd = './vast search offers -b "direct_port_count>1" --raw -o "dph"'
 if args.bidding_tactic == 'cheap_od':
     vast_cmd = './vast search offers -d "direct_port_count>1 gpu_ram > 15" --raw -o "dph"'
+if args.bidding_tactic == 'flops':
+    vast_cmd = './vast search offers -d "direct_port_count>1 gpu_ram > 15 num_gpus == 1" --raw -o "total_flops-"'
 
 if args.bidding_tactic == 'cheap4':
     vast_cmd = './vast search offers -b "direct_port_count>1 num_gpus == 4" --raw -o "dph"' 

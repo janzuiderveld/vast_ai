@@ -5,7 +5,7 @@ import argparse
 #TODO set 3090 mode.
 
 parser = argparse.ArgumentParser(description='Run a command on a remote host.')
-parser.add_argument('bidding_tactic', type=str, default='cheap', choices=['cheap', 'cheap8', 'cheap4', 'best1', 'auto1', 'auto1_bid', 'cheap_od'], help='bidding tactic')
+parser.add_argument('bidding_tactic', type=str, default='cheap', choices=['cheap', 'cheap8', 'cheap4', 'best1', 'auto1', 'auto1_bid', 'cheap_od', "flops"], help='bidding tactic')
 # parser.add_argument('min_bid', type=str, default='1')
 parser.add_argument('project_name', type=str, default='', help='project name')
 parser.add_argument('--dummy', type=int, default=0, help='')

@@ -97,7 +97,7 @@ class ClientSocket:
                         # else:
                         #     break
 
-                        out = os.system(f"scp -o StrictHostKeyChecking=no -P {self.TCP_SERVER_PORT} root@{self.TCP_SERVER_IP}:{self.pull_fp}/{cnt_str}.jpg {self.output_fp}/{cnt_str}.jpg")
+                        out = os.system(f"scp -o StrictHostKeyChecking=no -P {self.TCP_SERVER_PORT} root@{self.TCP_SERVER_IP}:{self.pull_fp}/{cnt_str}_out.jpg {self.output_fp}/{cnt_str}.jpg")
                         if out == 0:
                             break
                     except Exception as e:

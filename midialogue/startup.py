@@ -482,6 +482,9 @@ def tx1_to_midi(tx1, save_folder):
   p2_prog = pretty_midi.instrument_name_to_program('Lead 2 (sawtooth)')
   tr_prog = pretty_midi.instrument_name_to_program('Synth Bass 1')
   no_prog = pretty_midi.instrument_name_to_program('Breath Noise')
+  ph_prog = pretty_midi.instrument_name_to_program('Synth Bass 2')
+
+  ph = pretty_midi.Instrument(program=ph_prog, name='ph', is_drum=False)
   p1 = pretty_midi.Instrument(program=p1_prog, name='p1', is_drum=False)
   p2 = pretty_midi.Instrument(program=p2_prog, name='p2', is_drum=False)
   tr = pretty_midi.Instrument(program=tr_prog, name='tr', is_drum=False)
@@ -537,16 +540,22 @@ def tx1_to_midi(tx1, save_folder):
 
   # Create MIDI and add instruments
   midi = pretty_midi.PrettyMIDI(initial_tempo=120, resolution=22050)
-  midi.instruments.extend([p1, p2, tr, no])
+  midi.instruments.extend([ph, p1, p2, tr, no])
+  # midi.instruments.extend([p1, p2, tr, no])
 
   # set names of instruments
-  midi.instruments[0].name = 'p1'
-  midi.instruments[1].name = 'p2'
-  midi.instruments[2].name = 'tr'
-  midi.instruments[3].name = 'no'
+  midi.instruments[0].name = 'ph'
+  midi.instruments[1].name = 'p1'
+  midi.instruments[2].name = 'p2'
+  midi.instruments[3].name = 'tr'
+  midi.instruments[4].name = 'no'
+  # midi.instruments[0].name = 'p1'
+  # midi.instruments[1].name = 'p2'
+  # midi.instruments[2].name = 'tr'
+  # midi.instruments[3].name = 'no'
 
   # add empty note at start of each instrument
-  for i in range(4):
+  for i in range(5):
     midi.instruments[i].notes.append(pretty_midi.Note(
         velocity=1, pitch=60, start=0, end=1))
   
@@ -558,7 +567,7 @@ def tx1_to_midi(tx1, save_folder):
   # 13, 14 > 67 
   # 15, 16 > 69 
 
-  for note in midi.instruments[3].notes:
+  for note in midi.instruments[4].notes:
     if note.pitch == 1:
       note.pitch = 60
     elif note.pitch == 2:

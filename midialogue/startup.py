@@ -319,21 +319,26 @@ def load_midi_fp(fp):
 
     print(midi.instruments)
 
-    instr_map = {}
-    # check the velocity of the notes
-    for i in range(4):
-        # get velocity of the first note
-        if len(midi.instruments[i].notes) > 0:
-            track_no = midi.instruments[i].notes[0].velocity - 101
-            instr_map[i] = track_no
-        else:
-            # TODO make sure this is needed like this. might be bad for generations
-            # make sure there is a note for every instrument
-            midi.instruments[i].notes.append(pretty_midi.Note(velocity=100, pitch=60, start=0, end=.5))
-            instr_map[i] = i
+
+
+    # instr_map = {}
+    # # check the velocity of the notes
+    # for i in range(4):
+    #     # get velocity of the first note
+    #     if len(midi.instruments[i].notes) > 0:
+    #         track_no = midi.instruments[i].notes[0].velocity - 101
+    #         instr_map[i] = track_no
+    #     else:
+    #         # TODO make sure this is needed like this. might be bad for generations
+    #         # make sure there is a note for every instrument
+    #         midi.instruments[i].notes.append(pretty_midi.Note(velocity=100, pitch=60, start=0, end=.5))
+    #         instr_map[i] = i
     
-    for i in reversed(range(4)):
-        midi.instruments[instr_map[i]] = midi.instruments[i]
+    # for i in reversed(range(4)):
+    #     midi.instruments[instr_map[i]] = midi.instruments[i]
+
+
+
 
     # map notes on "no" as follows:
     # 60 > 2

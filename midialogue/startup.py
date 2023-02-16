@@ -538,6 +538,17 @@ def tx1_to_midi(tx1, save_folder):
   # Create MIDI and add instruments
   midi = pretty_midi.PrettyMIDI(initial_tempo=120, resolution=22050)
   midi.instruments.extend([p1, p2, tr, no])
+
+  # set names of instruments
+  midi.instruments[0].name = 'p1'
+  midi.instruments[1].name = 'p2'
+  midi.instruments[2].name = 'tr'
+  midi.instruments[3].name = 'no'
+
+  # add empty note at start of each instrument
+  for i in range(4):
+    midi.instruments[i].notes.append(pretty_midi.Note(
+        velocity=0, pitch=60, start=0, end=0.01))
   
   # map notes on "no" as follows:
   # 1, 2, 3 > 60 

@@ -548,7 +548,7 @@ def tx1_to_midi(tx1, save_folder):
   # add empty note at start of each instrument
   for i in range(4):
     midi.instruments[i].notes.append(pretty_midi.Note(
-        velocity=0, pitch=60, start=0, end=0.01))
+        velocity=0, pitch=60, start=0, end=1))
   
   # map notes on "no" as follows:
   # 1, 2, 3 > 60 
@@ -591,6 +591,8 @@ def tx1_to_midi(tx1, save_folder):
       note.pitch = 69
     elif note.pitch == 16:
       note.pitch = 69
+    
+    note.pitch += 12
 
   # Create indicator for end of song
   eos = pretty_midi.TimeSignature(1, 1, nsamps / 44100.)

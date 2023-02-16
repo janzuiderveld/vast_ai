@@ -319,6 +319,28 @@ def load_midi_fp(fp):
 
     print(midi.instruments)
 
+    # map notes on "no" as follows:
+    # 60 > 2
+    # 62 > 5
+    # 64 > 8
+    # 65 > 11
+    # 67 > 13
+    # 69 > 15
+
+    for note in midi.instruments[3].notes:
+        if note.pitch == 60:
+            note.pitch = 2
+        elif note.pitch == 62:
+            note.pitch = 5
+        elif note.pitch == 64:
+            note.pitch = 8
+        elif note.pitch == 65:
+            note.pitch = 11
+        elif note.pitch == 67:
+            note.pitch = 13
+        elif note.pitch == 69:
+            note.pitch = 15
+       
     return midi
 
 def scale_number(unscaled, to_min, to_max, from_min, from_max):
@@ -495,6 +517,48 @@ def tx1_to_midi(tx1, save_folder):
   # Create MIDI and add instruments
   midi = pretty_midi.PrettyMIDI(initial_tempo=120, resolution=22050)
   midi.instruments.extend([p1, p2, tr, no])
+  
+  # map notes on "no" as follows:
+  # 1, 2, 3 > 60 
+  # 4, 5, 6 > 62 
+  # 7 , 8 , 9 > 64 
+  # 10, 11, 12 > 65 
+  # 13, 14 > 67 
+  # 15, 16 > 69 
+
+  for note in midi.instruments[3].notes:
+    if note.pitch == 1:
+      note.pitch = 60
+    elif note.pitch == 2:
+      note.pitch = 60
+    elif note.pitch == 3:
+      note.pitch = 60
+    elif note.pitch == 4:
+      note.pitch = 62
+    elif note.pitch == 5:
+      note.pitch = 62
+    elif note.pitch == 6:
+      note.pitch = 62
+    elif note.pitch == 7:
+      note.pitch = 64
+    elif note.pitch == 8:
+      note.pitch = 64
+    elif note.pitch == 9:
+      note.pitch = 64
+    elif note.pitch == 10:
+      note.pitch = 65
+    elif note.pitch == 11:
+      note.pitch = 65
+    elif note.pitch == 12:
+      note.pitch = 65
+    elif note.pitch == 13:
+      note.pitch = 67
+    elif note.pitch == 14:
+      note.pitch = 67
+    elif note.pitch == 15:
+      note.pitch = 69
+    elif note.pitch == 16:
+      note.pitch = 69
 
   # Create indicator for end of song
   eos = pretty_midi.TimeSignature(1, 1, nsamps / 44100.)
@@ -582,7 +646,7 @@ if __name__ == "__main__":
   parser.add_argument('--answer_add_silence', type=int, default=0) # this is added as wait time to end of input after last midi signal. Might influence output significantly?
   parser.add_argument('--temp', type=float, default=0.96)
   parser.add_argument('--topk', type=int, default=64)
-  parser.add_argument('--lasers', type=int, default=0)
+  parser.add_argument('--lasers', type=int, default=1)
   args = parser.parse_args()
 
   os.makedirs(args.midi_out_folder, exist_ok=True)

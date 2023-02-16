@@ -590,7 +590,7 @@ def tx1_to_midi(tx1, save_folder):
 
   return midi
 
-def get_incremental_fn(folder, fn="midi.mid"):
+def get_incremental_fn(folder, fn="midii.mid"):
   i = 0
   new_fp = f"{folder}/{str(i)}_{fn}"
   while os.path.exists(new_fp) :

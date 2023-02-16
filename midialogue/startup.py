@@ -341,6 +341,11 @@ def load_midi_fp(fp):
         elif note.pitch == 69:
             note.pitch = 15
        
+    # make sure there is a note for every instrument
+    for i in range(4):
+        if len(midi.instruments[i].notes) == 0:
+            midi.instruments[i].notes.append(pretty_midi.Note(0, 0, 0, 0))
+
     return midi
 
 def scale_number(unscaled, to_min, to_max, from_min, from_max):

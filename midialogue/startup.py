@@ -318,6 +318,11 @@ def load_midi_fp(fp):
     midi.instruments[3].name = "no"
 
     print(midi.instruments)
+       
+    # make sure there is a note for every instrument
+    for i in range(4):
+        if len(midi.instruments[i].notes) == 0:
+            midi.instruments[i].notes.append(pretty_midi.Note(velocity=100, pitch=60, start=0, end=.5))
 
     # map notes on "no" as follows:
     # 60 > 2
@@ -340,11 +345,6 @@ def load_midi_fp(fp):
             note.pitch = 13
         elif note.pitch == 69:
             note.pitch = 15
-       
-    # make sure there is a note for every instrument
-    for i in range(4):
-        if len(midi.instruments[i].notes) == 0:
-            midi.instruments[i].notes.append(pretty_midi.Note(0, 0, 0, 0))
 
     return midi
 

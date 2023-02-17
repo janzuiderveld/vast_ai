@@ -395,7 +395,7 @@ def midi_to_tx1(fp):
   midi = load_midi_fp(fp)
 
   ins_names = ['p1', 'p2', 'tr', 'no']
-  instruments = sorted(midi.instruments, key=lambda x: ins_names.index(x.name))
+  # instruments = sorted(midi.instruments, key=lambda x: ins_names.index(x.name))
   samp_to_events = defaultdict(list)
   for ins in instruments:
     instag = ins.name.upper()
@@ -412,8 +412,8 @@ def midi_to_tx1(fp):
       # NO RANGE: 1 - 16
 
       # scale notes between 0 and 127 to 0-16 if not lasers
-      if instag == 'NO' and not args.lasers:
-          pitch = round(scale_number(pitch, 1, 16, 0, 127))
+      # if instag == 'NO' and not args.lasers:
+      #     pitch = round(scale_number(pitch, 1, 16, 0, 127))
       
       filtered = False
       if (instag == 'P1' and pitch < 33) or (instag == 'P2' and pitch < 33) or (instag == 'TR' and pitch < 21) or (instag == 'NO' and pitch < 1):
@@ -442,7 +442,6 @@ def midi_to_tx1(fp):
           continue
       if not start >= last_end:
           continue
-
 
       if last_end >= 0 and last_end != start:
         samp_to_events[last_end].append('{}_NOTEOFF'.format(instag))
@@ -481,7 +480,7 @@ def tx1_to_midi(tx1, save_folder):
   p1_prog = pretty_midi.instrument_name_to_program('Lead 1 (square)')
   p2_prog = pretty_midi.instrument_name_to_program('Lead 2 (sawtooth)')
   tr_prog = pretty_midi.instrument_name_to_program('Synth Bass 1')
-  no_prog = pretty_midi.instrument_name_to_program('Breath Noise')
+  no_prog = pretty_midi.instrument_name_to_program('Acoustic Grand Piano')
   ph_prog = pretty_midi.instrument_name_to_program('Synth Bass 2')
 
   ph = pretty_midi.Instrument(program=ph_prog, name='ph', is_drum=False)
@@ -557,7 +556,7 @@ def tx1_to_midi(tx1, save_folder):
   # add empty note at start of each instrument
   for i in range(5):
     midi.instruments[i].notes.append(pretty_midi.Note(
-        velocity=1, pitch=60, start=0, end=1))
+        velocity=1, pitch=60, start=0, end=0.2))
   
   # map notes on "no" as follows:
   # 1, 2, 3 > 60 

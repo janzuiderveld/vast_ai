@@ -549,7 +549,7 @@ def tx1_to_midi(tx1, save_folder):
   midi.instruments[3].name = 'no'
 
   # add empty note at start of each instrument
-  for i in range(5):
+  for i in range(4):
     midi.instruments[i].notes.append(pretty_midi.Note(
         velocity=1, pitch=60, start=0, end=0.2))
   
@@ -561,7 +561,7 @@ def tx1_to_midi(tx1, save_folder):
   # 13, 14 > 67 
   # 15, 16 > 69 
 
-  for note in midi.instruments[4].notes:
+  for note in midi.instruments[3].notes:
     if note.pitch == 1:
       note.pitch = 60
     elif note.pitch == 2:

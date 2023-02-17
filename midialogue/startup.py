@@ -395,7 +395,7 @@ def midi_to_tx1(fp):
   midi = load_midi_fp(fp)
 
   ins_names = ['p1', 'p2', 'tr', 'no']
-  # instruments = sorted(midi.instruments, key=lambda x: ins_names.index(x.name))
+  instruments = sorted(midi.instruments, key=lambda x: ins_names.index(x.name))
   samp_to_events = defaultdict(list)
   for ins in instruments:
     instag = ins.name.upper()

@@ -487,7 +487,7 @@ def tx1_to_midi(tx1, save_folder):
   p1 = pretty_midi.Instrument(program=p1_prog, name='p1', is_drum=False)
   p2 = pretty_midi.Instrument(program=p2_prog, name='p2', is_drum=False)
   tr = pretty_midi.Instrument(program=tr_prog, name='tr', is_drum=False)
-  no = pretty_midi.Instrument(program=no_prog, name='no', is_drum=True)
+  no = pretty_midi.Instrument(program=no_prog, name='no', is_drum=False)
 
   name_to_ins = {'P1': p1, 'P2': p2, 'TR': tr, 'NO': no}
   name_to_pitch = {'P1': None, 'P2': None, 'TR': None, 'NO': None}

@@ -301,52 +301,37 @@ def load_midi_fp(fp):
     print("startup: loading midi")
     midi = pretty_midi.PrettyMIDI(mf.name)
 
-    assert len(midi.instruments) == 4
+    print(midi.instruments)
+    if len(midi.instruments) > 4:
+        del midi.instruments[4:]
+    if len(midi.instruments) < 4:
+        for i in range(4 - len(midi.instruments)):
+            midi.instruments.append(pretty_midi.Instrument(program=0))
 
-    print("startup: loading midi done")
+    instr_map = {}
+    # check the velocity of the notes
+    for i in range(4):
+        # get velocity of the first note
+        if len(midi.instruments[i].notes) > 0:
+            track_no = midi.instruments[i].notes[0].velocity - 121
+            instr_map[i] = track_no
+            print(midi.instruments[i].notes[0].velocity)
+        else:
+            # map to lowest track with no notes
+            for j in range(4):
+                if j not in instr_map.values():
+                    instr_map[i] = j
+                    break
 
-    # print(midi.instruments)
-    # if len(midi.instruments) > 4:
-    #     del midi.instruments[4:]
-    # if len(midi.instruments) < 4:
-    #     for i in range(4 - len(midi.instruments)):
-    #         midi.instruments.append(pretty_midi.Instrument(program=0))
+    # map instruments according to instr_map
+    cp = midi.instruments.copy()
+    for i in range(4):
+        midi.instruments[instr_map[i]] = cp[i]
 
     midi.instruments[0].name = "p1"
     midi.instruments[1].name = "p2"
     midi.instruments[2].name = "tr"
     midi.instruments[3].name = "no"
-
-    print(midi.instruments)
-
-
-
-    # instr_map = {}
-    # # check the velocity of the notes
-    # for i in range(4):
-    #     # get velocity of the first note
-    #     if len(midi.instruments[i].notes) > 0:
-    #         track_no = midi.instruments[i].notes[0].velocity - 101
-    #         instr_map[i] = track_no
-    #     else:
-    #         # TODO make sure this is needed like this. might be bad for generations
-    #         # make sure there is a note for every instrument
-    #         midi.instruments[i].notes.append(pretty_midi.Note(velocity=100, pitch=60, start=0, end=.5))
-    #         instr_map[i] = i
-    
-    # for i in reversed(range(4)):
-    #     midi.instruments[instr_map[i]] = midi.instruments[i]
-
-
-
-
-    # map notes on "no" as follows:
-    # 60 > 2
-    # 62 > 5
-    # 64 > 8
-    # 65 > 11
-    # 67 > 13
-    # 69 > 15
 
     for note in midi.instruments[3].notes:
         if note.pitch == 60:

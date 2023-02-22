@@ -9,8 +9,8 @@ double deltaAverageThresholdTriggerIn = 1.0; // IMPORTANT
 double deltaAverageThresholdControlOut = 1.0; // IMPORTANT
 double triggerDist = 250.0; // IMPORTANT
 const double smoothSamples = 1.0 ; 
-int ctrlStartMs = 50;
-int settleRequired = 5;
+int ctrlStartMs = 100;
+int settleRequired = 4;
 
 // lead 1
 int notes1[7] = {57, 58, 60, 62, 64, 65, 67};
@@ -31,17 +31,20 @@ int chMap[7] = {1, 1, 2, 3, 4, 4, 4};
 int ctrlChannelMapPos[7] = {1, 1, 2, 3, 4, 4, 4};
 int ctrlChannelMapNeg[7] = {1, 1, 2, 3, 4, 4, 4};
 
-int ctrlMapPos[7] = {48, 94, 94, 94,    18, 50, 84};
-int ctrlMapNeg[7] = {117, 93, 93, 93,     119, 119, 119};
+int ctrlMapPos[7] = {69, 94, 94, 94,    18, 50, 84};
+int ctrlMapNeg[7] = {69, 93, 93, 93,     119, 119, 119};
+int ctrlPosReset[7] = {40, 0, 0, 0,    0, 0, 0};
+int ctrlNegReset[7] = {40, 0, 0, 0,    0, 0, 0};
+int ctrlPosRange[7] = {127, 127, 127, 127,    127, 127, 127};
+int ctrlNegRange[7] = {-127, 127, 127, 127,    127, 127, 127};
+
+// not implemented yet
 int ctrlMapPos2[7] = {0, 0, 0, 0,    0, 0, 0};
 int ctrlMapNeg2[7] = {0, 0, 0, 0,    0, 0, 0};
-int ctrlPosReset[7] = {0, 0, 0, 0,    0, 0, 0};
-int ctrlNegReset[7] = {0, 0, 0, 0,    0, 0, 0};
 int ctrlPosReset2[7] = {0, 0, 0, 0,    0, 0, 0};
 int ctrlNegReset2[7] = {0, 0, 0, 0,    0, 0, 0};
 
-int ctrReset2[7] = {0, 0, 0, 0, 0, 0, 0};
-
+// not implemented yet
 int retriggerStart[7] = {0, 0, 0, 0, 500, 500, 500};
 int retriggerMod[7] = {0, 0, 0, 0, 0, 0, 0};
 int retriggerSend[7] = {0, 0, 0, 0, 0, 0, 0};
@@ -218,6 +221,12 @@ void setup() {
     usbMIDI.sendControlChange(wave_send_cc, 127, 4);
   }
 
+  // init ctrl according to ctrlReset
+  for (int i = 0; i < 4; i++) {
+    usbMIDI.sendControlChange(ctrlChannelMapNeg[i], ctrlNegReset[i], i);
+    usbMIDI.sendControlChange(ctrlChannelMapPos[i], ctrlPosReset[i], i);
+  }
+
 }
 
 ////////////////////////////////// main loop //////////////////////////////////
@@ -319,7 +328,7 @@ void loop() {
             
             // map to ctrlChange
             if (distDiff[ch] > 0) {
-                ctrlChange[ch] = map(distDiff[ch], 0, 127, 0, 127);
+                ctrlChange[ch] = map(distDiff[ch], 0, 127, 0, ctrlPosRange[ch]) + ctrlPosReset[ch];
 
                 // cutoff 
                 if (ctrlChange[ch] > 127) {
@@ -334,7 +343,7 @@ void loop() {
             }
 
             if (distDiff[ch] < 0) {
-                ctrlChange[ch] = map(distDiff[ch], 0, -127, 0, 127);
+                ctrlChange[ch] = map(distDiff[ch], 0, -127, 0, ctrlNegRange[ch]) + ctrlNegReset[ch];
                 
                 // cutoff 
                 if (ctrlChange[ch] > 127) {

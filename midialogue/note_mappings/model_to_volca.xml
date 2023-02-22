@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<!-- This mapping maps midi notes 1-16 of LakhNES to Volca Drum -->
+<!-- drum model accepts 1 - 16 -->
+<!-- drum synth accepts 60, 62, 64, 65, 67, 69 -->
+
+<!-- MIDI Note Number	Note Name
+1	C-1
+2	C#-1
+3	D-1
+4	D#-1
+5	E-1
+6	F-1
+7	F#-1
+8	G-1
+9	G#-1
+10	A-1
+11	A#-1
+12	B-1
+13	C0
+14	C#0
+15	D0
+16	D#0 -->
+
+<!-- Thus we will use the following mapping, but inversed -->
+<!-- 60 > 1, 2, 3 -->
+<!-- = C4 > C-1, C#-1, D-1 -->
+
+<!-- 62 > 4, 5, 6 -->
+<!-- = D4 > D#-1, E-1, F-1 -->
+
+<!-- 64 > 7 , 8 , 9 -->
+<!-- = E4 > F#-1, G-1, G#-1 -->
+
+<!-- 65 > 10, 11, 12 -->
+<!-- = F4 > A-1, A#-1, B-1 -->
+
+<!-- 67 > 13, 14 -->
+<!-- = G4 > C0, C#0 -->
+
+<!-- 69 > 15, 16 -->
+<!-- = A4 > D0, D#0 -->
+
+
+<notemap>
+
+<map from="C-1" to="C4" />
+<map from="C#-1" to="C4" />
+<map from="D-1" to="C4" />
+<map from="D#-1" to="D4" />
+<map from="E-1" to="D4" />
+<map from="F-1" to="D4" />
+<map from="F#-1" to="E4" />
+<map from="G-1" to="E4" />
+<map from="G#-1" to="E4" />
+<map from="A-1" to="F4" />
+<map from="A#-1" to="F4" />
+<map from="B-1" to="F4" />
+<map from="C0" to="G4" />
+<map from="C#0" to="G4" />
+<map from="D0" to="A4" />
+<map from="D#0" to="A4" />
+
+</notemap>

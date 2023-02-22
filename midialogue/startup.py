@@ -301,23 +301,51 @@ def load_midi_fp(fp):
     print("startup: loading midi")
     midi = pretty_midi.PrettyMIDI(mf.name)
 
-    assert len(midi.instruments) == 4
+    print(midi.instruments)
+    if len(midi.instruments) > 4:
+        del midi.instruments[4:]
+    if len(midi.instruments) < 4:
+        for i in range(4 - len(midi.instruments)):
+            midi.instruments.append(pretty_midi.Instrument(program=0))
 
-    print("startup: loading midi done")
+    instr_map = {}
+    # check the velocity of the notes
+    for i in range(4):
+        # get velocity of the first note
+        if len(midi.instruments[i].notes) > 0:
+            track_no = midi.instruments[i].notes[0].velocity - 121
+            instr_map[i] = track_no
+            print(midi.instruments[i].notes[0].velocity)
+        else:
+            # map to lowest track with no notes
+            for j in range(4):
+                if j not in instr_map.values():
+                    instr_map[i] = j
+                    break
 
-    # print(midi.instruments)
-    # if len(midi.instruments) > 4:
-    #     del midi.instruments[4:]
-    # if len(midi.instruments) < 4:
-    #     for i in range(4 - len(midi.instruments)):
-    #         midi.instruments.append(pretty_midi.Instrument(program=0))
+    # map instruments according to instr_map
+    cp = midi.instruments.copy()
+    for i in range(4):
+        midi.instruments[instr_map[i]] = cp[i]
 
     midi.instruments[0].name = "p1"
     midi.instruments[1].name = "p2"
     midi.instruments[2].name = "tr"
     midi.instruments[3].name = "no"
 
-    print(midi.instruments)
+    for note in midi.instruments[3].notes:
+        if note.pitch == 60:
+            note.pitch = 2
+        elif note.pitch == 62:
+            note.pitch = 5
+        elif note.pitch == 64:
+            note.pitch = 8
+        elif note.pitch == 65:
+            note.pitch = 11
+        elif note.pitch == 67:
+            note.pitch = 13
+        elif note.pitch == 69:
+            note.pitch = 15
 
     return midi
 
@@ -369,8 +397,8 @@ def midi_to_tx1(fp):
       # NO RANGE: 1 - 16
 
       # scale notes between 0 and 127 to 0-16 if not lasers
-      if instag == 'NO' and not args.lasers:
-          pitch = round(scale_number(pitch, 1, 16, 0, 127))
+      # if instag == 'NO' and not args.lasers:
+      #     pitch = round(scale_number(pitch, 1, 16, 0, 127))
       
       filtered = False
       if (instag == 'P1' and pitch < 33) or (instag == 'P2' and pitch < 33) or (instag == 'TR' and pitch < 21) or (instag == 'NO' and pitch < 1):
@@ -399,7 +427,6 @@ def midi_to_tx1(fp):
           continue
       if not start >= last_end:
           continue
-
 
       if last_end >= 0 and last_end != start:
         samp_to_events[last_end].append('{}_NOTEOFF'.format(instag))
@@ -438,11 +465,15 @@ def tx1_to_midi(tx1, save_folder):
   p1_prog = pretty_midi.instrument_name_to_program('Lead 1 (square)')
   p2_prog = pretty_midi.instrument_name_to_program('Lead 2 (sawtooth)')
   tr_prog = pretty_midi.instrument_name_to_program('Synth Bass 1')
-  no_prog = pretty_midi.instrument_name_to_program('Breath Noise')
+  no_prog = pretty_midi.instrument_name_to_program('Acoustic Grand Piano')
+
+  # ph_prog = pretty_midi.instrument_name_to_program('Synth Bass 2')
+  # ph = pretty_midi.Instrument(program=ph_prog, name='ph', is_drum=False)
+
   p1 = pretty_midi.Instrument(program=p1_prog, name='p1', is_drum=False)
   p2 = pretty_midi.Instrument(program=p2_prog, name='p2', is_drum=False)
   tr = pretty_midi.Instrument(program=tr_prog, name='tr', is_drum=False)
-  no = pretty_midi.Instrument(program=no_prog, name='no', is_drum=True)
+  no = pretty_midi.Instrument(program=no_prog, name='no', is_drum=False)
 
   name_to_ins = {'P1': p1, 'P2': p2, 'TR': tr, 'NO': no}
   name_to_pitch = {'P1': None, 'P2': None, 'TR': None, 'NO': None}
@@ -496,6 +527,59 @@ def tx1_to_midi(tx1, save_folder):
   midi = pretty_midi.PrettyMIDI(initial_tempo=120, resolution=22050)
   midi.instruments.extend([p1, p2, tr, no])
 
+  # set names of instruments
+  midi.instruments[0].name = 'p1'
+  midi.instruments[1].name = 'p2'
+  midi.instruments[2].name = 'tr'
+  midi.instruments[3].name = 'no'
+
+  # add empty note at start of each instrument
+  for i in range(4):
+    midi.instruments[i].notes.append(pretty_midi.Note(
+        velocity=1, pitch=60, start=0, end=0.2))
+  
+  # map notes on "no" as follows:
+  # 1, 2, 3 > 60 
+  # 4, 5, 6 > 62 
+  # 7 , 8 , 9 > 64 
+  # 10, 11, 12 > 65 
+  # 13, 14 > 67 
+  # 15, 16 > 69 
+
+  for note in midi.instruments[3].notes:
+    if note.pitch == 1:
+      note.pitch = 60
+    elif note.pitch == 2:
+      note.pitch = 60
+    elif note.pitch == 3:
+      note.pitch = 60
+    elif note.pitch == 4:
+      note.pitch = 62
+    elif note.pitch == 5:
+      note.pitch = 62
+    elif note.pitch == 6:
+      note.pitch = 62
+    elif note.pitch == 7:
+      note.pitch = 64
+    elif note.pitch == 8:
+      note.pitch = 64
+    elif note.pitch == 9:
+      note.pitch = 64
+    elif note.pitch == 10:
+      note.pitch = 65
+    elif note.pitch == 11:
+      note.pitch = 65
+    elif note.pitch == 12:
+      note.pitch = 65
+    elif note.pitch == 13:
+      note.pitch = 67
+    elif note.pitch == 14:
+      note.pitch = 67
+    elif note.pitch == 15:
+      note.pitch = 69
+    elif note.pitch == 16:
+      note.pitch = 69
+
   # Create indicator for end of song
   eos = pretty_midi.TimeSignature(1, 1, nsamps / 44100.)
   midi.time_signature_changes.append(eos)
@@ -510,7 +594,7 @@ def tx1_to_midi(tx1, save_folder):
 
   return midi
 
-def get_incremental_fn(folder, fn="midi.mid"):
+def get_incremental_fn(folder, fn="midii.mid"):
   i = 0
   new_fp = f"{folder}/{str(i)}_{fn}"
   while os.path.exists(new_fp) :
@@ -582,7 +666,7 @@ if __name__ == "__main__":
   parser.add_argument('--answer_add_silence', type=int, default=0) # this is added as wait time to end of input after last midi signal. Might influence output significantly?
   parser.add_argument('--temp', type=float, default=0.96)
   parser.add_argument('--topk', type=int, default=64)
-  parser.add_argument('--lasers', type=int, default=0)
+  parser.add_argument('--lasers', type=int, default=1)
   args = parser.parse_args()
 
   os.makedirs(args.midi_out_folder, exist_ok=True)

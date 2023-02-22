@@ -35,6 +35,6 @@ python3 vast_bid.py auto1 midialogue
 # python3 vast_bid.py auto1_bid midialogue
 
 # sudo chmod a+x startup_scripts/midialogue_local.sh
-./startup_scripts/midialogue_local.sh 
+./startup_scripts/midialogue_local.sh | tee midi_meta.log
 
 echo $?

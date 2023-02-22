@@ -8,34 +8,53 @@ int DEBUG = 1;
 double deltaAverageThresholdTriggerIn = 1.0; // IMPORTANT
 double deltaAverageThresholdControlOut = 1.0; // IMPORTANT
 double triggerDist = 250.0; // IMPORTANT
-const double smoothSamples = 1.0 ;
-int ctrlStartMs = 20;
+const double smoothSamples = 1.0 ; 
+int ctrlStartMs = 50;
+int settleRequired = 5;
 
-int notes1[6] = {48, 50, 52, 55, 57, 59};
-int notes2[6] = {48, 50, 52, 55, 57, 59};
-int notes3[6] = {48, 50, 52, 55, 57, 59};
-int notes4[6] = {48, 50, 52, 55, 57, 59};
-int notes5[6] = {48, 50, 52, 55, 57, 59};
-int notes6[6] = {48, 50, 52, 55, 57, 59};
-int notes7[6] = {48, 50, 52, 55, 57, 59};
+// lead 1
+int notes1[7] = {57, 58, 60, 62, 64, 65, 67};
+// lead 2
+int notes2[6] = {65, 67, 69, 70, 72, 74};
+// lead 3
+int notes3[7] = {69, 70, 72, 74, 76, 77, 79};
+// bass
+int notes4[6] = {45, 46, 48, 50, 52, 53};
+// drum
+int notes5[6] = {60, 60, 62, 62, 62, 62};
+int notes6[6] = {64, 64, 65, 65, 65, 65};
+int notes7[6] = {67, 67, 69, 69, 69, 69};
 
-// length of notes arrays
-// int numNotes = sizeof(notes1) -1;
-int numNotes = 5;
+int numNotes = 5; // cutoff for notes used 
 
-int ctrlMapPos[7] = {94, 94, 94, 94, 94, 94, 94};
-int ctrlMapNeg[7] = {93, 93, 93, 93, 93, 93, 93};
+int chMap[7] = {1, 1, 2, 3, 4, 4, 4}; 
+int ctrlChannelMapPos[7] = {1, 1, 2, 3, 4, 4, 4};
+int ctrlChannelMapNeg[7] = {1, 1, 2, 3, 4, 4, 4};
 
-// int ctrlMapPos[7] = {0, 0, 0, 0, 0, 0, 0};
-// int ctrlMapNeg[7] = {0, 0, 0, 0, 0, 0, 0};
-int ctrlChannelMapPos[7] = {1, 2, 3, 4, 5, 6, 7};
-int ctrlChannelMapNeg[7] = {1, 2, 3, 4, 5, 6, 7};
+int ctrlMapPos[7] = {48, 94, 94, 94,    18, 50, 84};
+int ctrlMapNeg[7] = {117, 93, 93, 93,     119, 119, 119};
+int ctrlMapPos2[7] = {0, 0, 0, 0,    0, 0, 0};
+int ctrlMapNeg2[7] = {0, 0, 0, 0,    0, 0, 0};
+int ctrlPosReset[7] = {0, 0, 0, 0,    0, 0, 0};
+int ctrlNegReset[7] = {0, 0, 0, 0,    0, 0, 0};
+int ctrlPosReset2[7] = {0, 0, 0, 0,    0, 0, 0};
+int ctrlNegReset2[7] = {0, 0, 0, 0,    0, 0, 0};
+
+int ctrReset2[7] = {0, 0, 0, 0, 0, 0, 0};
+
+int retriggerStart[7] = {0, 0, 0, 0, 500, 500, 500};
+int retriggerMod[7] = {0, 0, 0, 0, 0, 0, 0};
+int retriggerSend[7] = {0, 0, 0, 0, 0, 0, 0};
 
 int inputMapRange[2] = {50, 250};
 
 const int num_channels = 7; // number of analog channels to iterate over
 int *notes[7] = {notes1, notes2, notes3, notes4, notes5, notes6, notes7};
 int noteLock[7] = {0,0,0,0,0,0,0};
+
+int settleCount[7] = {0,0,0,0,0,0,0};
+
+int sendMidi = 1;
 
 // Ordered Serial list
 HardwareSerial Serials[7] {
@@ -83,20 +102,56 @@ int distDiff[7] = {0, 0, 0, 0, 0, 0, 0};
 int ctrlChange[7] = {0, 0, 0, 0, 0, 0, 0};
 int triggerTick[7] = {0, 0, 0, 0, 0, 0, 0};
 
+int lastTick[7] = {0, 0, 0, 0, 0, 0, 0};
+int currentMillis = 0;
+int minTimeBetweenTicks = 1;
+
+int lastTriggerDist[7] = {0, 0, 0, 0, 0, 0, 0};
 
 // USB MIDI receive functions
 // contributed by Jan Zuiderveld
 
 // laser_control_pins: 12 - 9, 6 - 3
-int laser_control_pins[7] = {24, 12, 11, 10, 9, 6, 5};
+int laser_control_pins[7] = {24, 11, 12, 10, 9, 6, 5};
 int extra_control_pin = 25;
 
 void OnNoteOn(byte channel, byte note, byte velocity) {
-  digitalWrite(laser_control_pins[note], HIGH);
+  // if note is between 0 and 6, turn on laser
+  if (note < 7) {
+    digitalWrite(laser_control_pins[note], HIGH);
+  }
+
+  // if note is 7, turn on extra control pin
+  if (note == 7) {
+    digitalWrite(extra_control_pin, HIGH);
+  }
+
+  // if note == 10, set sendMidi to true
+  if (note == 10) {
+    sendMidi = 1;
+  }
+
 }
 
 void OnNoteOff(byte channel, byte note, byte velocity) {
-  digitalWrite(laser_control_pins[note], LOW);  // Any Note-Off turns off LED
+  // if note is between 0 and 6, turn ff laser
+  if (note < 7) {
+    digitalWrite(laser_control_pins[note], LOW);
+    // exit function
+    return;
+  }
+
+  // else if note is 7, turn off extra control pin
+  if (note == 7) {
+    digitalWrite(extra_control_pin, LOW);
+    // exit function
+    return;
+  }
+
+  // if note == 10, set sendMidi to false
+  if (note == 10) {
+    sendMidi = 0;
+  }
 }
 
 ///////////////////////// SETUP ///////////////////////////// 
@@ -106,7 +161,7 @@ void setup() {
   
   if (DEBUG) {
     Serial.begin(115200);
-    Serial.println("DEBUG MODE");
+    Serial.println("DEBUGUG MODE");
   }
 
   // begin all 7 serial ports with baud rate 115200
@@ -157,6 +212,12 @@ void setup() {
     pinMode(laser_control_pins[i], OUTPUT);
   }
 
+  //  setup Volca drum 
+  // control channel 103 - 108: send 127
+  for (int wave_send_cc = 103; wave_send_cc < 109; wave_send_cc++) {
+    usbMIDI.sendControlChange(wave_send_cc, 127, 4);
+  }
+
 }
 
 ////////////////////////////////// main loop //////////////////////////////////
@@ -164,11 +225,22 @@ void loop() {
   while (usbMIDI.read()) { // read all incoming messages
   }
 
+  if (sendMidi == 0) {
+      return;
+  }
+
   // read data from channels 
   for (int ch = 0; ch < num_channels; ch++) {
-    while(Serials[ch].available()){
-      Get_Lidar_data(Serials[ch], ch);
-    }
+      while(Serials[ch].available()){
+          Get_Lidar_data(Serials[ch], ch);
+      }
+
+    // // retrigger
+    // // check if channel is in retrigger mode
+    // if (retriggerStart[ch] != 0) {
+    //   // check if channel is active
+    //   if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 1) {
+    //     // check if channel has been inactive for retrigger time
 
     // if dists[ch] has not changed, continue
     if (dists[ch] == lastDists[ch]) {
@@ -193,40 +265,51 @@ void loop() {
 
         deltaAverage[ch] = (lastAverage[ch] - average[ch]); // positive if lower, negative if higher away
         if (deltaAverage[ch] <= deltaAverageThresholdTriggerIn) {
-        
-            // map to note
-            noteLock[ch] = 1;
-            noteIndex[ch] = map(average[ch], inputMapRange[0], inputMapRange[1], 0, numNotes);
+            settleCount[ch] += 1;
 
-            // cut off index at 0 and 5
-            if (noteIndex[ch] < 0) {
-                noteIndex[ch] = 0;
+            if (settleCount[ch] >= settleRequired) {
+              lastTriggerDist[ch] = average[ch];
+
+              // map to note
+              noteLock[ch] = 1;
+              noteIndex[ch] = map(average[ch], inputMapRange[0], inputMapRange[1], 0, numNotes);
+
+              // cut off index at 0 and 5
+              if (noteIndex[ch] < 0) {
+                  noteIndex[ch] = 0;
+              }
+              if (noteIndex[ch] > 5) {
+                  noteIndex[ch] = 5;
+              }
+              noteOut[ch] = notes[ch][noteIndex[ch]];
+
+              usbMIDI.sendNoteOn(noteOut[ch], 120 + chMap[ch], chMap[ch]);
+              usbMIDI.send_now();
+
+              triggerTick[ch] = millis();
+
+              // print noteOut
+              if (DEBUG) {
+                Serial.print("Note out: ");
+                Serial.println(noteOut[ch]);
+                Serial.print("Channel: ");
+                Serial.println(ch);
             }
-            if (noteIndex[ch] > 5) {
-                noteIndex[ch] = 5;
-            }
-            noteOut[ch] = notes[ch][noteIndex[ch]];
-
-            usbMIDI.sendNoteOn(noteOut[ch], 127, ch+1);
-            usbMIDI.send_now();
-
-            triggerTick[ch] = millis();
-
-            // print noteOut
-            if (DEBUG) {
-              Serial.print("Note out: ");
-              Serial.println(noteOut[ch]);
-              Serial.print("Channel: ");
-              Serial.println(ch);
-           }
-        } 
+          }
+        } else {
+          settleCount[ch] = 0;
+        }
 
     }
 
     // This section sends ctrlChange messages to the MIDI channel when appropriate (distance change while noteLock is on)
+    // check if laser is still active
     if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 1) {
-        if (triggerTick[ch] < (millis() + ctrlStartMs)) {
-          
+        currentMillis = millis();
+        // check if last update was long enough ago
+        if (currentMillis >= (lastTick[ch] + minTimeBetweenTicks) && triggerTick[ch] < (currentMillis + ctrlStartMs)) {
+            lastTick[ch] = currentMillis;
+
             if (enterDist[ch] == 0) {
                 enterDist[ch] = average[ch];
             }
@@ -247,10 +330,12 @@ void loop() {
                 }
 
                 usbMIDI.sendControlChange(ctrlMapPos[ch], ctrlChange[ch], ctrlChannelMapPos[ch]);
+
             }
 
             if (distDiff[ch] < 0) {
                 ctrlChange[ch] = map(distDiff[ch], 0, -127, 0, 127);
+                
                 // cutoff 
                 if (ctrlChange[ch] > 127) {
                     ctrlChange[ch] = 127;
@@ -258,10 +343,22 @@ void loop() {
                 if (ctrlChange[ch] < 1) {
                     ctrlChange[ch] = 1;
                 } 
+
                 usbMIDI.sendControlChange(ctrlMapNeg[ch], ctrlChange[ch], ctrlChannelMapNeg[ch]);
             }
 
-          usbMIDI.send_now();
+            usbMIDI.send_now();
+
+            // if retriggerStart, edit retriggerMod[ch]
+            if (retriggerStart[ch] > 0) {
+                retriggerMod[ch] = retriggerStart[ch] + map(distDiff[ch], 0, 50, 0, 1000);
+                if (retriggerMod[ch] > 1500) {
+                    retriggerMod[ch] = 1500;
+                }
+                if (retriggerMod[ch] < 1) {
+                    retriggerMod[ch] = 1;
+                }
+            }
 
             // print ctrlChange
             if (DEBUG) {
@@ -281,12 +378,12 @@ void loop() {
     if (noteLock[ch] == 1  && (average[ch] == 0 || average[ch] > triggerDist)) {
 
         // turn off note
-        usbMIDI.sendNoteOn(noteOut[ch], 0, ch+1);
+        usbMIDI.sendNoteOn(noteOut[ch], 0, chMap[ch]);
         usbMIDI.send_now();
 
         // reset control change
-        usbMIDI.sendControlChange(ctrlMapPos[ch], 0, ctrlChannelMapPos[ch]);
-        usbMIDI.sendControlChange(ctrlMapNeg[ch], 0, ctrlChannelMapNeg[ch]);
+        usbMIDI.sendControlChange(ctrlMapPos[ch], ctrlPosReset[ch], ctrlChannelMapPos[ch]);
+        usbMIDI.sendControlChange(ctrlMapNeg[ch], ctrlNegReset[ch], ctrlChannelMapNeg[ch]);
         usbMIDI.send_now();
 
         // reset noteLock
@@ -294,6 +391,9 @@ void loop() {
 
         // reset triggerSampleCount
         enterDist[ch] = 0;
+
+        // reset settleCount
+        settleCount[ch] = 0;
 
         // print 
         if (DEBUG) {
@@ -303,6 +403,9 @@ void loop() {
             Serial.println(ch);
             Serial.print("Distance: ");
             Serial.println(average[ch]);
+            // print lastTriggerDist
+            Serial.print("Last trigger dist: ");
+            Serial.println(lastTriggerDist[ch]);
 
         }
 
@@ -312,6 +415,26 @@ void loop() {
     lastDists[ch] = dists[ch];
 
   } // end of loop over channels
+
+  // // retrigger
+  // for (int ch = 0; ch < num_channels; ch++) {
+  //   if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 1) {
+  //       currentMillis = millis();
+  //       if (currentMillis >= (lastTick[ch] + minTimeBetweenTicks) && triggerTick[ch] < (currentMillis + ctrlStartMs)) {
+  //           lastTick[ch] = currentMillis;
+  //           if (retriggerStart[ch] > 0 && (currentMillis - triggerTick[ch]) % retriggerMod[ch] == 0) {
+  //               if (retriggerSend[ch] == 0) {
+  //                   usbMIDI.sendNoteOn(noteOut[ch], 120 + chMap[ch], chMap[ch]);
+  //                   usbMIDI.send_now();
+  //                   retriggerSend[ch] = 1;
+  //               } else {
+  //                   retriggerSend[ch] = 0;
+  //               }
+  //           }
+  //       }
+  //   }
+  // }
+
 
     // every 100ms, print the distances
     if (millis() % 100 == 0 && DEBUG && noteLock == 0) {

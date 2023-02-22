@@ -9,6 +9,7 @@ import argparse
 import os
 import time
 import typing
+import hashlib
 from datetime import date, datetime
 
 import requests
@@ -32,7 +33,8 @@ except NameError:
     pass
 
 
-server_url_default = "https://vast.ai"
+#server_url_default = "https://vast.ai"
+server_url_default = "https://console.vast.ai"
 #server_url_default  = "https://vast.ai/api/v0"
 api_key_file_base = "~/.vast_api_key"
 api_key_file = os.path.expanduser(api_key_file_base)
@@ -161,7 +163,6 @@ def translate_null_strings_to_blanks(d: typing.Dict) -> typing.Dict:
     """Map over a dict and translate any null string values into ' '.
     Leave everything else as is. This is needed because you cannot add TableCell
     objects with only a null string or the client crashes.
-
     :param Dict d: dict of item values.
     :rtype Dict:
     """
@@ -178,7 +179,6 @@ def translate_null_strings_to_blanks(d: typing.Dict) -> typing.Dict:
 
 def apiurl(args: argparse.Namespace, subpath: str, query_args: typing.Dict = None) -> str:
     """Creates the endpoint URL for a given combination of parameters.
-
     :param argparse.Namespace args: Namespace with many fields relevant to the endpoint.
     :param str subpath: added to end of URL to further specify endpoint.
     :param typing.Dict query_args: specifics such as API key and search parameters that complete the URL.
@@ -208,7 +208,6 @@ def deindent(message: str) -> str:
     """
     Deindent a quoted string. Scans message and finds the smallest number of whitespace characters in any line and
     removes that many from the start of every line.
-
     :param str message: Message to deindent.
     :rtype str:
     """
@@ -224,21 +223,24 @@ displayable_fields = (
     # ("bw_nvlink", "Bandwidth NVLink", "{}", None, True),
     ("id", "ID", "{}", None, True),
     ("cuda_max_good", "CUDA", "{:0.1f}", None, True),
-    ("num_gpus", "Num", "{}x", None, False),
+    ("num_gpus", "N", "{}x", None, False),
     ("gpu_name", "Model", "{}", None, True),
-    ("pcie_bw", "PCIE_BW", "{:0.1f}", None, True),
+    ("pcie_bw", "PCIE", "{:0.1f}", None, True),
     ("cpu_cores_effective", "vCPUs", "{:0.1f}", None, True),
     ("cpu_ram", "RAM", "{:0.1f}", lambda x: x / 1000, False),
-    ("disk_space", "Storage", "{:.0f}", None, True),
+    ("disk_space", "Disk", "{:.0f}", None, True),
     ("dph_total", "$/hr", "{:0.4f}", None, True),
-    ("dlperf", "DLPerf", "{:0.1f}", None, True),
-    ("dlperf_per_dphtotal", "DLP/$", "{:0.1f}", None, True),
-    ("driver_version", "Nvidia Driver Version", "{}", None, True),
+    ("dlperf", "DLP", "{:0.1f}", None, True),
+    ("dlperf_per_dphtotal", "DLP/$", "{:0.2f}", None, True),
+    ("driver_version", "NV Driver", "{}", None, True),
     ("inet_up", "Net_up", "{:0.1f}", None, True),
     ("inet_down", "Net_down", "{:0.1f}", None, True),
     ("reliability2", "R", "{:0.1f}", lambda x: x * 100, True),
     ("duration", "Max_Days", "{:0.1f}", lambda x: x / (24.0 * 60.0 * 60.0), True),
-    ("machine_id", "machine_id", "{}", None, True),
+    ("machine_id", "mach_id", "{}", None, True),
+    ("verification", "status", "{}", None, True),
+    ("direct_port_count", "ports", "{}", None, True),
+    ("geolocation", "country", "{}", None, True),
    #  ("direct_port_count", "Direct Port Count", "{}", None, True),
 )
 
@@ -318,7 +320,6 @@ def version_string_sort(a, b) -> int:
     Accepts two version strings and decides whether a > b, a == b, or a < b.
     This is meant as a sort function to be used for the driver versions in which only
     the == operator currently works correctly. Not quite finished...
-
     :param str a:
     :param str b:
     :return int:
@@ -333,7 +334,6 @@ def parse_query(query_str: str, res: typing.Dict = None) -> typing.Dict:
     """
     Basically takes a query string (like the ones in the examples of commands for the search__offers function) and
     processes it into a dict of URL parameters to be sent to the server.
-
     :param str query_str:
     :param Dict res:
     :return Dict:
@@ -423,6 +423,7 @@ def parse_query(query_str: str, res: typing.Dict = None) -> typing.Dict:
         "rented",
         "storage_cost",
         "total_flops",
+        "verification",
         "verified",
 
     };
@@ -472,13 +473,9 @@ def parse_query(query_str: str, res: typing.Dict = None) -> typing.Dict:
 def display_table(rows: list, fields: typing.Tuple) -> None:
     """Basically takes a set of field names and rows containing the corresponding data and prints a nice tidy table
     of it.
-
     :param list rows: Each row is a dict with keys corresponding to the field names (first element) in the fields tuple.
-
     :param Tuple fields: 5-tuple describing a field. First element is field name, second is human readable version, third is format string, fourth is a lambda function run on the data in that field, fifth is a bool determining text justification. True = left justify, False = right justify. Here is an example showing the tuples in action.
-
     :rtype None:
-
     Example of 5-tuple: ("cpu_ram", "RAM", "{:0.1f}", lambda x: x / 1000, False)
     """
     header = [name for _, name, _, _, _ in fields]
@@ -518,7 +515,6 @@ def parse_vast_url(url_str):
     """
     Breaks up a vast-style url in the form instance_id:path and does
     some basic sanity type-checking.
-
     :param url_str:
     :return:
     """
@@ -559,7 +555,6 @@ def parse_vast_url(url_str):
          vast copy 11824:/data/test 12371:/temp
          vast copy 11824:/data/test data/test
          vast copy data/test 11824:/data/test
-
         The first example copy syncs the directory '/tmp' in instance 12371 from the directory '/data/test' in instance 11824.
         The second example copy syncs the relative directory 'data/test' on the local machine from '/data/test' in instance 11824.
         The third example copy syncs the directory '/data/test' in instance 11824 from the relative directory 'data/test' on the local machine.
@@ -568,7 +563,6 @@ def parse_vast_url(url_str):
 def copy(args: argparse.Namespace):
     """
     Transfer data from one instance to another.
-
     @param src: Location of data object to be copied.
     @param dst: Target to copy object to.
     """
@@ -640,28 +634,20 @@ def copy(args: argparse.Namespace):
     help="Search for instance types using custom query",
     epilog=deindent("""
         Query syntax:
-
             query = comparison comparison...
             comparison = field op value
             field = <name of a field>
             op = one of: <, <=, ==, !=, >=, >, in, notin
             value = <bool, int, float, etc> | 'any'
-
         note: to pass '>' and '<' on the command line, make sure to use quotes
         note: to encode a string query value (ie for gpu_name), replace any spaces ' ' with underscore '_'
-
-
         Examples:
-
             ./vast search offers 'compute_cap > 610 total_flops < 5'
             ./vast search offers 'reliability > 0.99  num_gpus>=4' -o 'num_gpus-'
             ./vast search offers 'rentable = any'
             ./vast search offers 'reliability > 0.98 num_gpus=1 gpu_name=RTX_3090'
-
         Available fields:
-
               Name                  Type       Description
-
             bw_nvlink               float     bandwidth NVLink
             compute_cap:            int       cuda compute capability*100  (ie:  650 for 6.5, 700 for 7.0)
             cpu_cores:              int       # virtual cpus
@@ -676,7 +662,7 @@ def copy(args: argparse.Namespace):
             dph:                    float     $/hour rental cost
             driver_version          string    driver version in use on a host.
             duration:               float     max rental duration in days
-            external:               bool      show external offers
+            external:               bool      show external offers in addition to datacenter offers
             flops_usd:              float     TFLOPs/$
             gpu_mem_bw:             float     GPU memory bandwidth in GB/s
             gpu_name:               string    GPU model name (no quotes, replace spaces with underscores, ie: RTX_3090 rather than 'RTX 3090')
@@ -704,7 +690,6 @@ def copy(args: argparse.Namespace):
 )
 def search__offers(args):
     """Creates a query based on search parameters as in the examples above.
-
     :param argparse.Namespace args: should supply all the command-line options
     """
     field_alias = {
@@ -765,7 +750,6 @@ def search__offers(args):
 def show__instances(args):
     """
     Shows the stats on the machine the user is renting.
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype:
     """
@@ -786,7 +770,6 @@ def show__instances(args):
 )
 def ssh_url(args):
     """
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype:
     """
@@ -800,7 +783,6 @@ def ssh_url(args):
 )
 def scp_url(args):
     """
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype:
     """
@@ -830,7 +812,6 @@ def _ssh_url(args, protocol):
 def show__machines(args):
     """
     Show the machines user is offering for rent.
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype:
     """
@@ -851,6 +832,65 @@ def show__machines(args):
 
 @parser.command(
     argument("-q", "--quiet", action="store_true", help="only display numeric ids"),
+    argument("-s", "--start_date", help="start date and time for report. Many formats accepted", type=str),
+    argument("-e", "--end_date", help="end date and time for report. Many formats accepted ", type=str),
+    argument("-m", "--machine_id", help="Machine id (optional)", type=int),
+    usage="./vast show earnings [OPTIONS]",
+    help="Get machine earning history reports",
+)
+def show__earnings(args):
+    """
+    Show earnings history for a time range, optionally per machine. Various options available to limit time range and type of items.
+    :param argparse.Namespace args: should supply all the command-line options
+    :rtype:
+    """
+
+    Minutes = 60.0;
+    Hours	= 60.0*Minutes;
+    Days	= 24.0*Hours;
+    Years	= 365.0*Days;
+    cday    = time.time() / Days
+    sday = cday - 1.0
+    eday = cday - 1.0
+
+    try:
+        import dateutil
+        from dateutil import parser
+
+    except ImportError:
+        print("""\nWARNING: Missing dateutil, can't parse time format""")
+
+    if args.end_date:
+        try:
+            end_date = dateutil.parser.parse(str(args.end_date))
+            end_date_txt = end_date.isoformat()
+            end_timestamp = time.mktime(end_date.timetuple())
+            eday = end_timestamp / Days
+        except ValueError:
+            print("Warning: Invalid end date format! Ignoring end date!")
+
+    if args.start_date:
+        try:
+            start_date = dateutil.parser.parse(str(args.start_date))
+            start_date_txt = start_date.isoformat()
+            start_timestamp = time.mktime(start_date.timetuple())
+            sday = start_timestamp / Days
+        except ValueError:
+            print("Warning: Invalid start date format! Ignoring start date!")
+
+
+
+    req_url = apiurl(args, "/users/me/machine-earnings", {"owner": "me", "sday": sday, "eday": eday, "machid" :args.machine_id});
+    r = requests.get(req_url)
+    r.raise_for_status()
+    rows = r.json()
+
+    print(json.dumps(rows, indent=1, sort_keys=True))
+
+
+
+@parser.command(
+    argument("-q", "--quiet", action="store_true", help="only display numeric ids"),
     argument("-s", "--start_date", help="start date and time for report. Many formats accepted (optional)", type=str),
     argument("-e", "--end_date", help="end date and time for report. Many formats accepted (optional)", type=str),
     argument("-c", "--only_charges", action="store_true", help="Show only charge items."),
@@ -862,11 +902,10 @@ def show__invoices(args):
     """
     Show current payments and charges. Various options available to limit time range and type
     of items. Default is to show everything for user's entire billing history.
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype:
     """
-    req_url = apiurl(args, "/users/me/invoices", {"owner": "me"});
+    req_url = apiurl(args, "/users/me/invoices", {"owner": "me", "inc_charges" : not args.only_credits});
     r = requests.get(req_url)
     r.raise_for_status()
     rows = r.json()["invoices"]
@@ -894,7 +933,6 @@ def show__invoices(args):
 def show__user(args):
     """
     Shows stats for logged-in user. Does not show API key.
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype:
     """
@@ -915,12 +953,9 @@ def show__user(args):
 def filter_invoice_items(args: argparse.Namespace, rows: typing.List) -> typing.Dict:
     """This applies various filters to the invoice items. Currently it filters on start and end date and applies the
     'only_charge' and 'only_credits' options.invoice_number
-
     :param argparse.Namespace args: should supply all the command-line options
     :param List rows: The rows of items in the invoice
-
     :rtype List: Returns the filtered list of rows.
-
     """
 
     try:
@@ -993,8 +1028,7 @@ def filter_invoice_items(args: argparse.Namespace, rows: typing.List) -> typing.
 
     header_text = header_text + " " + type_txt
 
-    rows = list(filter(lambda row: end_timestamp >= row["timestamp"] >= start_timestamp
-                                   and type_filter_fn(row) and float(row["amount"]) != 0, rows))
+    rows = list(filter(lambda row: end_timestamp >= (row["timestamp"] or 0.0) >= start_timestamp and type_filter_fn(row) and float(row["amount"]) != 0, rows))
 
     if start_date_txt:
         start_date_txt = "S:" + start_date_txt
@@ -1028,7 +1062,6 @@ def generate__pdf_invoices(args):
     """
     Makes a PDF version of the data returned by the "show invoices" command. Takes the same command line args as that
     command.
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype:
     """
@@ -1077,8 +1110,6 @@ def generate__pdf_invoices(args):
 )
 def list__machine(args):
     """
-
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype:
     """
@@ -1114,7 +1145,6 @@ def list__machine(args):
 def unlist__machine(args):
     """
     Removes machine from list of machines for rent.
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype:
     """
@@ -1137,8 +1167,6 @@ def unlist__machine(args):
 )
 def remove__defjob(args):
     """
-
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype:
     """
@@ -1159,7 +1187,6 @@ def remove__defjob(args):
 
 def set_ask(args):
     """
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype:
     """
@@ -1198,7 +1225,6 @@ def reboot__instance(args):
 )
 def start__instance(args):
     """
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype:
     """
@@ -1226,7 +1252,6 @@ def start__instance(args):
 )
 def stop__instance(args):
     """
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype:
     """
@@ -1255,7 +1280,6 @@ def stop__instance(args):
 )
 def label__instance(args):
     """
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype:
     """
@@ -1278,8 +1302,7 @@ def label__instance(args):
     help="Destroy an instance (irreversible, deletes data)",
 )
 def destroy__instance(args):
-    """Perfoms the same action as pressing the "DESTROY" button on the website at https://vast.ai/console/instances/.
-
+    """Perfoms the same action as pressing the "DESTROY" button on the website at https://console.vast.ai/instances/.
     :param argparse.Namespace args: should supply all the command-line options
     """
     url = apiurl(args, "/instances/{id}/".format(id=args.id))
@@ -1301,9 +1324,19 @@ def destroy__instance(args):
 
 @parser.command(
     argument("ID", help="id of instance to execute on", type=int),
-    argument("COMMAND", help="command to execute",  type=str),
+    argument("COMMAND", help="bash command surrounded by single quotes",  type=str),
     usage="./vast execute ID COMMAND",
     help="Execute a (constrained) remote command on a machine",
+    epilog=deindent("""
+        examples:
+          ./vast execute 99999 'ls -l -o -r'
+          ./vast execute 99999 'rm -r home/delete_this.txt'
+          ./vast execute 99999 'du -d2 -h'
+        available commands:
+          ls                 List directory contents
+          rm                 Remote files or directories
+          du                 Summarize device usage for a set of files
+    """),
 )
 def execute(args):
     """Execute a (constrained) remote command on a machine.
@@ -1316,9 +1349,20 @@ def execute(args):
     if (r.status_code == 200):
         rj = r.json();
         if (rj["success"]):
-            print("Executing {args.command} on instance {args.id}.".format(**(locals())));
+            for i in range(0,30):
+                time.sleep(0.3)
+                #url = args.url + "/static/docker_logs/C" + str(args.ID&255) + ".log" # apiurl(args, "/instances/request_logs/{id}/".format(id=args.id))
+                api_key_id_h = hashlib.md5( (args.api_key + str(args.ID)).encode('utf-8') ).hexdigest()
+                #url = "https://s3.amazonaws.com/vast.ai/instance_logs/" + args.api_key + str(args.ID) + "C.log"
+                url = "https://s3.amazonaws.com/vast.ai/instance_logs/" + api_key_id_h + "C.log"
+                #print(url)
+                r = requests.get(url);
+                if (r.status_code == 200):
+                    filtered_text = r.text.replace(rj["writeable_path"], '');
+                    print(filtered_text)
+                    break
         else:
-            print(rj["msg"]);
+            print(rj);
     else:
         print(r.text);
         print("failed with error {r.status_code}".format(**locals()));
@@ -1346,9 +1390,12 @@ def logs(args):
     if (r.status_code == 200):
         rj = r.json();
         for i in range(0,30):
-            time.sleep(1)
-            url = args.url + "/static/docker_logs/C" + str(args.INSTANCE_ID&255) + ".log" # apiurl(args, "/instances/request_logs/{id}/".format(id=args.id))
-            print(f"waiting on logs for instance {args.INSTANCE_ID}")
+            time.sleep(0.3)
+            #url = args.url + "/static/docker_logs/C" + str(args.INSTANCE_ID&255) + ".log" # apiurl(args, "/instances/request_logs/{id}/".format(id=args.id))
+            #url = "https://s3.amazonaws.com/vast.ai/instance_logs/" + args.api_key + str(args.INSTANCE_ID) + ".log"
+            api_key_id_h = hashlib.md5( (args.api_key + str(args.INSTANCE_ID)).encode('utf-8') ).hexdigest()
+            url = "https://s3.amazonaws.com/vast.ai/instance_logs/" + api_key_id_h + ".log"
+            print(f"waiting on logs for instance {args.INSTANCE_ID} fetching from {url}")
             r = requests.get(url);
             if (r.status_code == 200):
                 print(r.text)
@@ -1358,7 +1405,6 @@ def logs(args):
     else:
         print(r.text);
         print("failed with error {r.status_code}".format(**locals()));
-
 
 
 @parser.command(
@@ -1373,7 +1419,6 @@ def logs(args):
 )
 def set__defjob(args):
     """
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype:
     """
@@ -1415,7 +1460,7 @@ def parse_env(envs):
                 return result
           elif (prev == "-e"):
             e = e.strip(" '\"")
-            if set(e).issubset(set("1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_=")):
+            if True: #set(e).issubset(set("1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_=")):
                 kv = e.split('=')
                 result[kv[0]] = kv[1]
             else:
@@ -1456,8 +1501,7 @@ def parse_env(envs):
     """),
 )
 def create__instance(args: argparse.Namespace):
-    """Performs the same action as pressing the "RENT" button on the website at https://vast.ai/console/create/.
-
+    """Performs the same action as pressing the "RENT" button on the website at https://console.vast.ai/create/.
     :param argparse.Namespace args: Namespace with many fields relevant to the endpoint.
     """
     if args.onstart:
@@ -1517,7 +1561,6 @@ def create__instance(args: argparse.Namespace):
 )
 def change__bid(args: argparse.Namespace):
     """Alter the bid with id contained in args.
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype int:
     """
@@ -1531,6 +1574,18 @@ def change__bid(args: argparse.Namespace):
     print("Per gpu bid price changed".format(r.json()))
 
 
+
+
+
+def pretty_print_POST(req):
+    print('{}\n{}\r\n{}\r\n\r\n{}'.format(
+        '-----------START-----------',
+        req.method + ' ' + req.url,
+        '\r\n'.join('{}: {}'.format(k, v) for k, v in req.headers.items()),
+        req.body,
+    ))
+
+
 @parser.command(
     argument("id", help="id of machine to set min bid price for", type=int),
     argument("--price", help="per gpu min bid price in $/hour", type=float),
@@ -1542,17 +1597,40 @@ def change__bid(args: argparse.Namespace):
 )
 def set__min_bid(args):
     """
-
     :param argparse.Namespace args: should supply all the command-line options
     :rtype:
     """
     url = apiurl(args, "/machines/{id}/minbid/".format(id=args.id))
-    r = requests.put(url, json={
-        "client_id": "me",
-        "price": args.price,
-    })
+    print(url)
+
+    req = requests.put(url, json={"client_id": "me", "price": args.price,})
+    #prepared = req.prepare()
+    #pretty_print_POST(prepared)
+
+    r = requests.put(url, json={"client_id": "me", "price": args.price,})
+
+    print(r.request.url)
+    print(r.request.body)
+    print(r.request.headers)
+
     r.raise_for_status()
     print("Per gpu min bid price changed".format(r.json()))
+
+
+
+@parser.command(
+    usage="./vast reset api-key",
+    help="Reset your api-key (get new key from website).",
+)
+def reset__api_key(args):
+    """Caution: a bad API key will make it impossible to connect to the servers.
+    """
+    print('fml')
+    #url = apiurl(args, "/users/current/reset-apikey/", {"owner": "me"})
+    url = apiurl(args, "/commands/reset_apikey/" )
+    r = requests.put(url, json={"client_id": "me",})
+    r.raise_for_status()
+    print("api-key reset ".format(r.json()))
 
 
 @parser.command(
@@ -1562,7 +1640,6 @@ def set__min_bid(args):
 )
 def set__api_key(args):
     """Caution: a bad API key will make it impossible to connect to the servers.
-
     :param argparse.Namespace args: should supply all the command-line options
     """
     with open(api_key_file, "w") as writer:
@@ -1572,8 +1649,7 @@ def set__api_key(args):
 
 login_deprecated_message = """
 login via the command line is no longer supported.
-go to https://vast.ai/console/cli in a web browser to get your api key, then run:
-
+go to https://console.vast.ai/cli in a web browser to get your api key, then run:
     vast set api-key YOUR_API_KEY_HERE
 """
 
@@ -1584,7 +1660,6 @@ go to https://vast.ai/console/cli in a web browser to get your api key, then run
 )
 def create__account(args):
     print(login_deprecated_message)
-
 @parser.command(
     argument("ignored", nargs="*"),
     usage=login_deprecated_message,

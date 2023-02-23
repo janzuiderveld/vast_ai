@@ -6,12 +6,12 @@
 
 int DEBUG = 1;
 double deltaAverageThresholdTriggerIn = 1.0; // IMPORTANT
-int settleRequired = 4;
+int settleRequired = 500;
 
 double deltaAverageThresholdControlOut = 1.0; // IMPORTANT not yet
 double triggerDist = 250.0; // IMPORTANT
 const double smoothSamples = 1.0 ; 
-int ctrlStartMs = 100; // Doesn't seem to be working, need to test./.
+int ctrlStartMs = 100; 
 
 // lead 1
 int notes1[7] = {57, 58, 60, 62, 64, 65, 67};
@@ -47,7 +47,7 @@ int ctrlNegReset2[7] = {0, 0, 0, 0,    0, 0, 0};
 
 // not implemented yet
 int retriggerStart[7] = {0, 0, 0, 0, 500, 500, 500};
-int retriggerMod[7] = {0, 0, 0, 0, 0, 0, 0};
+int retriggerMod[7] = {0, 0, 0, 0, 500, 500, 500};
 int lastRetrigger[7] = {0, 0, 0, 0, 0, 0, 0};
 
 int inputMapRange[2] = {50, 250};
@@ -249,6 +249,12 @@ void loop() {
       if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 1) {
         // check if last retrigger was long enough ago
         if (millis() > retriggerMod[ch] + lastRetrigger[ch]) {
+
+          // # TODO UNTested
+          // turn off note
+          usbMIDI.sendNoteOn(noteOut[ch], 0, chMap[ch]);
+          // 
+
           // Send NoteOn message to MIDI channel
           usbMIDI.sendNoteOn(noteOut[ch], 120 + chMap[ch], chMap[ch]);
           // update lastRetrigger
@@ -257,9 +263,22 @@ void loop() {
       }
     }
 
+    // check if channel is inactive, but average is within triggerDist
+    if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 0) {
+      // absoulute of average
+        deltaAverage[ch] = abs(lastAverage[ch] - average[ch]); // absoulute of average
+        if (deltaAverage[ch] <= deltaAverageThresholdTriggerIn) { 
+            settleCount[ch] += 1;
+        } else {
+          settleCount[ch] = 0;
+        }
+    }
+
+
+
     // if dists[ch] has not changed and last update was less than 1 ms ago, continue
     if (dists[ch] == lastDists[ch]) {
-      if (millis() <= (lastTick[ch] + minTimeBetweenTicks) {
+      if (millis() <= (lastTick[ch] + minTimeBetweenTicks)) {
         continue;
       }
     }
@@ -280,11 +299,11 @@ void loop() {
     // This section sends NoteOn messages to the MIDI channel when appropriate
     if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 0) {
 
-        // TODO this should be moved out of this loop, where it only counts on change of dist
-        deltaAverage[ch] = (lastAverage[ch] - average[ch]); // positive if lower, negative if higher away
-        if (deltaAverage[ch] <= deltaAverageThresholdTriggerIn) { // Use absolute diff here?
-            settleCount[ch] += 1;
-            // 
+        // // TODO this should be moved out of this loop, where it only counts on change of dist
+        // deltaAverage[ch] = (lastAverage[ch] - average[ch]); // positive if lower, negative if higher away
+        // if (deltaAverage[ch] <= deltaAverageThresholdTriggerIn) { // Use absolute diff here?
+        //     settleCount[ch] += 1;
+        //     // 
 
             if (settleCount[ch] >= settleRequired) {
               lastTriggerDist[ch] = average[ch];
@@ -307,6 +326,8 @@ void loop() {
 
               triggerTick[ch] = millis();
 
+              lastRetrigger[ch] = millis();
+
               // print noteOut
               if (DEBUG) {
                 Serial.print("Note out: ");
@@ -315,9 +336,12 @@ void loop() {
                 Serial.println(ch);
             }
           }
-        } else {
-          settleCount[ch] = 0;
-        }
+        
+        // //
+        // } else {
+        //   settleCount[ch] = 0;
+        // }
+        // //
 
     }
 
@@ -325,7 +349,7 @@ void loop() {
     // check if laser is still active
     if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 1) {
         currentMillis = millis();
-        if (triggerTick[ch] < (currentMillis + ctrlStartMs)) {
+        if (currentMillis > (triggerTick[ch] + ctrlStartMs)) {
             lastTick[ch] = currentMillis;
 
             if (enterDist[ch] == 0) {
@@ -369,12 +393,12 @@ void loop() {
 
             // if retriggerStart, edit retriggerMod[ch]
             if (retriggerStart[ch] > 0) {
-                retriggerMod[ch] = retriggerStart[ch] + map(distDiff[ch], 0, 100, 0, 1000);
-                if (retriggerMod[ch] > 1500) {
-                    retriggerMod[ch] = 1500;
+                retriggerMod[ch] = retriggerStart[ch] + map(distDiff[ch], 0, 100, 0, 500);
+                if (retriggerMod[ch] > 2000) {
+                    retriggerMod[ch] = 2000;
                 }
-                if (retriggerMod[ch] < 1) {
-                    retriggerMod[ch] = 1;
+                if (retriggerMod[ch] < 10) {
+                    retriggerMod[ch] = 10;
                 }
             }
 
@@ -424,6 +448,12 @@ void loop() {
             // print lastTriggerDist
             Serial.print("Last trigger dist: ");
             Serial.println(lastTriggerDist[ch]);
+            // print triggerTick
+            Serial.print("Trigger tick: ");
+            Serial.println(triggerTick[ch]);
+            // print currentMillis
+            Serial.print("Current millis: ");
+            Serial.println(currentMillis);
 
         }
 
@@ -434,35 +464,16 @@ void loop() {
 
   } // end of loop over channels
 
-  // // retrigger
-  // for (int ch = 0; ch < num_channels; ch++) {
-  //   if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 1) {
-  //       currentMillis = millis();
-  //       if (currentMillis >= (lastTick[ch] + minTimeBetweenTicks) && triggerTick[ch] < (currentMillis + ctrlStartMs)) {
-  //           lastTick[ch] = currentMillis;
-  //           if (retriggerStart[ch] > 0 && (currentMillis - triggerTick[ch]) % retriggerMod[ch] == 0) {
-  //               if (retriggerSend[ch] == 0) {
-  //                   usbMIDI.sendNoteOn(noteOut[ch], 120 + chMap[ch], chMap[ch]);
-  //                   usbMIDI.send_now();
-  //                   retriggerSend[ch] = 1;
-  //               } else {
-  //                   retriggerSend[ch] = 0;
-  //               }
-  //           }
-  //       }
-  //   }
-  // }
 
+    // // every 100ms, print the distances
+    // if (millis() % 100 == 0 && DEBUG && noteLock == 0) {
+    //     for (int i = 0; i < 7; i++) {
+    //         Serial.print(dists[i]);
+    //         Serial.print(" ");
+    //     }
+    //     Serial.println();
 
-    // every 100ms, print the distances
-    if (millis() % 100 == 0 && DEBUG && noteLock == 0) {
-        for (int i = 0; i < 7; i++) {
-            Serial.print(dists[i]);
-            Serial.print(" ");
-        }
-        Serial.println();
-
-    }
+    // }
 
 
 }

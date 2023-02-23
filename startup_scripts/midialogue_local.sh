@@ -1,11 +1,14 @@
 #!/bin/bash
 function finish {
+  python3 midialogue/midi_scripts/note_off_all.py 
+
   pkill -P $$
   echo "killed $$"
   cd $ROOT_DIR
   ID=$(./vast show instances --raw | python3 -c "import sys, json; print(json.load(sys.stdin)[0]['id'])")
   echo "destroying instance $ID"
   ./vast destroy instance $ID
+
   exit
 }
 trap finish EXIT
@@ -14,10 +17,19 @@ trap finish SIGINT
 timeout=1
 
 #TODO
-# cut final silene of midi recording 
+# cut beginning midis that are too long
+# remove 1st hit on all instruments ?
+
 # make drums repeat on hold
 # make sure wave guide send is set on boot
-# ambient out
+
+# autoreboot if loading takes too long?
+#  1 make bash script reboot on crash
+#  2 make loading script check if it is still running after 5 minutes and send reboot command otherwise
+
+
+# seems te be ok:
+# cut final silence of midi recording 
 
 # make sure there are no more tunnels on port 8080 the machine
 lsof -ti:8080 | xargs kill -9
@@ -77,8 +89,8 @@ es1_port=${midi_devices:$esi1_index:2}
 es2_port=${midi_devices:$esi2_index:2}
 model_port=${midi_devices:$model_index:2}
 
-all_synths_port=6
-model_and_synths_port=7
+all_synths_port=4
+model_and_synths_port=5
 
 echo "in_port: $in_port"
 echo "blo_port: $blo_port"

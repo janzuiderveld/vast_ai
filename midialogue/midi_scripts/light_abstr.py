@@ -13,7 +13,9 @@ num_steps = 7
 import os
 
 in_port = int(os.environ['in_port'])
+model_port = int(os.environ['model_port'])
 all_synths_port = int(os.environ['all_synths_port'])
+
 
 def set_laser_mode(i, mode, midi_out=None):
     if mode == 1:
@@ -81,6 +83,12 @@ class MidiOutWrapper:
             for note in range(128):
                 # midi_out.send_message([0x80, note, 0]
                 self.note_off(note, ch=ch)
+
+        # if ch is None:
+        #     for ch in range(1,6):
+        #         self.channel_message(ALL_NOTES_OFF, ch=ch)
+        # else:
+        #     self.channel_message(ALL_NOTES_OFF, ch=ch)
 
 # midiout = MidiOutWrapper(midiout)  # passing in a rtmidi.MidiOut instance
 # midiout.channel_message(NOTE_ON, 36, 127, ch=10)

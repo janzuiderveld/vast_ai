@@ -4,13 +4,12 @@ import random
 import time
 import sys
 import os
-from light_abstr import set_laser_mode, set_all_lasers_mode, x_by_x, all_on_off
+from light_abstr import set_laser_mode, set_all_lasers_mode, x_by_x, all_on_off, in_port, all_synths_port
 
 script_dir = os.path.dirname(__file__)
 
-teensy = 1
-playback = 6
-num_steps = 7
+teensy = in_port
+playback = all_synths_port
 
 def handle_input(event, data=None):
     event, deltatime = event

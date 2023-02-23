@@ -1,531 +1,1060 @@
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-copying /home/p/vast_ai/midialogue/midi_in/8586882624176502364.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/12110409053856208395.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-failed with error 429: (no detail message supplied)
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-failed with error 429: (no detail message supplied)
 receiving incremental file list
 midi_out/
 
 sent 28 bytes  received 58 bytes  57.33 bytes/sec
 total size is 0  speedup is 0.00
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 receiving incremental file list
 midi_out/
 midi_out/0_midii.mid
-              0   0%    0.00kB/s    0:00:00              466 100%  455.08kB/s    0:00:00 (xfr#1, to-chk=0/2)
+              0   0%    0.00kB/s    0:00:00              166 100%  162.11kB/s    0:00:00 (xfr#1, to-chk=0/2)
 
-sent 47 bytes  received 464 bytes  340.67 bytes/sec
-total size is 466  speedup is 0.91
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
-Received SIGTERM signal. Exiting...
+sent 47 bytes  received 228 bytes  183.33 bytes/sec
+total size is 166  speedup is 0.60
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 playing /home/p/vast_ai/midialogue/midi_out/0_midii.mid
 killing light pattern play script
-Received SIGTERM signal. Exiting...
-restart input
 launching light pattern after play
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-sending incremental file list
-
-sent 146 bytes  received 18 bytes  109.33 bytes/sec
-total size is 1,297  speedup is 7.91
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
-copying /home/p/vast_ai/midialogue/midi_in/2688785695042052989.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/8026061358208149444.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
 receiving incremental file list
 
-sent 25 bytes  received 83 bytes  72.00 bytes/sec
-total size is 466  speedup is 4.31
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-failed with error 429: (no detail message supplied)
+sent 25 bytes  received 83 bytes  216.00 bytes/sec
+total size is 166  speedup is 1.54
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 receiving incremental file list
 midi_out/
 midi_out/1_midii.mid
-              0   0%    0.00kB/s    0:00:00              317 100%  309.57kB/s    0:00:00 (xfr#1, to-chk=0/3)
+              0   0%    0.00kB/s    0:00:00              249 100%  243.16kB/s    0:00:00 (xfr#1, to-chk=0/3)
 
-sent 47 bytes  received 401 bytes  298.67 bytes/sec
-total size is 783  speedup is 1.75
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
-Received SIGTERM signal. Exiting...
+sent 47 bytes  received 314 bytes  240.67 bytes/sec
+total size is 415  speedup is 1.15
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 playing /home/p/vast_ai/midialogue/midi_out/1_midii.mid
 killing light pattern play script
-Received SIGTERM signal. Exiting...
-restart input
 launching light pattern after play
-sending incremental file list
-
-sent 189 bytes  received 18 bytes  138.00 bytes/sec
-total size is 1,997  speedup is 9.65
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-copying /home/p/vast_ai/midialogue/midi_in/16552405052670336311.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/975816473406277943.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
-receiving incremental file list
-
-sent 25 bytes  received 114 bytes  92.67 bytes/sec
-total size is 783  speedup is 5.63
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
 receiving incremental file list
 midi_out/
 midi_out/2_midii.mid
-              0   0%    0.00kB/s    0:00:00              255 100%  249.02kB/s    0:00:00 (xfr#1, to-chk=0/4)
+              0   0%    0.00kB/s    0:00:00              166 100%  162.11kB/s    0:00:00 (xfr#1, to-chk=0/4)
 
-sent 47 bytes  received 359 bytes  270.67 bytes/sec
-total size is 1,038  speedup is 2.56
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
-Received SIGTERM signal. Exiting...
+sent 47 bytes  received 284 bytes  662.00 bytes/sec
+total size is 581  speedup is 1.76
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 playing /home/p/vast_ai/midialogue/midi_out/2_midii.mid
 killing light pattern play script
-Received SIGTERM signal. Exiting...
-restart input
 launching light pattern after play
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-sending incremental file list
-
-sent 237 bytes  received 18 bytes  170.00 bytes/sec
-total size is 3,277  speedup is 12.85
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
-copying /home/p/vast_ai/midialogue/midi_in/15171369319693326488.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/7785294460847507569.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
 receiving incremental file list
 
-sent 25 bytes  received 141 bytes  110.67 bytes/sec
-total size is 1,038  speedup is 6.25
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sent 25 bytes  received 139 bytes  109.33 bytes/sec
+total size is 581  speedup is 3.54
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
 failed with error 429: (no detail message supplied)
 receiving incremental file list
 midi_out/
 midi_out/3_midii.mid
-              0   0%    0.00kB/s    0:00:00              223 100%  217.77kB/s    0:00:00 (xfr#1, to-chk=0/5)
+              0   0%    0.00kB/s    0:00:00              361 100%  352.54kB/s    0:00:00 (xfr#1, to-chk=0/5)
 
-sent 47 bytes  received 361 bytes  272.00 bytes/sec
-total size is 1,261  speedup is 3.09
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
-Received SIGTERM signal. Exiting...
+sent 47 bytes  received 378 bytes  283.33 bytes/sec
+total size is 942  speedup is 2.22
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 playing /home/p/vast_ai/midialogue/midi_out/3_midii.mid
 killing light pattern play script
-Received SIGTERM signal. Exiting...
-restart input
 launching light pattern after play
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-sending incremental file list
-
-sent 276 bytes  received 18 bytes  196.00 bytes/sec
-total size is 3,687  speedup is 12.54
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
-copying /home/p/vast_ai/midialogue/midi_in/12412217678868703122.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/12741099447325637013.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
+receiving incremental file list
+
+sent 25 bytes  received 167 bytes  128.00 bytes/sec
+total size is 942  speedup is 4.91
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 receiving incremental file list
 midi_out/
 midi_out/4_midii.mid
-              0   0%    0.00kB/s    0:00:00              205 100%  200.20kB/s    0:00:00 (xfr#1, to-chk=0/6)
+              0   0%    0.00kB/s    0:00:00              319 100%  311.52kB/s    0:00:00 (xfr#1, to-chk=0/6)
 
-sent 47 bytes  received 395 bytes  294.67 bytes/sec
-total size is 1,466  speedup is 3.32
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+sent 47 bytes  received 440 bytes  324.67 bytes/sec
+total size is 1,261  speedup is 2.59
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 Received SIGTERM signal. Exiting...
 playing /home/p/vast_ai/midialogue/midi_out/4_midii.mid
 killing light pattern play script
 Received SIGTERM signal. Exiting...
-restart input
 launching light pattern after play
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-sending incremental file list
-midi_in/midi_in_unfinished/
-midi_in/midi_in_unfinished/11660014049309447891.mid
-              0 100%    0.00kB/s    0:00:00 (xfr#1, to-chk=0/8)
-
-sent 418 bytes  received 44 bytes  308.00 bytes/sec
-total size is 5,514  speedup is 11.94
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
-copying /home/p/vast_ai/midialogue/midi_in/11660014049309447891.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/11805183862844414252.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
 receiving incremental file list
 midi_out/
 midi_out/5_midii.mid
-              0   0%    0.00kB/s    0:00:00              192 100%  187.50kB/s    0:00:00 (xfr#1, to-chk=0/7)
+              0   0%    0.00kB/s    0:00:00              205 100%  200.20kB/s    0:00:00 (xfr#1, to-chk=0/7)
 
-sent 47 bytes  received 391 bytes  292.00 bytes/sec
-total size is 1,658  speedup is 3.79
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+sent 47 bytes  received 403 bytes  300.00 bytes/sec
+total size is 1,466  speedup is 3.26
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 Received SIGTERM signal. Exiting...
 playing /home/p/vast_ai/midialogue/midi_out/5_midii.mid
 killing light pattern play script
 Received SIGTERM signal. Exiting...
-restart input
 launching light pattern after play
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-sending incremental file list
-
-sent 355 bytes  received 18 bytes  746.00 bytes/sec
-total size is 8,409  speedup is 22.54
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
-copying /home/p/vast_ai/midialogue/midi_in/12718519752270913038.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/5498590708258751534.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
 receiving incremental file list
 
-sent 25 bytes  received 219 bytes  162.67 bytes/sec
-total size is 1,658  speedup is 6.80
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+sent 25 bytes  received 221 bytes  164.00 bytes/sec
+total size is 1,466  speedup is 5.96
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+
+sent 25 bytes  received 221 bytes  164.00 bytes/sec
+total size is 1,466  speedup is 5.96
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 receiving incremental file list
 midi_out/
 midi_out/6_midii.mid
-              0   0%    0.00kB/s    0:00:00              250 100%  244.14kB/s    0:00:00 (xfr#1, to-chk=0/8)
+              0   0%    0.00kB/s    0:00:00              819 100%  799.80kB/s    0:00:00 (xfr#1, to-chk=0/8)
 
-sent 47 bytes  received 492 bytes  359.33 bytes/sec
-total size is 1,908  speedup is 3.54
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+sent 47 bytes  received 661 bytes  472.00 bytes/sec
+total size is 2,285  speedup is 3.23
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 Received SIGTERM signal. Exiting...
 playing /home/p/vast_ai/midialogue/midi_out/6_midii.mid
 killing light pattern play script
 Received SIGTERM signal. Exiting...
-restart input
 launching light pattern after play
-sending incremental file list
-
-sent 398 bytes  received 18 bytes  277.33 bytes/sec
-total size is 8,875  speedup is 21.33
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-copying /home/p/vast_ai/midialogue/midi_in/14581978953432019719.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/575973464527325555.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
 receiving incremental file list
 
-sent 25 bytes  received 247 bytes  181.33 bytes/sec
-total size is 1,908  speedup is 7.01
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+sent 25 bytes  received 246 bytes  180.67 bytes/sec
+total size is 2,285  speedup is 8.43
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 246 bytes  180.67 bytes/sec
+total size is 2,285  speedup is 8.43
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 246 bytes  180.67 bytes/sec
+total size is 2,285  speedup is 8.43
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
 receiving incremental file list
 midi_out/
 midi_out/7_midii.mid
-              0   0%    0.00kB/s    0:00:00              233 100%  227.54kB/s    0:00:00 (xfr#1, to-chk=0/9)
+              0   0%    0.00kB/s    0:00:00              872 100%  851.56kB/s    0:00:00 (xfr#1, to-chk=0/9)
 
-sent 47 bytes  received 483 bytes  353.33 bytes/sec
-total size is 2,141  speedup is 4.04
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+sent 47 bytes  received 920 bytes  644.67 bytes/sec
+total size is 3,157  speedup is 3.26
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 Received SIGTERM signal. Exiting...
 playing /home/p/vast_ai/midialogue/midi_out/7_midii.mid
 killing light pattern play script
 Received SIGTERM signal. Exiting...
-restart input
 launching light pattern after play
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-sending incremental file list
-
-sent 437 bytes  received 18 bytes  303.33 bytes/sec
-total size is 9,590  speedup is 21.08
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
-copying /home/p/vast_ai/midialogue/midi_in/16958494534293073520.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/12050765913887636774.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
-receiving incremental file list
-
-sent 25 bytes  received 274 bytes  199.33 bytes/sec
-total size is 2,141  speedup is 7.16
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-failed with error 429: (no detail message supplied)
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-failed with error 429: (no detail message supplied)
 receiving incremental file list
 midi_out/
 midi_out/8_midii.mid
-              0   0%    0.00kB/s    0:00:00              338 100%  330.08kB/s    0:00:00 (xfr#1, to-chk=0/10)
+              0   0%    0.00kB/s    0:00:00              166 100%  162.11kB/s    0:00:00 (xfr#1, to-chk=0/10)
 
-sent 47 bytes  received 618 bytes  443.33 bytes/sec
-total size is 2,479  speedup is 3.73
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+sent 47 bytes  received 446 bytes  328.67 bytes/sec
+total size is 3,323  speedup is 6.74
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 Received SIGTERM signal. Exiting...
 playing /home/p/vast_ai/midialogue/midi_out/8_midii.mid
 killing light pattern play script
 Received SIGTERM signal. Exiting...
-restart input
 launching light pattern after play
-sending incremental file list
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-
-sent 470 bytes  received 18 bytes  325.33 bytes/sec
-total size is 11,316  speedup is 23.19
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
-copying /home/p/vast_ai/midialogue/midi_in/2904430477306308888.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/13039884256833424595.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
-receiving incremental file list
-
-sent 25 bytes  received 299 bytes  216.00 bytes/sec
-total size is 2,479  speedup is 7.65
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
 receiving incremental file list
 midi_out/
 midi_out/9_midii.mid
-              0   0%    0.00kB/s    0:00:00              841 100%  821.29kB/s    0:00:00 (xfr#1, to-chk=0/11)
+              0   0%    0.00kB/s    0:00:00               42 100%   41.02kB/s    0:00:00 (xfr#1, to-chk=0/11)
 
-sent 47 bytes  received 645 bytes  461.33 bytes/sec
-total size is 3,320  speedup is 4.80
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+sent 47 bytes  received 413 bytes  306.67 bytes/sec
+total size is 3,365  speedup is 7.32
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 Received SIGTERM signal. Exiting...
 playing /home/p/vast_ai/midialogue/midi_out/9_midii.mid
 killing light pattern play script
-Received SIGTERM signal. Exiting...
-restart input
 launching light pattern after play
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-sending incremental file list
-
-sent 509 bytes  received 18 bytes  210.80 bytes/sec
-total size is 12,157  speedup is 23.07
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
-copying /home/p/vast_ai/midialogue/midi_in/9868187649007471717.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/16280877753995488028.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
 receiving incremental file list
 
-sent 25 bytes  received 327 bytes  234.67 bytes/sec
-total size is 3,320  speedup is 9.43
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+sent 25 bytes  received 326 bytes  234.00 bytes/sec
+total size is 3,365  speedup is 9.59
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+
+sent 25 bytes  received 326 bytes  702.00 bytes/sec
+total size is 3,365  speedup is 9.59
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+
+sent 25 bytes  received 326 bytes  234.00 bytes/sec
+total size is 3,365  speedup is 9.59
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 receiving incremental file list
 midi_out/
 midi_out/10_midii.mid
-              0   0%    0.00kB/s    0:00:00              327 100%  319.34kB/s    0:00:00 (xfr#1, to-chk=9/12)
+              0   0%    0.00kB/s    0:00:00            1,253 100%    1.19MB/s    0:00:00 (xfr#1, to-chk=9/12)
 
-sent 47 bytes  received 601 bytes  432.00 bytes/sec
-total size is 3,647  speedup is 5.63
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+sent 47 bytes  received 1,096 bytes  762.00 bytes/sec
+total size is 4,618  speedup is 4.04
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 Received SIGTERM signal. Exiting...
 playing /home/p/vast_ai/midialogue/midi_out/10_midii.mid
 killing light pattern play script
 Received SIGTERM signal. Exiting...
-restart input
 launching light pattern after play
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-sending incremental file list
-
-sent 547 bytes  received 18 bytes  376.67 bytes/sec
-total size is 13,279  speedup is 23.50
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
-copying /home/p/vast_ai/midialogue/midi_in/14473315617668479009.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/10744079872157954780.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
-receiving incremental file list
-
-sent 25 bytes  received 355 bytes  253.33 bytes/sec
-total size is 3,647  speedup is 9.60
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
-receiving incremental file list
-
-sent 25 bytes  received 355 bytes  253.33 bytes/sec
-total size is 3,647  speedup is 9.60
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
 failed with error 429: (no detail message supplied)
 receiving incremental file list
 midi_out/
 midi_out/11_midii.mid
-              0   0%    0.00kB/s    0:00:00              650 100%  634.77kB/s    0:00:00 (xfr#1, to-chk=9/13)
+              0   0%    0.00kB/s    0:00:00              304 100%  296.88kB/s    0:00:00 (xfr#1, to-chk=9/13)
 
-sent 47 bytes  received 684 bytes  487.33 bytes/sec
-total size is 4,297  speedup is 5.88
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+sent 47 bytes  received 648 bytes  1,390.00 bytes/sec
+total size is 4,922  speedup is 7.08
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 Received SIGTERM signal. Exiting...
 playing /home/p/vast_ai/midialogue/midi_out/11_midii.mid
-killing light pattern play script
 Received SIGTERM signal. Exiting...
-restart input
+killing light pattern play script
 launching light pattern after play
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-sending incremental file list
-
-sent 591 bytes  received 18 bytes  406.00 bytes/sec
-total size is 18,264  speedup is 29.99
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
-copying /home/p/vast_ai/midialogue/midi_in/16254942460241549107.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/3336230223524381087.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
 receiving incremental file list
 midi_out/
 midi_out/12_midii.mid
-              0   0%    0.00kB/s    0:00:00              206 100%  201.17kB/s    0:00:00 (xfr#1, to-chk=9/14)
+              0   0%    0.00kB/s    0:00:00              223 100%  217.77kB/s    0:00:00 (xfr#1, to-chk=9/14)
 
-sent 47 bytes  received 594 bytes  427.33 bytes/sec
-total size is 4,503  speedup is 7.02
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+sent 47 bytes  received 612 bytes  439.33 bytes/sec
+total size is 5,145  speedup is 7.81
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 Received SIGTERM signal. Exiting...
 playing /home/p/vast_ai/midialogue/midi_out/12_midii.mid
-killing light pattern play script
 Received SIGTERM signal. Exiting...
-restart input
+killing light pattern play script
 launching light pattern after play
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-sending incremental file list
-
-sent 626 bytes  received 18 bytes  429.33 bytes/sec
-total size is 19,105  speedup is 29.67
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
-copying /home/p/vast_ai/midialogue/midi_in/7769506445548240287.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/6158104785169002079.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
 failed with error 429: (no detail message supplied)
 receiving incremental file list
 midi_out/
 midi_out/13_midii.mid
-              0   0%    0.00kB/s    0:00:00              166 100%  162.11kB/s    0:00:00 (xfr#1, to-chk=9/15)
+              0   0%    0.00kB/s    0:00:00              300 100%  292.97kB/s    0:00:00 (xfr#1, to-chk=9/15)
 
-sent 47 bytes  received 581 bytes  418.67 bytes/sec
-total size is 4,669  speedup is 7.43
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+sent 47 bytes  received 647 bytes  462.67 bytes/sec
+total size is 5,445  speedup is 7.85
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 Received SIGTERM signal. Exiting...
 playing /home/p/vast_ai/midialogue/midi_out/13_midii.mid
 killing light pattern play script
 Received SIGTERM signal. Exiting...
-restart input
 launching light pattern after play
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-sending incremental file list
-
-sent 661 bytes  received 18 bytes  452.67 bytes/sec
-total size is 19,794  speedup is 29.15
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
-copying /home/p/vast_ai/midialogue/midi_in/4254139936501518729.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/6348951022118584233.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 435 bytes  920.00 bytes/sec
+total size is 5,445  speedup is 11.84
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
 failed with error 429: (no detail message supplied)
 receiving incremental file list
 midi_out/
 midi_out/14_midii.mid
-              0   0%    0.00kB/s    0:00:00              194 100%  189.45kB/s    0:00:00 (xfr#1, to-chk=9/16)
+              0   0%    0.00kB/s    0:00:00              325 100%  317.38kB/s    0:00:00 (xfr#1, to-chk=9/16)
 
-sent 47 bytes  received 647 bytes  462.67 bytes/sec
-total size is 4,863  speedup is 7.01
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+sent 47 bytes  received 679 bytes  484.00 bytes/sec
+total size is 5,770  speedup is 7.95
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 Received SIGTERM signal. Exiting...
 playing /home/p/vast_ai/midialogue/midi_out/14_midii.mid
 killing light pattern play script
 Received SIGTERM signal. Exiting...
-restart input
-launching light pattern after play
-sending incremental file list
-waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-
-sent 704 bytes  received 18 bytes  481.33 bytes/sec
-total size is 20,038  speedup is 27.75
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
-copying /home/p/vast_ai/midialogue/midi_in/2365428982370354308.mid to 5924322:/workspace/vast_ai/midialogue
-wating for new midi in /home/p/vast_ai/midialogue/midi_out
-receiving incremental file list
-
-sent 25 bytes  received 463 bytes  325.33 bytes/sec
-total size is 4,863  speedup is 9.97
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
-receiving incremental file list
-midi_out/
-midi_out/15_midii.mid
-              0   0%    0.00kB/s    0:00:00              414 100%  404.30kB/s    0:00:00 (xfr#1, to-chk=9/17)
-
-sent 47 bytes  received 853 bytes  360.00 bytes/sec
-total size is 5,277  speedup is 5.86
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
-Received SIGTERM signal. Exiting...
-playing /home/p/vast_ai/midialogue/midi_out/15_midii.mid
-killing light pattern play script
-Received SIGTERM signal. Exiting...
-restart input
 launching light pattern after play
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-sending incremental file list
-
-sent 748 bytes  received 18 bytes  510.67 bytes/sec
-total size is 24,727  speedup is 32.28
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
-copying /home/p/vast_ai/midialogue/midi_in/2046721765765385778.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/2865710500539992244.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
-receiving incremental file list
-
-sent 25 bytes  received 490 bytes  343.33 bytes/sec
-total size is 5,277  speedup is 10.25
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
 failed with error 429: (no detail message supplied)
 receiving incremental file list
 midi_out/
-midi_out/16_midii.mid
-              0   0%    0.00kB/s    0:00:00              335 100%  327.15kB/s    0:00:00 (xfr#1, to-chk=9/18)
+midi_out/15_midii.mid
+              0   0%    0.00kB/s    0:00:00               42 100%   41.02kB/s    0:00:00 (xfr#1, to-chk=9/17)
 
-sent 47 bytes  received 761 bytes  538.67 bytes/sec
-total size is 5,612  speedup is 6.95
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+sent 47 bytes  received 575 bytes  414.67 bytes/sec
+total size is 5,812  speedup is 9.34
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 Received SIGTERM signal. Exiting...
-playing /home/p/vast_ai/midialogue/midi_out/16_midii.mid
+playing /home/p/vast_ai/midialogue/midi_out/15_midii.mid
 killing light pattern play script
-Received SIGTERM signal. Exiting...
-restart input
 launching light pattern after play
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
-sending incremental file list
-
-sent 787 bytes  received 18 bytes  536.67 bytes/sec
-total size is 25,406  speedup is 31.56
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' /home/p/vast_ai/midialogue/midi_in vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue
-copying /home/p/vast_ai/midialogue/midi_in/17816466410043277950.mid to 5924322:/workspace/vast_ai/midialogue
+copying /home/p/vast_ai/midialogue/midi_in/16286094112939868076.mid to 5928986:/workspace/vast_ai/midialogue
 wating for new midi in /home/p/vast_ai/midialogue/midi_out
+receiving incremental file list
+
+sent 25 bytes  received 488 bytes  342.00 bytes/sec
+total size is 5,812  speedup is 11.33
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+midi_out/
+midi_out/16_midii.mid
+              0   0%    0.00kB/s    0:00:00              248 100%  242.19kB/s    0:00:00 (xfr#1, to-chk=9/18)
+
+sent 47 bytes  received 724 bytes  1,542.00 bytes/sec
+total size is 6,060  speedup is 7.86
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+Received SIGTERM signal. Exiting...
+playing /home/p/vast_ai/midialogue/midi_out/16_midii.mid
+Received SIGTERM signal. Exiting...
+killing light pattern play script
+launching light pattern after play
+waiting for new midi in /home/p/vast_ai/midialogue/midi_in
+copying /home/p/vast_ai/midialogue/midi_in/1121035087413263624.mid to 5928986:/workspace/vast_ai/midialogue
+wating for new midi in /home/p/vast_ai/midialogue/midi_out
+receiving incremental file list
+
+sent 25 bytes  received 513 bytes  358.67 bytes/sec
+total size is 6,060  speedup is 11.26
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
 receiving incremental file list
 midi_out/
 midi_out/17_midii.mid
-              0   0%    0.00kB/s    0:00:00              190 100%  185.55kB/s    0:00:00 (xfr#1, to-chk=9/19)
+              0   0%    0.00kB/s    0:00:00              287 100%  280.27kB/s    0:00:00 (xfr#1, to-chk=9/19)
 
-sent 47 bytes  received 720 bytes  511.33 bytes/sec
-total size is 5,802  speedup is 7.56
-copying 5924322:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
-sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 10099 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5924322//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+sent 47 bytes  received 805 bytes  568.00 bytes/sec
+total size is 6,347  speedup is 7.45
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
 Received SIGTERM signal. Exiting...
 playing /home/p/vast_ai/midialogue/midi_out/17_midii.mid
 killing light pattern play script
 Received SIGTERM signal. Exiting...
-restart input
 launching light pattern after play
-copying None:/home/p/vast_ai/midialogue/midi_in 5924322:/workspace/vast_ai/midialogue
-failed with error 429: (no detail message supplied)
 waiting for new midi in /home/p/vast_ai/midialogue/midi_in
+copying /home/p/vast_ai/midialogue/midi_in/8111952762234205447.mid to 5928986:/workspace/vast_ai/midialogue
+wating for new midi in /home/p/vast_ai/midialogue/midi_out
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  226.40 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 545 bytes  380.00 bytes/sec
+total size is 6,347  speedup is 11.14
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  1,132.00 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 545 bytes  380.00 bytes/sec
+total size is 6,347  speedup is 11.14
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 545 bytes  380.00 bytes/sec
+total size is 6,347  speedup is 11.14
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  226.40 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  226.40 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  1,132.00 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudoreceiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudcopying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@1receiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928986//workspace/vast_ai/midialogue/midcopying 5928827:/workspace/vast_areceiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /rootcopying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/idreceiving incremental file list
+
+sent 25 bytes  received 541 bytes  377.33 bytes/sec
+total size is 6,347  speedup is 11.21
+copying 5928986:/workspaccopying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5928827:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 41199 -o StrictHostKeyChecking=no' vastai_kaalia@185.158.179.210::5928827//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue

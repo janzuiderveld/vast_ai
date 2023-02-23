@@ -71,18 +71,13 @@ def main(args):
             os.system(f"echo 'waiting for new midi in {args.midi_in_folder}'")
             saved_midi = wait_for_new_midi(args.midi_in_folder, pull=False)
 
+            # send note off on note 10 teensy to stop input
+            os.system(f"/home/p/vast_ai/midialogue/midi-utilities/bin/sendmidi --out {args.midi_in_port} --note-off 1 10 0")
+
             # copy midi to server
             os.system(f"echo 'copying {saved_midi} to {ID}:/workspace/vast_ai/midialogue'")
             command = ["./vast", "copy", args.midi_in_folder, f"{ID}:/workspace/vast_ai/midialogue"]
             process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-            # os.system(f"echo 'killing input_PID {os.environ['input_PID']}'")
-            # # kill input_PID to stop input
-            # input_PID = os.environ["input_PID"]
-            # os.system(f"kill {input_PID}")
-
-            # send note off on note 10 teensy to stop input
-            os.system("/home/p/vast_ai/midialogue/midi-utilities/bin/sendmidi --out 1 --note-off 1 10 0")
 
             # launch script for loading light pattern
             process = subprocess.Popen(["python3", "/home/p/vast_ai/midialogue/midi_scripts/light_pattern_load.py"])
@@ -109,43 +104,37 @@ def main(args):
             # os.system(f"echo 'send note off to all channels'")
             # # send note off to all channels
             # _ = subprocess.Popen(["python3", "/home/p/vast_ai/midialogue/midi_scripts/note_off_all.py"])
-
-            os.system(f"echo restart input")
-
-            # reconnect teensy
-            # os.system("python3 midialogue/reset_usb.py search Teensy Midi")
-            # kill light pattern PIDs
-            os.system("kill $(ps aux | grep 'light_pattern' | awk '{print $2}')")
-            # # restart input
-            # command = ['midialogue/midi-utilities/bin/routemidi', '--in', '1', '--out', '7']
-
-            # send note on on note 10 teensy to start input
-            os.system("/home/p/vast_ai/midialogue/midi-utilities/bin/sendmidi --out 1 --note-on 1 10 1")
             
             # Launch the process
-            process = subprocess.Popen(command)
-            input_PID = process.pid
-            os.environ["input_PID"] = str(input_PID)
+            # process = subprocess.Popen(command)
+            # input_PID = process.pid
+            # os.environ["input_PID"] = str(input_PID)
 
-            print("checking if input is running")
-            poll = process.poll()
-            while poll is not None:
-                # print error message
-                print("Error in input script")
-                print(process.stderr.read())
+            # print("checking if input is running")
+            # poll = process.poll()
+            # while poll is not None:
+            #     # print error message
+            #     print("Error in input script")
+            #     print(process.stderr.read())
                 
-                # try again
-                process = subprocess.Popen(command)
-                input_PID = process.pid
-                os.environ["input_PID"] = str(input_PID)
+            #     # try again
+            #     process = subprocess.Popen(command)
+            #     input_PID = process.pid
+            #     os.environ["input_PID"] = str(input_PID)
 
-                time.sleep(0.5)
+            #     time.sleep(0.5)
 
-                poll = process.poll()
+            #     poll = process.poll()
+
+            # kill light pattern PIDs
+            os.system("kill $(ps aux | grep 'light_pattern' | awk '{print $2}')")
 
             # launch script for playing light pattern
             os.system(f"echo 'launching light pattern after play'")
             os.system(f"python3 {ROOT_DIR}/midialogue/midi_scripts/light_pattern_after_play.py")
+
+            # send note on on note 10 teensy to start input
+            os.system(f"/home/p/vast_ai/midialogue/midi-utilities/bin/sendmidi --out {args.midi_in_port} --note-on 1 10 1")
 
         except Exception as e:
             print(traceback.format_exc())
@@ -161,6 +150,7 @@ if __name__ == "__main__":
 
 #   parser.add_argument('--midi_out_folder', type=str, default='/Users/janzuiderveld/Documents/GitHub/vast_ai/midialogue/midi_out')
   parser.add_argument('--midi_send_port', type=int, default=6)
+  parser.add_argument('--midi_in_port', type=int, default=3)
   args = parser.parse_args()
 
   os.makedirs(args.midi_out_folder, exist_ok=True)

@@ -10,6 +10,11 @@ from rtmidi.midiconstants import (ALL_NOTES_OFF, ALL_SOUND_OFF, BALANCE, BANK_SE
                                   SONG_POSITION_POINTER, SONG_SELECT, TIMING_CLOCK)
 num_steps = 7
 
+import os
+
+in_port = int(os.environ['in_port'])
+all_synths_port = int(os.environ['all_synths_port'])
+
 def set_laser_mode(i, mode, midi_out=None):
     if mode == 1:
         midi_out.send_message([0x90, i, 112])  # note on, middle C, velocity 112

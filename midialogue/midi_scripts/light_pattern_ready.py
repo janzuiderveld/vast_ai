@@ -1,13 +1,13 @@
 import rtmidi
 import signal
 import random
-from light_abstr import set_laser_mode, set_all_lasers_mode, x_by_x, all_on_off
+from light_abstr import set_laser_mode, set_all_lasers_mode, x_by_x, all_on_off, in_port
 import os
 import sys
 
 script_dir = os.path.dirname(__file__)
 
-teensy = 1
+teensy = in_port
 
 # set up midi out
 midi_out = rtmidi.MidiOut()

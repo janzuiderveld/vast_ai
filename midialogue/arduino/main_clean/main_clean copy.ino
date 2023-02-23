@@ -6,12 +6,11 @@
 
 int DEBUG = 1;
 double deltaAverageThresholdTriggerIn = 1.0; // IMPORTANT
-int settleRequired = 4;
-
-double deltaAverageThresholdControlOut = 1.0; // IMPORTANT not yet
+double deltaAverageThresholdControlOut = 1.0; // IMPORTANT
 double triggerDist = 250.0; // IMPORTANT
 const double smoothSamples = 1.0 ; 
-int ctrlStartMs = 100; // Doesn't seem to be working, need to test./.
+int ctrlStartMs = 100;
+int settleRequired = 4;
 
 // lead 1
 int notes1[7] = {57, 58, 60, 62, 64, 65, 67};
@@ -48,7 +47,7 @@ int ctrlNegReset2[7] = {0, 0, 0, 0,    0, 0, 0};
 // not implemented yet
 int retriggerStart[7] = {0, 0, 0, 0, 500, 500, 500};
 int retriggerMod[7] = {0, 0, 0, 0, 0, 0, 0};
-int lastRetrigger[7] = {0, 0, 0, 0, 0, 0, 0};
+int retriggerSend[7] = {0, 0, 0, 0, 0, 0, 0};
 
 int inputMapRange[2] = {50, 250};
 
@@ -111,6 +110,9 @@ int currentMillis = 0;
 int minTimeBetweenTicks = 1;
 
 int lastTriggerDist[7] = {0, 0, 0, 0, 0, 0, 0};
+
+// USB MIDI receive functions
+// contributed by Jan Zuiderveld
 
 // laser_control_pins: 12 - 9, 6 - 3
 int laser_control_pins[7] = {24, 11, 12, 10, 9, 6, 5};
@@ -243,25 +245,15 @@ void loop() {
       }
 
     // // retrigger
-    // check if channel is in retrigger mode
-    if (retriggerStart[ch] != 0) {
-      // check if channel is active
-      if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 1) {
-        // check if last retrigger was long enough ago
-        if (millis() > retriggerMod[ch] + lastRetrigger[ch]) {
-          // Send NoteOn message to MIDI channel
-          usbMIDI.sendNoteOn(noteOut[ch], 120 + chMap[ch], chMap[ch]);
-          // update lastRetrigger
-          lastRetrigger[ch] = millis();
-        }
-      }
-    }
+    // // check if channel is in retrigger mode
+    // if (retriggerStart[ch] != 0) {
+    //   // check if channel is active
+    //   if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 1) {
+    //     // check if channel has been inactive for retrigger time
 
-    // if dists[ch] has not changed and last update was less than 1 ms ago, continue
+    // if dists[ch] has not changed, continue
     if (dists[ch] == lastDists[ch]) {
-      if (millis() <= (lastTick[ch] + minTimeBetweenTicks) {
         continue;
-      }
     }
   
     if (smoothSamples == 1.0) {
@@ -280,11 +272,9 @@ void loop() {
     // This section sends NoteOn messages to the MIDI channel when appropriate
     if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 0) {
 
-        // TODO this should be moved out of this loop, where it only counts on change of dist
         deltaAverage[ch] = (lastAverage[ch] - average[ch]); // positive if lower, negative if higher away
-        if (deltaAverage[ch] <= deltaAverageThresholdTriggerIn) { // Use absolute diff here?
+        if (deltaAverage[ch] <= deltaAverageThresholdTriggerIn) {
             settleCount[ch] += 1;
-            // 
 
             if (settleCount[ch] >= settleRequired) {
               lastTriggerDist[ch] = average[ch];
@@ -325,7 +315,8 @@ void loop() {
     // check if laser is still active
     if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 1) {
         currentMillis = millis();
-        if (triggerTick[ch] < (currentMillis + ctrlStartMs)) {
+        // check if last update was long enough ago
+        if (currentMillis >= (lastTick[ch] + minTimeBetweenTicks) && triggerTick[ch] < (currentMillis + ctrlStartMs)) {
             lastTick[ch] = currentMillis;
 
             if (enterDist[ch] == 0) {
@@ -369,7 +360,7 @@ void loop() {
 
             // if retriggerStart, edit retriggerMod[ch]
             if (retriggerStart[ch] > 0) {
-                retriggerMod[ch] = retriggerStart[ch] + map(distDiff[ch], 0, 100, 0, 1000);
+                retriggerMod[ch] = retriggerStart[ch] + map(distDiff[ch], 0, 50, 0, 1000);
                 if (retriggerMod[ch] > 1500) {
                     retriggerMod[ch] = 1500;
                 }

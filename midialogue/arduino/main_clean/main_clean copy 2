@@ -3,7 +3,7 @@
 
 // This code reads serial data from 7 different Benewake mini-S LiDAR sensors
 
-int DEBUG = 1; // TURN OFF for fixing laginess?
+int DEBUG = 1;
 double deltaAverageThresholdTriggerIn = 1.0; // IMPORTANT
 int settleRequired = 4;
 
@@ -107,7 +107,7 @@ int triggerTick[7] = {0, 0, 0, 0, 0, 0, 0};
 
 int lastTick[7] = {0, 0, 0, 0, 0, 0, 0};
 int currentMillis = 0;
-int minTimeBetweenTicks = 1; // POSSIBLE FIX for lagginess; set to higher value
+int minTimeBetweenTicks = 1;
 
 int lastTriggerDist[7] = {0, 0, 0, 0, 0, 0, 0};
 
@@ -241,18 +241,11 @@ void loop() {
           Get_Lidar_data(Serials[ch], ch);
       }
 
-    // if dists[ch] has not changed and last update was less than 1 ms ago, continue
-    if (dists[ch] == lastDists[ch]) {
-      if (millis() <= (lastTick[ch] + minTimeBetweenTicks) {
-        continue;
-      }
-    }
-
     // // retrigger
     // check if channel is in retrigger mode
     if (retriggerStart[ch] != 0) {
       // check if channel is active
-      if (noteLock[ch] == 1) {
+      if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 1) {
         // check if last retrigger was long enough ago
         if (millis() > retriggerMod[ch] + lastRetrigger[ch]) {
           // Send NoteOn message to MIDI channel
@@ -260,6 +253,13 @@ void loop() {
           // update lastRetrigger
           lastRetrigger[ch] = millis();
         }
+      }
+    }
+
+    // if dists[ch] has not changed and last update was less than 1 ms ago, continue
+    if (dists[ch] == lastDists[ch]) {
+      if (millis() <= (lastTick[ch] + minTimeBetweenTicks) {
+        continue;
       }
     }
   

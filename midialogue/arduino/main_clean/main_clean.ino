@@ -208,19 +208,19 @@ void setup() {
     // turn on laser
     pinMode(laser_control_pins[ch], OUTPUT);
 
-    // read 10000 samples
-    for (int j = 0; j < 10000; j++) {
+    // read 100000 samples
+    for (int j = 0; j < 100000; j++) {
       // read sensor
       Get_Lidar_data(Serials[ch], ch);
       // add to average
       triggerDist[ch] += dists[ch];
     }
 
-    // divide by 10000
-    triggerDist[ch] /= 10000;
+    // divide by 100000
+    triggerDist[ch] /= 100000;
 
-    // add 10
-    triggerDist[ch] += 10;
+    // subtract 10
+    triggerDist[ch] -= 10;
 
     // turn off laser
     pinMode(laser_control_pins[ch], INPUT);

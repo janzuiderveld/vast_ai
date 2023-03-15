@@ -29,12 +29,12 @@ try:
 
     # do 5 x by x rounds
     for i in range(1,6):
-        x_by_x(x=i, step_sleep=0.2/i**0.5, random_sleep=True, random_order=True, midi_out=midi_out)
+        x_by_x(x=i, step_sleep=0.7/i**0.1, random_sleep=True, random_order=True, midi_out=midi_out)
 
     # do on_off rounds until interrupted
     i = 6
     while True:
-        all_on_off(step_sleep=0.2/i**0.5, random_sleep=False, midi_out=midi_out)
+        all_on_off(step_sleep=0.7/i**0.1, random_sleep=False, midi_out=midi_out)
         i += 1
         
 except KeyboardInterrupt:

@@ -6,12 +6,16 @@
 
 int DEBUG = 1;
 double deltaAverageThresholdTriggerIn = 1.0; // IMPORTANT
-int settleRequired = 500;
+int settleRequired = 3000;
 
 double deltaAverageThresholdControlOut = 1.0; // IMPORTANT not yet
-double triggerDist = 250.0; // IMPORTANT
+// double triggerDist = 260.0; // IMPORTANT
+
+// double triggerDist[7] = {150.0, 150.0, 150.0, 150.0, 150.0, 150.0, 150.0};
+double triggerDist[7] = {999.0, 999.0, 999.0, 999.0, 999.0, 999.0, 999.0};
+
 const double smoothSamples = 1.0 ; 
-int ctrlStartMs = 100; 
+int ctrlStartMs = 200; 
 
 // lead 1
 int notes1[7] = {57, 58, 60, 62, 64, 65, 67};
@@ -21,23 +25,35 @@ int notes2[6] = {65, 67, 69, 70, 72, 74};
 int notes3[7] = {69, 70, 72, 74, 76, 77, 79};
 // bass
 int notes4[6] = {45, 46, 48, 50, 52, 53};
+// bass 2
+int notes5[6] = {55, 57, 58, 60, 62, 64};
 // drum
-int notes5[6] = {60, 60, 62, 62, 62, 62};
-int notes6[6] = {64, 64, 65, 65, 65, 65};
-int notes7[6] = {67, 67, 69, 69, 69, 69};
+int notes6[6] = {60, 60, 60, 60, 62, 62};
+int notes7[6] = {67, 67, 67, 67, 69, 69};
+// // drum
+// int notes5[6] = {60, 60, 62, 62, 62, 62};
+// int notes6[6] = {64, 64, 65, 65, 65, 65};
+// int notes7[6] = {67, 67, 69, 69, 69, 69};
 
 int numNotes = 5; // cutoff for notes used 
 
-int chMap[7] = {1, 1, 2, 3, 4, 4, 4}; 
-int ctrlChannelMapPos[7] = {1, 1, 2, 3, 4, 4, 4};
-int ctrlChannelMapNeg[7] = {1, 1, 2, 3, 4, 4, 4};
+int chMap[7] = {1, 1, 2, 3, 3, 4, 4}; 
+int ctrlChannelMapPos[7] = {1, 1, 2, 3, 3, 4, 4};
+int ctrlChannelMapNeg[7] = {1, 1, 2, 3, 3, 4, 4};
 
-int ctrlMapPos[7] = {69, 94, 94, 94,    18, 50, 84};
-int ctrlMapNeg[7] = {69, 93, 93, 93,     119, 119, 119};
-int ctrlPosReset[7] = {40, 0, 0, 0,    0, 0, 0};
-int ctrlNegReset[7] = {40, 0, 0, 0,    0, 0, 0};
-int ctrlPosRange[7] = {127, 127, 127, 127,    127, 127, 127};
-int ctrlNegRange[7] = {-127, 127, 127, 127,    127, 127, 127};
+int ctrlMapPos[7] = {75, 75, 93, 69, 69,        18, 84};
+int ctrlMapNeg[7] = {70, 93, 69, 24, 70,       119, 119};
+int ctrlPosReset[7] = {40, 64, 0, 50, 40,           0, 0};
+int ctrlNegReset[7] = {40, 0, 64, 20, 40,         0, 0};
+int ctrlPosRange[7] = {127, 175, 127, 100, 127,     127, 127};
+int ctrlNegRange[7] = {-127, 80, 127, 100, 30,    127, 127};
+
+// int ctrlMapPos[7] = {69, 94, 94, 94,    18, 50, 84};
+// int ctrlMapNeg[7] = {70, 93, 75, 93,     119, 119, 119};
+// int ctrlPosReset[7] = {40, 0, 0, 0,    0, 0, 0};
+// int ctrlNegReset[7] = {40, 0, 64, 0,    0, 0, 0};
+// int ctrlPosRange[7] = {127, 127, 127, 127,    127, 127, 127};
+// int ctrlNegRange[7] = {-127, 127, 127, 127,    127, 127, 127};
 
 // not implemented yet
 int ctrlMapPos2[7] = {0, 0, 0, 0,    0, 0, 0};
@@ -45,12 +61,12 @@ int ctrlMapNeg2[7] = {0, 0, 0, 0,    0, 0, 0};
 int ctrlPosReset2[7] = {0, 0, 0, 0,    0, 0, 0};
 int ctrlNegReset2[7] = {0, 0, 0, 0,    0, 0, 0};
 
-// not implemented yet
-int retriggerStart[7] = {0, 0, 0, 0, 500, 500, 500};
-int retriggerMod[7] = {0, 0, 0, 0, 500, 500, 500};
+int retriggerStart[7] = {500, 0, 0, 0, 0, 500, 500};
+int retriggerMod[7] = {500, 0, 0, 0, 0, 500, 500};
+
 int lastRetrigger[7] = {0, 0, 0, 0, 0, 0, 0};
 
-int inputMapRange[2] = {50, 250};
+int inputMapRange[2] = {80, 280};
 
 const int num_channels = 7; // number of analog channels to iterate over
 int *notes[7] = {notes1, notes2, notes3, notes4, notes5, notes6, notes7};
@@ -188,6 +204,29 @@ void setup() {
     Serial.println(duration);
   }
 
+  // Calibrate the sensors 
+  for (int ch = 0; ch < 7; ch++) {
+    // turn on laser
+    pinMode(laser_control_pins[ch], OUTPUT);
+
+    // read 10000 samples
+    for (int j = 0; j < 10000; j++) {
+      // read sensor
+      Get_Lidar_data(Serials[ch], ch);
+      // add to average
+      triggerDist[ch] += dists[ch];
+    }
+
+    // divide by 10000
+    triggerDist[ch] /= 10000;
+
+    // add 10
+    triggerDist[ch] += 10;
+
+    // turn off laser
+    pinMode(laser_control_pins[ch], INPUT);
+  }
+
   // blink lasers to signal setup is done
   for (int i = 0; i < 7; i++) {
     pinMode(laser_control_pins[i], OUTPUT);
@@ -246,7 +285,7 @@ void loop() {
     // check if channel is in retrigger mode
     if (retriggerStart[ch] != 0) {
       // check if channel is active
-      if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 1) {
+      if (average[ch] != 0 && average[ch] < triggerDist[ch] && noteLock[ch] == 1) {
         // check if last retrigger was long enough ago
         if (millis() > retriggerMod[ch] + lastRetrigger[ch]) {
 
@@ -264,7 +303,7 @@ void loop() {
     }
 
     // check if channel is inactive, but average is within triggerDist
-    if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 0) {
+    if (average[ch] != 0 && average[ch] < triggerDist[ch] && noteLock[ch] == 0) {
       // absoulute of average
         deltaAverage[ch] = abs(lastAverage[ch] - average[ch]); // absoulute of average
         if (deltaAverage[ch] <= deltaAverageThresholdTriggerIn) { 
@@ -297,7 +336,7 @@ void loop() {
 
     // distance to MIDI translation
     // This section sends NoteOn messages to the MIDI channel when appropriate
-    if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 0) {
+    if (average[ch] != 0 && average[ch] < triggerDist[ch] && noteLock[ch] == 0) {
 
         // // TODO this should be moved out of this loop, where it only counts on change of dist
         // deltaAverage[ch] = (lastAverage[ch] - average[ch]); // positive if lower, negative if higher away
@@ -347,7 +386,7 @@ void loop() {
 
     // This section sends ctrlChange messages to the MIDI channel when appropriate (distance change while noteLock is on)
     // check if laser is still active
-    if (average[ch] != 0 && average[ch] < triggerDist && noteLock[ch] == 1) {
+    if (average[ch] != 0 && average[ch] < triggerDist[ch] && noteLock[ch] == 1) {
         currentMillis = millis();
         if (currentMillis > (triggerTick[ch] + ctrlStartMs)) {
             lastTick[ch] = currentMillis;
@@ -417,7 +456,7 @@ void loop() {
     }
 
     // This section sends NoteOff messages to the MIDI channel when appropriate
-    if (noteLock[ch] == 1  && (average[ch] == 0 || average[ch] > triggerDist)) {
+    if (noteLock[ch] == 1  && (average[ch] == 0 || average[ch] > triggerDist[ch])) {
 
         // turn off note
         usbMIDI.sendNoteOn(noteOut[ch], 0, chMap[ch]);

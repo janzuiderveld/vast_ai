@@ -14,7 +14,7 @@ function finish {
 trap finish EXIT
 trap finish SIGINT
 
-timeout=1
+timeout=5
 
 #TODO
 # cut beginning midis that are too long
@@ -151,7 +151,7 @@ $ROOT_DIR/midialogue/midi-utilities/bin/sendmidi --out $in_port --note-on 1 10 1
 cd $ROOT_DIR/midialogue
 sudo rm -rf midi_in midi_out
 
-# sleep 999999
+sleep 999999
 # python3 $ROOT_DIR/midialogue/midi_scripts/brainstorm_custom.py &
 
 echo "waiting for server to be ready..."

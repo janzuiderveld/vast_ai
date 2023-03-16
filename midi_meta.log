@@ -1,30 +1,23 @@
 ROOT_DIR: /home/p/vast_ai
 waiting for server to start up (3 minutes)
 Resetting device: Teensy
-Successfully reset /dev/bus/usb/001/004
+Successfully reset /dev/bus/usb/001/078
 
 Midi Utilities: midi ins
   0 Midi Through:Midi Through Port-0
-  1 ESI MIDIMATE eX:ESI MIDIMATE eX MIDI 1
-  2 ESI MIDIMATE eX:ESI MIDIMATE eX MIDI 2
-  3 Teensy MIDI:Teensy MIDI MIDI 1
-  4 routemidi:4
-  5 routemidi:5
-  6 routemidi:routemidi
-  7 routemidi:routemidi
-  8 routemidi:routemidi
-  9 routemidi:routemidi
- 10 routemidi:routemidi
+  1 Teensy MIDI:Teensy MIDI MIDI 1
+  2 ESI MIDIMATE eX:ESI MIDIMATE eX MIDI 1
+  3 ESI MIDIMATE eX:ESI MIDIMATE eX MIDI 2
 
-0 Midi Through:Midi Through Port-0 1 ESI MIDIMATE eX:ESI MIDIMATE eX MIDI 1 2 ESI MIDIMATE eX:ESI MIDIMATE eX MIDI 2 3 Teensy MIDI:Teensy MIDI MIDI 1 4 routemidi:4 5 routemidi:5 6 routemidi:routemidi 7 routemidi:routemidi 8 routemidi:routemidi 9 routemidi:routemidi 10 routemidi:routemidi
+0 Midi Through:Midi Through Port-0 1 Teensy MIDI:Teensy MIDI MIDI 1 2 ESI MIDIMATE eX:ESI MIDIMATE eX MIDI 1 3 ESI MIDIMATE eX:ESI MIDIMATE eX MIDI 2
 
-in_port: 3 
-blo_port: di
-es1_port: 1 
-es2_port: 2 
+in_port: 1 
+blo_port:  2
+es1_port: 2 
+es2_port: 3 
 model_port: 0 
-all_synths_port: 6
-model_and_synths_port: 7
+all_synths_port: 4
+model_and_synths_port: 5
 
 
 
@@ -32,7 +25,1101 @@ model_and_synths_port: 7
 
 
 
-bus 6: to all synths
-bus 7: to model and all synths
+bus 4: to all synths
+bus 5: to model and all synths
 send a midi note 10 to teensy to make sure midi is send
 waiting for server to be ready...
+['ssh', '//root@ssh4.vast.ai', '18758\n']
+Error on line 15
+Server not ready yet
+['ssh', '//root@ssh4.vast.ai', '18758\n']
+root@ssh4.vast.ai 18758 31.12.82.146 -1
+
+COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME ssh 49579 root 4u IPv6 344091 0t0 TCP localhost:http-alt (LISTEN) ssh 49579 root 5u IPv4 344092 0t0 TCP localhost:http-alt (LISTEN)
+Server ready
+model listens on virtual port 0
+starting ambient out
+waiting for new midi in /home/p/vast_ai/midialogue/midi_in
+copying /home/p/vast_ai/midialogue/midi_in/13167038071824973256.mid to 5938759:/workspace/vast_ai/midialogue
+killing ambient out
+wating for new midi in /home/p/vast_ai/midialogue/midi_out
+receiving incremental file list
+midi_out/
+
+sent 28 bytes  received 58 bytes  57.33 bytes/sec
+total size is 0  speedup is 0.00
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 55 bytes  53.33 bytes/sec
+total size is 0  speedup is 0.00
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 55 bytes  53.33 bytes/sec
+total size is 0  speedup is 0.00
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+
+sent 25 bytes  received 55 bytes  53.33 bytes/sec
+total size is 0  speedup is 0.00
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 55 bytes  53.33 bytes/sec
+total size is 0  speedup is 0.00
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 55 bytes  53.33 bytes/sec
+total size is 0  speedup is 0.00
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+midi_out/
+midi_out/0_midii.mid
+              0   0%    0.00kB/s    0:00:00            1,043 100% 1018.55kB/s    0:00:00 (xfr#1, to-chk=0/2)
+
+sent 47 bytes  received 354 bytes  267.33 bytes/sec
+total size is 1,043  speedup is 2.60
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+Received SIGTERM signal. Exiting...
+playing /home/p/vast_ai/midialogue/midi_out/0_midii.mid
+killing light pattern play script
+Received SIGTERM signal. Exiting...
+launching light pattern after play
+starting ambient out
+waiting for new midi in /home/p/vast_ai/midialogue/midi_in
+copying /home/p/vast_ai/midialogue/midi_in/10680049693541591745.mid to 5938759:/workspace/vast_ai/midialogue
+killing ambient out
+wating for new midi in /home/p/vast_ai/midialogue/midi_out
+receiving incremental file list
+
+sent 25 bytes  received 83 bytes  72.00 bytes/sec
+total size is 1,043  speedup is 9.66
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+midi_out/
+midi_out/1_midii.mid
+              0   0%    0.00kB/s    0:00:00              167 100%  163.09kB/s    0:00:00 (xfr#1, to-chk=0/3)
+
+sent 47 bytes  received 260 bytes  122.80 bytes/sec
+total size is 1,210  speedup is 3.94
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+Received SIGTERM signal. Exiting...
+playing /home/p/vast_ai/midialogue/midi_out/1_midii.mid
+killing light pattern play script
+Received SIGTERM signal. Exiting...
+launching light pattern after play
+starting ambient out
+waiting for new midi in /home/p/vast_ai/midialogue/midi_in
+copying /home/p/vast_ai/midialogue/midi_in/1178145884246446133.mid to 5938759:/workspace/vast_ai/midialogue
+killing ambient out
+wating for new midi in /home/p/vast_ai/midialogue/midi_out
+receiving incremental file list
+
+sent 25 bytes  received 114 bytes  92.67 bytes/sec
+total size is 1,210  speedup is 8.71
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 118 bytes  57.20 bytes/sec
+total size is 1,210  speedup is 8.46
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+midi_out/
+midi_out/2_midii.mid
+              0   0%    0.00kB/s    0:00:00              489 100%  477.54kB/s    0:00:00 (xfr#1, to-chk=0/4)
+
+sent 47 bytes  received 480 bytes  351.33 bytes/sec
+total size is 1,699  speedup is 3.22
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+Received SIGTERM signal. Exiting...
+playing /home/p/vast_ai/midialogue/midi_out/2_midii.mid
+killing light pattern play script
+Received SIGTERM signal. Exiting...
+launching light pattern after play
+starting ambient out
+waiting for new midi in /home/p/vast_ai/midialogue/midi_in
+copying /home/p/vast_ai/midialogue/midi_in/3998350774298900425.mid to 5938759:/workspace/vast_ai/midialogue
+killing ambient out
+wating for new midi in /home/p/vast_ai/midialogue/midi_out
+receiving incremental file list
+
+sent 25 bytes  received 141 bytes  110.67 bytes/sec
+total size is 1,699  speedup is 10.23
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+midi_out/
+midi_out/3_midii.mid
+              0   0%    0.00kB/s    0:00:00              223 100%  217.77kB/s    0:00:00 (xfr#1, to-chk=0/5)
+
+sent 47 bytes  received 375 bytes  168.80 bytes/sec
+total size is 1,922  speedup is 4.55
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+Received SIGTERM signal. Exiting...
+playing /home/p/vast_ai/midialogue/midi_out/3_midii.mid
+killing light pattern play script
+Received SIGTERM signal. Exiting...
+launching light pattern after play
+starting ambient out
+waiting for new midi in /home/p/vast_ai/midialogue/midi_in
+copying /home/p/vast_ai/midialogue/midi_in/8977930174968289509.mid to 5938759:/workspace/vast_ai/midialogue
+killing ambient out
+wating for new midi in /home/p/vast_ai/midialogue/midi_out
+receiving incremental file list
+
+sent 25 bytes  received 168 bytes  128.67 bytes/sec
+total size is 1,922  speedup is 9.96
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 168 bytes  128.67 bytes/sec
+total size is 1,922  speedup is 9.96
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 168 bytes  128.67 bytes/sec
+total size is 1,922  speedup is 9.96
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 168 bytes  128.67 bytes/sec
+total size is 1,922  speedup is 9.96
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 168 bytes  128.67 bytes/sec
+total size is 1,922  speedup is 9.96
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 168 bytes  128.67 bytes/sec
+total size is 1,922  speedup is 9.96
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 172 bytes  131.33 bytes/sec
+total size is 1,922  speedup is 9.76
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 168 bytes  77.20 bytes/sec
+total size is 1,922  speedup is 9.96
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+midi_out/
+midi_out/4_midii.mid
+              0   0%    0.00kB/s    0:00:00            1,329 100%    1.27MB/s    0:00:00 (xfr#1, to-chk=0/6)
+
+sent 47 bytes  received 1,160 bytes  804.67 bytes/sec
+total size is 3,251  speedup is 2.69
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+Received SIGTERM signal. Exiting...
+playing /home/p/vast_ai/midialogue/midi_out/4_midii.mid
+killing light pattern play script
+Received SIGTERM signal. Exiting...
+launching light pattern after play
+starting ambient out
+waiting for new midi in /home/p/vast_ai/midialogue/midi_in
+copying /home/p/vast_ai/midialogue/midi_in/6027003461388969906.mid to 5938759:/workspace/vast_ai/midialogue
+killing ambient out
+wating for new midi in /home/p/vast_ai/midialogue/midi_out
+receiving incremental file list
+
+sent 25 bytes  received 195 bytes  146.67 bytes/sec
+total size is 3,251  speedup is 14.78
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+midi_out/
+midi_out/5_midii.mid
+              0   0%    0.00kB/s    0:00:00               42 100%   41.02kB/s    0:00:00 (xfr#1, to-chk=0/7)
+
+sent 47 bytes  received 309 bytes  142.40 bytes/sec
+total size is 3,293  speedup is 9.25
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+Received SIGTERM signal. Exiting...
+playing /home/p/vast_ai/midialogue/midi_out/5_midii.mid
+killing light pattern play script
+launching light pattern after play
+starting ambient out
+waiting for new midi in /home/p/vast_ai/midialogue/midi_in
+copying /home/p/vast_ai/midialogue/midi_in/12874781062720075965.mid to 5938759:/workspace/vast_ai/midialogue
+killing ambient out
+wating for new midi in /home/p/vast_ai/midialogue/midi_out
+receiving incremental file list
+
+sent 25 bytes  received 222 bytes  70.57 bytes/sec
+total size is 3,293  speedup is 13.33
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 222 bytes  164.67 bytes/sec
+total size is 3,293  speedup is 13.33
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 226 bytes  167.33 bytes/sec
+total size is 3,293  speedup is 13.12
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 222 bytes  98.80 bytes/sec
+total size is 3,293  speedup is 13.33
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 222 bytes  164.67 bytes/sec
+total size is 3,293  speedup is 13.33
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 222 bytes  98.80 bytes/sec
+total size is 3,293  speedup is 13.33
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 222 bytes  164.67 bytes/sec
+total size is 3,293  speedup is 13.33
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 222 bytes  98.80 bytes/sec
+total size is 3,293  speedup is 13.33
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 222 bytes  164.67 bytes/sec
+total size is 3,293  speedup is 13.33
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 222 bytes  164.67 bytes/sec
+total size is 3,293  speedup is 13.33
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+midi_out/
+midi_out/6_midii.mid
+              0   0%    0.00kB/s    0:00:00            1,599 100%    1.52MB/s    0:00:00 (xfr#1, to-chk=0/8)
+
+sent 47 bytes  received 1,044 bytes  436.40 bytes/sec
+total size is 4,892  speedup is 4.48
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+Received SIGTERM signal. Exiting...
+playing /home/p/vast_ai/midialogue/midi_out/6_midii.mid
+killing light pattern play script
+Received SIGTERM signal. Exiting...
+launching light pattern after play
+starting ambient out
+waiting for new midi in /home/p/vast_ai/midialogue/midi_in
+copying /home/p/vast_ai/midialogue/midi_in/3237762477178929742.mid to 5938759:/workspace/vast_ai/midialogue
+killing ambient out
+wating for new midi in /home/p/vast_ai/midialogue/midi_out
+receiving incremental file list
+midi_out/
+midi_out/7_midii.mid
+              0   0%    0.00kB/s    0:00:00               53 100%   51.76kB/s    0:00:00 (xfr#1, to-chk=0/9)
+
+sent 47 bytes  received 372 bytes  279.33 bytes/sec
+total size is 4,945  speedup is 11.80
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+Received SIGTERM signal. Exiting...
+playing /home/p/vast_ai/midialogue/midi_out/7_midii.mid
+killing light pattern play script
+launching light pattern after play
+starting ambient out
+waiting for new midi in /home/p/vast_ai/midialogue/midi_in
+['Midi Through:Midi Through Port-0 14:0', 'Teensy MIDI:Teensy MIDI MIDI 1 20:0', 'ESI MIDIMATE eX:ESI MIDIMATE eX MIDI 1 32:0', 'ESI MIDIMATE eX:ESI MIDIMATE eX MIDI 2 32:1', 'routemidi:routemidi 129:0', 'routemidi:routemidi 130:0', 'routemidi:routemidi 132:0', 'routemidi:routemidi 133:0']
+Start recording
+Stopping recording in 0.15967440605163574 seconds
+Stopping recording in 0.9994397163391113 seconds
+Stopping recording in 0.9998533725738525 seconds
+Stopping recording in 0.9358887672424316 seconds
+Stop recording
+Start recording
+Stopping recording in 0.5722336769104004 seconds
+Stop recording
+Start recording
+Stopping recording in 0.3089873790740967 seconds
+Stopping recording in 0.7882950305938721 seconds
+Stop recording
+Start recording
+Stopping recording in 0.9988138675689697 seconds
+Stopping recording in 0.9919312000274658 seconds
+Stopping recording in 0.6734209060668945 seconds
+Stopping recording in 0.8815512657165527 seconds
+Stopping recording in 0.9951145648956299 seconds
+Stopping recording in 0.9047298431396484 seconds
+Stopping recording in 0.9570379257202148 seconds
+Stopping recording in 0.7976400852203369 seconds
+Stopping recording in 0.8527274131774902 seconds
+Stopping recording in 0.7541892528533936 seconds
+Stopping recording in 0.8413665294647217 seconds
+Stopping recording in 0.8907017707824707 seconds
+Stopping recording in 0.9753966331481934 seconds
+Stopping recording in 0.5908763408660889 seconds
+Stopping recording in 0.9979288578033447 seconds
+Stopping recording in 0.9356815814971924 seconds
+Stopping recording in 0.8488123416900635 seconds
+Stopping recording in 0.4145681858062744 seconds
+Stopping recording in 0.5131785869598389 seconds
+Stop recording
+Start recording
+Stopping recording in 0.8111732006072998 seconds
+Stopping recording in 0.756479024887085 seconds
+Stopping recording in 0.7790253162384033 seconds
+Stop recording
+Start recording
+Stopping recording in 0.9139089584350586 seconds
+Stopping recording in 0.9927606582641602 seconds
+Stopping recording in 0.9788737297058105 seconds
+Stopping recording in 0.9993550777435303 seconds
+Stopping recording in 0.705935001373291 seconds
+Stopping recording in 0.5846872329711914 seconds
+Stopping recording in 0.9539978504180908 seconds
+Stopping recording in 0.9988079071044922 seconds
+Stopping recording in 0.999199628829956 seconds
+Stopping recording in 0.9271860122680664 seconds
+Stopping recording in 0.14763927459716797 seconds
+Stopping recording in 0.9990322589874268 seconds
+Stopping recording in 0.9995088577270508 seconds
+Stopping recording in 0.9998457431793213 seconds
+Stopping recording in 0.9990911483764648 seconds
+Stopping recording in 0.9982459545135498 seconds
+Stopping recording in 0.8632717132568359 seconds
+Stopping recording in 0.986621618270874 seconds
+Stopping recording in 0.8604321479797363 seconds
+Stopping recording in 0.964989185333252 seconds
+Stopping recording in 0.7859001159667969 seconds
+Stopping recording in 0.9423420429229736 seconds
+Stopping recording in 0.9349250793457031 seconds
+Stopping recording in 0.9565179347991943 seconds
+Stopping recording in 0.7714347839355469 seconds
+Stopping recording in 0.8942537307739258 seconds
+Stopping recording in 0.8942580223083496 seconds
+Stopping recording in 0.9996387958526611 seconds
+Stopping recording in 0.5140852928161621 seconds
+Stopping recording in 0.9985620975494385 seconds
+Stopping recording in 0.9976511001586914 seconds
+Stopping recording in 0.9997141361236572 seconds
+Stopping recording in 0.32064127922058105 seconds
+Stopping recording in 0.9981606006622314 seconds
+Stopping recording in 0.9981462955474854 seconds
+Stopping recording in 0.9991443157196045 seconds
+Stopping recording in 0.03307151794433594 seconds
+Stopping recording in 0.9131507873535156 seconds
+Stopping recording in 0.9994668960571289 seconds
+Stopping recording in 0.998467206954956 seconds
+Stopping recording in 0.9333369731903076 seconds
+Stopping recording in 0.9996185302734375 seconds
+Stopping recording in 0.7965378761291504 seconds
+Stopping recording in 0.3134438991546631 seconds
+Stopping recording in 0.9988024234771729 seconds
+Stopping recording in 0.989293098449707 seconds
+Stopping recording in 0.9995448589324951 seconds
+Stopping recording in 0.999326229095459 seconds
+Stopping recording in 0.9983415603637695 seconds
+Stopping recording in 0.9990816116333008 seconds
+Stopping recording in 0.9999511241912842 seconds
+Stopping recording in 0.9996318817138672 seconds
+Stopping recording in 0.9962968826293945 seconds
+Stopping recording in 0.9971280097961426 seconds
+Stopping recording in 0.9934921264648438 seconds
+Stopping recording in 0.9975371360778809 seconds
+Stopping recording in 0.9995875358581543 seconds
+Stopping recording in 0.9956724643707275 seconds
+Stopping recording in 0.944119930267334 seconds
+Stopping recording in 0.9999005794525146 seconds
+Stopping recording in 0.9994771480560303 seconds
+Stopping recording in 0.9994761943817139 seconds
+Stopping recording in 0.9921891689300537 seconds
+Stopping recording in 0.19740986824035645 seconds
+Stop recording
+Start recording
+Stopping recording in 0.11097502708435059 seconds
+Stop recording
+Start recording
+Stopping recording in 0.10502195358276367 seconds
+Stop recording
+Start recording
+Stopping recording in 0.6820731163024902 seconds
+Stopping recording in 0.9450821876525879 seconds
+Stopping recording in 0.873600959777832 seconds
+Stopping recording in 0.9994254112243652 seconds
+Stopping recording in 0.999284029006958 seconds
+Stopping recording in 0.9558312892913818 seconds
+Stopping recording in 0.9481983184814453 seconds
+Stopping recording in 0.9830944538116455 seconds
+Stopping recording in 0.9772424697875977 seconds
+Stopping recording in 0.9972658157348633 seconds
+Stopping recording in 0.9834170341491699 seconds
+Stopping recording in 0.7937307357788086 seconds
+Stopping recording in 0.9717307090759277 seconds
+Stopping recording in 0.8140590190887451 seconds
+Stopping recording in 0.9990339279174805 seconds
+Stopping recording in 0.9998929500579834 seconds
+Stopping recording in 0.9968700408935547 seconds
+Stopping recording in 0.9993960857391357 seconds
+Stopping recording in 0.9983663558959961 seconds
+Stopping recording in 0.9975671768188477 seconds
+Stopping recording in 0.9997508525848389 seconds
+Stopping recording in 0.9988319873809814 seconds
+Stopping recording in 0.8455839157104492 seconds
+Stopping recording in 0.990708589553833 seconds
+Stopping recording in 0.9948105812072754 seconds
+Stopping recording in 0.998201847076416 seconds
+Stopping recording in 0.9986748695373535 seconds
+Stopping recording in 0.999255895614624 seconds
+Stopping recording in 0.999967098236084 seconds
+Stopping recording in 0.9410510063171387 seconds
+Stopping recording in 0.9922840595245361 seconds
+Stopping recording in 0.9990692138671875 seconds
+Stopping recording in 0.9401664733886719 seconds
+Stopping recording in 0.9993371963500977 seconds
+Stopping recording in 0.9984452724456787 seconds
+Stopping recording in 0.9984283447265625 seconds
+Stopping recording in 0.9986729621887207 seconds
+Stopping recording in 0.9546365737915039 seconds
+Stopping recording in 0.9998917579650879 seconds
+Stopping recording in 0.9733831882476807 seconds
+Stopping recording in 0.25771450996398926 seconds
+Stop recording
+Start recording
+Stopping recording in 0.6877648830413818 seconds
+Stop recording
+Start recording
+Stopping recording in 0.8138747215270996 seconds
+Stopping recording in 0.8095579147338867 seconds
+Stopping recording in 0.89577317237854 seconds
+Stopping recording in 0.9941699504852295 seconds
+Stopping recording in 0.9941015243530273 seconds
+Stopping recording in 0.9983696937561035 seconds
+Stopping recording in 0.9839751720428467 seconds
+Stopping recording in 0.6155998706817627 seconds
+Stopping recording in 0.9994800090789795 seconds
+Stopping recording in 0.9997973442077637 seconds
+Stopping recording in 0.9996960163116455 seconds
+Stopping recording in 0.9987673759460449 seconds
+Stopping recording in 0.9302136898040771 seconds
+Stopping recording in 0.8405952453613281 seconds
+Stopping recording in 0.9731996059417725 seconds
+Stopping recording in 0.9993267059326172 seconds
+Stopping recording in 0.9996957778930664 seconds
+Stopping recording in 0.8730075359344482 secondscopying /home/p/vast_ai/midialogue/midi_in/9648489073591446669.mid to 5938759:/workspace/vast_ai/midialogue
+killing ambient out
+wating for new midi in /home/p/vast_ai/midialogue/midi_out
+receiving incremental file list
+
+sent 25 bytes  received 278 bytes  202.00 bytes/sec
+total size is 4,945  speedup is 16.32
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+midi_out/
+midi_out/8_midii.mid
+              0   0%    0.00kB/s    0:00:00               53 100%   51.76kB/s    0:00:00 (xfr#1, to-chk=0/10)
+
+sent 47 bytes  received 400 bytes  298.00 bytes/sec
+total size is 4,998  speedup is 11.18
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+Received SIGTERM signal. Exiting...
+playing /home/p/vast_ai/midialogue/midi_out/8_midii.mid
+killing light pattern play script
+launching light pattern after play
+starting ambient out
+waiting for new midi in /home/p/vast_ai/midialogue/midi_in
+copying /home/p/vast_ai/midialogue/midi_in/9285048284162838346.mid to 5938759:/workspace/vast_ai/midialogue
+killing ambient out
+wating for new midi in /home/p/vast_ai/midialogue/midi_out
+receiving incremental file list
+
+sent 25 bytes  received 306 bytes  220.67 bytes/sec
+total size is 4,998  speedup is 15.10
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 306 bytes  132.40 bytes/sec
+total size is 4,998  speedup is 15.10
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 306 bytes  220.67 bytes/sec
+total size is 4,998  speedup is 15.10
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 302 bytes  130.80 bytes/sec
+total size is 4,998  speedup is 15.28
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 302 bytes  218.00 bytes/sec
+total size is 4,998  speedup is 15.28
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+midi_out/
+midi_out/9_midii.mid
+              0   0%    0.00kB/s    0:00:00            1,118 100%    1.07MB/s    0:00:00 (xfr#1, to-chk=0/11)
+
+sent 47 bytes  received 1,091 bytes  758.67 bytes/sec
+total size is 6,116  speedup is 5.37
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+Received SIGTERM signal. Exiting...
+playing /home/p/vast_ai/midialogue/midi_out/9_midii.mid
+killing light pattern play script
+Received SIGTERM signal. Exiting...
+launching light pattern after play
+starting ambient out
+waiting for new midi in /home/p/vast_ai/midialogue/midi_in
+copying /home/p/vast_ai/midialogue/midi_in/5211677031105153082.mid to 5938759:/workspace/vast_ai/midialogue
+killing ambient out
+wating for new midi in /home/p/vast_ai/midialogue/midi_out
+receiving incremental file list
+
+sent 25 bytes  received 329 bytes  236.00 bytes/sec
+total size is 6,116  speedup is 17.28
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 329 bytes  236.00 bytes/sec
+total size is 6,116  speedup is 17.28
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 329 bytes  236.00 bytes/sec
+total size is 6,116  speedup is 17.28
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 329 bytes  236.00 bytes/sec
+total size is 6,116  speedup is 17.28
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+midi_out/
+midi_out/10_midii.mid
+              0   0%    0.00kB/s    0:00:00              577 100%  563.48kB/s    0:00:00 (xfr#1, to-chk=9/12)
+
+sent 47 bytes  received 798 bytes  563.33 bytes/sec
+total size is 6,693  speedup is 7.92
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+Received SIGTERM signal. Exiting...
+playing /home/p/vast_ai/midialogue/midi_out/10_midii.mid
+killing light pattern play script
+Received SIGTERM signal. Exiting...
+launching light pattern after play
+starting ambient out
+waiting for new midi in /home/p/vast_ai/midialogue/midi_in
+
+Stopping recording in 0.9994549751281738 seconds
+Stopping recording in 0.8963844776153564 seconds
+Stopping recording in 0.9984381198883057 seconds
+Stopping recording in 0.9991507530212402 seconds
+Stopping recording in 0.9989030361175537 seconds
+Stopping recording in 0.9872827529907227 seconds
+Stopping recording in 0.9087965488433838 seconds
+Stopping recording in 0.9611365795135498 seconds
+Stopping recording in 0.9215579032897949 seconds
+Stopping recording in 0.9915955066680908 seconds
+Stopping recording in 0.8974792957305908 seconds
+Stopping recording in 0.9895257949829102 seconds
+Stopping recording in 0.9412975311279297 seconds
+Stopping recording in 0.999809741973877 seconds
+Stopping recording in 0.9983630180358887 seconds
+Stopping recording in 0.9984340667724609 seconds
+Stopping recording in 0.7200930118560791 seconds
+Stopping recording in 0.8956599235534668 seconds
+Stopping recording in 0.9772078990936279 seconds
+Stopping recording in 0.9944283962249756 seconds
+Stopping recording in 0.9987707138061523 seconds
+Stopping recording in 0.999823808670044 seconds
+Stopping recording in 0.9999806880950928 seconds
+Stopping recording in 0.9994399547576904 seconds
+Stopping recording in 0.8752903938293457 seconds
+Stopping recording in 0.7139451503753662 seconds
+Stop recording
+Start recording
+Stopping recording in 0.08400368690490723 seconds
+Stop recording
+Start recording
+Stopping recording in 0.5933611392974854 seconds
+Stopping recording in 0.9592106342315674 seconds
+Stopping recording in 0.9907052516937256 seconds
+Stopping recording in 0.525444507598877 seconds
+Stopping recording in 0.962073564529419 seconds
+Stopping recording in 0.9350674152374268 seconds
+Stopping recording in 0.9982266426086426 seconds
+Stopping recording in 0.911656379699707 seconds
+Stopping recording in 0.8285410404205322 seconds
+Stopping recording in 0.7329699993133545 seconds
+Stopping recording in 0.8241798877716064 seconds
+Stopping recording in 0.9545447826385498 seconds
+Stopping recording in 0.996192455291748 seconds
+Stopping recording in 0.9990427494049072 seconds
+Stopping recording in 0.9997172355651855 seconds
+Stopping recording in 0.704444169998169 seconds
+Stopping recording in 0.8743095397949219 seconds
+Stopping recording in 0.9638245105743408 seconds
+Stopping recording in 0.9999024868011475 seconds
+Stopping recording in 0.8538200855255127 seconds
+Stopping recording in 0.9511525630950928 seconds
+Stopping recording in 0.9986600875854492 seconds
+Stopping recording in 0.9314274787902832 seconds
+Stopping recording in 0.9995191097259521 seconds
+Stopping recording in 0.9379799365997314 seconds
+Stopping recording in 0.8192570209503174 seconds
+Stopping recording in 0.7668664455413818 seconds
+Stop recording
+Start recording
+Stopping recording in 0.9991962909698486 seconds
+Stopping recording in 0.9260904788970947 seconds
+Stopping recording in 0.6141283512115479 seconds
+Stopping recording in 0.6699860095977783 seconds
+Stopping recording in 0.8481056690216064 seconds
+Stopping recording in 0.9467227458953857 seconds
+Stopping recording in 0.8859975337982178 seconds
+Stopping recording in 0.26399922370910645 seconds
+Stopping recording in 0.9996058940887451 seconds
+Stopping recording in 0.9977962970733643 seconds
+Stopping recording in 0.9367766380310059 seconds
+Stopping recording in 0.6780068874359131 seconds
+Stopping recording in 0.9990749359130859 seconds
+Stopping recording in 0.5321171283721924 seconds
+Stopping recording in 0.5309760570526123 seconds
+Stopping recording in 0.92734694480896 seconds
+Stopping recording in 0.9993486404418945 seconds
+Stopping recording in 0.9963252544403076 seconds
+Stopping recording in 0.9973764419555664 seconds
+Stopping recording in 0.7391560077667236 seconds
+Stopping recording in 0.9220438003540039 seconds
+Stopping recording in 0.8136277198791504 seconds
+Stopping recording in 0.998772382736206 seconds
+Stopping recording in 0.8981213569641113 seconds
+Stopping recording in 0.9998769760131836 seconds
+Stopping recording in 0.9996271133422852 seconds
+Stopping recording in 0.6247096061706543 seconds
+Stopping recording in 0.8851010799407959 seconds
+Stopping recording in 0.8453168869018555 seconds
+Stopping recording in 0.6484541893005371 seconds
+Stopping recording in 0.9734640121459961 seconds
+Stopping recording in 0.17685770988464355 seconds
+Stop recording
+Start recording
+Stopping recording in 0.7391319274902344 seconds
+Stopping recording in 0.9838278293609619 seconds
+Stopping recording in 0.6842958927154541 seconds
+Stopping recording in 0.35836362838745117 seconds
+Stopping recording in 0.5922656059265137 seconds
+Stopping recording in 0.7606372833251953 seconds
+Stopping recording in 0.9991726875305176 seconds
+Stopping recording in 0.9997520446777344 seconds
+Stopping recording in 0.998889684677124 seconds
+Stopping recording in 0.9998676776885986 seconds
+Stopping recording in 0.36949992179870605 seconds
+Stopping recording in 0.9999823570251465 seconds
+Stopping recording in 0.9991250038146973 seconds
+Stopping recording in 0.5227394104003906 seconds
+Stopping recording in 0.9993631839752197 seconds
+Stopping recording in 0.8735849857330322 seconds
+Stopping recording in 0.9991734027862549 seconds
+Stopping recording in 0.9999339580535889 seconds
+Stopping recording in 0.9995059967041016 seconds
+Stopping recording in 0.9983477592468262 seconds
+Stopping recording in 0.9986171722412109 seconds
+Stopping recording in 0.9281342029571533 seconds
+Stopping recording in 0.9996781349182129 seconds
+Stopping recording in 0.9786064624786377 seconds
+Stopping recording in 0.9839036464691162 seconds
+Stopping recording in 0.9755373001098633 seconds
+Stopping recording in 0.989037036895752 seconds
+Stopping recording in 0.978844404220581 seconds
+Stopping recording in 0.9980723857879639 seconds
+Stopping recording in 0.9379661083221436 seconds
+Stopping recording in 0.8203794956207275 seconds
+Stopping recording in 0.9140846729278564 seconds
+Stopping recording in 0.8918416500091553 seconds
+Stopping recording in 0.9629266262054443 seconds
+Stopping recording in 0.979522705078125 seconds
+Stopping recording in 0.9875845909118652 seconds
+Stopping recording in 0.8512797355651855 seconds
+Stopping recording in 0.9986593723297119 seconds
+Stopping recording in 0.9911236763000488 seconds
+Stopping recording in 0.9996943473815918 seconds
+Stopping recording in 0.9991185665130615 seconds
+Stopping recording in 0.9990456104278564 seconds
+Stopping recording in 0.9994196891784668 seconds
+Stopping recording in 0.7241106033325195 seconds
+Stopping recording in 0.7277865409851074 seconds
+Stopping recording in 0.9423973560333252 seconds
+Stopping recording in 0.8752965927124023 seconds
+Stopping recording in 0.999509334564209 seconds
+Stopping recording in 0.9962027072906494 seconds
+Stopping recording in 0.9646759033203125 seconds
+Stopping recording in 0.9995226860046387 seconds
+Stopping recording in 0.8935554027557373 seconds
+Stopping recording in 0.9084551334381104 seconds
+Stopping recording in 0.9404973983764648 seconds
+Stopping recording in 0.9999113082885742 seconds
+Stopping recording in 0.9967765808105469 seconds
+Stopping recording in 0.985562801361084 seconds
+Stopping recording in 0.9999516010284424 seconds
+Stopping recording in 0.9999535083770752 seconds
+Stopping recording in 0.9993011951446533 seconds
+Stopping recording in 0.995159387588501 seconds
+Stopping recording in 0.6833336353302002 seconds
+Stopping recording in 0.999950647354126 seconds
+Stopping recording in 0.9996354579925537 seconds
+Stopping recording in 0.9997954368591309 seconds
+Stopping recording in 0.9983477592468262 seconds
+Stopping recording in 0.9997894763946533 seconds
+Stopping recording in 0.9371182918548584 seconds
+Stopping recording in 0.9849824905395508 seconds
+Stopping recording in 0.9980154037475586 seconds
+Stopping recording in 0.9985518455505371 seconds
+Stopping recording in 0.9987180233001709 seconds
+Stopping recording in 0.9996969699859619 seconds
+Stopping recording in 0.9971961975097656 seconds
+Stopping recording in 0.9997012615203857 seconds
+Stopping recording in 0.9985301494598389 seconds
+Stopping recording in 0.999704122543335 seconds
+Stopping recording in 0.9982402324676514 seconds
+Stopping recording in 0.9995741844177246 seconds
+Stopping recording in 0.9995360374450684 seconds
+Stopping recording in 0.9990448951721191 seconds
+Stopping recording in 0.9985697269439697 seconds
+Stopping recording in 0.99912428855896 seconds
+Stopping recording in 0.9989762306213379 seconds
+Stopping recording in 0.8254034519195557 seconds
+Stopping recording in 0.3446512222290039 seconds
+Stopping recording in 0.9991250038146973 seconds
+Stopping recording in 0.873892068862915 seconds
+Stopping recording in 0.9984090328216553 seconds
+Stopping recording in 0.9992561340332031 seconds
+Stopping recording in 0.9996240139007568 seconds
+Stopping recording in 0.9985148906707764 seconds
+Stopping recording in 0.9998955726623535 seconds
+Stopping recording in 0.997028112411499 seconds
+Stopping recording in 0.9993851184844971 seconds
+Stopping recording in 0.9990193843841553 seconds
+Stopping recording in 0.9997718334197998 seconds
+Stopping recording in 0.9999549388885498 seconds
+Stopping recording in 0.9998269081115723 seconds
+Stopping recording in 0.7677686214447021 seconds
+Stopping recording in 0.9998717308044434 seconds
+Stopping recording in 0.9994709491729736 seconds
+Stopping recording in 0.9981355667114258 seconds
+Stopping recording in 0.9978992938995361 seconds
+Stopping recording in 0.9996840953826904 seconds
+Stopping recording in 0.9977517127990723 seconds
+Stopping recording in 0.9198298454284668 seconds
+Stopping recording in 0.9990818500518799 seconds
+Stopping recording in 0.997450590133667 seconds
+Stopping recording in 0.9602136611938477 seconds
+Stopping recording in 0.9477386474609375 seconds
+Stopping recording in 0.9560396671295166 seconds
+Stopping recording in 0.9530777931213379 seconds
+Stopping recording in 0.7116084098815918 seconds
+Stopping recording in 0.899785041809082 seconds
+Stopping recording in 0.9990708827972412 seconds
+Stopping recording in 0.9987452030181885 seconds
+Stopping recording in 0.9993045330047607 seconds
+Stopping recording in 0.9985780715942383 seconds
+Stopping recording in 0.9983456134796143 seconds
+Stopping recording in 0.9364349842071533 seconds
+Stopping recording in 0.9984488487243652 seconds
+Stopping recording in 0.9990737438201904 seconds
+Stopping recording in 0.9845430850982666 seconds
+Stopping recording in 0.999941349029541 seconds
+Stopping recording in 0.997553825378418 seconds
+Stopping recording in 0.7304332256317139 seconds
+Stopping recording in 0.9834156036376953 seconds
+Stopping recording in 0.9985153675079346 seconds
+Stopping recording in 0.8404908180236816 seconds
+Stopping recording in 0.845768928527832 seconds
+Stopping recording in 0.9878478050231934 seconds
+Stopping recording in 0.9999568462371826 seconds
+Stopping recording in 0.9958453178405762 seconds
+Stopping recording in 0.8767905235290527 seconds
+Stopping recording in 0.8785386085510254 seconds
+Stopping recording in 0.652909517288208 seconds
+Stopping recording in 0.8016715049743652 seconds
+Stopping recording in 0.9987833499908447 seconds
+Stopping recording in 0.9997594356536865 seconds
+Stopping recording in 0.9981679916381836 seconds
+Stopping recording in 0.9998178482055664 seconds
+Stopping recording in 0.9999024868011475 seconds
+Stopping recording in 0.7963056564331055 seconds
+Stopping recording in 0.9969987869262695 seconds
+Stopping recording in 0.9887862205505371 seconds
+Stopping recording in 0.9988973140716553 seconds
+Stopping recording in 0.9970130920410156 seconds
+Stopping recording in 0.9996778964996338 seconds
+Stopping recording in 0.9993867874145508 seconds
+Stopping recording in 0.9319925308227539 seconds
+Stopping recording in 0.9982869625091553 seconds
+Stopping recording in 0.9172563552856445 seconds
+Stopping recording in 0.9945807456970215 seconds
+Stopping recording in 0.9999451637268066 seconds
+Stopping recording in 0.9788475036621094 seconds
+Stopping recording in 0.9990434646606445 seconds
+Stopping recording in 0.9914288520812988 seconds
+Stopping recording in 0.998553991317749 seconds
+Stopping recording in 0.9719152450561523 seconds
+Stopping recording in 0.9990084171295166 seconds
+Stopping recording in 0.9999170303344727 seconds
+Stopping recording in 0.9997701644897461 seconds
+Stopping recording in 0.9685189723968506 seconds
+Stopping recording in 0.8101069927215576 seconds
+Stopping recording in 0.996023416519165 seconds
+Stopping recording in 0.9473555088043213 seconds
+Stopping recording in 0.949805736541748 seconds
+Stopping recording in 0.7564947605133057 seconds
+Stopping recording in 0.7296638488769531 seconds
+Stopping recording in 0.7176320552825928 seconds
+Stopping recording in 0.9806649684906006 seconds
+Stopping recording in 0.9460866451263428 seconds
+Stopping recording in 0.9994490146636963 seconds
+Stopping recording in 0.9997720718383789 seconds
+Stopping recording in 0.613745927810669 seconds
+Stopping recording in 0.9891986846923828 seconds
+Stopping recording in 0.9996216297149658 seconds
+Stopping recording in 0.9989159107208252 seconds
+Stopping recording in 0.9986629486083984 seconds
+Stopping recording in 0.9954886436462402 seconds
+Stopping recording in 0.998023271560669 seconds
+Stopping recording in 0.999732255935669 seconds
+Stopping recording in 0.9984641075134277 seconds
+Stopping recording in 0.999335527420044 seconds
+Stopping recording in 0.9990465641021729 seconds
+Stopping recording in 0.9981284141540527 seconds
+Stopping recording in 0.9996802806854248 seconds
+Stopping recording in 0.9993484020233154 seconds
+Stopping recording in 0.9991292953491211 seconds
+Stopping recording in 0.9996168613433838 seconds
+Stopping recording in 0.9999122619628906 seconds
+Stopping recording in 0.9999136924743652 seconds
+Stopping recording in 0.9991159439086914 seconds
+Stopping recording in 0.9989638328552246 seconds
+Stopping recording in 0.999718427658081 seconds
+Stopping recording in 0.9986860752105713 seconds
+Stopping recording in 0.9993326663970947 seconds
+Stopping recording in 0.9991312026977539 seconds
+Stopping recording in 0.9997973442077637 seconds
+Stopping recording in 0.9987442493438721 seconds
+Stopping recording in 0.9700431823730469 seconds
+Stopping recording in 0.8894431591033936 seconds
+Stopping recording in 0.9989299774169922 seconds
+Stopping recording in 0.9996495246887207 seconds
+Stopping recording in 0.9996099472045898 seconds
+Stopping recording in 0.9979703426361084 seconds
+Stopping recording in 0.9990870952606201 seconds
+Stopping recording in 0.9987411499023438 seconds
+Stopping recording in 0.9998660087585449 seconds
+Stopping recording in 0.9982295036315918 seconds
+Stopping recording in 0.9997851848602295 seconds
+Stopping recording in 0.9983508586883545 seconds
+Stopping recording in 0.9994866847991943 seconds
+Stopping recording in 0.9998481273651123 seconds
+Stopping recording in 0.9987032413482666 seconds
+Stopping recording in 0.9994003772735596 seconds
+Stopping recording in 0.9983878135681152 seconds
+Stopping recording in 0.9994614124298096 seconds
+Stopping recording in 0.9576787948608398 seconds
+Stopping recording in 0.5886280536651611 seconds
+Stopping recording in 0.9232609272003174 seconds
+Stopping recording in 0.9213845729827881 seconds
+Stopping recording in 0.9996330738067627 seconds
+Stopping recording in 0.9996569156646729 seconds
+Stopping recording in 0.9998207092285156 seconds
+Stopping recording in 0.9992365837097168 seconds
+Stopping recording in 0.9986052513122559 seconds
+Stopping recording in 0.9992859363555908 seconds
+Stopping recording in 0.9998807907104492 seconds
+Stopping recording in 0.9997808933258057 seconds
+Stopping recording in 0.9987838268280029 seconds
+Stopping recording in 0.998253583908081 seconds
+Stopping recording in 0.7950944900512695 seconds
+Stopping recording in 0.8631775379180908 seconds
+Stopping recording in 0.9996387958526611 seconds
+Stopping recording in 0.9985806941986084 seconds
+Stopping recording in 0.9993274211883545 seconds
+Stopping recording in 0.9998002052307129 seconds
+Stopping recording in 0.7718815803527832 seconds
+Stopping recording in 0.9622735977172852 seconds
+Stopping recording in 0.9980170726776123 seconds
+Stopping recording in 0.9990363121032715 seconds
+Stopping recording in 0.9982755184173584 seconds
+Stopping recording in 0.9990088939666748 seconds
+Stopping recording in 0.9980659484863281 seconds
+Stopping recording in 0.9995636940002441 secondscopying /home/p/vast_ai/midialogue/midi_in/10407871795432542127.mid to 5938759:/workspace/vast_ai/midialogue
+killing ambient out
+wating for new midi in /home/p/vast_ai/midialogue/midi_out
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+
+sent 25 bytes  received 357 bytes  254.67 bytes/sec
+total size is 6,693  speedup is 17.52
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 361 bytes  154.40 bytes/sec
+total size is 6,693  speedup is 17.34
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 357 bytes  254.67 bytes/sec
+total size is 6,693  speedup is 17.52
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 357 bytes  254.67 bytes/sec
+total size is 6,693  speedup is 17.52
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 357 bytes  254.67 bytes/sec
+total size is 6,693  speedup is 17.52
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 357 bytes  254.67 bytes/sec
+total size is 6,693  speedup is 17.52
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 357 bytes  19.59 bytes/sec
+total size is 6,693  speedup is 17.52
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 357 bytes  254.67 bytes/sec
+total size is 6,693  speedup is 17.52
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+
+sent 25 bytes  received 361 bytes  257.33 bytes/sec
+total size is 6,693  speedup is 17.34
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 361 bytes  257.33 bytes/sec
+total size is 6,693  speedup is 17.34
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 357 bytes  254.67 bytes/sec
+total size is 6,693  speedup is 17.52
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+
+sent 25 bytes  received 357 bytes  254.67 bytes/sec
+total size is 6,693  speedup is 17.52
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 357 bytes  254.67 bytes/sec
+total size is 6,693  speedup is 17.52
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 357 bytes  254.67 bytes/sec
+total size is 6,693  speedup is 17.52
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 357 bytes  254.67 bytes/sec
+total size is 6,693  speedup is 17.52
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 357 bytes  254.67 bytes/sec
+total size is 6,693  speedup is 17.52
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+failed with error 429: (no detail message supplied)
+receiving incremental file list
+
+sent 25 bytes  received 361 bytes  257.33 bytes/sec
+total size is 6,693  speedup is 17.34
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue
+receiving incremental file list
+
+sent 25 bytes  received 361 bytes  257.33 bytes/sec
+total size is 6,693  speedup is 17.34
+copying 5938759:/workspace/vast_ai/midialogue/midi_out None:/home/p/vast_ai/midialogue
+sudo rsync -arz -v --progress --rsh=ssh -e 'sudo ssh -i /root/.ssh/id_rsa -p 23699 -o StrictHostKeyChecking=no' vastai_kaalia@31.12.82.146::5938759//workspace/vast_ai/midialogue/midi_out /home/p/vast_ai/midialogue

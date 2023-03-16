@@ -3,7 +3,8 @@ source ~/.bashrc
 
 cd /workspace
 apt-get install git wget curl tar -y
-git clone https://github.com/janzuiderveld/vast_ai.git
+# git clone -b midi-pi https://github.com/janzuiderveld/vast_ai.git 
+git clone https://github.com/janzuiderveld/vast_ai.git 
 
 /usr/sbin/sshd -p $DIRECT_PORT_START
 

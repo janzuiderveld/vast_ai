@@ -1,18 +1,16 @@
 // This code is writen to read data from Benewake mini-S LiDAR through UART physical interface.
 // The code is tested with Teensy 4.1. It can also be used with ESP8266 by making slight modifications
+// by Ibrahim Technical Support Engineer: ibrahim@benewake.com
 
 // This code reads serial data from 7 different Benewake mini-S LiDAR sensors
 
-int DEBUG = 1; // TURN OFF for fixing laginess?
+int DEBUG = 1;
 double deltaAverageThresholdTriggerIn = 1.0; // IMPORTANT
 int settleRequired = 3000;
 
 double deltaAverageThresholdControlOut = 1.0; // IMPORTANT not yet
 // double triggerDist = 260.0; // IMPORTANT
-
-// double triggerDist[7] = {150.0, 150.0, 150.0, 150.0, 150.0, 150.0, 150.0};
-double triggerDist[7] = {999.0, 999.0, 999.0, 999.0, 999.0, 999.0, 999.0};
-
+double triggerDist[7] = {150.0, 150.0, 150.0, 150.0, 150.0, 150.0, 150.0};
 const double smoothSamples = 1.0 ; 
 int ctrlStartMs = 200; 
 
@@ -123,7 +121,7 @@ int triggerTick[7] = {0, 0, 0, 0, 0, 0, 0};
 
 int lastTick[7] = {0, 0, 0, 0, 0, 0, 0};
 int currentMillis = 0;
-int minTimeBetweenTicks = 1; // POSSIBLE FIX for lagginess; set to higher value
+int minTimeBetweenTicks = 1;
 
 int lastTriggerDist[7] = {0, 0, 0, 0, 0, 0, 0};
 
@@ -203,29 +201,6 @@ void setup() {
     Serial.println(duration);
   }
 
-  // Calibrate the sensors 
-  for (int ch = 0; ch < 7; ch++) {
-    // turn on laser
-    pinMode(laser_control_pins[ch], OUTPUT);
-
-    // read 100000 samples
-    for (int j = 0; j < 100000; j++) {
-      // read sensor
-      Get_Lidar_data(Serials[ch], ch);
-      // add to average
-      triggerDist[ch] += dists[ch];
-    }
-
-    // divide by 100000
-    triggerDist[ch] /= 100000;
-
-    // subtract 10
-    triggerDist[ch] -= 10;
-
-    // turn off laser
-    pinMode(laser_control_pins[ch], INPUT);
-  }
-
   // blink lasers to signal setup is done
   for (int i = 0; i < 7; i++) {
     pinMode(laser_control_pins[i], OUTPUT);
@@ -280,18 +255,11 @@ void loop() {
           Get_Lidar_data(Serials[ch], ch);
       }
 
-    // if dists[ch] has not changed and last update was less than 1 ms ago, continue
-    if (dists[ch] == lastDists[ch]) {
-      if (millis() <= (lastTick[ch] + minTimeBetweenTicks)) {
-        continue;
-      }
-    }
-
     // // retrigger
     // check if channel is in retrigger mode
     if (retriggerStart[ch] != 0) {
       // check if channel is active
-      if (noteLock[ch] == 1) {
+      if (average[ch] != 0 && average[ch] < triggerDist[ch] && noteLock[ch] == 1) {
         // check if last retrigger was long enough ago
         if (millis() > retriggerMod[ch] + lastRetrigger[ch]) {
 
@@ -519,20 +487,6 @@ void loop() {
     //     Serial.println();
 
     // }
-
-
-    // every 100ms, print the distances
-    // first check if DEBUG is on
-    if (DEBUG) {
-      if (millis() % 100 == 0 && noteLock == 0) {
-          for (int i = 0; i < 7; i++) {
-              Serial.print(dists[i]);
-              Serial.print(" ");
-          }
-          Serial.println();
-
-      }
-    }
 
 
 }

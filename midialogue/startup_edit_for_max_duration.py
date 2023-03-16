@@ -347,6 +347,18 @@ def load_midi_fp(fp):
         elif note.pitch == 69:
             note.pitch = 15
 
+    max_duration = 30
+
+    midi_end_time = midi.get_end_time()
+
+    if midi_end_time > max_duration:
+        # remove notes that are not in the last max_duration seconds
+        for i in range(4):
+            midi.instruments[i].notes = [note for note in midi.instruments[i].notes if note.start > (midi_end_time - max_duration)]
+
+        for note in midi.instruments[i].notes:
+            note.start -= (midi_end_time - max_duration)
+            note.end -= (midi_end_time - max_duration)
     return midi
 
 def scale_number(unscaled, to_min, to_max, from_min, from_max):
@@ -451,7 +463,13 @@ def midi_to_tx1(fp):
 
   # nsamps = int((midi.time_signature_changes[-1].time * 44100) + 1e-6)
   # if nsamps > last_samp:
-  tx1.append('WT_{}'.format(args.answer_add_silence))
+    # tx1.append('WT_{}'.format(args.answer_add_silence))
+
+  # check if last or single last event is WT
+  if tx1[-1][:2] == 'WT':
+    tx1 = tx1[:-1]
+  elif tx1[-2][:2] == 'WT':
+    tx1 = tx1[:-2] + [tx1[-1]]
 
   tx1 = '\n'.join(tx1)
   return tx1
@@ -507,8 +525,6 @@ def tx1_to_midi(tx1, save_folder):
       else:
         if old_pitch is not None:
           pitch = name_to_pitch[name]
-          if tokens[0] == 'NO' and not args.lasers:
-            pitch = round(scale_number(pitch, 0, 127, 1, 16))
 
           ins.notes.append(pretty_midi.Note(
               velocity=name_to_max_velocity[name],

@@ -67,6 +67,12 @@ def main(args):
 
     while True:
         try:
+            # start ambient out
+            os.system(f"echo 'starting ambient out'")
+            # os.system(f"/home/p/vast_ai/midialogue/midi_scripts/ambient_out.py")
+            command = ["python3", "/home/p/vast_ai/midialogue/midi_scripts/ambient_out.py"]
+            ambient_process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
             # wait for new midi being saved
             os.system(f"echo 'waiting for new midi in {args.midi_in_folder}'")
             saved_midi = wait_for_new_midi(args.midi_in_folder, pull=False)
@@ -78,6 +84,10 @@ def main(args):
             os.system(f"echo 'copying {saved_midi} to {ID}:/workspace/vast_ai/midialogue'")
             command = ["./vast", "copy", args.midi_in_folder, f"{ID}:/workspace/vast_ai/midialogue"]
             process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            
+            # stop ambient out
+            os.system(f"echo 'killing ambient out'")
+            os.system(f"kill {ambient_process.pid}")
 
             # launch script for loading light pattern
             process = subprocess.Popen(["python3", "/home/p/vast_ai/midialogue/midi_scripts/light_pattern_load.py"])

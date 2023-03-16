@@ -1,13 +1,9 @@
-// This code is writen to read data from Benewake mini-S LiDAR through UART physical interface.
-// The code is tested with Teensy 4.1. It can also be used with ESP8266 by making slight modifications
-
-// This code reads serial data from 7 different Benewake mini-S LiDAR sensors
-
 int DEBUG = 1; // TURN OFF for fixing laginess?
 double deltaAverageThresholdTriggerIn = 1.0; // IMPORTANT
 int settleRequired = 5;
 
 double deltaAverageThresholdControlOut = 1.0; // IMPORTANT not yet
+
 double triggerDist[7] = {999.0, 999.0, 999.0, 999.0, 999.0, 999.0, 999.0};
 
 const double smoothSamples = 1.0 ; 
@@ -71,15 +67,6 @@ HardwareSerial Serials[7] {
   Serial1,
   Serial2
 };
-
-// bool first_iteration = true;
-// const int sampleRate = 1000;
-// const int analogMemSec = 3;
-// const int analogMemSamples = analogMemSec * sampleRate;
-// double analogMemory [num_channels][analogMemSamples];
-// int analogMemCounter[num_channels] = {0, 0, 0, 0, 0, 0, 0};
-
-// double triggerSampleCount[num_channels] = {0, 0, 0, 0, 0, 0, 0};
 
 bool first_sample[num_channels] = {true, true, true, true, true, true, true} ;
 double scalar1 = 1.0/smoothSamples;
@@ -155,8 +142,6 @@ void OnNoteOff(byte channel, byte note, byte velocity) {
     sendMidi = 0;
   }
 }
-
-///////////////////////// SETUP ///////////////////////////// 
 
 void setup() {
   auto start = millis();
@@ -305,8 +290,6 @@ void loop() {
         }
     }
 
-
-
     // if dists[ch] has not changed and last update was less than 1 ms ago, continue
     if (dists[ch] == lastDists[ch]) {
       if (millis() <= (lastTick[ch] + minTimeBetweenTicks)) {
@@ -327,14 +310,7 @@ void loop() {
     }
 
     // distance to MIDI translation
-    // This section sends NoteOn messages to the MIDI channel when appropriate
     if (average[ch] != 0 && average[ch] < triggerDist[ch] && noteLock[ch] == 0) {
-
-        // // TODO this should be moved out of this loop, where it only counts on change of dist
-        // deltaAverage[ch] = (lastAverage[ch] - average[ch]); // positive if lower, negative if higher away
-        // if (deltaAverage[ch] <= deltaAverageThresholdTriggerIn) { // Use absolute diff here?
-        //     settleCount[ch] += 1;
-        //     // 
 
             if (settleCount[ch] >= settleRequired) {
               lastTriggerDist[ch] = average[ch];
@@ -368,11 +344,6 @@ void loop() {
             }
           }
         
-        // //
-        // } else {
-        //   settleCount[ch] = 0;
-        // }
-        // //
 
     }
 
@@ -468,26 +439,6 @@ void loop() {
         // reset settleCount
         settleCount[ch] = 0;
 
-        // print 
-        if (DEBUG) {
-            Serial.print("Note off: ");
-            Serial.println(noteOut[ch]);
-            Serial.print("Channel: ");
-            Serial.println(ch);
-            Serial.print("Distance: ");
-            Serial.println(average[ch]);
-            // print lastTriggerDist
-            Serial.print("Last trigger dist: ");
-            Serial.println(lastTriggerDist[ch]);
-            // print triggerTick
-            Serial.print("Trigger tick: ");
-            Serial.println(triggerTick[ch]);
-            // print currentMillis
-            Serial.print("Current millis: ");
-            Serial.println(currentMillis);
-
-        }
-
     }
 
     lastAverage[ch] = average[ch];
@@ -495,19 +446,6 @@ void loop() {
 
   } // end of loop over channels
 
-
-    // // every 100ms, print the distances
-    // if (millis() % 100 == 0 && DEBUG && noteLock == 0) {
-    //     for (int i = 0; i < 7; i++) {
-    //         Serial.print(dists[i]);
-    //         Serial.print(" ");
-    //     }
-    //     Serial.println();
-
-    // }
-
-
-    // every 100ms, print the distances
     // first check if DEBUG is on
     if (DEBUG) {
       if (millis() % 100 == 0 && noteLock == 0) {
@@ -523,8 +461,6 @@ void loop() {
 
 }
 
-
-
 /// @brief 
 /// @param serialX 
 /// @param i 
@@ -533,9 +469,7 @@ if (serialX.available()) //check if serial port has data input
     {
     if(rec_debug_state[i] == 0x01)
         {  //the first byte
-          //Serial.println("first byte");
           uart[i][0]=serialX.read();
-          //Serial.println(uart[i][0]);
           if(uart[i][0] == 0x59)
               {
                 // check = uart[i][0];
@@ -545,7 +479,6 @@ if (serialX.available()) //check if serial port has data input
         
 else if(rec_debug_state[i] == 0x02)
      {//the second byte
-      //Serial.println("2nd byte");
       uart[i][1]=serialX.read();
       if(uart[i][1] == 0x59)
           {
@@ -573,12 +506,8 @@ else if(rec_debug_state[i] ==  0x05)
             
             dist_temp = uart[i][2] + uart[i][3]*256;//the distance
 
-            // Serial.println(dist_temp);
-
-            // Do not update bad data
             if (dist_temp <= 0 || dist_temp > 1200) {
               rec_debug_state[i] = 0x01;
-              // dists[i] = 1200;
               return;
             }
 
@@ -586,8 +515,6 @@ else if(rec_debug_state[i] ==  0x05)
 
             while(serialX.available()){serialX.read();} // This part is added becuase some previous packets are there in the buffer so to clear serial buffer and get fresh data.
             rec_debug_state[i] = 0x01;
-            
-            // Serial.println(dists[i]); //output measure distance value of LiDAR
             
            }
     

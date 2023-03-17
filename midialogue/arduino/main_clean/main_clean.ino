@@ -510,7 +510,6 @@ void loop() {
             // print currentMillis
             Serial.print("Current millis: ");
             Serial.println(currentMillis);
-
         }
 
     }

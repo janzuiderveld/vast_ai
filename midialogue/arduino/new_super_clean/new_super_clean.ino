@@ -15,9 +15,9 @@ double triggerDist[7] = {999.0, 999.0, 999.0, 999.0, 999.0, 999.0, 999.0};
 int ctrlStartMs = 200; 
 
 // lead 1
-int notes1[5] = {57, 58, 60, 62, 64};
+int notes1[7] = {57, 58, 60, 62, 64, 64, 64};
 // lead 2
-int notes2[6] = {65, 67, 69, 70, 72, 74};
+int notes2[7] = {67, 69, 70, 72, 74, 74, 74};
 // lead 3
 int notes3[7] = {69, 70, 72, 74, 76, 77, 79};
 // bass
@@ -34,12 +34,12 @@ int chMap[7] = {1, 1, 2, 3, 3, 4, 4};
 int ctrlChannelMapPos[7] = {1, 1, 2, 3, 3, 4, 4};
 int ctrlChannelMapNeg[7] = {1, 1, 2, 3, 3, 4, 4};
 
-int ctrlMapPos[7] = {75, 75, 93, 69, 69,        18, 84};
-int ctrlMapNeg[7] = {70, 93, 69, 24, 70,       119, 119};
-int ctrlPosReset[7] = {40, 64, 0, 50, 40,           0, 0};
-int ctrlNegReset[7] = {40, 0, 64, 20, 40,         0, 0};
-int ctrlPosRange[7] = {127, 175, 127, 100, 127,     127, 127};
-int ctrlNegRange[7] = {-127, 80, 127, 100, 30,    127, 127};
+int ctrlMapPos[7] = {75, 16, 93, 69, 69,        18, 84};
+int ctrlMapNeg[7] = {70, 16, 69, 24, 70,       119, 119};
+int ctrlPosReset[7] = {40, 51, 0, 50, 40,           0, 0};
+int ctrlNegReset[7] = {40, 51, 64, 20, 40,         0, 0};
+int ctrlPosRange[7] = {127, 64, 127, 100, 127,     127, 127};
+int ctrlNegRange[7] = {-127, -64, 127, 100, 30,    127, 127};
 
 // not implemented yet
 int ctrlMapPos2[7] = {0, 0, 0, 0,    0, 0, 0};
@@ -84,6 +84,7 @@ HardwareSerial Serials[7] {
 
 // TODO if smoothing is not needed, make this int 
 int dists[num_channels]= {0, 0, 0, 0, 0, 0, 0} ;
+int strengths[num_channels]= {0, 0, 0, 0, 0, 0, 0} ;
 int lastAverage[num_channels]= {0, 0, 0, 0, 0, 0, 0} ;
 int deltaAverage[num_channels]= {0, 0, 0, 0, 0, 0, 0} ;
 
@@ -91,7 +92,7 @@ int deltaAverage[num_channels]= {0, 0, 0, 0, 0, 0, 0} ;
 int lastDists[7] = {0, 0, 0, 0, 0, 0, 0};
 int dist_temp = 0;
 
-unsigned char uart[7][5];  /*----save data measured by LiDAR-------------*/
+unsigned char uart[7][6];  /*----save data measured by LiDAR-------------*/
 const int HEADER=0x59; /*----frame header of data package------------*/
 int rec_debug_state[7] = {0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01}; /*----receive state for frame----------------*/
 
@@ -112,6 +113,55 @@ int lastTriggerDist[7] = {0, 0, 0, 0, 0, 0, 0};
 int laser_control_pins[7] = {24, 11, 12, 10, 9, 6, 5};
 int extra_control_pin = 25;
 
+
+// define calbirate function
+void calibrate(int ch) {
+  // turn off laser
+  pinMode(laser_control_pins[ch], INPUT);
+
+  // sum 100 samples
+  for (int j = 0; j < 100; j++) {
+    
+    Get_Lidar_data(Serials[ch], ch);
+    // check if reading is not 0
+    while (dists[ch] == 0) {
+      Get_Lidar_data(Serials[ch], ch);
+    }
+
+    // add to dists
+    triggerDist[ch] += dists[ch];
+
+    // delay 1 ms
+    delay(1);
+  }
+
+  triggerDist[ch] = triggerDist[ch] / 100;
+  triggerDist[ch] = triggerDist[ch] - 30;
+
+  // print triggerDist
+  if (DEBUG) {
+    Serial.print("Trigger Distance for ch ");
+    Serial.print(ch);
+    Serial.print(" is ");
+    Serial.println(triggerDist[ch]);
+  }
+
+  // turn on laser
+  pinMode(laser_control_pins[ch], OUTPUT);
+}
+
+void reportDistances() {
+    for (int i = 0; i < 7; i++) {
+        if (dists[i] > 0) {
+            // send first 2 digits
+            usbMIDI.sendControlChange(1, int(dists[i] / 10), 10);
+            // send last digit
+            usbMIDI.sendControlChange(1, dists[i] % 10, 11);
+        }
+    }
+    usbMIDI.send_now();
+}
+
 void OnNoteOn(byte channel, byte note, byte velocity) {
   // if note is between 0 and 6, turn on laser
   if (note < 7) {
@@ -120,6 +170,7 @@ void OnNoteOn(byte channel, byte note, byte velocity) {
 
   // if note is 7, turn on extra control pin
   if (note == 7) {
+    // Serial.println("Turning on extra control pin");
     digitalWrite(extra_control_pin, HIGH);
   }
 
@@ -128,7 +179,18 @@ void OnNoteOn(byte channel, byte note, byte velocity) {
     sendMidi = 1;
   }
 
+  // if note is between 20 and 26, calibrate channel
+  if (note > 19 && note < 27) {
+    calibrate(note - 20);
+  }
+
+  // if note is 30 report distances
+  if (note == 30) {
+    reportDistances();
+  }
+
 }
+
 
 void OnNoteOff(byte channel, byte note, byte velocity) {
   // if note is between 0 and 6, turn ff laser
@@ -149,6 +211,7 @@ void OnNoteOff(byte channel, byte note, byte velocity) {
   if (note == 10) {
     sendMidi = 0;
   }
+
 }
 
 ///////////////////////// SETUP ///////////////////////////// 
@@ -171,6 +234,9 @@ void setup() {
     pinMode(laser_control_pins[i], OUTPUT);
     digitalWrite(laser_control_pins[i], HIGH);
   }
+
+  // set up extra control pin
+  pinMode(extra_control_pin, OUTPUT);
 
   usbMIDI.setHandleNoteOff(OnNoteOff);
   usbMIDI.setHandleNoteOn(OnNoteOn) ;
@@ -216,7 +282,7 @@ void setup() {
     triggerDist[ch] /= 1000;
 
     // subtract 10
-    triggerDist[ch] -= 50;
+    triggerDist[ch] -= 30;
 
     // calculate min of triggerDist[ch]*0.8 and 300
     int max_note_height = min(int(triggerDist[ch]*0.8), 300);
@@ -233,16 +299,6 @@ void setup() {
 
     // turn off laser
     pinMode(laser_control_pins[ch], INPUT);
-  }
-
-  // print trigger distances
-  if (DEBUG) {
-    Serial.println("Trigger Distances:");
-    for (int i = 0; i < 7; i++) {
-      Serial.print(triggerDist[i]);
-      Serial.print(" ");
-    }
-    Serial.println();
   }
 
   // blink lasers to signal setup is done
@@ -516,17 +572,18 @@ void loop() {
 
     // every 100ms, print the distances
     // first check if DEBUG is on
-    if (DEBUG) {
-      if (millis() % 100 == 0 && noteLock == 0) {
-          for (int i = 0; i < 7; i++) {
-              Serial.print(dists[i]);
-              Serial.print(" ");
-          }
-          Serial.println();
-
-      }
-    }
-
+    // if (DEBUG) {
+    //   if (millis() % 100 == 0) {
+          // for (int i = 0; i < 7; i++) {
+          //     Serial.print(dists[i]);
+          //     Serial.print(" ");
+          // }
+          
+          // Serial.println(dists[0]);
+          // Serial.println(strengths[0]);
+          // Serial.println(" ");
+      // }
+    // }
 
 }
 
@@ -574,12 +631,14 @@ else if(rec_debug_state[i] == 0x04)
 
 else if(rec_debug_state[i] ==  0x05)
            {
-            while(serialX.available()){serialX.read();} // This part is added becuase some previous packets are there in the buffer so to clear serial buffer and get fresh data.
             
+            // uart[i][4]=serialX.read();
+            // uart[i][5]=serialX.read();
+            // strengths[i] = uart[i][4] + (uart[i][5]*256);
+            
+            while(serialX.available()){serialX.read();} // This part is added becuase some previous packets are there in the buffer so to clear serial buffer and get fresh data.
+
             dist_temp = uart[i][2] + uart[i][3]*256;//the distance
-
-            // Serial.println(dist_temp);
-
             // Do not update bad data
             if (dist_temp <= 0 || dist_temp > 1200) {
               rec_debug_state[i] = 0x01;

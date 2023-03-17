@@ -12,16 +12,37 @@ num_steps = 7
 
 import os
 
-in_port = int(os.environ['in_port'])
-model_port = int(os.environ['model_port'])
-all_synths_port = int(os.environ['all_synths_port'])
-
+try:
+    in_port = int(os.environ['in_port'])
+    model_port = int(os.environ['model_port'])
+    all_synths_port = int(os.environ['all_synths_port'])
+except KeyError:
+    os.system("/home/p/vast_ai/midialogue/midi-utilities/bin/lsmidiins")
+    try:
+        in_port = int(input("in_port: "))
+    except ValueError:
+        print("in_port: 3 (default)")
+        in_port = 3
+    # model_port = int(input("model_port: "))
+    # all_synths_port = int(input("all_synths_port: "))
 
 def set_laser_mode(i, mode, midi_out=None):
     if mode == 1:
         midi_out.send_message([0x90, i, 112])  # note on, middle C, velocity 112
     elif mode == 0:
         midi_out.send_message([0x80, i, 0])  # note off, middle C, velocity 0
+
+def calibrate_laser(i, midi_out=None):
+    midi_out.send_message([0x90, i+20, 112])
+
+def smoke(mode, midi_out=None):
+    if mode == 1:
+        midi_out.send_message([0x90, 7, 112])
+    elif mode == 0:
+        midi_out.send_message([0x80, 7, 0])
+
+def query_dists(midi_out=None):
+    midi_out.send_message([0x90, 30, 112])
 
 def set_all_lasers_mode(mode, step_sleep=0, random_sleep=False, random_order=False, midi_out=None):
     i_list = list(range(7))
@@ -45,6 +66,9 @@ def all_on_off(step_sleep=0.1, random_sleep=False, midi_out=None):
     time.sleep(step_sleep * random.random() if random_sleep else step_sleep)
     set_all_lasers_mode(0, step_sleep=0, random_sleep=False, midi_out=midi_out)
     time.sleep(step_sleep * random.random() if random_sleep else step_sleep)
+
+
+
 
 # MIDI Abstractionz
 

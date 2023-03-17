@@ -5,13 +5,13 @@ import random
 import rtmidi
 import time
 import signal
+import sys
 # pip install python-rtmidi
 
 script_dir = os.path.dirname(__file__)
 
-in_port = 1
-model_port = 0
-timeout = 1
+model_port = int(sys.argv[1])
+timeout = int(sys.argv[2])
 verbose = True
 
 # ONMIDI

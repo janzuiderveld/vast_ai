@@ -14,20 +14,20 @@ function finish {
 trap finish EXIT
 trap finish SIGINT
 
-timeout=5
+timeout=3
 
 #TODO
+# bug met control midi naar blofeld fixen
 # cut beginning midis that are too long
-# remove 1st hit on all instruments ?
 # metronoom achtergrond geluid? (geen metronoom geluid)
-
 # bug met meerdere lasers en veel retriggers fixen
-
-# knipperpatroon op basis van gespeelde midi
 
 # als server te lang bezig is afkappen
 
-# bug met control midi naar blofeld fixen
+# remove 1st hit on all instruments ?
+# knipperpatroon op basis van gespeelde midi
+
+
 
 # make sure wave guide send is set on boot
 
@@ -159,8 +159,8 @@ $ROOT_DIR/midialogue/midi-utilities/bin/sendmidi --out $in_port --note-on 1 10 1
 cd $ROOT_DIR/midialogue
 sudo rm -rf midi_in midi_out
 
+python3 $ROOT_DIR/midialogue/midi_scripts/brainstorm_custom.py $model_port $timeout &
 sleep 999999
-# python3 $ROOT_DIR/midialogue/midi_scripts/brainstorm_custom.py &
 
 echo "waiting for server to be ready..."
 kill -9 $(lsof -t -i:8080)

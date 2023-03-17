@@ -462,18 +462,23 @@ def tx1_to_midi(tx1, save_folder):
   nsamps = sum([int(x.split('_')[1]) for x in tx1 if x[:2] == 'WT'])
 
   # Create MIDI instruments
-  p1_prog = pretty_midi.instrument_name_to_program('Lead 1 (square)')
-  p2_prog = pretty_midi.instrument_name_to_program('Lead 2 (sawtooth)')
-  tr_prog = pretty_midi.instrument_name_to_program('Synth Bass 1')
-  no_prog = pretty_midi.instrument_name_to_program('Acoustic Grand Piano')
+#   p1_prog = pretty_midi.instrument_name_to_program('Lead 1 (square)')
+#   p2_prog = pretty_midi.instrument_name_to_program('Lead 2 (sawtooth)')
+#   tr_prog = pretty_midi.instrument_name_to_program('Synth Bass 1')
+#   no_prog = pretty_midi.instrument_name_to_program('Acoustic Grand Piano')
 
   # ph_prog = pretty_midi.instrument_name_to_program('Synth Bass 2')
   # ph = pretty_midi.Instrument(program=ph_prog, name='ph', is_drum=False)
 
-  p1 = pretty_midi.Instrument(program=p1_prog, name='p1', is_drum=False)
-  p2 = pretty_midi.Instrument(program=p2_prog, name='p2', is_drum=False)
-  tr = pretty_midi.Instrument(program=tr_prog, name='tr', is_drum=False)
-  no = pretty_midi.Instrument(program=no_prog, name='no', is_drum=False)
+#   p1 = pretty_midi.Instrument(program=p1_prog, name='p1', is_drum=False)
+#   p2 = pretty_midi.Instrument(program=p2_prog, name='p2', is_drum=False)
+#   tr = pretty_midi.Instrument(program=tr_prog, name='tr', is_drum=False)
+#   no = pretty_midi.Instrument(program=no_prog, name='no', is_drum=False)
+
+  p1 = pretty_midi.Instrument(name='p1', is_drum=False)
+  p2 = pretty_midi.Instrument(name='p2', is_drum=False)
+  tr = pretty_midi.Instrument(name='tr', is_drum=False)
+  no = pretty_midi.Instrument(name='no', is_drum=False)
 
   name_to_ins = {'P1': p1, 'P2': p2, 'TR': tr, 'NO': no}
   name_to_pitch = {'P1': None, 'P2': None, 'TR': None, 'NO': None}

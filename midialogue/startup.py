@@ -581,8 +581,8 @@ def tx1_to_midi(tx1, save_folder):
       note.pitch = 69
 
   # Create indicator for end of song
-  eos = pretty_midi.TimeSignature(1, 1, nsamps / 44100.)
-  midi.time_signature_changes.append(eos)
+#   eos = pretty_midi.TimeSignature(1, 1, nsamps / 44100.)
+#   midi.time_signature_changes.append(eos)
 
   with tempfile.NamedTemporaryFile('rb') as mf:
     midi.write(mf.name)

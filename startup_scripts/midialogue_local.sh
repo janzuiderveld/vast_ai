@@ -159,8 +159,8 @@ $ROOT_DIR/midialogue/midi-utilities/bin/sendmidi --out $in_port --note-on 1 10 1
 cd $ROOT_DIR/midialogue
 sudo rm -rf midi_in midi_out
 
-python3 $ROOT_DIR/midialogue/midi_scripts/brainstorm_custom.py $model_port $timeout &
-sleep 999999
+# python3 $ROOT_DIR/midialogue/midi_scripts/brainstorm_custom.py $model_port $timeout &
+# sleep 999999
 
 echo "waiting for server to be ready..."
 kill -9 $(lsof -t -i:8080)
@@ -184,7 +184,7 @@ export ROOT_DIR
 mkdir $ROOT_DIR/midialogue/midi_in
 mkdir $ROOT_DIR/midialogue/midi_out
 
-python3 $ROOT_DIR/midialogue/midi_scripts/brainstorm_custom.py &
+python3 $ROOT_DIR/midialogue/midi_scripts/brainstorm_custom.py $model_port $timeout &
 echo "model listens on virtual port 0"
 
 python3 ./midialogue/midi_autoplay.py --midi_send_port $all_synths_port --midi_in_port $in_port | tee autoplay.log

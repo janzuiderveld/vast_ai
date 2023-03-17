@@ -1,0 +1,30 @@
+ROOT_DIR: /home/p/vast_ai
+waiting for server to start up (3 minutes)
+Resetting device: Teensy
+Successfully reset /dev/bus/usb/001/010
+
+Midi Utilities: midi ins
+  0 Midi Through:Midi Through Port-0
+  1 ESI MIDIMATE eX:ESI MIDIMATE eX MIDI 1
+  2 ESI MIDIMATE eX:ESI MIDIMATE eX MIDI 2
+  3 Teensy MIDI:Teensy MIDI MIDI 1
+
+0 Midi Through:Midi Through Port-0 1 ESI MIDIMATE eX:ESI MIDIMATE eX MIDI 1 2 ESI MIDIMATE eX:ESI MIDIMATE eX MIDI 2 3 Teensy MIDI:Teensy MIDI MIDI 1
+
+in_port: 3 
+blo_port:  1
+es1_port: 1 
+es2_port: 2 
+model_port: 0 
+all_synths_port: 4
+model_and_synths_port: 5
+
+
+
+
+
+
+
+bus 4: to all synths
+bus 5: to model and all synths
+send a midi note 10 to teensy to make sure midi is send

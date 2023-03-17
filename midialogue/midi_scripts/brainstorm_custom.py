@@ -110,6 +110,10 @@ while True:
                 os.kill(rec_proces.pid, signal.SIGTERM)
                 recording = False
                 last_input = None
+
+                # process midi file
+                # os.system(f"python3 {ROOT_DIR}/midialogue/midi_scripts/midi_process.py {fn}")
+
                 os.system(f"mv {fn} {ROOT_DIR}/midialogue/midi_in")
         
             elif verbose:

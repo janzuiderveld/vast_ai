@@ -18,6 +18,8 @@ timeout=3
 
 #TODO
 # bug met control midi naar blofeld fixen
+# >> Program van pretty midi instr? Nu crasht server doordat argument niet gegeven wordt, probeer None
+
 # cut beginning midis that are too long
 # metronoom achtergrond geluid? (geen metronoom geluid)
 # bug met meerdere lasers en veel retriggers fixen

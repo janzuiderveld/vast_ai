@@ -15,9 +15,9 @@ double triggerDist[7] = {999.0, 999.0, 999.0, 999.0, 999.0, 999.0, 999.0};
 int ctrlStartMs = 200; 
 
 // lead 1
-int notes1[5] = {57, 58, 60, 62, 64};
+int notes1[7] = {57, 58, 60, 62, 64, 64, 64};
 // lead 2
-int notes2[5] = {67, 69, 70, 72, 74};
+int notes2[7] = {67, 69, 70, 72, 74, 74, 74};
 // lead 3
 int notes3[7] = {69, 70, 72, 74, 76, 77, 79};
 // bass
@@ -34,12 +34,12 @@ int chMap[7] = {1, 1, 2, 3, 3, 4, 4};
 int ctrlChannelMapPos[7] = {1, 1, 2, 3, 3, 4, 4};
 int ctrlChannelMapNeg[7] = {1, 1, 2, 3, 3, 4, 4};
 
-int ctrlMapPos[7] = {75, 75, 93, 69, 69,        18, 84};
-int ctrlMapNeg[7] = {70, 93, 69, 24, 70,       119, 119};
-int ctrlPosReset[7] = {40, 64, 0, 50, 40,           0, 0};
-int ctrlNegReset[7] = {40, 0, 64, 20, 40,         0, 0};
-int ctrlPosRange[7] = {127, 175, 127, 100, 127,     127, 127};
-int ctrlNegRange[7] = {-127, 80, 127, 100, 30,    127, 127};
+int ctrlMapPos[7] = {75, 16, 93, 69, 69,        18, 84};
+int ctrlMapNeg[7] = {70, 16, 69, 24, 70,       119, 119};
+int ctrlPosReset[7] = {40, 51, 0, 50, 40,           0, 0};
+int ctrlNegReset[7] = {40, 51, 64, 20, 40,         0, 0};
+int ctrlPosRange[7] = {127, 64, 127, 100, 127,     127, 127};
+int ctrlNegRange[7] = {-127, -64, 127, 100, 30,    127, 127};
 
 // not implemented yet
 int ctrlMapPos2[7] = {0, 0, 0, 0,    0, 0, 0};

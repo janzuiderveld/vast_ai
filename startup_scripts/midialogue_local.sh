@@ -19,8 +19,16 @@ timeout=5
 #TODO
 # cut beginning midis that are too long
 # remove 1st hit on all instruments ?
+# metronoom achtergrond geluid? (geen metronoom geluid)
 
-# make drums repeat on hold
+# bug met meerdere lasers en veel retriggers fixen
+
+# knipperpatroon op basis van gespeelde midi
+
+# als server te lang bezig is afkappen
+
+# bug met control midi naar blofeld fixen
+
 # make sure wave guide send is set on boot
 
 # autoreboot if loading takes too long?
@@ -28,7 +36,7 @@ timeout=5
 #  2 make loading script check if it is still running after 5 minutes and send reboot command otherwise
 
 
-# seems te be ok:
+# seems te be ok or not?
 # cut final silence of midi recording 
 
 # make sure there are no more tunnels on port 8080 the machine

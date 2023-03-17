@@ -5,9 +5,12 @@
 
 int DEBUG = 1; // TURN OFF for fixing laginess?
 double deltaAverageThresholdTriggerIn = 1.0; // IMPORTANT
-int settleRequired = 5;
+int settleRequired = 4;
 
 double deltaAverageThresholdControlOut = 1.0; // IMPORTANT not yet
+// double triggerDist = 260.0; // IMPORTANT
+
+// double triggerDist[7] = {150.0, 150.0, 150.0, 150.0, 150.0, 150.0, 150.0};
 double triggerDist[7] = {999.0, 999.0, 999.0, 999.0, 999.0, 999.0, 999.0};
 
 const double smoothSamples = 1.0 ; 
@@ -26,6 +29,10 @@ int notes5[6] = {55, 57, 58, 60, 62, 64};
 // drum
 int notes6[6] = {60, 60, 60, 60, 62, 62};
 int notes7[6] = {67, 67, 67, 67, 69, 69};
+// // drum
+// int notes5[6] = {60, 60, 62, 62, 62, 62};
+// int notes6[6] = {64, 64, 65, 65, 65, 65};
+// int notes7[6] = {67, 67, 69, 69, 69, 69};
 
 int numNotes = 5; // cutoff for notes used 
 
@@ -39,6 +46,13 @@ int ctrlPosReset[7] = {40, 64, 0, 50, 40,           0, 0};
 int ctrlNegReset[7] = {40, 0, 64, 20, 40,         0, 0};
 int ctrlPosRange[7] = {127, 175, 127, 100, 127,     127, 127};
 int ctrlNegRange[7] = {-127, 80, 127, 100, 30,    127, 127};
+
+// int ctrlMapPos[7] = {69, 94, 94, 94,    18, 50, 84};
+// int ctrlMapNeg[7] = {70, 93, 75, 93,     119, 119, 119};
+// int ctrlPosReset[7] = {40, 0, 0, 0,    0, 0, 0};
+// int ctrlNegReset[7] = {40, 0, 64, 0,    0, 0, 0};
+// int ctrlPosRange[7] = {127, 127, 127, 127,    127, 127, 127};
+// int ctrlNegRange[7] = {-127, 127, 127, 127,    127, 127, 127};
 
 // not implemented yet
 int ctrlMapPos2[7] = {0, 0, 0, 0,    0, 0, 0};

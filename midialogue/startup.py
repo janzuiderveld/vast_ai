@@ -534,9 +534,9 @@ def tx1_to_midi(tx1, save_folder):
   midi.instruments[3].name = 'no'
 
   # add empty note at start of each instrument
-  for i in range(4):
-    midi.instruments[i].notes.append(pretty_midi.Note(
-        velocity=1, pitch=60, start=0, end=0.2))
+#   for i in range(4):
+#     midi.instruments[i].notes.append(pretty_midi.Note(
+#         velocity=1, pitch=60, start=0, end=0.2))
   
   # map notes on "no" as follows:
   # 1, 2, 3 > 60 

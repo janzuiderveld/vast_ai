@@ -1,0 +1,221 @@
+
+
+const int gAnalogChannelNum = 8; // number of analog channels to iterate over
+
+// 0V to 4.096V
+// double analogInMax = 1.0;
+// double analogInMin = 0;
+double analogInMax[gAnalogChannelNum]= {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0} ;
+double analogInMin[gAnalogChannelNum]= {9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0} ;
+// 0V to 5V
+double analogOutMax = 1.0;
+double analogOutMin = 0;
+
+double runningAverage;
+
+double thresh_error = 0.02;
+
+float lastTrigger[gAnalogChannelNum];
+const int sampleRate = 22050;
+const int analogMemSec = 1000;
+const int analogMemSamples = analogMemSec * sampleRate;
+
+// double analogMemory [gAnalogChannelNum][analogMemSamples];
+double thresh [gAnalogChannelNum];
+double outputScaling [gAnalogChannelNum];
+
+double analogReading;
+double analogOutput;
+
+const double smoothSamples = 50.0 ;
+
+int counter = 0;
+
+double scalar1 = 1.0/smoothSamples;
+double scalar2 = 1.0 - scalar1;
+bool first_sample[gAnalogChannelNum] = {true, true, true, true, true, true, true} ;
+double average[gAnalogChannelNum]= {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0} ;
+double scaled[gAnalogChannelNum]= {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0} ;
+
+bool first_iteration = true;
+
+using std::chrono::system_clock;
+
+Scope scope;
+
+
+
+bool setup(BelaContext *context, void *userData)
+{     
+      // tell the scope how many channels and the sample rate
+      scope.setup(8, context->analogSampleRate);
+      
+    outputScaling[6] = 2.0;
+    outputScaling[1] = 2.0;
+    outputScaling[3] = 3.0;
+    outputScaling[5] = 2.2;
+    outputScaling[4] = 2.5;
+    outputScaling[2] = 3.0;
+
+      return true;
+}
+
+void render(BelaContext *context, void *userData)
+{  
+
+    if (first_iteration) {
+        // print: starting calibration in 2 seconds..
+        // std::cout << "starting calibration in 2 seconds.." << std::endl;
+       
+        // sleep for a second to allow the the ADC to settle
+        // usleep(1000000);
+       
+        // save the start second count for calculating the elapsed time
+        auto start = system_clock::now();
+
+        for(unsigned int i = 0; i < (analogMemSamples / context->analogFrames); i++) {
+        // for(unsigned int i = 0; i < (analogMemSamples); i++) {
+            for(unsigned int n = 0; n < context->analogFrames; n++) {
+                for(unsigned int ch = 0; ch < gAnalogChannelNum; ch++) {
+                    analogReading = analogRead(context, n, ch);
+                    if (analogReading > analogInMax[ch]) {
+                        // print to the console the channel, the min and max
+                        // std::cout << "Channel " << ch << ": " << analogInMin[ch] << " to " << analogInMax[ch] << std::endl;
+                        analogInMax[ch] = analogReading;
+                    }
+
+                    if (analogReading < analogInMin[ch]) {
+                        // filter our zero readings
+                            // print to the console the channel, the min and max
+                            // std::cout << "Channel " << ch << ": " << analogInMin[ch] << " to " << analogInMax[ch] << std::endl;
+                        analogInMin[ch] = analogReading;
+                    }
+                    // analogMemory[ch][i+n] = analogRead(context, n, ch);
+                }
+            }
+
+
+        }
+
+        // loop over channels
+        for(unsigned int ch = 0; ch < gAnalogChannelNum; ch++) {
+
+            // outputScaling[ch] = (analogOutMax - analogOutMin) / (analogInMax[ch] - analogInMin[ch] + 0.00001);
+
+            // std::cout << "output scaling " << outputScaling[ch] << std::endl;
+            std::cout << "AnalogInMin " << analogInMin[ch] << std::endl;
+            std::cout << "AnalogInMax " << analogInMax[ch] << std::endl;
+            }
+
+        first_iteration = false;
+
+        // print the time that has elapsed
+        auto end = system_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+        std::cout << "Time to initialize: " << duration.count() << " microseconds" << std::endl;
+    }
+
+        // for each channel, find the average, min and max of the first 3 seconds of the audio
+        // for(unsigned int ch = 0; ch < gAnalogChannelNum; ch++) {
+            // runningAverage = 0;
+            // for(int i = 0; i < analogMemSamples; i++){
+                // runningAverage += analogMemory[ch][i];
+
+
+                // }
+            // }
+
+            // std::cout << "running average total " << runningAverage << std::endl;
+            // runningAverage /= analogMemSamples;
+
+            // thresh[ch] = runningAverage + thresh_error;
+
+
+
+    // Main loop: measure, write to mem, output
+      for(unsigned int n = 0; n < context->analogFrames; n++) {
+        // iterate over channels
+        for(unsigned int ch = 0; ch < gAnalogChannelNum; ch++) {
+            // read analog input
+            analogReading = analogRead(context, n, ch);
+            if (first_sample[ch]) {
+                average[ch] = analogReading;
+                first_sample[ch] = false;
+            }
+            else {
+                average[ch] = (analogReading*scalar1) + (average[ch]*scalar2);
+            }
+           
+
+            // scale the analog input
+            // scaled[ch] = (average[ch] - analogInMin[ch]) * outputScaling[ch];
+            // scaled[ch] = (average[ch] - analogInMin[ch]);
+            // if (ch == 6) {
+            //     // scaled[ch] = scaled[ch] - 0.15;
+            //     scaled[ch] = scaled[ch] - 0.0;
+            // }
+           
+            // scaled[ch] = (average[ch] - analogInMax[ch]) * 1.5;
+            scaled[ch] = (average[ch] - analogInMax[ch]) * outputScaling[ch];
+           
+           
+             // eerste laser
+            if (ch == 4) {
+                // scaled[ch] = scaled[ch] - 0.15;
+                // scaled[ch] = scaled[ch] + 0.05;
+                scaled[ch] = scaled[ch] + 0.09;
+                // scaled[ch] = scaled[ch] + 1.5;
+            }
+           
+            // tweede laser
+            if (ch == 5) {
+                scaled[ch] = scaled[ch] - 0.01;
+            }
+           
+           
+            if (scaled[ch] < 0.06) {
+                scaled[ch] = 0;
+            }
+       
+            if (scaled[ch] > 0.99) {
+                scaled[ch] = 0.99;
+            }
+
+            // scaled[ch] = (analogInMin[ch]);
+            // scaled[ch] = (thresh[ch]);
+            // scaled[ch] = (analogReading);
+
+            // if ch == 7 subtract 0.2
+            // if (ch == 5) {
+            //     scaled[ch] = scaled[ch] - 0.07;
+            // }
+            // if (ch == 6) {
+            //     scaled[ch] = scaled[ch] - 0.07;
+            // }
+            // if (ch == 2) {
+            //     scaled[ch] = scaled[ch] - 0.02;
+            // }
+
+            // set scaled[ch] to zero if below threshhold
+            // if (scaled[ch] < thresh[ch]) {
+
+            if (ch == 7) {
+                analogWriteOnce(context, n, 0, scaled[ch]);
+            }        
+            else {
+                analogWriteOnce(context, n, ch, scaled[ch]);
+            }
+
+
+        }
+            // // log the three oscillators to the scope
+            // scope.log(average[0]*outputScaling[0], average[1]*outputScaling[1], average[2]*outputScaling[2], average[3]*outputScaling[3], average[4]*outputScaling[4], average[5]*outputScaling[5], average[6]*outputScaling[6]);
+        // scope.log(average[0], average[1], average[2], average[3], average[4], average[5], average[6]);
+        scope.log(scaled[0], scaled[1], scaled[2], scaled[3], scaled[4], scaled[5], scaled[6], scaled[7]);
+      }
+}
+
+void cleanup(BelaContext *context, void *userData)
+{
+
+}

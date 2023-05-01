@@ -12,27 +12,31 @@ trap finish EXIT
 trap finish SIGINT
 
 # make sure there are no more tunnels on port 8080 the machine
-lsof -ti:8080 | xargs kill -9
+# lsof -ti:8080 | xargs kill -9
+
 
 ROOT_DIR=$PWD
-
 cd $ROOT_DIR/dream_machine
 
+echo "activating venv"
 python3 -u -m venv $ROOT_DIR/dream_machine/dream_machine_env
 source $ROOT_DIR/dream_machine/dream_machine_env/bin/activate
 
+echo "installing requirements"
 python3 -u -m pip install -r $ROOT_DIR/dream_machine/Python-TCP-Image-Socket/requirements.txt
 python3 -u -m pip install requests 
 python3 -u -m pip install pillow 
 
 # sleep 10
 
-python3 -u ./MidiPython-TCP-Image-Socket/sender_3.4.py &
-
-sleep 5
-
-sudo python3 -u ./serial/first.py &
-
+# if statement, if DEVICE != "Mac"
+if [[ $DEVICE != "Mac" ]]; then
+  echo "starting windows XP server"
+  python3 -u ./MidiPython-TCP-Image-Socket/sender_3.4.py &
+  sleep 5
+  echo "starting serial"
+  sudo python3 -u ./serial/first.py &
+fi
 
 # apt-get update
 # apt-get install ffmpeg libsm6 libxext6  -y
@@ -57,20 +61,20 @@ sudo python3 -u ./serial/first.py &
 
 
 echo "waiting for server to be ready..."
-kill -9 $(lsof -t -i:8080)
+# kill -9 $(lsof -t -i:8080)
 python3 -u ./MidiPython-TCP-Image-Socket/check_ready.py
-sleep 2
-kill -9 $(lsof -t -i:8080)
-sleep 2
+# sleep 2
+# kill -9 $(lsof -t -i:8080)
+# sleep 2
 
-echo $(lsof -i:8080)
+# echo $(lsof -i:8080)
 
-cmd=`cat ssh_pipe.cmd` 
-$cmd > test_ssh.thrash &
+# cmd=`cat ssh_pipe.cmd` 
+# $cmd > test_ssh.thrash &
 
-sleep 3
+# sleep 3
 
-echo $(lsof -i:8080)
+# echo $(lsof -i:8080)
 
 echo "Server ready"
 

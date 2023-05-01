@@ -14,9 +14,9 @@ trap finish SIGINT
 # make sure there are no more tunnels on port 8080 the machine
 lsof -ti:8080 | xargs kill -9
 
-ROOT_DIR=$PWD
+cd vast_ai
 
-cd $ROOT_DIR/midialogue
+ROOT_DIR=$PWD
 
 echo "ROOT_DIR: $ROOT_DIR"
 
@@ -34,20 +34,52 @@ echo "waiting for server to start up (3 minutes)"
 
 echo ""
 echo "Midi Utilities: midi ins" 
-
 $ROOT_DIR/midialogue/midi-utilities/bin/lsmidiins
-echo ""
-read -p 'Which midi input port do you want to listen to?: ' in_port
-echo "using midi input port $in_port"
+
+
+#$ROOT_DIR/midialogue/midi-utilities/bin/lsmidiins
+#echo ""
+#read -p 'Which midi input port do you want to listen to?: ' in_port
+#echo "using midi input port $in_port"
+
+#echo ""
+#echo "Midi Utilities: midi outs"
+
+#$ROOT_DIR/midialogue/midi-utilities/bin/lsmidiouts
+#echo ""
+#read -p 'Which midi output port do you want to send to?: ' out_port
+#echo "using midi output port $out_port"
+#echo ""
+
+midi_devices=$($ROOT_DIR/midialogue/midi-utilities/bin/lsmidiins)
+
+blo="Blofeld:Blofeld Blofeld"
+tee="Teensy MIDI:Teensy MIDI MIDI 1"
 
 echo ""
-echo "Midi Utilities: midi outs"
+echo $midi_devices
+echo ""
 
-$ROOT_DIR/midialogue/midi-utilities/bin/lsmidiouts
-echo ""
-read -p 'Which midi output port do you want to send to?: ' out_port
-echo "using midi output port $out_port"
-echo ""
+blo_index=${midi_devices%%$blo*}
+tee_index=${midi_devices%%$tee*}
+
+blo_index=${#blo_index}
+tee_index=${#tee_index}
+
+let blo_index=$blo_index-2
+let tee_index=$tee_index-2
+
+out_port=${midi_devices:$blo_index:2}
+in_port=${midi_devices:$tee_index:2}
+
+echo $in_port
+echo $out_port
+
+in_port=$in_port | xargs echo
+out_port=$out_port | xargs echo
+
+echo $in_port
+echo $out_port
 
 case "$(uname -s)" in
 
@@ -94,6 +126,7 @@ source $ROOT_DIR/midialogue/midialogue_env/bin/activate
 python3 -m pip install wheel cython
 python3 -m pip install -r $ROOT_DIR/midialogue/Python-TCP-Image-Socket/requirements.txt
 python3 -m pip install pretty_midi
+python3 -m pip install requests
 
 cd $ROOT_DIR/midialogue
 # remove midi_in and midi_out folders
@@ -128,4 +161,20 @@ prefix=$"$ROOT_DIR/midialogue/midi_in/"
 
 echo "model listens on virtual port $model_port"
 # saves files which will be sent to model
-./brainstorm  --in $model_port --prefix $prefix --timeout $timeout --confirmation 'echo "saved a midi file"'
+./brainstorm  --in $model_port --prefix $prefix --timeout $timeout --confirmation 'echo "saved a midi file"' 
+
+# ./brainstorm  --in $model_port --prefix $prefix --timeout $timeout --confirmation 'echo "saved a midi file"' &
+# while loop copying over midi files to and from vast and hide output
+# cd $ROOT_DIR
+# ID=$(./vast show instances --raw | python3 -c "import sys, json; print(json.load(sys.stdin)[0]['id'])")
+
+# # make midi_in and midi_out folders
+# mkdir $ROOT_DIR/midialogue/midi_in
+# mkdir $ROOT_DIR/midialogue/midi_out
+# while true; do
+#   ./vast copy $ROOT_DIR/midialogue/midi_in $ID:/workspace/vast_ai/midialogue 2> /dev/null
+#   ./vast copy $ID:/workspace/vast_ai/midialogue/midi_out $ROOT_DIR/midialogue 2> /dev/null
+#   sleep 0.1
+# done
+
+
